@@ -1,4 +1,9 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <cassert>
+#include <algorithm>
+#include <random>
+
 using namespace std;
 
 const unsigned MOD = 65537;
@@ -58,15 +63,15 @@ inline unsigned pow_mod(unsigned a, unsigned b) {
 }
 
 
-vector<unsigned> fnt(const vector<unsigned> &a, unsigned log_n, unsigned opt) {       
+vector<unsigned> fnt(const vector<unsigned>& a, unsigned log_n, unsigned opt) {
     // TODO: use spmd for j in each layer i, need sync each layer 
 
     /*
     opt 2 bit: x1 x2
      - x1: w_n or 1/w_n
-     - x2: need result * 1/n     
+     - x2: need result * 1/n
     */
-    
+
     unsigned n = 1 << log_n, haft_n = n >> 1, wp = (opt & 2) >> 1;
     vector<unsigned> b(n, 0);
     for (unsigned i = 0; i < a.size(); i++) b[N_pos[log_n][i]] = a[i];
@@ -91,8 +96,8 @@ vector<unsigned> fnt(const vector<unsigned> &a, unsigned log_n, unsigned opt) {
 
 }
 
-inline vector<unsigned> poly_mul(const vector<unsigned> &a, const vector<unsigned> &b, unsigned log_n) {
-    
+inline vector<unsigned> poly_mul(const vector<unsigned>& a, const vector<unsigned>& b, unsigned log_n) {
+
     unsigned n = 1 << log_n;
     vector<unsigned> c(n << 1, 0);
 
@@ -102,7 +107,8 @@ inline vector<unsigned> poly_mul(const vector<unsigned> &a, const vector<unsigne
             for (unsigned j = 0; j < n; j++)
                 c[i + j] = add_mod(c[i + j], mul_mod(a[i], b[j]));
 
-    } else {
+    }
+    else {
 
         vector<unsigned> fa = fnt(a, log_n + 1, 0);
         vector<unsigned> fb = fnt(b, log_n + 1, 0);
@@ -118,18 +124,18 @@ inline vector<unsigned> poly_mul(const vector<unsigned> &a, const vector<unsigne
 
 }
 
-inline vector<unsigned> poly_deriv(const vector<unsigned> &p) {
+inline vector<unsigned> poly_deriv(const vector<unsigned>& p) {
 
     vector<unsigned> pd(p.size(), 0);
     for (unsigned i = 1; i < p.size(); i++)
         pd[i - 1] = mul_mod(p[i], i);
-    
+
     return pd;
 
 }
 
-inline vector<unsigned> build_product(const vector<vector<unsigned>> &p, unsigned log_n1, unsigned log_n2) {
-    
+inline vector<unsigned> build_product(const vector<vector<unsigned>>& p, unsigned log_n1, unsigned log_n2) {
+
     // TODO: parallel for each j in layer i
 
     unsigned n = 1 << log_n2;
@@ -155,26 +161,26 @@ inline vector<unsigned> build_product(const vector<vector<unsigned>> &p, unsigne
 
 }
 
-inline vector<unsigned> build_ax(const vector<unsigned> &x) {
-    
+inline vector<unsigned> build_ax(const vector<unsigned>& x) {
+
     vector<vector<unsigned>> p(NUM_OF_NEED_PACKET);
     for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++)
         p[i] = packet_product[x[i << LOG_SYMBOL] >> LOG_SEG];
-    
+
     return build_product(p, LOG_SYMBOL + 1, MAX_LOG);
 
 }
 
-vector<unsigned> encode(const vector<unsigned> &chunk) {
+vector<unsigned> encode(const vector<unsigned>& chunk) {
     return fnt(chunk, MAX_LOG, 0);
 }
 
-vector<unsigned> decode(const vector<unsigned> &x, const vector<unsigned> &y) {
+vector<unsigned> decode(const vector<unsigned>& x, const vector<unsigned>& y) {
 
     vector<unsigned> ax = build_ax(x);
-    
+
     vector<unsigned> dax = poly_deriv(ax);
-    
+
     vector<unsigned> vdax = fnt(dax, MAX_LOG, 0);
     vector<unsigned> n1(NUM_OF_NEED_SYMBOL);
     for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
@@ -183,7 +189,7 @@ vector<unsigned> decode(const vector<unsigned> &x, const vector<unsigned> &y) {
     vector<unsigned> n2(1 << MAX_LOG, 0);
     for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
         n2[x[i]] = n1[i];
-    
+
     vector<unsigned> vn2 = fnt(n2, MAX_LOG, 2);
     unsigned vn2_0 = vn2[0];
     for (unsigned i = 1; i < vn2.size(); i++)
@@ -198,7 +204,7 @@ vector<unsigned> decode(const vector<unsigned> &x, const vector<unsigned> &y) {
 void init() {
     // TODO: offline process
 
-    N_pos = new unsigned*[MAX_LOG + 1];
+    N_pos = new unsigned* [MAX_LOG + 1];
     for (unsigned i = 1; i <= MAX_LOG; i++) {
         unsigned n = 1 << i;
         N_pos[i] = new unsigned[n];
@@ -212,7 +218,7 @@ void init() {
             for (unsigned k = 0; k < i; k++) {
                 if (j & (1 << k))
                     rev_num |= (1 << (i - 1 - k));
-            }  
+            }
             if (j < rev_num)
                 swap(N_pos[i][j], N_pos[i][rev_num]);
         }
@@ -228,9 +234,9 @@ void init() {
         inv[i] = pow_mod(i, MOD - 2);
     }
 
-    root_layer_pow = new unsigned**[2];
+    root_layer_pow = new unsigned** [2];
     for (unsigned i = 0; i < 2; i++) {
-        root_layer_pow[i] = new unsigned*[MAX_LOG];
+        root_layer_pow[i] = new unsigned* [MAX_LOG];
         for (unsigned j = 0; j < MAX_LOG; j++) {
             unsigned haft_len = 1 << j;
             root_layer_pow[i][j] = new unsigned[haft_len];
@@ -295,15 +301,15 @@ int main() {
 }
 
 void testEncodeDecode() {
-    
+
     srand(time(0));
-    
+
     vector<unsigned> a(NUM_OF_NEED_SYMBOL);
     for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
         a[i] = rand() % (MOD - 1); // 2 bytes
 
     vector<unsigned> b = encode(a);
-    
+
     vector<unsigned> x(NUM_OF_NEED_SYMBOL), y(NUM_OF_NEED_SYMBOL);
 
     for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++) {

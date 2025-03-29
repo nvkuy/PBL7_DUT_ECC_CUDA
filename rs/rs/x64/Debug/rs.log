@@ -1,0 +1,7 @@
+﻿  rs.cpp
+C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs\rs\rs.cpp(305,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs\rs\rs.cpp(335,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs\rs\rs.cpp(337,61): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs\rs\rs.cpp(340,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs\rs\rs.cpp(344,28): warning C4018: '<': signed/unsigned mismatch
+  rs.vcxproj -> C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs\x64\Debug\rs.exe
