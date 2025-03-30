@@ -108,7 +108,7 @@ inline vector<unsigned> poly_mul(const vector<unsigned> &a, const vector<unsigne
         vector<unsigned> fb = fnt(b, log_n + 1, 0);
 
         for (unsigned i = 0; i < c.size(); i++)
-            c[i] = add_mod(fa[i], fb[i]);
+            c[i] = mul_mod(fa[i], fb[i]);
 
         c = fnt(c, log_n + 1, 3);
 
@@ -128,7 +128,7 @@ inline vector<unsigned> poly_deriv(const vector<unsigned> &p) {
 
 }
 
-vector<unsigned> build_product(const vector<vector<unsigned>> &p, unsigned log_n1, unsigned log_n2) {
+inline vector<unsigned> build_product(const vector<vector<unsigned>> &p, unsigned log_n1, unsigned log_n2) {
     
     // TODO: parallel for each j in layer i
 
@@ -136,7 +136,7 @@ vector<unsigned> build_product(const vector<vector<unsigned>> &p, unsigned log_n
     vector<unsigned> product(n);
     for (unsigned i = 0; i < n; i++) {
         unsigned bl_id = i >> log_n1, th_id = i & ((1 << log_n1) - 1);
-        product[bl_id + th_id] = p[bl_id][th_id];
+        product[i] = p[bl_id][th_id];
     }
 
     for (unsigned i = log_n1; i < log_n2; i++) {
@@ -155,7 +155,7 @@ vector<unsigned> build_product(const vector<vector<unsigned>> &p, unsigned log_n
 
 }
 
-vector<unsigned> build_ax(const vector<unsigned> &x) {
+inline vector<unsigned> build_ax(const vector<unsigned> &x) {
     
     vector<vector<unsigned>> p(NUM_OF_NEED_PACKET);
     for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++)
@@ -171,16 +171,27 @@ vector<unsigned> encode(const vector<unsigned> &chunk) {
 
 vector<unsigned> decode(const vector<unsigned> &x, const vector<unsigned> &y) {
 
-    vector<unsigned> Ax = build_ax(x);
+    vector<unsigned> ax = build_ax(x);
     
-    vector<unsigned> dAx = poly_deriv(Ax);
+    vector<unsigned> dax = poly_deriv(ax);
     
-    vector<unsigned> vdAx = fnt(dAx, MAX_LOG, 0);
+    vector<unsigned> vdax = fnt(dax, MAX_LOG, 0);
     vector<unsigned> n1(NUM_OF_NEED_SYMBOL);
     for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
-        n1[i] = div_mod(y[i], vdAx[x[i]]);
+        n1[i] = div_mod(y[i], vdax[x[i]]);
 
+    vector<unsigned> n2(1 << MAX_LOG, 0);
+    for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
+        n2[x[i]] = n1[i];
     
+    vector<unsigned> vn2 = fnt(n2, MAX_LOG, 2);
+    unsigned vn2_0 = vn2[0];
+    for (unsigned i = 1; i < vn2.size(); i++)
+        vn2[i - 1] = sub_mod(MOD, vn2[i]);
+    vn2[vn2.size() - 1] = sub_mod(MOD, vn2_0);
+
+    vector<unsigned> px = poly_mul(ax, vn2, MAX_LOG - 1);
+    return vector<unsigned>(px.begin(), px.begin() + NUM_OF_NEED_SYMBOL);
 
 }
 
@@ -237,8 +248,8 @@ void init() {
         vector<vector<unsigned>> p(SYMBOL_PER_PACKET, vector<unsigned>(2, 1));
         for (unsigned j = 0; j < SEG_PER_PACKET; j++) {
             unsigned k = i * SEG_PER_PACKET + j;
-            p[j][0] = MOD - root_pow[k];
-            p[j + SEG_PER_PACKET][0] = MOD - root_pow[k + SEG_DIFF];
+            p[j][0] = sub_mod(MOD, root_pow[k]);
+            p[j + SEG_PER_PACKET][0] = sub_mod(MOD, root_pow[k + SEG_DIFF]);
         }
         packet_product[i] = build_product(p, 1, LOG_SYMBOL + 1);
     }
@@ -268,18 +279,51 @@ void fin() {
 
 void testFNT();
 
+void testEncodeDecode();
+
 int main() {
 
     init();
 
     testFNT();
 
+    testEncodeDecode();
+
     fin();
 
     return 0;
 }
 
+void testEncodeDecode() {
+    
+    srand(time(0));
+    
+    vector<unsigned> a(NUM_OF_NEED_SYMBOL);
+    for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
+        a[i] = rand() % (MOD - 1); // 2 bytes
+
+    vector<unsigned> b = encode(a);
+    
+    vector<unsigned> x(NUM_OF_NEED_SYMBOL), y(NUM_OF_NEED_SYMBOL);
+
+    for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++) {
+        unsigned stx = i * SYMBOL_PER_PACKET;
+        for (unsigned j = 0; j < SEG_PER_PACKET; j++) {
+            x[stx + j] = stx + j;
+            x[stx + j + SEG_PER_PACKET] = stx + j + SEG_DIFF;
+            y[stx + j] = b[stx + j];
+            y[stx + j + SEG_PER_PACKET] = b[stx + j + SEG_DIFF];
+        }
+    }
+
+    vector<unsigned> c = decode(x, y);
+    for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
+        assert(a[i] == c[i]);
+
+}
+
 void testFNT() {
+
     unsigned log_n = 16;
     vector<unsigned> c1;
     for (unsigned i = 0; i < (1 << log_n); i++)
@@ -289,4 +333,9 @@ void testFNT() {
     vector<unsigned> c2 = fnt(v, log_n, 3);
     for (unsigned i = 0; i < (1 << log_n); i++)
         assert(c1[i] == c2[i]);
+
+    vector<unsigned> u = fnt(v, log_n, 2);
+    for (unsigned i = 0; i < (1 << log_n); i++)
+        assert(div_mod(u[i], (1 << log_n)) == c1[i]);
+
 }
