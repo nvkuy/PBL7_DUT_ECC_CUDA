@@ -10,9 +10,16 @@ const unsigned MAX_LOG = 16;
 const unsigned WARP_SIZE = 32;
 const unsigned POLY_CUTOFF = WARP_SIZE << 1;
 
-const unsigned DATA_PER_PACKET = 1024; // in bytes
-const unsigned SYMBOL_PER_PACKET = DATA_PER_PACKET >> 1;
-const unsigned NUM_OF_PACKET = (1 << MAX_LOG) / SYMBOL_PER_PACKET;
+const unsigned LOG_DATA = 10;
+const unsigned LOG_SYMBOL = LOG_DATA - 1;
+const unsigned LOG_SEG = LOG_SYMBOL - 1;
+const unsigned DATA_PER_PACKET = 1 << LOG_DATA; // in bytes
+const unsigned SYMBOL_PER_PACKET = 1 << LOG_SYMBOL;
+const unsigned NUM_OF_PACKET = 1 << (MAX_LOG - LOG_SYMBOL);
+const unsigned NUM_OF_NEED_PACKET = NUM_OF_PACKET >> 1;
+const unsigned SEG_PER_PACKET = 1 << LOG_SEG;
+const unsigned SEG_DIFF = 1 << (MAX_LOG - 1);
+const unsigned NUM_OF_NEED_SYMBOL = 1 << (MAX_LOG - 1);
 
 unsigned** N_pos;
 unsigned* root_pow;
@@ -20,7 +27,7 @@ unsigned* root_inv_pow;
 unsigned*** root_layer_pow;
 unsigned* inv;
 
-unsigned **packet_product;
+vector<vector<unsigned>> packet_product;
 
 inline unsigned mul_mod(unsigned a, unsigned b) {
     // TODO: use 32-bit simd
@@ -121,24 +128,40 @@ inline vector<unsigned> poly_deriv(const vector<unsigned> &p) {
 
 }
 
-vector<unsigned> build_product(const vector<vector<unsigned>> &p) {
+vector<unsigned> build_product(const vector<vector<unsigned>> &p, unsigned log_n1, unsigned log_n2) {
     
+    // TODO: parallel for each j in layer i
+
+    unsigned n = 1 << log_n2;
+    vector<unsigned> product(n);
+    for (unsigned i = 0; i < n; i++) {
+        unsigned bl_id = i >> log_n1, th_id = i & ((1 << log_n1) - 1);
+        product[bl_id + th_id] = p[bl_id][th_id];
+    }
+
+    for (unsigned i = log_n1; i < log_n2; i++) {
+        unsigned len = 1 << i, m = n >> (i + 1);
+        for (unsigned j = 0; j < m; j++) {
+            unsigned st = j << (i + 1);
+            vector<unsigned> p1(product.begin() + st, product.begin() + st + len);
+            vector<unsigned> p2(product.begin() + st + len, product.begin() + st + (len << 1));
+            vector<unsigned> p3 = poly_mul(p1, p2, i);
+            for (unsigned k = 0; k < p3.size(); k++)
+                product[k + st] = p3[k];
+        }
+    }
+
+    return product;
+
 }
 
 vector<unsigned> build_ax(const vector<unsigned> &x) {
     
-    unsigned n = 1 << MAX_LOG;
-    vector<unsigned> product(n, 1);
-
-    for (unsigned i = 0; i < x.size(); i++)
-        product[i << 1] = MOD - x[i];
-
-    for (unsigned i = 1; i < MAX_LOG; i++) {
-
-        // unsigned len = 1 << i, part = len;
-        // for ()
-
-    }
+    vector<vector<unsigned>> p(NUM_OF_NEED_PACKET);
+    for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++)
+        p[i] = packet_product[x[i << LOG_SYMBOL] >> LOG_SEG];
+    
+    return build_product(p, LOG_SYMBOL + 1, MAX_LOG);
 
 }
 
@@ -148,7 +171,16 @@ vector<unsigned> encode(const vector<unsigned> &chunk) {
 
 vector<unsigned> decode(const vector<unsigned> &x, const vector<unsigned> &y) {
 
+    vector<unsigned> Ax = build_ax(x);
+    
+    vector<unsigned> dAx = poly_deriv(Ax);
+    
+    vector<unsigned> vdAx = fnt(dAx, MAX_LOG, 0);
+    vector<unsigned> n1(NUM_OF_NEED_SYMBOL);
+    for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
+        n1[i] = div_mod(y[i], vdAx[x[i]]);
 
+    
 
 }
 
@@ -200,10 +232,15 @@ void init() {
         }
     }
 
-    packet_product = new unsigned*[NUM_OF_PACKET];
+    packet_product = vector<vector<unsigned>>(NUM_OF_PACKET);
     for (unsigned i = 0; i < NUM_OF_PACKET; i++) {
-        packet_product[i] = new unsigned[SYMBOL_PER_PACKET];
-        
+        vector<vector<unsigned>> p(SYMBOL_PER_PACKET, vector<unsigned>(2, 1));
+        for (unsigned j = 0; j < SEG_PER_PACKET; j++) {
+            unsigned k = i * SEG_PER_PACKET + j;
+            p[j][0] = MOD - root_pow[k];
+            p[j + SEG_PER_PACKET][0] = MOD - root_pow[k + SEG_DIFF];
+        }
+        packet_product[i] = build_product(p, 1, LOG_SYMBOL + 1);
     }
 
 }
@@ -226,11 +263,6 @@ void fin() {
         delete[] root_layer_pow[i];
     }
     delete[] root_layer_pow;
-
-    for (unsigned i = 0; i < NUM_OF_PACKET; i++) 
-        delete[] packet_product[i];
-
-    delete[] packet_product;
 
 }
 
