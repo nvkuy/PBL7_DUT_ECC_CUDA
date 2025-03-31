@@ -124,6 +124,13 @@ inline vector<unsigned> poly_mul(const vector<unsigned>& a, const vector<unsigne
 
 }
 
+// inline vector<unsigned> poly_add(const vector<unsigned>& a, const vector<unsigned>& b) {
+//    vector<unsigned> c(a.size());
+//    for (unsigned i = 0; i < a.size(); i++)
+//        c[i] = add_mod(a[i], b[i]);
+//    return c;
+// }
+
 inline vector<unsigned> poly_deriv(const vector<unsigned>& p) {
 
     vector<unsigned> pd(p.size(), 0);
@@ -188,16 +195,44 @@ vector<unsigned> decode(const vector<unsigned>& x, const vector<unsigned>& y) {
 
     vector<unsigned> n2(1 << MAX_LOG, 0);
     for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
-        n2[x[i]] = n1[i];
+       n2[x[i]] = n1[i];
 
     vector<unsigned> vn2 = fnt(n2, MAX_LOG, 2);
     unsigned vn2_0 = vn2[0];
     for (unsigned i = 1; i < vn2.size(); i++)
-        vn2[i - 1] = sub_mod(MOD, vn2[i]);
+       vn2[i - 1] = sub_mod(MOD, vn2[i]);
     vn2[vn2.size() - 1] = sub_mod(MOD, vn2_0);
 
+    ax.resize(NUM_OF_NEED_SYMBOL);
+    vn2.resize(NUM_OF_NEED_SYMBOL);
     vector<unsigned> px = poly_mul(ax, vn2, MAX_LOG - 1);
+    px.resize(NUM_OF_NEED_SYMBOL);
     return vector<unsigned>(px.begin(), px.begin() + NUM_OF_NEED_SYMBOL);
+
+    /*vector<unsigned> n2(1 << MAX_LOG, 0), n3(1 << MAX_LOG, 1);
+    for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++) {
+        unsigned j = i << 1;
+        n2[j] = n1[i];
+        n3[j] = sub_mod(MOD, root_pow[x[i]]);
+    }
+    for (unsigned i = 1; i < MAX_LOG; i++) {
+        unsigned len = 1 << i, n_len = len << 1, m = NUM_OF_NEED_SYMBOL >> i;
+        for (unsigned j = 0; j < m; j++) {
+            unsigned st = j << (i + 1);
+            vector<unsigned> num1(n2.begin() + st, n2.begin() + st + len);
+            vector<unsigned> den1(n3.begin() + st, n3.begin() + st + len);
+            vector<unsigned> num2(n2.begin() + st + len, n2.begin() + st + n_len);
+            vector<unsigned> den2(n3.begin() + st + len, n3.begin() + st + n_len);
+            vector<unsigned> n_num1 = poly_mul(num1, den2, i), n_num2 = poly_mul(num2, den1, i);
+            vector<unsigned> n_den = poly_mul(den1, den2, i);
+            for (unsigned k = 0; k < n_len; k++) {
+                n2[k + st] = add_mod(n_num1[k], n_num2[k]);
+                n3[k + st] = n_den[k];
+            }
+        }
+    }
+
+    return vector<unsigned>(n2.begin(), n2.begin() + NUM_OF_NEED_SYMBOL);*/
 
 }
 
@@ -304,44 +339,54 @@ void testEncodeDecode() {
 
     srand(time(0));
 
-    vector<unsigned> a(NUM_OF_NEED_SYMBOL);
-    for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
-        a[i] = rand() % (MOD - 1); // 2 bytes
+    unsigned N_test = 10;
 
-    vector<unsigned> b = encode(a);
+    for (unsigned tt = 0; tt < N_test; tt++) {
+        vector<unsigned> a(NUM_OF_NEED_SYMBOL);
+        for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
+            a[i] = rand() % (MOD - 1); // 2 bytes
 
-    vector<unsigned> x(NUM_OF_NEED_SYMBOL), y(NUM_OF_NEED_SYMBOL);
+        vector<unsigned> b = encode(a);
 
-    for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++) {
-        unsigned stx = i * SYMBOL_PER_PACKET;
-        for (unsigned j = 0; j < SEG_PER_PACKET; j++) {
-            x[stx + j] = stx + j;
-            x[stx + j + SEG_PER_PACKET] = stx + j + SEG_DIFF;
-            y[stx + j] = b[stx + j];
-            y[stx + j + SEG_PER_PACKET] = b[stx + j + SEG_DIFF];
+        vector<unsigned> x(NUM_OF_NEED_SYMBOL), y(NUM_OF_NEED_SYMBOL);
+
+        for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++) {
+            unsigned stx = i * SYMBOL_PER_PACKET;
+            for (unsigned j = 0; j < SEG_PER_PACKET; j++) {
+                x[stx + j] = stx + j;
+                x[stx + j + SEG_PER_PACKET] = stx + j + SEG_DIFF;
+                y[stx + j] = b[stx + j];
+                y[stx + j + SEG_PER_PACKET] = b[stx + j + SEG_DIFF];
+            }
         }
-    }
 
-    vector<unsigned> c = decode(x, y);
-    for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
-        assert(a[i] == c[i]);
+        vector<unsigned> c = decode(x, y);
+        for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
+            assert(a[i] == c[i]);
+        cout << "EncodeDecode test " << tt << " passed!" << endl;
+    }
 
 }
 
 void testFNT() {
 
-    unsigned log_n = 16;
-    vector<unsigned> c1;
-    for (unsigned i = 0; i < (1 << log_n); i++)
-        c1.push_back(i);
-    shuffle(c1.begin(), c1.end(), default_random_engine(time(NULL)));
-    vector<unsigned> v = fnt(c1, log_n, 0);
-    vector<unsigned> c2 = fnt(v, log_n, 3);
-    for (unsigned i = 0; i < (1 << log_n); i++)
-        assert(c1[i] == c2[i]);
+    unsigned N_test = 10;
 
-    vector<unsigned> u = fnt(v, log_n, 2);
-    for (unsigned i = 0; i < (1 << log_n); i++)
-        assert(div_mod(u[i], (1 << log_n)) == c1[i]);
+    for (unsigned tt = 0; tt < N_test; tt++) {
+        unsigned log_n = 16;
+        vector<unsigned> c1;
+        for (unsigned i = 0; i < (1 << log_n); i++)
+            c1.push_back(i);
+        shuffle(c1.begin(), c1.end(), default_random_engine(time(NULL)));
+        vector<unsigned> v = fnt(c1, log_n, 0);
+        vector<unsigned> c2 = fnt(v, log_n, 3);
+        for (unsigned i = 0; i < (1 << log_n); i++)
+            assert(c1[i] == c2[i]);
+
+        vector<unsigned> u = fnt(v, log_n, 2);
+        for (unsigned i = 0; i < (1 << log_n); i++)
+            assert(div_mod(u[i], (1 << log_n)) == c1[i]);
+        cout << "FNT test " << tt << " passed!" << endl;
+    }
 
 }
