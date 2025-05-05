@@ -76,7 +76,15 @@
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
+      <GenerateRelocatableDeviceCode>true</GenerateRelocatableDeviceCode>
+      <CodeGeneration>compute_86,sm_86</CodeGeneration>
+      <FastMath>true</FastMath>
+      <Runtime>MT</Runtime>
+      <Optimization>O2</Optimization>
     </CudaCompile>
+    <CudaLink>
+      <Optimization>O2</Optimization>
+    </CudaLink>
   </ItemDefinitionGroup>
   <ItemGroup>
     <CudaCompile Include="kernel.cu" />

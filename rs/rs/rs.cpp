@@ -198,10 +198,8 @@ vector<unsigned> decode(const vector<unsigned>& x, const vector<unsigned>& y) {
        n2[x[i]] = n1[i];
 
     vector<unsigned> vn2 = fnt(n2, MAX_LOG, 2);
-    unsigned vn2_0 = vn2[0];
-    for (unsigned i = 1; i < vn2.size(); i++)
-       vn2[i - 1] = sub_mod(MOD, vn2[i]);
-    vn2[vn2.size() - 1] = sub_mod(MOD, vn2_0);
+    for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
+       vn2[i] = sub_mod(0, vn2[i + 1]);
 
     ax.resize(NUM_OF_NEED_SYMBOL);
     vn2.resize(NUM_OF_NEED_SYMBOL);
@@ -213,7 +211,7 @@ vector<unsigned> decode(const vector<unsigned>& x, const vector<unsigned>& y) {
     for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++) {
         unsigned j = i << 1;
         n2[j] = n1[i];
-        n3[j] = sub_mod(MOD, root_pow[x[i]]);
+        n3[j] = sub_mod(0, root_pow[x[i]]);
     }
     for (unsigned i = 1; i < MAX_LOG; i++) {
         unsigned len = 1 << i, n_len = len << 1, m = NUM_OF_NEED_SYMBOL >> i;
@@ -289,8 +287,8 @@ void init() {
         vector<vector<unsigned>> p(SYMBOL_PER_PACKET, vector<unsigned>(2, 1));
         for (unsigned j = 0; j < SEG_PER_PACKET; j++) {
             unsigned k = i * SEG_PER_PACKET + j;
-            p[j][0] = sub_mod(MOD, root_pow[k]);
-            p[j + SEG_PER_PACKET][0] = sub_mod(MOD, root_pow[k + SEG_DIFF]);
+            p[j][0] = sub_mod(0, root_pow[k]);
+            p[j + SEG_PER_PACKET][0] = sub_mod(0, root_pow[k + SEG_DIFF]);
         }
         packet_product[i] = build_product(p, 1, LOG_SYMBOL + 1);
     }
