@@ -1,12 +1,17 @@
 ﻿  Compiling CUDA source file kernel.cu...
   
   C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\bin\nvcc.exe" -gencode=arch=compute_86,code=\"sm_86,compute_86\" --use-local-env -ccbin "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\bin\HostX64\x64" -x cu -rdc=true  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\include"     --keep-dir x64\Release -use_fast_math -maxrregcount=0    --machine 64 --compile -cudart static    -DWIN32 -DWIN64 -DNDEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /O2 /FS   /MT " -Xcompiler "/Fdx64\Release\vc143.pdb" -o "C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\x64\Release\kernel.cu.obj" "C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu" 
+C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(59): warning #20011-D: calling a __host__ function("double  ::sqrt<unsigned int, (int)0> (T1)") from a __host__ __device__ function("build_launch_param") is not allowed
+  
+  Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+  
   kernel.cu
-  tmpxft_00002c54_00000000-7_kernel.cudafe1.cpp
-C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(705): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(755): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(807): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(883): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  tmpxft_00004078_00000000-7_kernel.cudafe1.cpp
+C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(59): warning C4244: 'initializing': conversion from 'double' to 'unsigned int', possible loss of data
+C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(706): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(756): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(808): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(884): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   
   C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\bin\nvcc.exe" -dlink  -o x64\Release\rs_cuda.device-link.obj -Xcompiler "/EHsc /W3 /nologo /O2   /MT " -Xcompiler "/Fdx64\Release\vc143.pdb" -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\bin/crt" -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.8\lib\x64" cudart_static.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib cudart.lib cudadevrt.lib  -gencode=arch=compute_86,code=sm_86   "C:\Users\Captain 3060\Downloads\OneDrive - The University of Technology\uy\PBL\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\x64\Release\kernel.cu.obj" 
   cudart_static.lib

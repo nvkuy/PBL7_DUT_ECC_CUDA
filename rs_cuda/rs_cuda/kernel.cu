@@ -56,8 +56,9 @@ unsigned* d_root_layer_pow;
 unsigned* d_packet_product;
 
 __host__ __device__ __forceinline__ inline void build_launch_param(unsigned n, unsigned& n_th, unsigned& n_bl) {
-	//n_th = n > 512 ? 512 : (n > 256 ? 256 : n);
-	n_th = n > 256 ? 256 : n;
+	unsigned sq_n = sqrt(n);
+	n_th = 1;
+	while (n_th < sq_n) n_th <<= 1;
 	n_bl = n / n_th;
 }
 
@@ -675,7 +676,7 @@ int main()
 
 	//test_encode_decode();
 
-	//test_fnt_performance();
+	test_fnt_performance();
 
 	test_encode_decode_performance();
 
@@ -840,7 +841,7 @@ void test_fnt_performance() {
 
 	using namespace std;
 
-	const unsigned N_test = 32;
+	const unsigned N_test = 512 * 1024 / 64;
 	unsigned log_n = 16, n = 1 << log_n;
 	unsigned size_n = n * sizeof(unsigned);
 	vector<vector<unsigned>> a(N_test, vector<unsigned>(n));
@@ -865,7 +866,7 @@ void test_fnt_performance() {
 
 	cudaDeviceSynchronize();
 	auto stop = chrono::high_resolution_clock::now();
-	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start).count();
+	auto duration = chrono::duration_cast<chrono::milliseconds>(stop - start).count();
 
 	cout << "FNT " << N_test << " in " << duration << "ms" << endl;
 
@@ -882,7 +883,7 @@ void test_encode_decode_performance() {
 	using namespace std;
 	srand(time(NULL));
 
-	unsigned N_test = 10 * 1024 / 64;
+	unsigned N_test = 1024 * 1024 / 64;
 	vector<vector<unsigned>> a(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL));
 	vector<vector<unsigned>> b(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL << 1));
 	vector<vector<unsigned>> c(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL));
@@ -899,7 +900,7 @@ void test_encode_decode_performance() {
 
 	cudaDeviceSynchronize();
 	auto stop1 = chrono::high_resolution_clock::now();
-	auto duration1 = chrono::duration_cast<chrono::microseconds>(stop1 - start1).count();
+	auto duration1 = chrono::duration_cast<chrono::milliseconds>(stop1 - start1).count();
 
 	cout << "Encode " << N_test << " chunks in " << duration1 << "ms" << endl;
 
@@ -926,7 +927,7 @@ void test_encode_decode_performance() {
 
 	cudaDeviceSynchronize();
 	auto stop2 = chrono::high_resolution_clock::now();
-	auto duration2 = chrono::duration_cast<chrono::microseconds>(stop2 - start2).count();
+	auto duration2 = chrono::duration_cast<chrono::milliseconds>(stop2 - start2).count();
 
 	cout << "Decode " << N_test << " chunks in " << duration2 << "ms" << endl;
 
