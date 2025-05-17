@@ -3,7 +3,7 @@ extern  /* COMDAT group: _ZTISt20bad_array_new_length */ const struct __si_class
 extern  /* COMDAT group: _ZTISt12system_error */ const struct __si_class_type_info _ZTISt12system_error;
 extern  /* COMDAT group: _ZTISt8bad_cast */ const struct __si_class_type_info _ZTISt8bad_cast;
 extern  /* COMDAT group: _ZTINSt8ios_base7failureE */ const struct __si_class_type_info _ZTINSt8ios_base7failureE;
-#line 67 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 80 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *d_N_pos = 0;
 unsigned *d_root_pow = 0;
 unsigned *d_root_inv_pow = 0;
@@ -45,6 +45,7 @@ extern  /* COMDAT group: _ZNSt9_FacetptrISt7num_putIcSt19ostreambuf_iteratorIcSt
 static const struct _ZSt15_Fake_allocator __nv_static_30__dcb4e26f_9_kernel_cu_6c617819__ZN39_INTERNAL_dcb4e26f_9_kernel_cu_6c617819St11_Fake_allocE;
 #line 40 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\iostream"
 extern _ZSt7ostream _ZSt4cout;
+extern _ZSt7ostream _ZSt4cerr;
  /* COMDAT group: _ZNSt7num_putIcSt19ostreambuf_iteratorIcSt11char_traitsIcEEE2idE */ unsigned __int64 _ZGVNSt7num_putIcSt19ostreambuf_iteratorIcSt11char_traitsIcEEE2idE;
  /* COMDAT group: _ZNSt8numpunctIcE2idE */ unsigned __int64 _ZGVNSt8numpunctIcE2idE;
  /* COMDAT group: _ZTISt20bad_array_new_length */ const struct __si_class_type_info _ZTISt20bad_array_new_length = {{{(_ZTVN10__cxxabiv120__si_class_type_infoE + 2),_ZTSSt20bad_array_new_length}},((const struct __class_type_info *)(&_ZTISt9bad_alloc.base))};
