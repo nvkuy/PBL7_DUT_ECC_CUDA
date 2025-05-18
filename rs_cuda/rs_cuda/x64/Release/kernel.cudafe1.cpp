@@ -30651,11 +30651,8 @@ constexpr piecewise_construct_t piecewise_construct{};
 #line 116
 template< class ...> class tuple; 
 #line 119
-template< size_t _Index, class ..._Types> 
-#line 120
-[[nodiscard]] constexpr auto &&
-#line 119
-_Tuple_get(tuple< _Types...>  && _Tuple) noexcept; 
+template < size_t _Index, class ... _Types >
+[ [ nodiscard ] ] constexpr auto && _Tuple_get ( tuple < _Types ... > && _Tuple ) noexcept;
 #line 122
 template < class _Ty1, class _Ty2 >
 struct pair {
@@ -70521,1386 +70518,6752 @@ namespace std {
 #pragma pack ( pop )
 #line 5909 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\chrono"
 #pragma external_header(pop)
-#line 23 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-inline void check(cudaError_t err, const char *const func, const char *const file, const int line) 
+#line 21 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#pragma external_header(push)
+#line 12 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\queue"
+#pragma external_header(push)
+#line 17 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\deque"
+#pragma pack ( push, 8 )
+#pragma warning(push, 3)
+#pragma warning(disable : 4180 4412 4455 4494 4514 4574 4582 4583 4587 4588 4619 4623 4625 4626 4643 4648 4702 4793 4820 4988 5026 5027 5045 6294 4984 )
 #line 24
-{ 
+namespace std { 
 #line 25
-if (err != (cudaSuccess)) 
-#line 26
-{ 
-#line 27
-(((((((((std::cerr << ("CUDA Runtime Error at: "))) << file)) << (":"))) << line)) << (std::endl)); 
-#line 28
-(((((((std::cerr << (cudaGetErrorString(err)))) << (" "))) << func)) << (std::endl)); 
-#line 29
-std::exit(1); 
+template < class _Mydeque >
+class _Deque_unchecked_const_iterator {
+private :
+    using _Size_type = typename _Mydeque :: size_type;
+
+    static constexpr int _Block_size = _Mydeque :: _Block_size;
+
+public :
+    using iterator_category = random_access_iterator_tag;
+
+    using value_type = typename _Mydeque :: value_type;
+    using difference_type = typename _Mydeque :: difference_type;
+    using pointer = typename _Mydeque :: const_pointer;
+    using reference = const value_type &;
+
+    _Deque_unchecked_const_iterator ( ) noexcept : _Mycont ( ), _Myoff ( 0 ) { }
+
+    _Deque_unchecked_const_iterator ( _Size_type _Off, const _Container_base12 * _Pdeque ) noexcept
+        : _Mycont ( static_cast < const _Mydeque * > ( _Pdeque ) ), _Myoff ( _Off ) { }
+
+    [ [ nodiscard ] ] reference operator * ( ) const noexcept {
+        _Size_type _Block = _Mycont -> _Getblock ( _Myoff );
+        _Size_type _Off = _Myoff % _Block_size;
+        return _Mycont -> _Map [ _Block ] [ _Off ];
+    }
+
+    [ [ nodiscard ] ] pointer operator -> ( ) const noexcept {
+        return pointer_traits < pointer > :: pointer_to ( * * this );
+    }
+
+    _Deque_unchecked_const_iterator & operator ++ ( ) noexcept {
+        ++ _Myoff;
+        return * this;
+    }
+
+    _Deque_unchecked_const_iterator operator ++ ( int ) noexcept {
+        _Deque_unchecked_const_iterator _Tmp = * this;
+        ++ _Myoff;
+        return _Tmp;
+    }
+
+    _Deque_unchecked_const_iterator & operator -- ( ) noexcept {
+        -- _Myoff;
+        return * this;
+    }
+
+    _Deque_unchecked_const_iterator operator -- ( int ) noexcept {
+        _Deque_unchecked_const_iterator _Tmp = * this;
+        -- _Myoff;
+        return _Tmp;
+    }
+
+    _Deque_unchecked_const_iterator & operator += ( const difference_type _Off ) noexcept {
+        _Myoff += _Off;
+        return * this;
+    }
+
+    [ [ nodiscard ] ] _Deque_unchecked_const_iterator operator + ( const difference_type _Off ) const noexcept {
+        _Deque_unchecked_const_iterator _Tmp = * this;
+        return _Tmp += _Off;
+    }
+
+    _Deque_unchecked_const_iterator & operator -= ( const difference_type _Off ) noexcept {
+        _Myoff -= _Off;
+        return * this;
+    }
+
+    [ [ nodiscard ] ] _Deque_unchecked_const_iterator operator - ( const difference_type _Off ) const noexcept {
+        _Deque_unchecked_const_iterator _Tmp = * this;
+        return _Tmp -= _Off;
+    }
+
+    [ [ nodiscard ] ] difference_type operator - ( const _Deque_unchecked_const_iterator & _Right ) const noexcept {
+        return static_cast < difference_type > ( _Myoff - _Right . _Myoff );
+    }
+
+    [ [ nodiscard ] ] reference operator [ ] ( const difference_type _Off ) const noexcept {
+        return * ( * this + _Off );
+    }
+
+    [ [ nodiscard ] ] bool operator == ( const _Deque_unchecked_const_iterator & _Right ) const noexcept {
+        return _Myoff == _Right . _Myoff;
+    }
+
+
+
+
+
+
+    [ [ nodiscard ] ] bool operator != ( const _Deque_unchecked_const_iterator & _Right ) const noexcept {
+        return ! ( * this == _Right );
+    }
+
+    [ [ nodiscard ] ] bool operator < ( const _Deque_unchecked_const_iterator & _Right ) const noexcept {
+        return _Myoff < _Right . _Myoff;
+    }
+
+    [ [ nodiscard ] ] bool operator > ( const _Deque_unchecked_const_iterator & _Right ) const noexcept {
+        return _Right < * this;
+    }
+
+    [ [ nodiscard ] ] bool operator <= ( const _Deque_unchecked_const_iterator & _Right ) const noexcept {
+        return ! ( _Right < * this );
+    }
+
+    [ [ nodiscard ] ] bool operator >= ( const _Deque_unchecked_const_iterator & _Right ) const noexcept {
+        return ! ( * this < _Right );
+    }
+
+
+    const _Container_base12 * _Getcont ( ) const noexcept {
+        return _Mycont;
+    }
+
+    const _Mydeque * _Mycont;
+    _Size_type _Myoff;
+};
+#line 143 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\deque"
+template < class _Mydeque >
+[ [ nodiscard ] ] _Deque_unchecked_const_iterator < _Mydeque > operator + (
+    typename _Deque_unchecked_const_iterator < _Mydeque > :: difference_type _Off,
+    _Deque_unchecked_const_iterator < _Mydeque > _Next ) noexcept {
+    return _Next += _Off;
+}
+#line 150
+template < class _Mydeque >
+class _Deque_unchecked_iterator : public _Deque_unchecked_const_iterator < _Mydeque > {
+private :
+    using _Size_type = typename _Mydeque :: size_type;
+    using _Mybase = _Deque_unchecked_const_iterator < _Mydeque >;
+
+public :
+    using iterator_category = random_access_iterator_tag;
+
+    using value_type = typename _Mydeque :: value_type;
+    using difference_type = typename _Mydeque :: difference_type;
+    using pointer = typename _Mydeque :: pointer;
+    using reference = value_type &;
+
+    using _Mybase :: _Mybase;
+
+    [ [ nodiscard ] ] reference operator * ( ) const noexcept {
+        return const_cast < reference > ( _Mybase :: operator * ( ) );
+    }
+
+    [ [ nodiscard ] ] pointer operator -> ( ) const noexcept {
+        return pointer_traits < pointer > :: pointer_to ( * * this );
+    }
+
+    _Deque_unchecked_iterator & operator ++ ( ) noexcept {
+        _Mybase :: operator ++ ( );
+        return * this;
+    }
+
+    _Deque_unchecked_iterator operator ++ ( int ) noexcept {
+        _Deque_unchecked_iterator _Tmp = * this;
+        _Mybase :: operator ++ ( );
+        return _Tmp;
+    }
+
+    _Deque_unchecked_iterator & operator -- ( ) noexcept {
+        _Mybase :: operator -- ( );
+        return * this;
+    }
+
+    _Deque_unchecked_iterator operator -- ( int ) noexcept {
+        _Deque_unchecked_iterator _Tmp = * this;
+        _Mybase :: operator -- ( );
+        return _Tmp;
+    }
+
+    _Deque_unchecked_iterator & operator += ( const difference_type _Off ) noexcept {
+        _Mybase :: operator += ( _Off );
+        return * this;
+    }
+
+    [ [ nodiscard ] ] _Deque_unchecked_iterator operator + ( const difference_type _Off ) const noexcept {
+        _Deque_unchecked_iterator _Tmp = * this;
+        return _Tmp += _Off;
+    }
+
+    _Deque_unchecked_iterator & operator -= ( const difference_type _Off ) noexcept {
+        _Mybase :: operator -= ( _Off );
+        return * this;
+    }
+
+    [ [ nodiscard ] ] _Deque_unchecked_iterator operator - ( const difference_type _Off ) const noexcept {
+        _Deque_unchecked_iterator _Tmp = * this;
+        return _Tmp -= _Off;
+    }
+
+    [ [ nodiscard ] ] difference_type operator - ( const _Mybase & _Right ) const noexcept {
+        return _Mybase :: operator - ( _Right );
+    }
+
+    [ [ nodiscard ] ] reference operator [ ] ( const difference_type _Off ) const noexcept {
+        return const_cast < reference > ( _Mybase :: operator [ ] ( _Off ) );
+    }
+};
+#line 225
+template < class _Mydeque >
+[ [ nodiscard ] ] _Deque_unchecked_iterator < _Mydeque > operator + (
+    typename _Deque_unchecked_iterator < _Mydeque > :: difference_type _Off,
+    _Deque_unchecked_iterator < _Mydeque > _Next ) noexcept {
+    return _Next += _Off;
+}
+#line 232
+template < class _Mydeque >
+class _Deque_const_iterator : public _Iterator_base12 {
+private :
+    using _Size_type = typename _Mydeque :: size_type;
+
+    static constexpr int _Block_size = _Mydeque :: _Block_size;
+
+public :
+    using iterator_category = random_access_iterator_tag;
+
+    using value_type = typename _Mydeque :: value_type;
+    using difference_type = typename _Mydeque :: difference_type;
+    using pointer = typename _Mydeque :: const_pointer;
+    using reference = const value_type &;
+
+    using _Mydeque_t = _Mydeque;
+    enum { _EEN_DS = _Block_size };
+    _Deque_const_iterator ( ) noexcept : _Myoff ( 0 ) {
+        _Setcont ( nullptr );
+    }
+
+    _Deque_const_iterator ( _Size_type _Off, const _Container_base12 * _Pdeque ) noexcept : _Myoff ( _Off ) {
+        _Setcont ( static_cast < const _Mydeque * > ( _Pdeque ) );
+    }
+
+    [ [ nodiscard ] ] reference operator * ( ) const noexcept {
+        const auto _Mycont = static_cast < const _Mydeque * > ( this -> _Getcont ( ) );
+
+
+
+
+
+
+        _Size_type _Block = _Mycont -> _Getblock ( _Myoff );
+        _Size_type _Off = _Myoff % _Block_size;
+        return _Mycont -> _Map [ _Block ] [ _Off ];
+    }
+
+    [ [ nodiscard ] ] pointer operator -> ( ) const noexcept {
+        return pointer_traits < pointer > :: pointer_to ( * * this );
+    }
+
+    _Deque_const_iterator & operator ++ ( ) noexcept {
+
+
+
+
+
+
+        ++ _Myoff;
+        return * this;
+    }
+
+    _Deque_const_iterator operator ++ ( int ) noexcept {
+        _Deque_const_iterator _Tmp = * this;
+        ++ * this;
+        return _Tmp;
+    }
+
+    _Deque_const_iterator & operator -- ( ) noexcept {
+
+
+
+
+
+
+        -- _Myoff;
+        return * this;
+    }
+
+    _Deque_const_iterator operator -- ( int ) noexcept {
+        _Deque_const_iterator _Tmp = * this;
+        -- * this;
+        return _Tmp;
+    }
+
+    _Deque_const_iterator & operator += ( const difference_type _Off ) noexcept {
+
+
+
+
+
+
+
+
+
+
+        _Myoff += _Off;
+        return * this;
+    }
+
+    [ [ nodiscard ] ] _Deque_const_iterator operator + ( const difference_type _Off ) const noexcept {
+        _Deque_const_iterator _Tmp = * this;
+        return _Tmp += _Off;
+    }
+
+    _Deque_const_iterator & operator -= ( const difference_type _Off ) noexcept {
+        return * this += - _Off;
+    }
+
+    [ [ nodiscard ] ] _Deque_const_iterator operator - ( const difference_type _Off ) const noexcept {
+        _Deque_const_iterator _Tmp = * this;
+        return _Tmp -= _Off;
+    }
+
+    [ [ nodiscard ] ] difference_type operator - ( const _Deque_const_iterator & _Right ) const noexcept {
+        _Compat ( _Right );
+        return static_cast < difference_type > ( this -> _Myoff - _Right . _Myoff );
+    }
+
+    [ [ nodiscard ] ] reference operator [ ] ( const difference_type _Off ) const noexcept {
+        return * ( * this + _Off );
+    }
+
+    [ [ nodiscard ] ] bool operator == ( const _Deque_const_iterator & _Right ) const noexcept {
+        _Compat ( _Right );
+        return this -> _Myoff == _Right . _Myoff;
+    }
+
+
+
+
+
+
+
+    [ [ nodiscard ] ] bool operator != ( const _Deque_const_iterator & _Right ) const noexcept {
+        return ! ( * this == _Right );
+    }
+
+    [ [ nodiscard ] ] bool operator < ( const _Deque_const_iterator & _Right ) const noexcept {
+        _Compat ( _Right );
+        return this -> _Myoff < _Right . _Myoff;
+    }
+
+    [ [ nodiscard ] ] bool operator > ( const _Deque_const_iterator & _Right ) const noexcept {
+        return _Right < * this;
+    }
+
+    [ [ nodiscard ] ] bool operator <= ( const _Deque_const_iterator & _Right ) const noexcept {
+        return ! ( _Right < * this );
+    }
+
+    [ [ nodiscard ] ] bool operator >= ( const _Deque_const_iterator & _Right ) const noexcept {
+        return ! ( * this < _Right );
+    }
+
+
+    void _Compat ( const _Deque_const_iterator & _Right ) const noexcept {
+
+        ( void ) _Right;
+
+
+
+    }
+
+    void _Setcont ( const _Mydeque * _Pdeque ) noexcept {
+        this -> _Adopt ( _Pdeque );
+    }
+
+    using _Prevent_inheriting_unwrap = _Deque_const_iterator;
+
+    [ [ nodiscard ] ] _Deque_unchecked_const_iterator < _Mydeque > _Unwrapped ( ) const noexcept {
+        return { this -> _Myoff, this -> _Getcont ( ) };
+    }
+
+    void _Verify_offset ( const difference_type _Off ) const noexcept {
+
+        ( void ) _Off;
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+    void _Seek_to ( const _Deque_unchecked_const_iterator < _Mydeque > & _UIt ) noexcept {
+        _Myoff = _UIt . _Myoff;
+    }
+
+    _Size_type _Myoff;
+};
+#line 425 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\deque"
+template < class _Mydeque >
+[ [ nodiscard ] ] _Deque_const_iterator < _Mydeque > operator + (
+    typename _Deque_const_iterator < _Mydeque > :: difference_type _Off, _Deque_const_iterator < _Mydeque > _Next ) noexcept {
+    return _Next += _Off;
+}
+#line 431
+template < class _Mydeque >
+class _Deque_iterator : public _Deque_const_iterator < _Mydeque > {
+private :
+    using _Size_type = typename _Mydeque :: size_type;
+    using _Mybase = _Deque_const_iterator < _Mydeque >;
+
+public :
+    using _Deque_unchecked_type = _Deque_unchecked_iterator < _Mydeque >;
+    using iterator_category = random_access_iterator_tag;
+
+    using value_type = typename _Mydeque :: value_type;
+    using difference_type = typename _Mydeque :: difference_type;
+    using pointer = typename _Mydeque :: pointer;
+    using reference = value_type &;
+
+    using _Mybase :: _Mybase;
+
+    [ [ nodiscard ] ] reference operator * ( ) const noexcept {
+        return const_cast < reference > ( _Mybase :: operator * ( ) );
+    }
+
+    [ [ nodiscard ] ] pointer operator -> ( ) const noexcept {
+        return pointer_traits < pointer > :: pointer_to ( * * this );
+    }
+
+    _Deque_iterator & operator ++ ( ) noexcept {
+        _Mybase :: operator ++ ( );
+        return * this;
+    }
+
+    _Deque_iterator operator ++ ( int ) noexcept {
+        _Deque_iterator _Tmp = * this;
+        _Mybase :: operator ++ ( );
+        return _Tmp;
+    }
+
+    _Deque_iterator & operator -- ( ) noexcept {
+        _Mybase :: operator -- ( );
+        return * this;
+    }
+
+    _Deque_iterator operator -- ( int ) noexcept {
+        _Deque_iterator _Tmp = * this;
+        _Mybase :: operator -- ( );
+        return _Tmp;
+    }
+
+    _Deque_iterator & operator += ( const difference_type _Off ) noexcept {
+        _Mybase :: operator += ( _Off );
+        return * this;
+    }
+
+    [ [ nodiscard ] ] _Deque_iterator operator + ( const difference_type _Off ) const noexcept {
+        _Deque_iterator _Tmp = * this;
+        return _Tmp += _Off;
+    }
+
+    _Deque_iterator & operator -= ( const difference_type _Off ) noexcept {
+        _Mybase :: operator -= ( _Off );
+        return * this;
+    }
+
+    using _Mybase :: operator -;
+
+    [ [ nodiscard ] ] _Deque_iterator operator - ( const difference_type _Off ) const noexcept {
+        _Deque_iterator _Tmp = * this;
+        return _Tmp -= _Off;
+    }
+
+    [ [ nodiscard ] ] reference operator [ ] ( const difference_type _Off ) const noexcept {
+        return const_cast < reference > ( _Mybase :: operator [ ] ( _Off ) );
+    }
+
+    using _Prevent_inheriting_unwrap = _Deque_iterator;
+
+    [ [ nodiscard ] ] _Deque_unchecked_iterator < _Mydeque > _Unwrapped ( ) const noexcept {
+        return { this -> _Myoff, this -> _Getcont ( ) };
+    }
+};
+#line 511
+template < class _Mydeque >
+[ [ nodiscard ] ] _Deque_iterator < _Mydeque > operator + (
+    typename _Deque_iterator < _Mydeque > :: difference_type _Off, _Deque_iterator < _Mydeque > _Next ) noexcept {
+    return _Next += _Off;
+}
+#line 517
+template< class _Value_type, class _Size_type, class _Difference_type, class _Pointer, class _Const_pointer, class 
+#line 518
+_Reference, class _Const_reference, class _Mapptr_type> 
+#line 519
+struct _Deque_iter_types { 
+#line 520
+using value_type = _Value_type; 
+#line 521
+using size_type = _Size_type; 
+#line 522
+using difference_type = _Difference_type; 
+#line 523
+using pointer = _Pointer; 
+#line 524
+using const_pointer = _Const_pointer; 
+#line 525
+using _Mapptr = _Mapptr_type; 
+#line 526
+}; 
+#line 528
+template< class _Ty> 
+#line 529
+struct _Deque_simple_types : public _Simple_types< _Ty>  { 
+#line 530
+using _Mapptr = _Ty **; 
+#line 531
+}; 
+#line 533
+template < class _Val_types >
+class _Deque_val : public _Container_base12 {
+public :
+    using value_type = typename _Val_types :: value_type;
+    using size_type = typename _Val_types :: size_type;
+    using difference_type = typename _Val_types :: difference_type;
+    using pointer = typename _Val_types :: pointer;
+    using const_pointer = typename _Val_types :: const_pointer;
+    using reference = value_type &;
+    using const_reference = const value_type &;
+    using _Mapptr = typename _Val_types :: _Mapptr;
+
+private :
+    static constexpr size_t _Bytes = sizeof ( value_type );
+
+public :
+    static constexpr int _Block_size = _Bytes <= 1 ? 16
+                                     : _Bytes <= 2 ? 8
+                                     : _Bytes <= 4 ? 4
+                                     : _Bytes <= 8 ? 2
+                                                   : 1;
+
+    _Deque_val ( ) noexcept : _Map ( ), _Mapsize ( 0 ), _Myoff ( 0 ), _Mysize ( 0 ) { }
+
+    size_type _Getblock ( size_type _Off ) const noexcept {
+
+        return ( _Off / _Block_size ) & ( _Mapsize - 1 );
+    }
+
+    _Mapptr _Map;
+    size_type _Mapsize;
+    size_type _Myoff;
+    size_type _Mysize;
+};
+#line 568
+template < class _Ty, class _Alloc = allocator < _Ty > >
+class deque {
+private :
+    friend _Tidy_guard < deque >;
+    static_assert ( ! 0 || is_same_v < _Ty, typename _Alloc :: value_type >,
+        "deque<T, Allocator> requires that Allocator\'s value_type match T (See N4659 26.2.1 [container.requirements.general]/16 allocato" "r_type) Either fix the allocator value_type or define _ENFORCE_MATCHING_ALLOCATORS=0 to suppress this diagnostic." );
+
+    using _Alty = _Rebind_alloc_t < _Alloc, _Ty >;
+    using _Alty_traits = allocator_traits < _Alty >;
+    using _Alpty = _Rebind_alloc_t < _Alloc, typename _Alty_traits :: pointer >;
+    using _Alpty_traits = allocator_traits < _Alpty >;
+    using _Mapptr = typename _Alpty_traits :: pointer;
+    using _Alproxy_ty = _Rebind_alloc_t < _Alty, _Container_proxy >;
+    using _Alproxy_traits = allocator_traits < _Alproxy_ty >;
+
+    using _Scary_val = _Deque_val < conditional_t < _Is_simple_alloc_v < _Alty >, _Deque_simple_types < _Ty >,
+        _Deque_iter_types < _Ty, typename _Alty_traits :: size_type, typename _Alty_traits :: difference_type,
+            typename _Alty_traits :: pointer, typename _Alty_traits :: const_pointer, _Ty &, const _Ty &, _Mapptr >> >;
+
+    static constexpr int _Minimum_map_size = 8;
+    static constexpr int _Block_size = _Scary_val :: _Block_size;
+
+public :
+    using allocator_type = _Alloc;
+    using value_type = _Ty;
+    using size_type = typename _Alty_traits :: size_type;
+    using difference_type = typename _Alty_traits :: difference_type;
+    using pointer = typename _Alty_traits :: pointer;
+    using const_pointer = typename _Alty_traits :: const_pointer;
+    using reference = _Ty &;
+    using const_reference = const _Ty &;
+
+    using iterator = _Deque_iterator < _Scary_val >;
+    using const_iterator = _Deque_const_iterator < _Scary_val >;
+    using _Unchecked_iterator = _Deque_unchecked_iterator < _Scary_val >;
+    using _Unchecked_const_iterator = _Deque_unchecked_const_iterator < _Scary_val >;
+
+    using reverse_iterator = :: std :: reverse_iterator < iterator >;
+    using const_reverse_iterator = :: std :: reverse_iterator < const_iterator >;
+    enum { _EEN_DS = _Block_size };
+
+    deque ( ) : _Mypair ( _Zero_then_variadic_args_t { } ) {
+        _Get_data ( ) . _Alloc_proxy ( static_cast < _Alproxy_ty > ( _Getal ( ) ) );
+    }
+
+    explicit deque ( const _Alloc & _Al ) : _Mypair ( _One_then_variadic_args_t { }, _Al ) {
+        _Get_data ( ) . _Alloc_proxy ( static_cast < _Alproxy_ty > ( _Getal ( ) ) );
+    }
+
+    explicit deque ( size_type _Count, const _Alloc & _Al = _Alloc ( ) )
+        : _Mypair ( _One_then_variadic_args_t { }, _Al ) {
+        _Alproxy_ty _Alproxy ( _Getal ( ) );
+        _Container_proxy_ptr12 < _Alproxy_ty > _Proxy ( _Alproxy, _Get_data ( ) );
+        resize ( _Count );
+        _Proxy . _Release ( );
+    }
+
+    deque ( size_type _Count, const _Ty & _Val ) : _Mypair ( _Zero_then_variadic_args_t { } ) {
+        _Alproxy_ty _Alproxy ( _Getal ( ) );
+        _Container_proxy_ptr12 < _Alproxy_ty > _Proxy ( _Alproxy, _Get_data ( ) );
+        _Construct_n ( _Count, _Val );
+        _Proxy . _Release ( );
+    }
+
+    deque ( size_type _Count, const _Ty & _Val, const _Alloc & _Al )
+        : _Mypair ( _One_then_variadic_args_t { }, _Al ) {
+        _Alproxy_ty _Alproxy ( _Getal ( ) );
+        _Container_proxy_ptr12 < _Alproxy_ty > _Proxy ( _Alproxy, _Get_data ( ) );
+        _Construct_n ( _Count, _Val );
+        _Proxy . _Release ( );
+    }
+
+    deque ( const deque & _Right )
+        : _Mypair ( _One_then_variadic_args_t { }, _Alty_traits :: select_on_container_copy_construction ( _Right . _Getal ( ) ) ) {
+        _Alproxy_ty _Alproxy ( _Getal ( ) );
+        _Container_proxy_ptr12 < _Alproxy_ty > _Proxy ( _Alproxy, _Get_data ( ) );
+        _Construct ( _Right . _Unchecked_begin ( ), _Right . _Unchecked_end ( ) );
+        _Proxy . _Release ( );
+    }
+
+    deque ( const deque & _Right, const _Alloc & _Al ) : _Mypair ( _One_then_variadic_args_t { }, _Al ) {
+        _Alproxy_ty _Alproxy ( _Getal ( ) );
+        _Container_proxy_ptr12 < _Alproxy_ty > _Proxy ( _Alproxy, _Get_data ( ) );
+        _Construct ( _Right . _Unchecked_begin ( ), _Right . _Unchecked_end ( ) );
+        _Proxy . _Release ( );
+    }
+
+    template < class _Iter, enable_if_t < _Is_iterator_v < _Iter >, int > = 0 >
+    deque ( _Iter _First, _Iter _Last ) : _Mypair ( _Zero_then_variadic_args_t { } ) {
+        _Alproxy_ty _Alproxy ( _Getal ( ) );
+        _Container_proxy_ptr12 < _Alproxy_ty > _Proxy ( _Alproxy, _Get_data ( ) );
+        _Construct ( _First, _Last );
+        _Proxy . _Release ( );
+    }
+
+    template < class _Iter, enable_if_t < _Is_iterator_v < _Iter >, int > = 0 >
+    deque ( _Iter _First, _Iter _Last, const _Alloc & _Al ) : _Mypair ( _One_then_variadic_args_t { }, _Al ) {
+        _Alproxy_ty _Alproxy ( _Getal ( ) );
+        _Container_proxy_ptr12 < _Alproxy_ty > _Proxy ( _Alproxy, _Get_data ( ) );
+        _Construct ( _First, _Last );
+        _Proxy . _Release ( );
+    }
+
+private :
+    template < class _Iter >
+    void _Construct ( _Iter _First, _Iter _Last ) {
+        _Tidy_guard < deque > _Guard { this };
+        for (; _First != _Last; ++ _First ) {
+            emplace_back ( * _First );
+        }
+
+        _Guard . _Target = nullptr;
+    }
+
+    void _Construct_n ( size_type _Count, const _Ty & _Val ) {
+        _Tidy_guard < deque > _Guard { this };
+        for (; 0 < _Count; -- _Count ) {
+            _Emplace_back_internal ( _Val );
+        }
+
+        _Guard . _Target = nullptr;
+    }
+
+public :
+    deque ( deque && _Right ) : _Mypair ( _One_then_variadic_args_t { }, :: std :: move ( _Right . _Getal ( ) ) ) {
+        _Get_data ( ) . _Alloc_proxy ( static_cast < _Alproxy_ty > ( _Getal ( ) ) );
+        _Take_contents ( _Right );
+    }
+
+    deque ( deque && _Right, const _Alloc & _Al ) : _Mypair ( _One_then_variadic_args_t { }, _Al ) {
+        _Alproxy_ty _Alproxy ( _Getal ( ) );
+        if constexpr ( ! _Alty_traits :: is_always_equal :: value ) {
+            if ( _Getal ( ) != _Right . _Getal ( ) ) {
+                _Container_proxy_ptr12 < _Alproxy_ty > _Proxy ( _Alproxy, _Get_data ( ) );
+                _Construct ( :: std :: make_move_iterator ( _Right . _Unchecked_begin ( ) ),
+                    :: std :: make_move_iterator ( _Right . _Unchecked_end ( ) ) );
+                _Proxy . _Release ( );
+                return;
+            }
+        }
+
+        _Get_data ( ) . _Alloc_proxy ( _Alproxy );
+        _Take_contents ( _Right );
+    }
+
+private :
+    void _Move_assign ( deque & _Right, _Equal_allocators ) noexcept {
+        _Tidy ( );
+        _Pocma ( _Getal ( ), _Right . _Getal ( ) );
+        _Take_contents ( _Right );
+    }
+
+    void _Move_assign ( deque & _Right, _Propagate_allocators ) {
+        auto & _Al = _Getal ( );
+        auto & _Right_al = _Right . _Getal ( );
+        if ( _Al == _Right_al ) {
+            _Move_assign ( _Right, _Equal_allocators { } );
+        } else {
+            _Alproxy_ty _Alproxy ( _Al );
+            _Alproxy_ty _Right_alproxy ( _Right_al );
+            _Container_proxy_ptr12 < _Alproxy_ty > _Proxy ( _Right_alproxy, _Leave_proxy_unbound { } );
+            _Tidy ( );
+            _Pocma ( _Al, _Right_al );
+            _Proxy . _Bind ( _Alproxy, :: std :: addressof ( _Get_data ( ) ) );
+            _Take_contents ( _Right );
+        }
+    }
+
+    void _Move_assign ( deque & _Right, _No_propagate_allocators ) {
+        if ( _Getal ( ) == _Right . _Getal ( ) ) {
+            _Move_assign ( _Right, _Equal_allocators { } );
+        } else {
+            assign (
+                :: std :: make_move_iterator ( _Right . _Unchecked_begin ( ) ), :: std :: make_move_iterator ( _Right . _Unchecked_end ( ) ) );
+        }
+    }
+
+public :
+    deque & operator = ( deque && _Right ) noexcept ( _Alty_traits :: is_always_equal :: value ) {
+        if ( this != :: std :: addressof ( _Right ) ) {
+            _Move_assign ( _Right, _Choose_pocma < _Alty > { } );
+        }
+
+        return * this;
+    }
+
+private :
+    void _Take_contents ( deque & _Right ) noexcept {
+
+
+        auto & _My_data = _Get_data ( );
+        auto & _Right_data = _Right . _Get_data ( );
+        _My_data . _Swap_proxy_and_iterators ( _Right_data );
+        _My_data . _Map = _Right_data . _Map;
+        _My_data . _Mapsize = _Right_data . _Mapsize;
+        _My_data . _Myoff = _Right_data . _Myoff;
+        _My_data . _Mysize = _Right_data . _Mysize;
+
+        _Right_data . _Map = nullptr;
+        _Right_data . _Mapsize = 0;
+        _Right_data . _Myoff = 0;
+        _Right_data . _Mysize = 0;
+    }
+
+public :
+    void push_front ( _Ty && _Val ) {
+        emplace_front ( :: std :: move ( _Val ) );
+    }
+
+    void push_back ( _Ty && _Val ) {
+        _Orphan_all ( );
+        _Emplace_back_internal ( :: std :: move ( _Val ) );
+    }
+
+    iterator insert ( const_iterator _Where, _Ty && _Val ) {
+        return emplace ( _Where, :: std :: move ( _Val ) );
+    }
+
+    template < class ... _Valty >
+    decltype ( auto ) emplace_front ( _Valty && ... _Val ) {
+        _Orphan_all ( );
+
+        if ( _Myoff ( ) % _Block_size == 0 && _Mapsize ( ) <= ( _Mysize ( ) + _Block_size ) / _Block_size ) {
+            _Growmap ( 1 );
+        }
+        _Myoff ( ) &= _Mapsize ( ) * _Block_size - 1;
+        size_type _Newoff = _Myoff ( ) != 0 ? _Myoff ( ) : _Mapsize ( ) * _Block_size;
+        size_type _Block = _Getblock ( -- _Newoff );
+        if ( _Map ( ) [ _Block ] == nullptr ) {
+            _Map ( ) [ _Block ] = _Getal ( ) . allocate ( _Block_size );
+        }
+
+        _Alty_traits :: construct (
+            _Getal ( ), _Unfancy ( _Map ( ) [ _Block ] + _Newoff % _Block_size ), :: std :: forward < _Valty > ( _Val ) ... );
+
+        _Myoff ( ) = _Newoff;
+        ++ _Mysize ( );
+
+
+
+
+    }
+
+    template < class ... _Valty >
+    decltype ( auto ) emplace_back ( _Valty && ... _Val ) {
+        _Orphan_all ( );
+        _Emplace_back_internal ( :: std :: forward < _Valty > ( _Val ) ... );
+
+
+
+
+    }
+
+    template < class ... _Valty >
+    iterator emplace ( const_iterator _Where, _Valty && ... _Val ) {
+        const auto _Off = static_cast < size_type > ( _Where - begin ( ) );
+
+
+
+
+
+        if ( _Off <= _Mysize ( ) / 2 ) {
+            emplace_front ( :: std :: forward < _Valty > ( _Val ) ... );
+            :: std :: rotate ( begin ( ), _Next_iter ( begin ( ) ), begin ( ) + static_cast < difference_type > ( 1 + _Off ) );
+        } else {
+            emplace_back ( :: std :: forward < _Valty > ( _Val ) ... );
+            :: std :: rotate ( begin ( ) + static_cast < difference_type > ( _Off ), _Prev_iter ( end ( ) ), end ( ) );
+        }
+        return begin ( ) + static_cast < difference_type > ( _Off );
+    }
+
+    deque ( initializer_list < _Ty > _Ilist, const _Alloc & _Al = allocator_type ( ) )
+        : _Mypair ( _One_then_variadic_args_t { }, _Al ) {
+        _Alproxy_ty _Alproxy ( _Getal ( ) );
+        _Container_proxy_ptr12 < _Alproxy_ty > _Proxy ( _Alproxy, _Get_data ( ) );
+        _Construct ( _Ilist . begin ( ), _Ilist . end ( ) );
+        _Proxy . _Release ( );
+    }
+
+    deque & operator = ( initializer_list < _Ty > _Ilist ) {
+        assign ( _Ilist . begin ( ), _Ilist . end ( ) );
+        return * this;
+    }
+
+    void assign ( initializer_list < _Ty > _Ilist ) {
+        assign ( _Ilist . begin ( ), _Ilist . end ( ) );
+    }
+
+    iterator insert ( const_iterator _Where, initializer_list < _Ty > _Ilist ) {
+        return insert ( _Where, _Ilist . begin ( ), _Ilist . end ( ) );
+    }
+
+    ~ deque ( ) noexcept {
+        _Tidy ( );
+        _Alproxy_ty _Proxy_allocator ( _Getal ( ) );
+        _Delete_plain_internal ( _Proxy_allocator, :: std :: exchange ( _Get_data ( ) . _Myproxy, nullptr ) );
+    }
+
+    void _Copy_assign ( const deque & _Right, false_type ) {
+        _Pocca ( _Getal ( ), _Right . _Getal ( ) );
+        assign ( _Right . _Unchecked_begin ( ), _Right . _Unchecked_end ( ) );
+    }
+
+    void _Copy_assign ( const deque & _Right, true_type ) {
+        if ( _Getal ( ) != _Right . _Getal ( ) ) {
+            _Tidy ( );
+            _Get_data ( ) . _Reload_proxy ( static_cast < _Alproxy_ty > ( _Getal ( ) ), static_cast < _Alproxy_ty > ( _Right . _Getal ( ) ) );
+        }
+
+        _Copy_assign ( _Right, false_type { } );
+    }
+
+    deque & operator = ( const deque & _Right ) {
+        if ( this != :: std :: addressof ( _Right ) ) {
+            _Copy_assign ( _Right, _Choose_pocca < _Alty > { } );
+        }
+
+        return * this;
+    }
+
+    [ [ nodiscard ] ] iterator begin ( ) noexcept {
+        return iterator ( _Myoff ( ), :: std :: addressof ( _Get_data ( ) ) );
+    }
+
+    [ [ nodiscard ] ] const_iterator begin ( ) const noexcept {
+        return const_iterator ( _Myoff ( ), :: std :: addressof ( _Get_data ( ) ) );
+    }
+
+    [ [ nodiscard ] ] iterator end ( ) noexcept {
+        return iterator ( _Myoff ( ) + _Mysize ( ), :: std :: addressof ( _Get_data ( ) ) );
+    }
+
+    [ [ nodiscard ] ] const_iterator end ( ) const noexcept {
+        return const_iterator ( _Myoff ( ) + _Mysize ( ), :: std :: addressof ( _Get_data ( ) ) );
+    }
+
+    _Unchecked_iterator _Unchecked_begin ( ) noexcept {
+        return _Unchecked_iterator ( _Myoff ( ), :: std :: addressof ( _Get_data ( ) ) );
+    }
+
+    _Unchecked_const_iterator _Unchecked_begin ( ) const noexcept {
+        return _Unchecked_const_iterator ( _Myoff ( ), :: std :: addressof ( _Get_data ( ) ) );
+    }
+
+    _Unchecked_iterator _Unchecked_end ( ) noexcept {
+        return _Unchecked_iterator ( _Myoff ( ) + _Mysize ( ), :: std :: addressof ( _Get_data ( ) ) );
+    }
+
+    _Unchecked_const_iterator _Unchecked_end ( ) const noexcept {
+        return _Unchecked_const_iterator ( _Myoff ( ) + _Mysize ( ), :: std :: addressof ( _Get_data ( ) ) );
+    }
+
+    iterator _Make_iter ( const_iterator _Where ) const noexcept {
+        return iterator ( _Where . _Myoff, :: std :: addressof ( _Get_data ( ) ) );
+    }
+
+    [ [ nodiscard ] ] reverse_iterator rbegin ( ) noexcept {
+        return reverse_iterator ( end ( ) );
+    }
+
+    [ [ nodiscard ] ] const_reverse_iterator rbegin ( ) const noexcept {
+        return const_reverse_iterator ( end ( ) );
+    }
+
+    [ [ nodiscard ] ] reverse_iterator rend ( ) noexcept {
+        return reverse_iterator ( begin ( ) );
+    }
+
+    [ [ nodiscard ] ] const_reverse_iterator rend ( ) const noexcept {
+        return const_reverse_iterator ( begin ( ) );
+    }
+
+    [ [ nodiscard ] ] const_iterator cbegin ( ) const noexcept {
+        return begin ( );
+    }
+
+    [ [ nodiscard ] ] const_iterator cend ( ) const noexcept {
+        return end ( );
+    }
+
+    [ [ nodiscard ] ] const_reverse_iterator crbegin ( ) const noexcept {
+        return rbegin ( );
+    }
+
+    [ [ nodiscard ] ] const_reverse_iterator crend ( ) const noexcept {
+        return rend ( );
+    }
+
+    void shrink_to_fit ( ) {
+        size_type _Oldcapacity = _Block_size * _Mapsize ( );
+        size_type _Newcapacity = _Oldcapacity / 2;
+
+        if ( _Newcapacity < _Block_size * _Minimum_map_size ) {
+            _Newcapacity = _Block_size * _Minimum_map_size;
+        }
+
+        if ( ( empty ( ) && 0 < _Mapsize ( ) )
+            || ( ! empty ( ) && size ( ) <= _Newcapacity && _Newcapacity < _Oldcapacity ) ) {
+            deque _Tmp ( :: std :: make_move_iterator ( begin ( ) ), :: std :: make_move_iterator ( end ( ) ) );
+            swap ( _Tmp );
+        }
+    }
+
+    void resize ( size_type _Newsize ) {
+        while ( _Mysize ( ) < _Newsize ) {
+            emplace_back ( );
+        }
+
+        while ( _Newsize < _Mysize ( ) ) {
+            pop_back ( );
+        }
+    }
+
+    void resize ( size_type _Newsize, const _Ty & _Val ) {
+        _Orphan_all ( );
+        while ( _Mysize ( ) < _Newsize ) {
+            _Emplace_back_internal ( _Val );
+        }
+
+        while ( _Newsize < _Mysize ( ) ) {
+            pop_back ( );
+        }
+    }
+
+    [ [ nodiscard ] ] size_type size ( ) const noexcept {
+        return _Mysize ( );
+    }
+
+    [ [ nodiscard ] ] size_type max_size ( ) const noexcept {
+        return ( :: std :: min ) (
+            static_cast < size_type > ( ( numeric_limits < difference_type > :: max ) ( ) ), _Alty_traits :: max_size ( _Getal ( ) ) );
+    }
+
+    [ [ nodiscard ] ] bool empty ( ) const noexcept {
+        return _Mysize ( ) == 0;
+    }
+
+    [ [ nodiscard ] ] allocator_type get_allocator ( ) const noexcept {
+        return static_cast < allocator_type > ( _Getal ( ) );
+    }
+
+    [ [ nodiscard ] ] const_reference at ( size_type _Pos ) const {
+        if ( _Mysize ( ) <= _Pos ) {
+            _Xran ( );
+        }
+
+        return * ( begin ( ) + static_cast < difference_type > ( _Pos ) );
+    }
+
+    [ [ nodiscard ] ] reference at ( size_type _Pos ) {
+        if ( _Mysize ( ) <= _Pos ) {
+            _Xran ( );
+        }
+
+        return * ( begin ( ) + static_cast < difference_type > ( _Pos ) );
+    }
+
+    [ [ nodiscard ] ] const_reference operator [ ] ( size_type _Pos ) const noexcept {
+
+
+
+
+        return * ( _Unchecked_begin ( ) + static_cast < difference_type > ( _Pos ) );
+    }
+
+    [ [ nodiscard ] ] reference operator [ ] ( size_type _Pos ) noexcept {
+
+
+
+
+        return * ( _Unchecked_begin ( ) + static_cast < difference_type > ( _Pos ) );
+    }
+
+    [ [ nodiscard ] ] reference front ( ) noexcept {
+
+
+
+
+        return * _Unchecked_begin ( );
+    }
+
+    [ [ nodiscard ] ] const_reference front ( ) const noexcept {
+
+
+
+
+        return * _Unchecked_begin ( );
+    }
+
+    [ [ nodiscard ] ] reference back ( ) noexcept {
+
+
+
+
+        return * _Prev_iter ( _Unchecked_end ( ) );
+    }
+
+    [ [ nodiscard ] ] const_reference back ( ) const noexcept {
+
+
+
+
+        return * _Prev_iter ( _Unchecked_end ( ) );
+    }
+
+    void push_front ( const _Ty & _Val ) {
+        emplace_front ( _Val );
+    }
+
+    void pop_front ( ) noexcept {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        size_type _Block = _Getblock ( _Myoff ( ) );
+        _Alty_traits :: destroy ( _Getal ( ), _Unfancy ( _Map ( ) [ _Block ] + _Myoff ( ) % _Block_size ) );
+        if ( -- _Mysize ( ) == 0 ) {
+            _Myoff ( ) = 0;
+        } else {
+            ++ _Myoff ( );
+        }
+
+    }
+
+private :
+    template < class ... _Tys >
+    void _Emplace_back_internal ( _Tys && ... _Vals ) {
+        if ( ( _Myoff ( ) + _Mysize ( ) ) % _Block_size == 0 && _Mapsize ( ) <= ( _Mysize ( ) + _Block_size ) / _Block_size ) {
+            _Growmap ( 1 );
+        }
+        _Myoff ( ) &= _Mapsize ( ) * _Block_size - 1;
+        size_type _Newoff = _Myoff ( ) + _Mysize ( );
+        size_type _Block = _Getblock ( _Newoff );
+        if ( _Map ( ) [ _Block ] == nullptr ) {
+            _Map ( ) [ _Block ] = _Getal ( ) . allocate ( _Block_size );
+        }
+
+        _Alty_traits :: construct (
+            _Getal ( ), _Unfancy ( _Map ( ) [ _Block ] + _Newoff % _Block_size ), :: std :: forward < _Tys > ( _Vals ) ... );
+
+        ++ _Mysize ( );
+    }
+
+public :
+    void push_back ( const _Ty & _Val ) {
+        _Orphan_all ( );
+        _Emplace_back_internal ( _Val );
+    }
+
+    void pop_back ( ) noexcept {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        size_type _Newoff = _Myoff ( ) + _Mysize ( ) - 1;
+        size_type _Block = _Getblock ( _Newoff );
+        _Alty_traits :: destroy ( _Getal ( ), _Unfancy ( _Map ( ) [ _Block ] + _Newoff % _Block_size ) );
+        if ( -- _Mysize ( ) == 0 ) {
+            _Myoff ( ) = 0;
+        }
+
+    }
+
+    template < class _Iter, enable_if_t < _Is_iterator_v < _Iter >, int > = 0 >
+    void assign ( _Iter _First, _Iter _Last ) {
+        _Orphan_all ( );
+        _Adl_verify_range ( _First, _Last );
+        auto _UFirst = _Get_unwrapped ( _First );
+        const auto _ULast = _Get_unwrapped ( _Last );
+        auto _Myfirst = _Unchecked_begin ( );
+        const auto _Mylast = _Unchecked_end ( );
+        for (; _UFirst != _ULast; ++ _UFirst ) {
+            if ( _Myfirst == _Mylast ) {
+                do {
+                    emplace_back ( * _UFirst );
+                    ++ _UFirst;
+                } while ( _UFirst != _ULast );
+                return;
+            }
+
+            * _Myfirst = * _UFirst;
+            ++ _Myfirst;
+        }
+
+        _Erase_last_n ( static_cast < size_type > ( _Mylast - _Myfirst ) );
+    }
+
+    void assign ( size_type _Count, const _Ty & _Val ) {
+        _Orphan_all ( );
+        auto _Myfirst = _Unchecked_begin ( );
+        const auto _Oldsize = _Mysize ( );
+        auto _Assign_count = ( :: std :: min ) ( _Count, _Oldsize );
+        for (; 0 < _Assign_count; -- _Assign_count ) {
+            * _Myfirst = _Val;
+            ++ _Myfirst;
+        }
+
+        const auto _Shrink_by = _Oldsize - _Assign_count;
+        auto _Extend_by = _Count - _Assign_count;
+        _Erase_last_n ( _Shrink_by );
+        for (; 0 < _Extend_by; -- _Extend_by ) {
+            _Emplace_back_internal ( _Val );
+        }
+    }
+
+    iterator insert ( const_iterator _Where, const _Ty & _Val ) {
+        size_type _Off = static_cast < size_type > ( _Where - begin ( ) );
+
+
+
+
+
+        if ( _Off <= _Mysize ( ) / 2 ) {
+            push_front ( _Val );
+            :: std :: rotate ( begin ( ), _Next_iter ( begin ( ) ), begin ( ) + static_cast < difference_type > ( 1 + _Off ) );
+        } else {
+            push_back ( _Val );
+            :: std :: rotate ( begin ( ) + static_cast < difference_type > ( _Off ), _Prev_iter ( end ( ) ), end ( ) );
+        }
+
+        return begin ( ) + static_cast < difference_type > ( _Off );
+    }
+
+    iterator insert ( const_iterator _Where, size_type _Count, const _Ty & _Val ) {
+
+        size_type _Off = static_cast < size_type > ( _Where - begin ( ) );
+        _Insert_n ( _Where, _Count, _Val );
+        return begin ( ) + static_cast < difference_type > ( _Off );
+    }
+
+    template < class _Iter, enable_if_t < _Is_iterator_v < _Iter >, int > = 0 >
+    iterator insert ( const_iterator _Where, _Iter _First, _Iter _Last ) {
+
+        size_type _Off = static_cast < size_type > ( _Where - begin ( ) );
+
+
+
+
+
+        _Adl_verify_range ( _First, _Last );
+        auto _UFirst = _Get_unwrapped ( _First );
+        const auto _ULast = _Get_unwrapped ( _Last );
+
+        size_type _Oldsize = _Mysize ( );
+
+        if ( _UFirst != _ULast ) {
+            if ( _Off <= _Mysize ( ) / 2 ) {
+                try {
+                for (; _UFirst != _ULast; ++ _UFirst ) {
+                    emplace_front ( * _UFirst );
+                }
+
+                } catch ( ... ) {
+                while ( _Oldsize < _Mysize ( ) ) {
+                    pop_front ( );
+                }
+
+                throw;
+                }
+
+                size_type _Num = _Mysize ( ) - _Oldsize;
+                :: std :: reverse ( begin ( ), begin ( ) + static_cast < difference_type > ( _Num ) );
+                :: std :: rotate ( begin ( ), begin ( ) + static_cast < difference_type > ( _Num ),
+                    begin ( ) + static_cast < difference_type > ( _Num + _Off ) );
+            } else {
+                try {
+                _Orphan_all ( );
+                for (; _UFirst != _ULast; ++ _UFirst ) {
+                    _Emplace_back_internal ( * _UFirst );
+                }
+
+                } catch ( ... ) {
+                while ( _Oldsize < _Mysize ( ) ) {
+                    pop_back ( );
+                }
+
+                throw;
+                }
+
+                :: std :: rotate ( begin ( ) + static_cast < difference_type > ( _Off ),
+                    begin ( ) + static_cast < difference_type > ( _Oldsize ), end ( ) );
+            }
+        }
+
+        return begin ( ) + static_cast < difference_type > ( _Off );
+    }
+
+    iterator erase ( const_iterator _Where ) noexcept ( is_nothrow_move_assignable_v < value_type > ) {
+        return erase ( _Where, _Next_iter ( _Where ) );
+    }
+
+    iterator erase ( const_iterator _First_arg, const_iterator _Last_arg ) noexcept (
+        is_nothrow_move_assignable_v < value_type > ) {
+        iterator _First = _Make_iter ( _First_arg );
+        iterator _Last = _Make_iter ( _Last_arg );
+
+
+
+
+
+
+
+
+
+
+        auto _Off = static_cast < size_type > ( _First - begin ( ) );
+        auto _Count = static_cast < size_type > ( _Last - _First );
+
+
+        if ( _Count == 0 ) {
+            return _First;
+        }
+
+        if ( _Off < static_cast < size_type > ( end ( ) - _Last ) ) {
+            :: std :: move_backward ( begin ( ), _First, _Last );
+            for (; 0 < _Count; -- _Count ) {
+                pop_front ( );
+            }
+        } else {
+            :: std :: move ( _Last, end ( ), _First );
+            for (; 0 < _Count; -- _Count ) {
+                pop_back ( );
+            }
+        }
+
+
+
+
+
+
+
+        return begin ( ) + static_cast < difference_type > ( _Off );
+    }
+
+private :
+    void _Erase_last_n ( size_type _Count ) noexcept {
+        for (; 0 < _Count; -- _Count ) {
+            pop_back ( );
+        }
+    }
+
+public :
+    void clear ( ) noexcept {
+        _Tidy ( );
+    }
+
+    void swap ( deque & _Right ) noexcept {
+        if ( this != :: std :: addressof ( _Right ) ) {
+            _Pocs ( _Getal ( ), _Right . _Getal ( ) );
+            auto & _My_data = _Get_data ( );
+            auto & _Right_data = _Right . _Get_data ( );
+            _My_data . _Swap_proxy_and_iterators ( _Right_data );
+            _Swap_adl ( _My_data . _Map, _Right_data . _Map );
+            :: std :: swap ( _My_data . _Mapsize, _Right_data . _Mapsize );
+            :: std :: swap ( _My_data . _Myoff, _Right_data . _Myoff );
+            :: std :: swap ( _My_data . _Mysize, _Right_data . _Mysize );
+        }
+    }
+
+private :
+    void _Insert_n ( const_iterator _Where, size_type _Count, const _Ty & _Val ) {
+        iterator _Mid;
+        size_type _Num;
+        size_type _Off = static_cast < size_type > ( _Where - begin ( ) );
+        size_type _Oldsize = _Mysize ( );
+        size_type _Rem = _Oldsize - _Off;
+
+
+
+
+
+        if ( _Off < _Rem ) {
+            try {
+            if ( _Off < _Count ) {
+                for ( _Num = _Count - _Off; 0 < _Num; -- _Num ) {
+                    push_front ( _Val );
+                }
+                for ( _Num = _Off; 0 < _Num; -- _Num ) {
+                    push_front ( begin ( ) [ static_cast < difference_type > ( _Count - 1 ) ] );
+                }
+
+                _Mid = begin ( ) + static_cast < difference_type > ( _Count );
+                :: std :: fill ( _Mid, _Mid + static_cast < difference_type > ( _Off ), _Val );
+            } else {
+                for ( _Num = _Count; 0 < _Num; -- _Num ) {
+                    push_front ( begin ( ) [ static_cast < difference_type > ( _Count - 1 ) ] );
+                }
+
+                _Mid = begin ( ) + static_cast < difference_type > ( _Count );
+                _Alloc_temporary2 < _Alty > _Tmp ( _Getal ( ), _Val );
+                :: std :: move ( _Mid + static_cast < difference_type > ( _Count ), _Mid + static_cast < difference_type > ( _Off ),
+                    _Mid );
+                :: std :: fill ( begin ( ) + static_cast < difference_type > ( _Off ), _Mid + static_cast < difference_type > ( _Off ),
+                    _Tmp . _Get_value ( ) );
+            }
+            } catch ( ... ) {
+            while ( _Oldsize < _Mysize ( ) ) {
+                pop_front ( );
+            }
+
+            throw;
+            }
+        } else {
+            try {
+            if ( _Rem < _Count ) {
+                _Orphan_all ( );
+                for ( _Num = _Count - _Rem; 0 < _Num; -- _Num ) {
+                    _Emplace_back_internal ( _Val );
+                }
+                for ( _Num = 0; _Num < _Rem; ++ _Num ) {
+                    _Emplace_back_internal ( begin ( ) [ static_cast < difference_type > ( _Off + _Num ) ] );
+                }
+
+                _Mid = begin ( ) + static_cast < difference_type > ( _Off );
+                :: std :: fill ( _Mid, _Mid + static_cast < difference_type > ( _Rem ), _Val );
+            } else {
+                for ( _Num = 0; _Num < _Count; ++ _Num ) {
+                    _Emplace_back_internal (
+                        begin ( ) [ static_cast < difference_type > ( _Off + _Rem - _Count + _Num ) ] );
+                }
+
+                _Mid = begin ( ) + static_cast < difference_type > ( _Off );
+                _Alloc_temporary2 < _Alty > _Tmp ( _Getal ( ), _Val );
+                :: std :: move_backward ( _Mid, _Mid + static_cast < difference_type > ( _Rem - _Count ),
+                    _Mid + static_cast < difference_type > ( _Rem ) );
+                :: std :: fill ( _Mid, _Mid + static_cast < difference_type > ( _Count ),
+                    _Tmp . _Get_value ( ) );
+            }
+            } catch ( ... ) {
+            _Erase_last_n ( _Mysize ( ) - _Oldsize );
+            throw;
+            }
+        }
+    }
+
+    [ [ noreturn ] ] void _Xlen ( ) const {
+        _Xlength_error ( "deque<T> too long" );
+    }
+
+    [ [ noreturn ] ] void _Xran ( ) const {
+        _Xout_of_range ( "invalid deque<T> subscript" );
+    }
+
+    void _Growmap ( size_type _Count ) {
+        static_assert ( 1 < _Minimum_map_size, "The _Xlen() test should always be performed." );
+
+        _Alpty _Almap ( _Getal ( ) );
+        size_type _Newsize = 0 < _Mapsize ( ) ? _Mapsize ( ) : 1;
+        while ( _Newsize - _Mapsize ( ) < _Count || _Newsize < _Minimum_map_size ) {
+
+            if ( max_size ( ) / _Block_size - _Newsize < _Newsize ) {
+                _Xlen ( );
+            }
+
+            _Newsize *= 2;
+        }
+        _Count = _Newsize - _Mapsize ( );
+
+        size_type _Myboff = _Myoff ( ) / _Block_size;
+        _Mapptr _Newmap = _Almap . allocate ( _Mapsize ( ) + _Count );
+        _Mapptr _Myptr = _Newmap + _Myboff;
+
+        _Myptr = :: std :: uninitialized_copy ( _Map ( ) + _Myboff, _Map ( ) + _Mapsize ( ), _Myptr );
+        if ( _Myboff <= _Count ) {
+            _Myptr = :: std :: uninitialized_copy ( _Map ( ), _Map ( ) + _Myboff, _Myptr );
+            _Uninitialized_value_construct_n_unchecked1 ( _Myptr, _Count - _Myboff );
+            _Uninitialized_value_construct_n_unchecked1 ( _Newmap, _Myboff );
+        } else {
+            :: std :: uninitialized_copy ( _Map ( ), _Map ( ) + _Count, _Myptr );
+            _Myptr = :: std :: uninitialized_copy ( _Map ( ) + _Count, _Map ( ) + _Myboff, _Newmap );
+            _Uninitialized_value_construct_n_unchecked1 ( _Myptr, _Count );
+        }
+
+        _Destroy_range ( _Map ( ) + _Myboff, _Map ( ) + _Mapsize ( ) );
+        if ( _Map ( ) != _Mapptr ( ) ) {
+            _Almap . deallocate ( _Map ( ), _Mapsize ( ) );
+        }
+
+        _Map ( ) = _Newmap;
+        _Mapsize ( ) += _Count;
+    }
+
+    void _Tidy ( ) noexcept {
+        _Orphan_all ( );
+
+        _Alpty _Almap ( _Getal ( ) );
+        while ( ! empty ( ) ) {
+            pop_back ( );
+        }
+
+        for ( size_type _Block = _Mapsize ( ); 0 < _Block; ) {
+            if ( _Map ( ) [ -- _Block ] ) {
+                _Getal ( ) . deallocate ( _Map ( ) [ _Block ], _Block_size );
+                _Destroy_in_place ( _Map ( ) [ _Block ] );
+            }
+        }
+
+        if ( _Map ( ) != _Mapptr ( ) ) {
+            _Almap . deallocate ( _Map ( ), _Mapsize ( ) );
+        }
+
+        _Mapsize ( ) = 0;
+        _Map ( ) = _Mapptr ( );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    size_type _Getblock ( size_type _Off ) const noexcept {
+        return _Get_data ( ) . _Getblock ( _Off );
+    }
+
+    void _Orphan_all ( ) noexcept {
+        _Get_data ( ) . _Orphan_all ( );
+    }
+
+    _Alty & _Getal ( ) noexcept {
+        return _Mypair . _Get_first ( );
+    }
+
+    const _Alty & _Getal ( ) const noexcept {
+        return _Mypair . _Get_first ( );
+    }
+
+    _Scary_val & _Get_data ( ) noexcept {
+        return _Mypair . _Myval2;
+    }
+
+    const _Scary_val & _Get_data ( ) const noexcept {
+        return _Mypair . _Myval2;
+    }
+
+    _Mapptr & _Map ( ) noexcept {
+        return _Get_data ( ) . _Map;
+    }
+
+    const _Mapptr & _Map ( ) const noexcept {
+        return _Get_data ( ) . _Map;
+    }
+
+    size_type & _Mapsize ( ) noexcept {
+        return _Get_data ( ) . _Mapsize;
+    }
+
+    const size_type & _Mapsize ( ) const noexcept {
+        return _Get_data ( ) . _Mapsize;
+    }
+
+    size_type & _Myoff ( ) noexcept {
+        return _Get_data ( ) . _Myoff;
+    }
+
+    const size_type & _Myoff ( ) const noexcept {
+        return _Get_data ( ) . _Myoff;
+    }
+
+    size_type & _Mysize ( ) noexcept {
+        return _Get_data ( ) . _Mysize;
+    }
+
+    const size_type & _Mysize ( ) const noexcept {
+        return _Get_data ( ) . _Mysize;
+    }
+
+    _Compressed_pair < _Alty, _Scary_val > _Mypair;
+};
+#line 1580 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\deque"
+template < class _Ty, class _Alloc >
+void swap ( deque < _Ty, _Alloc > & _Left, deque < _Ty, _Alloc > & _Right ) noexcept {
+    _Left . swap ( _Right );
+}
+#line 1585
+template < class _Ty, class _Alloc >
+[ [ nodiscard ] ] bool operator == ( const deque < _Ty, _Alloc > & _Left, const deque < _Ty, _Alloc > & _Right ) {
+    return _Left . size ( ) == _Right . size ( )
+        && :: std :: equal ( _Left . _Unchecked_begin ( ), _Left . _Unchecked_end ( ), _Right . _Unchecked_begin ( ) );
+}
+#line 1592
+template < class _Ty, class _Alloc >
+[ [ nodiscard ] ] bool operator != ( const deque < _Ty, _Alloc > & _Left, const deque < _Ty, _Alloc > & _Right ) {
+    return ! ( _Left == _Right );
+}
+#line 1605 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\deque"
+template < class _Ty, class _Alloc >
+[ [ nodiscard ] ] bool operator < ( const deque < _Ty, _Alloc > & _Left, const deque < _Ty, _Alloc > & _Right ) {
+    return :: std :: lexicographical_compare (
+        _Left . _Unchecked_begin ( ), _Left . _Unchecked_end ( ), _Right . _Unchecked_begin ( ), _Right . _Unchecked_end ( ) );
+}
+#line 1611
+template < class _Ty, class _Alloc >
+[ [ nodiscard ] ] bool operator <= ( const deque < _Ty, _Alloc > & _Left, const deque < _Ty, _Alloc > & _Right ) {
+    return ! ( _Right < _Left );
+}
+#line 1616
+template < class _Ty, class _Alloc >
+[ [ nodiscard ] ] bool operator > ( const deque < _Ty, _Alloc > & _Left, const deque < _Ty, _Alloc > & _Right ) {
+    return _Right < _Left;
+}
+#line 1621
+template < class _Ty, class _Alloc >
+[ [ nodiscard ] ] bool operator >= ( const deque < _Ty, _Alloc > & _Left, const deque < _Ty, _Alloc > & _Right ) {
+    return ! ( _Left < _Right );
+}
+#line 1645 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\deque"
+}
+#line 1649
+#pragma warning(pop)
+#pragma pack ( pop )
+#line 1653 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\deque"
+#pragma external_header(pop)
+#line 15 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\queue"
+#pragma pack ( push, 8 )
+#pragma warning(push, 3)
+#pragma warning(disable : 4180 4412 4455 4494 4514 4574 4582 4583 4587 4588 4619 4623 4625 4626 4643 4648 4702 4793 4820 4988 5026 5027 5045 6294 4984 )
+#line 22
+namespace std { 
+#line 23
+template < class _Ty, class _Container = deque < _Ty > >
+class queue {
+public :
+    using value_type = typename _Container :: value_type;
+    using reference = typename _Container :: reference;
+    using const_reference = typename _Container :: const_reference;
+    using size_type = typename _Container :: size_type;
+    using container_type = _Container;
+
+    static_assert ( is_same_v < _Ty, value_type >, "container adaptors require consistent types" );
+
+    queue ( ) = default;
+
+    explicit queue ( const _Container & _Cont ) : c ( _Cont ) { }
+
+    explicit queue ( _Container && _Cont ) noexcept ( is_nothrow_move_constructible_v < _Container > )
+        : c ( :: std :: move ( _Cont ) ) { }
+
+    template < class _Alloc, enable_if_t < uses_allocator_v < _Container, _Alloc >, int > = 0 >
+    explicit queue ( const _Alloc & _Al ) noexcept ( is_nothrow_constructible_v < _Container, const _Alloc & > )
+        : c ( _Al ) { }
+
+    template < class _Alloc, enable_if_t < uses_allocator_v < _Container, _Alloc >, int > = 0 >
+    queue ( const _Container & _Cont, const _Alloc & _Al ) : c ( _Cont, _Al ) { }
+
+    template < class _Alloc, enable_if_t < uses_allocator_v < _Container, _Alloc >, int > = 0 >
+    queue ( _Container && _Cont, const _Alloc & _Al ) noexcept (
+        is_nothrow_constructible_v < _Container, _Container, const _Alloc & > )
+        : c ( :: std :: move ( _Cont ), _Al ) { }
+
+    template < class _Alloc, enable_if_t < uses_allocator_v < _Container, _Alloc >, int > = 0 >
+    queue ( const queue & _Right, const _Alloc & _Al ) : c ( _Right . c, _Al ) { }
+
+    template < class _Alloc, enable_if_t < uses_allocator_v < _Container, _Alloc >, int > = 0 >
+    queue ( queue && _Right, const _Alloc & _Al ) noexcept (
+        is_nothrow_constructible_v < _Container, _Container, const _Alloc & > )
+        : c ( :: std :: move ( _Right . c ), _Al ) { }
+
+    [ [ nodiscard ] ] bool empty ( ) const noexcept ( noexcept ( c . empty ( ) ) ) {
+        return c . empty ( );
+    }
+
+    [ [ nodiscard ] ] size_type size ( ) const noexcept ( noexcept ( c . size ( ) ) ) {
+        return c . size ( );
+    }
+
+    [ [ nodiscard ] ] reference front ( ) noexcept ( noexcept ( c . front ( ) ) ) {
+        return c . front ( );
+    }
+
+    [ [ nodiscard ] ] const_reference front ( ) const noexcept ( noexcept ( c . front ( ) ) ) {
+        return c . front ( );
+    }
+
+    [ [ nodiscard ] ] reference back ( ) noexcept ( noexcept ( c . back ( ) ) ) {
+        return c . back ( );
+    }
+
+    [ [ nodiscard ] ] const_reference back ( ) const noexcept ( noexcept ( c . back ( ) ) ) {
+        return c . back ( );
+    }
+
+    void push ( const value_type & _Val ) {
+        c . push_back ( _Val );
+    }
+
+    void push ( value_type && _Val ) {
+        c . push_back ( :: std :: move ( _Val ) );
+    }
+
+    template < class ... _Valty >
+    decltype ( auto ) emplace ( _Valty && ... _Val ) {
+
+
+
+        c . emplace_back ( :: std :: forward < _Valty > ( _Val ) ... );
+
+    }
+
+    void pop ( ) noexcept ( noexcept ( c . pop_front ( ) ) ) {
+        c . pop_front ( );
+    }
+
+    void swap ( queue & _Right ) noexcept ( _Is_nothrow_swappable < _Container > :: value ) {
+        _Swap_adl ( c, _Right . c );
+    }
+
+    [ [ nodiscard ] ] const _Container & _Get_container ( ) const noexcept {
+        return c;
+    }
+
+protected :
+    _Container c { };
+};
+#line 129 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\queue"
+template < class _Ty, class _Container >
+[ [ nodiscard ] ] bool operator == ( const queue < _Ty, _Container > & _Left, const queue < _Ty, _Container > & _Right ) {
+    return _Left . _Get_container ( ) == _Right . _Get_container ( );
+}
+#line 134
+template < class _Ty, class _Container >
+[ [ nodiscard ] ] bool operator != ( const queue < _Ty, _Container > & _Left, const queue < _Ty, _Container > & _Right ) {
+    return _Left . _Get_container ( ) != _Right . _Get_container ( );
+}
+#line 139
+template < class _Ty, class _Container >
+[ [ nodiscard ] ] bool operator < ( const queue < _Ty, _Container > & _Left, const queue < _Ty, _Container > & _Right ) {
+    return _Left . _Get_container ( ) < _Right . _Get_container ( );
+}
+#line 144
+template < class _Ty, class _Container >
+[ [ nodiscard ] ] bool operator > ( const queue < _Ty, _Container > & _Left, const queue < _Ty, _Container > & _Right ) {
+    return _Left . _Get_container ( ) > _Right . _Get_container ( );
+}
+#line 149
+template < class _Ty, class _Container >
+[ [ nodiscard ] ] bool operator <= ( const queue < _Ty, _Container > & _Left, const queue < _Ty, _Container > & _Right ) {
+    return _Left . _Get_container ( ) <= _Right . _Get_container ( );
+}
+#line 154
+template < class _Ty, class _Container >
+[ [ nodiscard ] ] bool operator >= ( const queue < _Ty, _Container > & _Left, const queue < _Ty, _Container > & _Right ) {
+    return _Left . _Get_container ( ) >= _Right . _Get_container ( );
+}
+#line 167
+template < class _Ty, class _Container, enable_if_t < _Is_swappable < _Container > :: value, int > = 0 >
+void swap ( queue < _Ty, _Container > & _Left, queue < _Ty, _Container > & _Right ) noexcept ( noexcept ( _Left . swap ( _Right ) ) ) {
+    _Left . swap ( _Right );
+}
+#line 172
+template< class _Ty, class _Container, class _Alloc> 
+#line 173
+struct uses_allocator< queue< _Ty, _Container> , _Alloc>  : public std::uses_allocator< _Container, _Alloc> ::type { }; 
+#line 175
+template < class _Ty, class _Container = vector < _Ty >, class _Pr = less < typename _Container :: value_type > >
+class priority_queue {
+public :
+    using value_type = typename _Container :: value_type;
+    using reference = typename _Container :: reference;
+    using const_reference = typename _Container :: const_reference;
+    using size_type = typename _Container :: size_type;
+    using container_type = _Container;
+    using value_compare = _Pr;
+
+    static_assert ( is_same_v < _Ty, value_type >, "container adaptors require consistent types" );
+
+    priority_queue ( ) = default;
+
+    explicit priority_queue ( const _Pr & _Pred ) noexcept (
+        is_nothrow_default_constructible_v < _Container > && is_nothrow_copy_constructible_v < value_compare > )
+        : c ( ), comp ( _Pred ) { }
+
+    priority_queue ( const _Pr & _Pred, const _Container & _Cont ) : c ( _Cont ), comp ( _Pred ) {
+        :: std :: make_heap ( c . begin ( ), c . end ( ), comp );
+    }
+
+    priority_queue ( const _Pr & _Pred, _Container && _Cont ) : c ( :: std :: move ( _Cont ) ), comp ( _Pred ) {
+        :: std :: make_heap ( c . begin ( ), c . end ( ), comp );
+    }
+
+    template < class _InIt >
+    priority_queue ( _InIt _First, _InIt _Last, const _Pr & _Pred, const _Container & _Cont ) : c ( _Cont ), comp ( _Pred ) {
+        c . insert ( c . end ( ), _First, _Last );
+        :: std :: make_heap ( c . begin ( ), c . end ( ), comp );
+    }
+
+    template < class _InIt >
+    priority_queue ( _InIt _First, _InIt _Last ) : c ( _First, _Last ), comp ( ) {
+        :: std :: make_heap ( c . begin ( ), c . end ( ), comp );
+    }
+
+    template < class _InIt >
+    priority_queue ( _InIt _First, _InIt _Last, const _Pr & _Pred ) : c ( _First, _Last ), comp ( _Pred ) {
+        :: std :: make_heap ( c . begin ( ), c . end ( ), comp );
+    }
+
+    template < class _InIt >
+    priority_queue ( _InIt _First, _InIt _Last, const _Pr & _Pred, _Container && _Cont ) : c ( :: std :: move ( _Cont ) ), comp ( _Pred ) {
+        c . insert ( c . end ( ), _First, _Last );
+        :: std :: make_heap ( c . begin ( ), c . end ( ), comp );
+    }
+
+    template < class _Alloc, enable_if_t < uses_allocator_v < _Container, _Alloc >, int > = 0 >
+    explicit priority_queue ( const _Alloc & _Al ) noexcept ( is_nothrow_constructible_v < _Container, const _Alloc & > &&
+            is_nothrow_default_constructible_v < value_compare > )
+        : c ( _Al ), comp ( ) { }
+
+    template < class _Alloc, enable_if_t < uses_allocator_v < _Container, _Alloc >, int > = 0 >
+    priority_queue ( const _Pr & _Pred, const _Alloc & _Al ) noexcept ( is_nothrow_constructible_v < _Container, const _Alloc & > &&
+            is_nothrow_copy_constructible_v < value_compare > )
+        : c ( _Al ), comp ( _Pred ) { }
+
+    template < class _Alloc, enable_if_t < uses_allocator_v < _Container, _Alloc >, int > = 0 >
+    priority_queue ( const _Pr & _Pred, const _Container & _Cont, const _Alloc & _Al ) : c ( _Cont, _Al ), comp ( _Pred ) {
+        :: std :: make_heap ( c . begin ( ), c . end ( ), comp );
+    }
+
+    template < class _Alloc, enable_if_t < uses_allocator_v < _Container, _Alloc >, int > = 0 >
+    priority_queue ( const _Pr & _Pred, _Container && _Cont, const _Alloc & _Al ) : c ( :: std :: move ( _Cont ), _Al ), comp ( _Pred ) {
+        :: std :: make_heap ( c . begin ( ), c . end ( ), comp );
+    }
+
+    template < class _Alloc, enable_if_t < uses_allocator_v < _Container, _Alloc >, int > = 0 >
+    priority_queue ( const priority_queue & _Right, const _Alloc & _Al ) : c ( _Right . c, _Al ), comp ( _Right . comp ) { }
+
+    template < class _Alloc, enable_if_t < uses_allocator_v < _Container, _Alloc >, int > = 0 >
+    priority_queue ( priority_queue && _Right, const _Alloc & _Al ) noexcept (
+        is_nothrow_constructible_v < _Container, _Container, const _Alloc & > &&
+            is_nothrow_move_constructible_v < value_compare > )
+        : c ( :: std :: move ( _Right . c ), _Al ), comp ( :: std :: move ( _Right . comp ) ) { }
+
+    [ [ nodiscard ] ] bool empty ( ) const noexcept ( noexcept ( c . empty ( ) ) ) {
+        return c . empty ( );
+    }
+
+    [ [ nodiscard ] ] size_type size ( ) const noexcept ( noexcept ( c . size ( ) ) ) {
+        return c . size ( );
+    }
+
+    [ [ nodiscard ] ] const_reference top ( ) const noexcept ( noexcept ( c . front ( ) ) ) {
+        return c . front ( );
+    }
+
+    void push ( const value_type & _Val ) {
+        c . push_back ( _Val );
+        :: std :: push_heap ( c . begin ( ), c . end ( ), comp );
+    }
+
+    void push ( value_type && _Val ) {
+        c . push_back ( :: std :: move ( _Val ) );
+        :: std :: push_heap ( c . begin ( ), c . end ( ), comp );
+    }
+
+    template < class ... _Valty >
+    void emplace ( _Valty && ... _Val ) {
+        c . emplace_back ( :: std :: forward < _Valty > ( _Val ) ... );
+        :: std :: push_heap ( c . begin ( ), c . end ( ), comp );
+    }
+
+    void pop ( ) {
+        :: std :: pop_heap ( c . begin ( ), c . end ( ), comp );
+        c . pop_back ( );
+    }
+
+    void swap ( priority_queue & _Right ) noexcept (
+        _Is_nothrow_swappable < _Container > :: value && _Is_nothrow_swappable < _Pr > :: value ) {
+        _Swap_adl ( c, _Right . c );
+        _Swap_adl ( comp, _Right . comp );
+    }
+
+protected :
+    _Container c { };
+    _Pr comp { };
+};
+#line 314 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\queue"
+template < class _Ty, class _Container, class _Pr,
+    enable_if_t < _Is_swappable < _Container > :: value && _Is_swappable < _Pr > :: value, int > = 0 >
+void swap ( priority_queue < _Ty, _Container, _Pr > & _Left, priority_queue < _Ty, _Container, _Pr > & _Right ) noexcept (
+    noexcept ( _Left . swap ( _Right ) ) ) {
+    _Left . swap ( _Right );
+}
+#line 321
+template< class _Ty, class _Container, class _Pr, class _Alloc> 
+#line 322
+struct uses_allocator< priority_queue< _Ty, _Container, _Pr> , _Alloc>  : public std::uses_allocator< _Container, _Alloc> ::type { }; 
+#line 324
+}
+#line 328
+#pragma warning(pop)
+#pragma pack ( pop )
+#line 332 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\queue"
+#pragma external_header(pop)
+#line 22 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#pragma external_header(push)
+#line 19 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\mutex"
+#pragma external_header(push)
+#line 13 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\thread"
+#pragma external_header(push)
+#line 14 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\process.h"
+#pragma external_header(push)
+#line 12 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\corecrt_startup.h"
+#pragma external_header(push)
+#line 16 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\math.h"
+#pragma external_header(pop)
+#line 13 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\corecrt_startup.h"
+#pragma external_header(push)
+#line 12 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\vcruntime_startup.h"
+#pragma warning(push)
+#pragma warning(disable: 4514 4820 )
+#line 15
+__pragma( pack ( push, 8 )) extern "C" {
+#line 24
+typedef 
+#line 19
+enum _crt_argv_mode { 
+#line 21
+_crt_argv_no_arguments, 
+#line 22
+_crt_argv_unexpanded_arguments, 
+#line 23
+_crt_argv_expanded_arguments
+#line 24
+} _crt_argv_mode; 
 #line 30
-}  
-#line 31
-} 
-#line 34
-inline void check_last(const char *const file, const int line) 
-#line 35
-{ 
-#line 36
-const cudaError_t err{cudaPeekAtLastError()}; 
+typedef 
+#line 26
+enum _crt_exit_return_mode { 
+#line 28
+_crt_exit_terminate_process, 
+#line 29
+_crt_exit_return_to_caller
+#line 30
+} _crt_exit_return_mode; 
 #line 37
-if (err != (cudaSuccess)) 
-#line 38
-{ 
+typedef 
+#line 32
+enum _crt_exit_cleanup_mode { 
+#line 34
+_crt_exit_full_cleanup, 
+#line 35
+_crt_exit_quick_cleanup, 
+#line 36
+_crt_exit_no_cleanup
+#line 37
+} _crt_exit_cleanup_mode; 
 #line 39
-(((((((((std::cerr << ("CUDA Runtime Error at: "))) << file)) << (":"))) << line)) << (std::endl)); 
-#line 40
-(((std::cerr << (cudaGetErrorString(err)))) << (std::endl)); 
-#line 41
-std::exit(1); 
-#line 42
-}  
+extern _crt_exit_return_mode __current_exit_return_mode; 
 #line 43
-} 
+__vcrt_bool __cdecl __vcrt_initialize(); 
+#line 44
+__vcrt_bool __cdecl __vcrt_uninitialize(__vcrt_bool _Terminating); 
 #line 45
-const unsigned MOD = (65537); 
+__vcrt_bool __cdecl __vcrt_uninitialize_critical(); 
 #line 46
-const unsigned SPECIAL = (MOD - (1)); 
+__vcrt_bool __cdecl __vcrt_thread_attach(); 
 #line 47
-const unsigned ROOT = (3); 
-#line 48
-const unsigned ROOT_INV = (21846); 
+__vcrt_bool __cdecl __vcrt_thread_detach(); 
 #line 49
-const unsigned MAX_LOG = (16); 
-#line 51
-const unsigned LOG_WARP_SIZE = (5); 
-#line 53
-const unsigned ALGO_N_2_CUTOFF = (16); 
+int __cdecl __isa_available_init(); 
+#line 50
+_crt_argv_mode __cdecl _get_startup_argv_mode(); 
 #line 54
-const unsigned ALGO_NLOGN_CUTOFF = (32); 
-#line 55
-const unsigned ALGO_BLOCK_CUTOFF = (512); 
-#line 57
-const unsigned LOG_DATA = (10); 
-#line 58
-const unsigned LOG_SYMBOL = (LOG_DATA - (1)); 
-#line 59
-const unsigned LOG_SEG = (LOG_SYMBOL - (1)); 
+}__pragma( pack ( pop )) 
+#line 56
+#pragma warning(pop)
+#pragma external_header(pop)
+#line 15 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\corecrt_startup.h"
+#pragma warning(push)
+#pragma warning(disable: 4324 4514 4574 4710 4793 4820 4995 4996 28719 28726 28727 )
+#line 19
+__pragma( pack ( push, 8 )) extern "C" {
+#line 28
+struct _EXCEPTION_POINTERS; 
+#line 30
+int __cdecl _seh_filter_dll(unsigned long _ExceptionNum, _EXCEPTION_POINTERS * _ExceptionPtr); 
+#line 35
+int __cdecl _seh_filter_exe(unsigned long _ExceptionNum, _EXCEPTION_POINTERS * _ExceptionPtr); 
+#line 52
+typedef 
+#line 47
+enum _crt_app_type { 
+#line 49
+_crt_unknown_app, 
+#line 50
+_crt_console_app, 
+#line 51
+_crt_gui_app
+#line 52
+} _crt_app_type; 
+#line 54
+_crt_app_type __cdecl _query_app_type(); 
+#line 56
+void __cdecl _set_app_type(_crt_app_type _Type); 
 #line 60
-const unsigned SYMBOL_PER_PACKET = (1 << LOG_SYMBOL); 
-#line 61
-const unsigned NUM_OF_PACKET = (1 << (MAX_LOG - LOG_SYMBOL)); 
+typedef int (__cdecl *_UserMathErrorFunctionPointer)(_exception *); 
 #line 62
-const unsigned NUM_OF_NEED_PACKET = (NUM_OF_PACKET >> 1); 
-#line 63
-const unsigned SEG_PER_PACKET = (1 << LOG_SEG); 
-#line 64
-const unsigned SEG_DIFF = (1 << (MAX_LOG - (1))); 
-#line 65
-const unsigned NUM_OF_NEED_SYMBOL = (1 << (MAX_LOG - (1))); 
-#line 67
-const unsigned LEN_ROOT_LAYER_POW = ((1 << MAX_LOG) - 1); 
-#line 68
-const unsigned LEN_ROOT_LAYER_POW_2 = (LEN_ROOT_LAYER_POW << 1); 
-#line 69
-const unsigned LEN_N_POS = ((1 << (MAX_LOG + (1))) - 1); 
-#line 70
-const unsigned LEN_PACKET_PRODUCT = (NUM_OF_PACKET * (SYMBOL_PER_PACKET << 1)); 
-#line 71
-const unsigned LEN_ONE_PACKET_PRODUCT = (1 << (LOG_SYMBOL + (1))); 
-#line 73
-const unsigned SIZE_SMALL = (NUM_OF_NEED_SYMBOL * sizeof(unsigned)); 
-#line 74
-const unsigned SIZE_LARGE = (SIZE_SMALL << 1); 
+void __cdecl __setusermatherr(_UserMathErrorFunctionPointer _UserMathErrorFunction); 
+#line 66
+int __cdecl _is_c_termination_complete(); 
 #line 75
-const unsigned SIZE_ONE_PACKET_PRODUCT = (LEN_ONE_PACKET_PRODUCT * sizeof(unsigned)); 
-#line 77
-const unsigned MAX_RUN_AT_ONCE = ((10 * 1024) / 64); 
-#line 78
-const unsigned MAX_LAUNCH_COUNT_EACH_RUN = (256); 
-#line 80
-unsigned *d_N_pos; 
-#line 81
-unsigned *d_root_pow; 
-#line 82
-unsigned *d_root_inv_pow; 
-#line 83
-unsigned *d_inv; 
-#line 84
-unsigned *d_root_layer_pow; 
+errno_t __cdecl _configure_narrow_argv(_crt_argv_mode mode); 
+#line 79
+errno_t __cdecl _configure_wide_argv(_crt_argv_mode mode); 
 #line 85
-unsigned *d_packet_product; 
-#line 87
-__forceinline void build_launch_param(unsigned log_n, unsigned &n_th, unsigned &n_bl) { 
+int __cdecl _initialize_narrow_environment(); 
+#line 86
+int __cdecl _initialize_wide_environment(); 
 #line 88
-if (log_n <= LOG_WARP_SIZE) { 
+char **__cdecl _get_initial_narrow_environment(); 
 #line 89
-n_th = (1 << log_n); 
-#line 90
-n_bl = (1); 
+__wchar_t **__cdecl _get_initial_wide_environment(); 
 #line 91
-} else 
+char *__cdecl _get_narrow_winmain_command_line(); 
 #line 92
-{ 
-#line 93
-unsigned c_l2_sqrt_n = (log_n >> 1) + (log_n & (1)); 
+__wchar_t *__cdecl _get_wide_winmain_command_line(); 
 #line 94
-n_th = (1 << c_l2_sqrt_n); 
+char **__cdecl __p__acmdln(); 
 #line 95
-n_bl = (1 << (log_n - c_l2_sqrt_n)); 
+__wchar_t **__cdecl __p__wcmdln(); 
+#line 112 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\corecrt_startup.h"
+typedef void (__cdecl *_PVFV)(void); 
+#line 113
+typedef int (__cdecl *_PIFV)(void); 
+#line 114
+typedef void (__cdecl *_PVFI)(int); 
+#line 117
+void __cdecl _initterm(_PVFV * _First, _PVFV * _Last); 
+#line 122
+int __cdecl _initterm_e(_PIFV * _First, _PIFV * _Last); 
+#line 142 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\corecrt_startup.h"
+typedef 
+#line 137
+struct _onexit_table_t { 
+#line 139
+_PVFV *_first; 
+#line 140
+_PVFV *_last; 
+#line 141
+_PVFV *_end; 
+#line 142
+} _onexit_table_t; 
+#line 144
+int __cdecl _initialize_onexit_table(_onexit_table_t * _Table); 
+#line 148
+int __cdecl _register_onexit_function(_onexit_table_t * _Table, _onexit_t _Function); 
+#line 153
+int __cdecl _execute_onexit_table(_onexit_table_t * _Table); 
+#line 157
+int __cdecl _crt_atexit(_PVFV _Function); 
+#line 161
+int __cdecl _crt_at_quick_exit(_PVFV _Function); 
+#line 175
+__crt_bool __cdecl __acrt_initialize(); 
+#line 178
+__crt_bool __cdecl __acrt_uninitialize(__crt_bool _Terminating); 
+#line 183
+__crt_bool __cdecl __acrt_uninitialize_critical(__crt_bool _Terminating); 
+#line 188
+__crt_bool __cdecl __acrt_thread_attach(); 
+#line 191
+__crt_bool __cdecl __acrt_thread_detach(); 
+#line 197 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\corecrt_startup.h"
+}__pragma( pack ( pop )) 
+#line 199
+#pragma warning(pop)
+#pragma external_header(pop)
+#line 17 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\process.h"
+#pragma warning(push)
+#pragma warning(disable: 4324 4514 4574 4710 4793 4820 4995 4996 28719 28726 28727 )
+#line 21
+__pragma( pack ( push, 8 )) extern "C" {
+#line 42
+__declspec(noreturn) void __cdecl exit(int _Code); 
+#line 43
+__declspec(noreturn) void __cdecl _exit(int _Code); 
+#line 44
+__declspec(noreturn) void __cdecl _Exit(int _Code); 
+#line 45
+__declspec(noreturn) void __cdecl quick_exit(int _Code); 
+#line 46
+__declspec(noreturn) void __cdecl abort(); 
+#line 48
+int __cdecl system(const char * _Command); 
+#line 50
+void __cdecl _cexit(); 
+#line 51
+void __cdecl _c_exit(); 
+#line 53
+typedef void (__stdcall *_tls_callback_type)(void *, unsigned long, void *); 
+#line 54
+void __cdecl _register_thread_local_exe_atexit_callback(_tls_callback_type _Callback); 
+#line 84 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\process.h"
+typedef void (__cdecl *_beginthread_proc_type)(void *); 
+#line 85
+typedef unsigned (__stdcall *_beginthreadex_proc_type)(void *); 
+#line 87
+uintptr_t __cdecl _beginthread(_beginthread_proc_type _StartAddress, unsigned _StackSize, void * _ArgList); 
+#line 93
+void __cdecl _endthread(); 
+#line 96
+uintptr_t __cdecl _beginthreadex(void * _Security, unsigned _StackSize, _beginthreadex_proc_type _StartAddress, void * _ArgList, unsigned _InitFlag, unsigned * _ThrdAddr); 
+#line 105
+void __cdecl _endthreadex(unsigned _ReturnCode); 
+#line 113
+int __cdecl _getpid(); 
+#line 115
+intptr_t __cdecl _cwait(int * _TermStat, intptr_t _ProcHandle, int _Action); 
+#line 121
+intptr_t __cdecl _execl(const char * _FileName, const char * _Arguments, ...); 
+#line 126
+intptr_t __cdecl _execle(const char * _FileName, const char * _Arguments, ...); 
+#line 131
+intptr_t __cdecl _execlp(const char * _FileName, const char * _Arguments, ...); 
+#line 136
+intptr_t __cdecl _execlpe(const char * _FileName, const char * _Arguments, ...); 
+#line 141
+intptr_t __cdecl _execv(const char * _FileName, const char *const * _Arguments); 
+#line 146
+intptr_t __cdecl _execve(const char * _FileName, const char *const * _Arguments, const char *const * _Environment); 
+#line 152
+intptr_t __cdecl _execvp(const char * _FileName, const char *const * _Arguments); 
+#line 157
+intptr_t __cdecl _execvpe(const char * _FileName, const char *const * _Arguments, const char *const * _Environment); 
+#line 163
+intptr_t __cdecl _spawnl(int _Mode, const char * _FileName, const char * _Arguments, ...); 
+#line 169
+intptr_t __cdecl _spawnle(int _Mode, const char * _FileName, const char * _Arguments, ...); 
+#line 175
+intptr_t __cdecl _spawnlp(int _Mode, const char * _FileName, const char * _Arguments, ...); 
+#line 181
+intptr_t __cdecl _spawnlpe(int _Mode, const char * _FileName, const char * _Arguments, ...); 
+#line 187
+intptr_t __cdecl _spawnv(int _Mode, const char * _FileName, const char *const * _Arguments); 
+#line 193
+intptr_t __cdecl _spawnve(int _Mode, const char * _FileName, const char *const * _Arguments, const char *const * _Environment); 
+#line 200
+intptr_t __cdecl _spawnvp(int _Mode, const char * _FileName, const char *const * _Arguments); 
+#line 206
+intptr_t __cdecl _spawnvpe(int _Mode, const char * _FileName, const char *const * _Arguments, const char *const * _Environment); 
+#line 213
+__declspec(deprecated("This function or variable has been superceded by newer library or operating system functionality. Consider using LoadLibrary ins" "tead. See online help for details.")) intptr_t __cdecl 
+#line 214
+_loaddll(char * _FileName); 
+#line 218
+__declspec(deprecated("This function or variable has been superceded by newer library or operating system functionality. Consider using FreeLibrary ins" "tead. See online help for details.")) int __cdecl 
+#line 219
+_unloaddll(intptr_t _Handle); 
+#line 223
+typedef int (__cdecl *_GetDllProcAddrProcType)(void); 
+#line 225
+__declspec(deprecated("This function or variable has been superceded by newer library or operating system functionality. Consider using GetProcAddress " "instead. See online help for details.")) _GetDllProcAddrProcType __cdecl 
+#line 226
+_getdllprocaddr(intptr_t _Handle, char * _ProcedureName, intptr_t _Ordinal); 
+#line 250 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\process.h"
+intptr_t __cdecl cwait(int * _TermStat, intptr_t _ProcHandle, int _Action); 
+#line 257
+intptr_t __cdecl execl(const char * _FileName, const char * _Arguments, ...); 
+#line 263
+intptr_t __cdecl execle(const char * _FileName, const char * _Arguments, ...); 
+#line 269
+intptr_t __cdecl execlp(const char * _FileName, const char * _Arguments, ...); 
+#line 275
+intptr_t __cdecl execlpe(const char * _FileName, const char * _Arguments, ...); 
+#line 281
+intptr_t __cdecl execv(const char * _FileName, const char *const * _Arguments); 
+#line 287
+intptr_t __cdecl execve(const char * _FileName, const char *const * _Arguments, const char *const * _Environment); 
+#line 294
+intptr_t __cdecl execvp(const char * _FileName, const char *const * _Arguments); 
+#line 300
+intptr_t __cdecl execvpe(const char * _FileName, const char *const * _Arguments, const char *const * _Environment); 
+#line 307
+intptr_t __cdecl spawnl(int _Mode, const char * _FileName, const char * _Arguments, ...); 
+#line 314
+intptr_t __cdecl spawnle(int _Mode, const char * _FileName, const char * _Arguments, ...); 
+#line 321
+intptr_t __cdecl spawnlp(int _Mode, const char * _FileName, const char * _Arguments, ...); 
+#line 328
+intptr_t __cdecl spawnlpe(int _Mode, const char * _FileName, const char * _Arguments, ...); 
+#line 335
+intptr_t __cdecl spawnv(int _Mode, const char * _FileName, const char *const * _Arguments); 
+#line 341
+intptr_t __cdecl spawnve(int _Mode, const char * _FileName, const char *const * _Arguments, const char *const * _Environment); 
+#line 349
+intptr_t __cdecl spawnvp(int _Mode, const char * _FileName, const char *const * _Arguments); 
+#line 356
+intptr_t __cdecl spawnvpe(int _Mode, const char * _FileName, const char *const * _Arguments, const char *const * _Environment); 
+#line 364
+int __cdecl getpid(); 
+#line 372 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\process.h"
+}__pragma( pack ( pop )) 
+#line 374
+#pragma warning(pop)
+#line 376 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\process.h"
+#pragma external_header(pop)
+#line 14 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\thread"
+#pragma external_header(push)
+#line 17 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\tuple"
+#pragma pack ( push, 8 )
+#pragma warning(push, 3)
+#pragma warning(disable : 4180 4412 4455 4494 4514 4574 4582 4583 4587 4588 4619 4623 4625 4626 4643 4648 4702 4793 4820 4988 5026 5027 5045 6294 4984 )
+#line 24
+namespace std { 
+#line 38 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\tuple"
+template< bool _Same, class _Dest, class ..._Srcs> constexpr bool 
+#line 39
+_Tuple_implicit_v0 = false; 
+#line 41
+template< class ..._Dests, class ..._Srcs> constexpr bool 
+#line 42
+_Tuple_implicit_v0< true, tuple< _Dests...> , _Srcs...>  = conjunction_v< is_constructible< _Dests, _Srcs> ..., is_convertible< _Srcs, _Dests> ...> ; 
+#line 45
+template< class _Dest, class ..._Srcs> 
+#line 46
+struct _Tuple_implicit_val : public bool_constant< _Tuple_implicit_v0< tuple_size_v< _Dest>  == sizeof...(_Srcs), _Dest, _Srcs...> >  { 
+#line 47
+}; 
+#line 50
+template< bool _Same, class _Dest, class ..._Srcs> constexpr bool 
+#line 51
+_Tuple_explicit_v0 = false; 
+#line 53
+template< class ..._Dests, class ..._Srcs> constexpr bool 
+#line 54
+_Tuple_explicit_v0< true, tuple< _Dests...> , _Srcs...>  = conjunction_v< is_constructible< _Dests, _Srcs> ..., negation< conjunction< is_convertible< _Srcs, _Dests> ...> > > ; 
+#line 57
+template< class _Dest, class ..._Srcs> 
+#line 58
+struct _Tuple_explicit_val : public bool_constant< _Tuple_explicit_v0< tuple_size_v< _Dest>  == sizeof...(_Srcs), _Dest, _Srcs...> >  { 
+#line 59
+}; 
+#line 62 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\tuple"
+template< bool _Same, class _Dest, class ..._Srcs> constexpr bool 
+#line 63
+_Tuple_constructible_v0 = false; 
+#line 65
+template< class ..._Dests, class ..._Srcs> constexpr bool 
+#line 66
+_Tuple_constructible_v0< true, tuple< _Dests...> , _Srcs...>  = conjunction_v< is_constructible< _Dests, _Srcs> ...> ; 
+#line 69
+template< class _Dest, class ..._Srcs> constexpr bool 
+#line 70
+_Tuple_constructible_v = _Tuple_constructible_v0< tuple_size_v< _Dest>  == sizeof...(_Srcs), _Dest, _Srcs...> ; 
+#line 73
+template< class _Dest, class ..._Srcs> 
+#line 74
+struct _Tuple_constructible_val : public bool_constant< _Tuple_constructible_v< _Dest, _Srcs...> >  { }; 
+#line 76
+template< bool _Same, class _Dest, class ..._Srcs> constexpr bool 
+#line 77
+_Tuple_nothrow_constructible_v0 = false; 
+#line 79
+template< class ..._Dests, class ..._Srcs> constexpr bool 
+#line 80
+_Tuple_nothrow_constructible_v0< true, tuple< _Dests...> , _Srcs...>  = conjunction_v< is_nothrow_constructible< _Dests, _Srcs> ...> ; 
+#line 83
+template< class _Dest, class ..._Srcs> constexpr bool 
+#line 84
+_Tuple_nothrow_constructible_v = _Tuple_nothrow_constructible_v0< tuple_size_v< _Dest>  == sizeof...(_Srcs), _Dest, _Srcs...> ; 
+#line 87
+template< bool _Same, class _Dest, class ..._Srcs> constexpr bool 
+#line 88
+_Tuple_assignable_v0 = false; 
+#line 90
+template< class ..._Dests, class ..._Srcs> constexpr bool 
+#line 91
+_Tuple_assignable_v0< true, tuple< _Dests...> , _Srcs...>  = conjunction_v< is_assignable< _Dests &, _Srcs> ...> ; 
+#line 94
+template< class _Dest, class ..._Srcs> constexpr bool 
+#line 95
+_Tuple_assignable_v = _Tuple_assignable_v0< tuple_size_v< _Dest>  == sizeof...(_Srcs), _Dest, _Srcs...> ; 
+#line 98
+template< class _Dest, class ..._Srcs> 
+#line 99
+struct _Tuple_assignable_val : public bool_constant< _Tuple_assignable_v< _Dest, _Srcs...> >  { }; 
+#line 101
+template< bool _Same, class _Dest, class ..._Srcs> constexpr bool 
+#line 102
+_Tuple_nothrow_assignable_v0 = false; 
+#line 104
+template< class ..._Dests, class ..._Srcs> constexpr bool 
+#line 105
+_Tuple_nothrow_assignable_v0< true, tuple< _Dests...> , _Srcs...>  = conjunction_v< is_nothrow_assignable< _Dests &, _Srcs> ...> ; 
+#line 108
+template< class _Dest, class ..._Srcs> constexpr bool 
+#line 109
+_Tuple_nothrow_assignable_v = _Tuple_nothrow_assignable_v0< tuple_size_v< _Dest>  == sizeof...(_Srcs), _Dest, _Srcs...> ; 
+#line 113
+template< class _Myself, class ..._Other> 
+#line 114
+struct _Tuple_convert_copy_val : public true_type { }; 
+#line 116
+template< class _This, class _Uty> 
+#line 117
+struct _Tuple_convert_copy_val< tuple< _This> , _Uty>  : public bool_constant< !disjunction_v< is_same< _This, _Uty> , is_constructible< _This, const tuple< _Uty>  &> , is_convertible< const tuple< _Uty>  &, _This> > >  { 
+#line 119
+}; 
+#line 122
+template< class _Myself, class ..._Other> 
+#line 123
+struct _Tuple_convert_move_val : public true_type { }; 
+#line 125
+template< class _This, class _Uty> 
+#line 126
+struct _Tuple_convert_move_val< tuple< _This> , _Uty>  : public bool_constant< !disjunction_v< is_same< _This, _Uty> , is_constructible< _This, tuple< _Uty> > , is_convertible< tuple< _Uty> , _This> > >  { 
+#line 128
+}; 
+#line 131
+template< class _Myself, class _This2, class ..._Rest2> 
+#line 132
+struct _Tuple_perfect_val : public true_type { }; 
+#line 134
+template< class _Myself, class _This2> 
+#line 135
+struct _Tuple_perfect_val< _Myself, _This2>  : public bool_constant< !is_same_v< _Myself, remove_const_t< remove_reference_t< _This2> > > >  { 
+#line 136
+}; 
+#line 138
+struct _Ignore { 
+#line 139
+template < class _Ty >
+    constexpr const _Ignore & operator = ( const _Ty & ) const noexcept {
+
+        return * this;
+    }
+#line 144
+}; 
+#line 146
+constexpr _Ignore ignore{}; 
+#line 153
+template < class _Ty >
+struct _Tuple_val {
+    constexpr _Tuple_val ( ) : _Val ( ) { }
+
+    template < class _Other >
+    constexpr _Tuple_val ( _Other && _Arg ) : _Val ( :: std :: forward < _Other > ( _Arg ) ) { }
+
+    template < class _Alloc, class ... _Other, enable_if_t < ! uses_allocator_v < _Ty, _Alloc >, int > = 0 >
+    constexpr _Tuple_val ( const _Alloc &, allocator_arg_t, _Other && ... _Arg ) : _Val ( :: std :: forward < _Other > ( _Arg ) ... ) { }
+
+    template < class _Alloc, class ... _Other,
+        enable_if_t < conjunction_v < :: std :: uses_allocator < _Ty, _Alloc >,
+                        :: std :: is_constructible < _Ty, :: std :: allocator_arg_t, const _Alloc &, _Other ... >>,
+            int > = 0 >
+    constexpr _Tuple_val ( const _Alloc & _Al, allocator_arg_t, _Other && ... _Arg )
+        : _Val ( allocator_arg, _Al, :: std :: forward < _Other > ( _Arg ) ... ) { }
+
+    template < class _Alloc, class ... _Other,
+        enable_if_t < conjunction_v < :: std :: uses_allocator < _Ty, _Alloc >,
+                        :: std :: negation < :: std :: is_constructible < _Ty, :: std :: allocator_arg_t, const _Alloc &, _Other ... >> >,
+            int > = 0 >
+    constexpr _Tuple_val ( const _Alloc & _Al, allocator_arg_t, _Other && ... _Arg )
+        : _Val ( :: std :: forward < _Other > ( _Arg ) ..., _Al ) { }
+
+    _Ty _Val;
+};
+#line 180
+struct _Exact_args_t { 
+#line 181
+explicit _Exact_args_t() = default;
+#line 182
+}; 
+#line 184
+struct _Unpack_tuple_t { 
+#line 185
+explicit _Unpack_tuple_t() = default;
+#line 186
+}; 
+#line 188
+struct _Alloc_exact_args_t { 
+#line 189
+explicit _Alloc_exact_args_t() = default;
+#line 190
+}; 
+#line 192
+struct _Alloc_unpack_tuple_t { 
+#line 193
+explicit _Alloc_unpack_tuple_t() = default;
+#line 194
+}; 
+#line 196
+template< class ..._Types> class tuple; 
+#line 200
+template<> class tuple< >  { 
+#line 202
+public: constexpr tuple() noexcept = default;
+#line 204
+constexpr tuple(const std::tuple< >  &) noexcept { } 
+#line 206
+template < class _Alloc >
+    inline tuple ( allocator_arg_t, const _Alloc & ) noexcept { }
+#line 209
+template < class _Alloc >
+    inline tuple ( allocator_arg_t, const _Alloc &, const tuple & ) noexcept { }
+#line 212
+template < class _Tag, enable_if_t < is_same_v < _Tag, :: std :: _Exact_args_t >, int > = 0 >
+    constexpr tuple ( _Tag ) noexcept { }
+#line 215
+template < class _Tag, class _Alloc, enable_if_t < is_same_v < _Tag, :: std :: _Alloc_exact_args_t >, int > = 0 >
+    constexpr tuple ( _Tag, const _Alloc & ) noexcept { }
+#line 218
+constexpr std::tuple< >  &operator=(const std::tuple< >  &) = default;
+#line 220
+void swap(std::tuple< >  &) noexcept { } 
+#line 222
+constexpr bool _Equals(const std::tuple< >  &) const noexcept { 
+#line 223
+return true; 
+#line 224
+} 
+#line 231
+[[nodiscard]] constexpr bool _Less(const std::tuple< >  &) const noexcept { 
+#line 232
+return false; 
+#line 233
+} 
+#line 235 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\tuple"
+}; 
+#line 237
+template < class _This, class ... _Rest >
+class tuple < _This, _Rest ... > : private tuple < _Rest ... > {
+public :
+    using _This_type = _This;
+    using _Mybase = tuple < _Rest ... >;
+
+    template < class _Tag, class _This2, class ... _Rest2, enable_if_t < is_same_v < _Tag, :: std :: _Exact_args_t >, int > = 0 >
+    constexpr tuple ( _Tag, _This2 && _This_arg, _Rest2 && ... _Rest_arg )
+        : _Mybase ( _Exact_args_t { }, :: std :: forward < _Rest2 > ( _Rest_arg ) ... ), _Myfirst ( :: std :: forward < _This2 > ( _This_arg ) ) { }
+
+    template < class _Tag, class _Tpl, size_t ... _Indices, enable_if_t < is_same_v < _Tag, :: std :: _Unpack_tuple_t >, int > = 0 >
+    constexpr tuple ( _Tag, _Tpl && _Right, index_sequence < _Indices ... > );
+
+    template < class _Tag, class _Tpl, enable_if_t < is_same_v < _Tag, :: std :: _Unpack_tuple_t >, int > = 0 >
+    constexpr tuple ( _Tag, _Tpl && _Right )
+        : tuple ( _Unpack_tuple_t { }, :: std :: forward < _Tpl > ( _Right ),
+            make_index_sequence < tuple_size_v < remove_reference_t < _Tpl >> > { } ) { }
+
+    template < class _Tag, class _Alloc, class _This2, class ... _Rest2,
+        enable_if_t < is_same_v < _Tag, :: std :: _Alloc_exact_args_t >, int > = 0 >
+    constexpr tuple ( _Tag, const _Alloc & _Al, _This2 && _This_arg, _Rest2 && ... _Rest_arg )
+        : _Mybase ( _Alloc_exact_args_t { }, _Al, :: std :: forward < _Rest2 > ( _Rest_arg ) ... ),
+          _Myfirst ( _Al, allocator_arg, :: std :: forward < _This2 > ( _This_arg ) ) { }
+
+    template < class _Tag, class _Alloc, class _Tpl, size_t ... _Indices,
+        enable_if_t < is_same_v < _Tag, :: std :: _Alloc_unpack_tuple_t >, int > = 0 >
+    constexpr tuple ( _Tag, const _Alloc & _Al, _Tpl && _Right, index_sequence < _Indices ... > );
+
+    template < class _Tag, class _Alloc, class _Tpl, enable_if_t < is_same_v < _Tag, :: std :: _Alloc_unpack_tuple_t >, int > = 0 >
+    constexpr tuple ( _Tag, const _Alloc & _Al, _Tpl && _Right )
+        : tuple ( _Alloc_unpack_tuple_t { }, _Al, :: std :: forward < _Tpl > ( _Right ),
+            make_index_sequence < tuple_size_v < remove_reference_t < _Tpl >> > { } ) { }
+
+
+
+
+
+
+
+
+
+
+
+    template < class _This2 = _This,
+        enable_if_t < conjunction_v < is_default_constructible < _This2 >, is_default_constructible < _Rest > ...,
+                        _Is_implicitly_default_constructible < _This2 >, _Is_implicitly_default_constructible < _Rest > ... >,
+            int > = 0 >
+    constexpr tuple ( ) noexcept ( conjunction_v < is_nothrow_default_constructible < _This2 >,
+        is_nothrow_default_constructible < _Rest > ... > )
+        : _Mybase ( ), _Myfirst ( ) { }
+
+    template < class _This2 = _This,
+        enable_if_t < conjunction_v < is_default_constructible < _This2 >, is_default_constructible < _Rest > ...,
+                        negation < conjunction < _Is_implicitly_default_constructible < _This2 >,
+                            _Is_implicitly_default_constructible < _Rest > ... >> >,
+            int > = 0 >
+    constexpr explicit tuple ( ) noexcept ( conjunction_v < is_nothrow_default_constructible < _This2 >,
+        is_nothrow_default_constructible < _Rest > ... > )
+        : _Mybase ( ), _Myfirst ( ) { }
+
+
+
+
+
+
+
+
+
+    template < class _This2 = _This,
+        enable_if_t < _Tuple_implicit_val < tuple, const _This2 &, const _Rest & ... > :: value, int > = 0 >
+    constexpr tuple ( const _This & _This_arg, const _Rest & ... _Rest_arg ) noexcept (
+        conjunction_v < is_nothrow_copy_constructible < _This2 >,
+            is_nothrow_copy_constructible < _Rest > ... > )
+        : tuple ( _Exact_args_t { }, _This_arg, _Rest_arg ... ) { }
+
+    template < class _This2 = _This,
+        enable_if_t < _Tuple_explicit_val < tuple, const _This2 &, const _Rest & ... > :: value, int > = 0 >
+    constexpr explicit tuple ( const _This & _This_arg, const _Rest & ... _Rest_arg ) noexcept (
+        conjunction_v < is_nothrow_copy_constructible < _This2 >,
+            is_nothrow_copy_constructible < _Rest > ... > )
+        : tuple ( _Exact_args_t { }, _This_arg, _Rest_arg ... ) { }
+
+
+
+
+
+
+
+
+
+
+
+    template < class _This2, class ... _Rest2,
+        enable_if_t <
+            conjunction_v < _Tuple_perfect_val < tuple, _This2, _Rest2 ... >, _Tuple_implicit_val < tuple, _This2, _Rest2 ... >>,
+            int > = 0 >
+    constexpr tuple ( _This2 && _This_arg, _Rest2 && ... _Rest_arg ) noexcept (
+        _Tuple_nothrow_constructible_v < tuple, _This2, _Rest2 ... > )
+        : tuple ( _Exact_args_t { }, :: std :: forward < _This2 > ( _This_arg ), :: std :: forward < _Rest2 > ( _Rest_arg ) ... ) { }
+
+    template < class _This2, class ... _Rest2,
+        enable_if_t <
+            conjunction_v < _Tuple_perfect_val < tuple, _This2, _Rest2 ... >, _Tuple_explicit_val < tuple, _This2, _Rest2 ... >>,
+            int > = 0 >
+    constexpr explicit tuple ( _This2 && _This_arg, _Rest2 && ... _Rest_arg ) noexcept (
+        _Tuple_nothrow_constructible_v < tuple, _This2, _Rest2 ... > )
+        : tuple ( _Exact_args_t { }, :: std :: forward < _This2 > ( _This_arg ), :: std :: forward < _Rest2 > ( _Rest_arg ) ... ) { }
+
+
+    tuple ( const tuple & ) = default;
+    tuple ( tuple && ) = default;
+
+
+
+
+
+
+
+
+
+
+    template < class ... _Other, enable_if_t < conjunction_v < _Tuple_implicit_val < tuple, const _Other & ... >,
+                                               _Tuple_convert_copy_val < tuple, _Other ... >>,
+                                   int > = 0 >
+    constexpr tuple ( const tuple < _Other ... > & _Right ) noexcept (
+        _Tuple_nothrow_constructible_v < tuple, const _Other & ... > )
+        : tuple ( _Unpack_tuple_t { }, _Right ) { }
+
+    template < class ... _Other, enable_if_t < conjunction_v < _Tuple_explicit_val < tuple, const _Other & ... >,
+                                               _Tuple_convert_copy_val < tuple, _Other ... >>,
+                                   int > = 0 >
+    constexpr explicit tuple ( const tuple < _Other ... > & _Right ) noexcept (
+        _Tuple_nothrow_constructible_v < tuple, const _Other & ... > )
+        : tuple ( _Unpack_tuple_t { }, _Right ) { }
+
+
+
+
+
+
+
+
+
+
+    template < class ... _Other,
+        enable_if_t < conjunction_v < _Tuple_implicit_val < tuple, _Other ... >, _Tuple_convert_move_val < tuple, _Other ... >>,
+            int > = 0 >
+    constexpr tuple ( tuple < _Other ... > && _Right ) noexcept (
+        _Tuple_nothrow_constructible_v < tuple, _Other ... > )
+        : tuple ( _Unpack_tuple_t { }, :: std :: move ( _Right ) ) { }
+
+    template < class ... _Other,
+        enable_if_t < conjunction_v < _Tuple_explicit_val < tuple, _Other ... >, _Tuple_convert_move_val < tuple, _Other ... >>,
+            int > = 0 >
+    constexpr explicit tuple ( tuple < _Other ... > && _Right ) noexcept (
+        _Tuple_nothrow_constructible_v < tuple, _Other ... > )
+        : tuple ( _Unpack_tuple_t { }, :: std :: move ( _Right ) ) { }
+
+
+
+
+
+
+
+
+
+
+    template < class _First, class _Second,
+        enable_if_t < _Tuple_implicit_val < tuple, const _First &, const _Second & > :: value, int > = 0 >
+    constexpr tuple ( const pair < _First, _Second > & _Right ) noexcept (
+        _Tuple_nothrow_constructible_v < tuple, const _First &, const _Second & > )
+        : tuple ( _Unpack_tuple_t { }, _Right ) { }
+
+    template < class _First, class _Second,
+        enable_if_t < _Tuple_explicit_val < tuple, const _First &, const _Second & > :: value, int > = 0 >
+    constexpr explicit tuple ( const pair < _First, _Second > & _Right ) noexcept (
+        _Tuple_nothrow_constructible_v < tuple, const _First &, const _Second & > )
+        : tuple ( _Unpack_tuple_t { }, _Right ) { }
+
+
+
+
+
+
+
+
+    template < class _First, class _Second, enable_if_t < _Tuple_implicit_val < tuple, _First, _Second > :: value, int > = 0 >
+    constexpr tuple ( pair < _First, _Second > && _Right ) noexcept (
+        _Tuple_nothrow_constructible_v < tuple, _First, _Second > )
+        : tuple ( _Unpack_tuple_t { }, :: std :: move ( _Right ) ) { }
+
+    template < class _First, class _Second, enable_if_t < _Tuple_explicit_val < tuple, _First, _Second > :: value, int > = 0 >
+    constexpr explicit tuple ( pair < _First, _Second > && _Right ) noexcept (
+        _Tuple_nothrow_constructible_v < tuple, _First, _Second > )
+        : tuple ( _Unpack_tuple_t { }, :: std :: move ( _Right ) ) { }
+
+
+
+
+
+
+
+
+
+
+
+    template < class _Alloc, class _This2 = _This,
+        enable_if_t < conjunction_v < is_default_constructible < _This2 >, is_default_constructible < _Rest > ...,
+                        _Is_implicitly_default_constructible < _This2 >, _Is_implicitly_default_constructible < _Rest > ... >,
+            int > = 0 >
+    inline tuple ( allocator_arg_t, const _Alloc & _Al )
+        : _Mybase ( allocator_arg, _Al ), _Myfirst ( _Al, allocator_arg ) { }
+
+    template < class _Alloc, class _This2 = _This,
+        enable_if_t < conjunction_v < is_default_constructible < _This2 >, is_default_constructible < _Rest > ...,
+                        negation < conjunction < _Is_implicitly_default_constructible < _This2 >,
+                            _Is_implicitly_default_constructible < _Rest > ... >> >,
+            int > = 0 >
+    inline explicit tuple ( allocator_arg_t, const _Alloc & _Al )
+        : _Mybase ( allocator_arg, _Al ), _Myfirst ( _Al, allocator_arg ) { }
+
+
+
+
+
+
+
+
+
+    template < class _Alloc, class _This2 = _This,
+        enable_if_t < _Tuple_implicit_val < tuple, const _This2 &, const _Rest & ... > :: value, int > = 0 >
+    inline tuple ( allocator_arg_t, const _Alloc & _Al, const _This & _This_arg, const _Rest & ... _Rest_arg )
+        : tuple ( _Alloc_exact_args_t { }, _Al, _This_arg, _Rest_arg ... ) { }
+
+    template < class _Alloc, class _This2 = _This,
+        enable_if_t < _Tuple_explicit_val < tuple, const _This2 &, const _Rest & ... > :: value, int > = 0 >
+    inline explicit tuple ( allocator_arg_t, const _Alloc & _Al, const _This & _This_arg, const _Rest & ... _Rest_arg )
+        : tuple ( _Alloc_exact_args_t { }, _Al, _This_arg, _Rest_arg ... ) { }
+
+
+
+
+
+
+
+
+
+
+
+    template < class _Alloc, class _This2, class ... _Rest2,
+        enable_if_t <
+            conjunction_v < _Tuple_perfect_val < tuple, _This2, _Rest2 ... >, _Tuple_implicit_val < tuple, _This2, _Rest2 ... >>,
+            int > = 0 >
+    inline tuple ( allocator_arg_t, const _Alloc & _Al, _This2 && _This_arg, _Rest2 && ... _Rest_arg )
+        : tuple ( _Alloc_exact_args_t { }, _Al, :: std :: forward < _This2 > ( _This_arg ), :: std :: forward < _Rest2 > ( _Rest_arg ) ... ) { }
+
+    template < class _Alloc, class _This2, class ... _Rest2,
+        enable_if_t <
+            conjunction_v < _Tuple_perfect_val < tuple, _This2, _Rest2 ... >, _Tuple_explicit_val < tuple, _This2, _Rest2 ... >>,
+            int > = 0 >
+    inline explicit tuple ( allocator_arg_t, const _Alloc & _Al, _This2 && _This_arg, _Rest2 && ... _Rest_arg )
+        : tuple ( _Alloc_exact_args_t { }, _Al, :: std :: forward < _This2 > ( _This_arg ), :: std :: forward < _Rest2 > ( _Rest_arg ) ... ) { }
+
+
+    template < class _Alloc, class _This2 = _This,
+        enable_if_t < _Tuple_constructible_v < tuple, const _This2 &, const _Rest & ... >, int > = 0 >
+    inline tuple ( allocator_arg_t, const _Alloc & _Al, const tuple & _Right )
+        : tuple ( _Alloc_unpack_tuple_t { }, _Al, _Right ) { }
+
+    template < class _Alloc, class _This2 = _This, enable_if_t < _Tuple_constructible_v < tuple, _This2, _Rest ... >, int > = 0 >
+    inline tuple ( allocator_arg_t, const _Alloc & _Al, tuple && _Right )
+        : tuple ( _Alloc_unpack_tuple_t { }, _Al, :: std :: move ( _Right ) ) { }
+
+
+
+
+
+
+
+
+
+
+    template < class _Alloc, class ... _Other,
+        enable_if_t <
+            conjunction_v < _Tuple_implicit_val < tuple, const _Other & ... >, _Tuple_convert_copy_val < tuple, _Other ... >>,
+            int > = 0 >
+    inline tuple ( allocator_arg_t, const _Alloc & _Al, const tuple < _Other ... > & _Right )
+        : tuple ( _Alloc_unpack_tuple_t { }, _Al, _Right ) { }
+
+    template < class _Alloc, class ... _Other,
+        enable_if_t <
+            conjunction_v < _Tuple_explicit_val < tuple, const _Other & ... >, _Tuple_convert_copy_val < tuple, _Other ... >>,
+            int > = 0 >
+    inline explicit tuple ( allocator_arg_t, const _Alloc & _Al, const tuple < _Other ... > & _Right )
+        : tuple ( _Alloc_unpack_tuple_t { }, _Al, _Right ) { }
+
+
+
+
+
+
+
+
+
+
+
+    template < class _Alloc, class ... _Other,
+        enable_if_t < conjunction_v < _Tuple_implicit_val < tuple, _Other ... >, _Tuple_convert_move_val < tuple, _Other ... >>,
+            int > = 0 >
+    inline tuple ( allocator_arg_t, const _Alloc & _Al, tuple < _Other ... > && _Right )
+        : tuple ( _Alloc_unpack_tuple_t { }, _Al, :: std :: move ( _Right ) ) { }
+
+    template < class _Alloc, class ... _Other,
+        enable_if_t < conjunction_v < _Tuple_explicit_val < tuple, _Other ... >, _Tuple_convert_move_val < tuple, _Other ... >>,
+            int > = 0 >
+    inline explicit tuple ( allocator_arg_t, const _Alloc & _Al, tuple < _Other ... > && _Right )
+        : tuple ( _Alloc_unpack_tuple_t { }, _Al, :: std :: move ( _Right ) ) { }
+
+
+
+
+
+
+
+
+
+    template < class _Alloc, class _First, class _Second,
+        enable_if_t < _Tuple_implicit_val < tuple, const _First &, const _Second & > :: value, int > = 0 >
+    inline tuple ( allocator_arg_t, const _Alloc & _Al, const pair < _First, _Second > & _Right )
+        : tuple ( _Alloc_unpack_tuple_t { }, _Al, _Right ) { }
+
+    template < class _Alloc, class _First, class _Second,
+        enable_if_t < _Tuple_explicit_val < tuple, const _First &, const _Second & > :: value, int > = 0 >
+    inline explicit tuple ( allocator_arg_t, const _Alloc & _Al, const pair < _First, _Second > & _Right )
+        : tuple ( _Alloc_unpack_tuple_t { }, _Al, _Right ) { }
+
+
+
+
+
+
+
+
+
+    template < class _Alloc, class _First, class _Second,
+        enable_if_t < _Tuple_implicit_val < tuple, _First, _Second > :: value, int > = 0 >
+    inline tuple ( allocator_arg_t, const _Alloc & _Al, pair < _First, _Second > && _Right )
+        : tuple ( _Alloc_unpack_tuple_t { }, _Al, :: std :: move ( _Right ) ) { }
+
+    template < class _Alloc, class _First, class _Second,
+        enable_if_t < _Tuple_explicit_val < tuple, _First, _Second > :: value, int > = 0 >
+    inline explicit tuple ( allocator_arg_t, const _Alloc & _Al, pair < _First, _Second > && _Right )
+        : tuple ( _Alloc_unpack_tuple_t { }, _Al, :: std :: move ( _Right ) ) { }
+
+
+    tuple & operator = ( const volatile tuple & ) = delete;
+
+    template < class _Myself = tuple, class _This2 = _This,
+        enable_if_t < conjunction_v < :: std :: _Is_copy_assignable_no_precondition_check < _This2 >,
+                        :: std :: _Is_copy_assignable_no_precondition_check < _Rest > ... >,
+            int > = 0 >
+    inline tuple & operator = ( _Identity_t < const _Myself & > _Right ) noexcept (
+        conjunction_v < is_nothrow_copy_assignable < _This2 >, is_nothrow_copy_assignable < _Rest > ... > ) {
+        _Myfirst . _Val = _Right . _Myfirst . _Val;
+        _Get_rest ( ) = _Right . _Get_rest ( );
+        return * this;
+    }
+
+    template < class _Myself = tuple, class _This2 = _This,
+        enable_if_t < conjunction_v < :: std :: _Is_move_assignable_no_precondition_check < _This2 >,
+                        :: std :: _Is_move_assignable_no_precondition_check < _Rest > ... >,
+            int > = 0 >
+    inline tuple & operator = ( _Identity_t < _Myself && > _Right ) noexcept (
+        conjunction_v < is_nothrow_move_assignable < _This2 >, is_nothrow_move_assignable < _Rest > ... > ) {
+        _Myfirst . _Val = :: std :: forward < _This > ( _Right . _Myfirst . _Val );
+        _Get_rest ( ) = :: std :: forward < _Mybase > ( _Right . _Get_rest ( ) );
+        return * this;
+    }
+
+    template < class ... _Other, enable_if_t < conjunction_v < :: std :: negation < :: std :: is_same < tuple, :: std :: tuple < _Other ... >> >,
+                                               :: std :: _Tuple_assignable_val < tuple, const _Other & ... >>,
+                                   int > = 0 >
+    inline tuple & operator = ( const tuple < _Other ... > & _Right ) noexcept (
+        _Tuple_nothrow_assignable_v < tuple, const _Other & ... > ) {
+        _Myfirst . _Val = _Right . _Myfirst . _Val;
+        _Get_rest ( ) = _Right . _Get_rest ( );
+        return * this;
+    }
+
+    template < class ... _Other, enable_if_t < conjunction_v < :: std :: negation < :: std :: is_same < tuple, :: std :: tuple < _Other ... >> >,
+                                               :: std :: _Tuple_assignable_val < tuple, _Other ... >>,
+                                   int > = 0 >
+    inline tuple & operator = ( tuple < _Other ... > && _Right ) noexcept (
+        _Tuple_nothrow_assignable_v < tuple, _Other ... > ) {
+        _Myfirst . _Val = :: std :: forward < typename tuple < _Other ... > :: _This_type > ( _Right . _Myfirst . _Val );
+        _Get_rest ( ) = :: std :: forward < typename tuple < _Other ... > :: _Mybase > ( _Right . _Get_rest ( ) );
+        return * this;
+    }
+
+    template < class _First, class _Second,
+        enable_if_t < _Tuple_assignable_v < tuple, const _First &, const _Second & >, int > = 0 >
+    inline tuple & operator = ( const pair < _First, _Second > & _Right ) noexcept (
+        _Tuple_nothrow_assignable_v < tuple, const _First &, const _Second & > ) {
+        _Myfirst . _Val = _Right . first;
+        _Get_rest ( ) . _Myfirst . _Val = _Right . second;
+        return * this;
+    }
+
+    template < class _First, class _Second, enable_if_t < _Tuple_assignable_v < tuple, _First, _Second >, int > = 0 >
+    inline tuple & operator = ( pair < _First, _Second > && _Right ) noexcept (
+        _Tuple_nothrow_assignable_v < tuple, _First, _Second > ) {
+        _Myfirst . _Val = :: std :: forward < _First > ( _Right . first );
+        _Get_rest ( ) . _Myfirst . _Val = :: std :: forward < _Second > ( _Right . second );
+        return * this;
+    }
+
+    inline void swap ( tuple & _Right ) noexcept (
+        conjunction_v < _Is_nothrow_swappable < _This >, _Is_nothrow_swappable < _Rest > ... > ) {
+        _Swap_adl ( _Myfirst . _Val, _Right . _Myfirst . _Val );
+        _Mybase :: swap ( _Right . _Get_rest ( ) );
+    }
+
+    constexpr _Mybase & _Get_rest ( ) noexcept {
+        return * this;
+    }
+
+    constexpr const _Mybase & _Get_rest ( ) const noexcept {
+        return * this;
+    }
+
+    template < class ... _Other >
+    constexpr bool _Equals ( const tuple < _Other ... > & _Right ) const {
+        return _Myfirst . _Val == _Right . _Myfirst . _Val && _Mybase :: _Equals ( _Right . _Get_rest ( ) );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    template < class ... _Other >
+    [ [ nodiscard ] ] constexpr bool _Less ( const tuple < _Other ... > & _Right ) const {
+        return _Myfirst . _Val < _Right . _Myfirst . _Val
+            || ( ! ( _Right . _Myfirst . _Val < _Myfirst . _Val ) && _Mybase :: _Less ( _Right . _Get_rest ( ) ) );
+    }
+
+
+    template < size_t _Index, class ... _Types >
+    friend constexpr tuple_element_t < _Index, tuple < _Types ... >> & get ( tuple < _Types ... > & _Tuple ) noexcept;
+
+    template < size_t _Index, class ... _Types >
+    friend constexpr const tuple_element_t < _Index, tuple < _Types ... >> & get ( const tuple < _Types ... > & _Tuple ) noexcept;
+
+    template < size_t _Index, class ... _Types >
+    friend constexpr tuple_element_t < _Index, tuple < _Types ... >> && get ( tuple < _Types ... > && _Tuple ) noexcept;
+
+    template < size_t _Index, class ... _Types >
+    friend constexpr const tuple_element_t < _Index, tuple < _Types ... >> && get ( const tuple < _Types ... > && _Tuple ) noexcept;
+
+    template < size_t _Index, class ... _Types >
+    friend constexpr auto && _Tuple_get ( tuple < _Types ... > && _Tuple ) noexcept;
+
+    template < class _Ty, class ... _Types >
+    friend constexpr _Ty & get ( tuple < _Types ... > & _Tuple ) noexcept;
+
+    template < class _Ty, class ... _Types >
+    friend constexpr const _Ty & get ( const tuple < _Types ... > & _Tuple ) noexcept;
+
+    template < class _Ty, class ... _Types >
+    friend constexpr _Ty && get ( tuple < _Types ... > && _Tuple ) noexcept;
+
+    template < class _Ty, class ... _Types >
+    friend constexpr const _Ty && get ( const tuple < _Types ... > && _Tuple ) noexcept;
+
+    _Tuple_val < _This > _Myfirst;
+};
+#line 737 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\tuple"
+template < class ... _Types1, class ... _Types2 >
+[ [ nodiscard ] ] constexpr bool operator == ( const tuple < _Types1 ... > & _Left, const tuple < _Types2 ... > & _Right ) {
+    static_assert ( sizeof ... ( _Types1 ) == sizeof ... ( _Types2 ), "cannot compare tuples of different sizes" );
+    return _Left . _Equals ( _Right );
+}
+#line 752
+template < class ... _Types1, class ... _Types2 >
+[ [ nodiscard ] ] constexpr bool operator != ( const tuple < _Types1 ... > & _Left, const tuple < _Types2 ... > & _Right ) {
+    return ! ( _Left == _Right );
+}
+#line 758 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\tuple"
+template < class ... _Types1, class ... _Types2 >
+[ [ nodiscard ] ] constexpr bool operator < ( const tuple < _Types1 ... > & _Left, const tuple < _Types2 ... > & _Right ) {
+    static_assert ( sizeof ... ( _Types1 ) == sizeof ... ( _Types2 ), "cannot compare tuples of different sizes" );
+    return _Left . _Less ( _Right );
+}
+#line 764
+template < class ... _Types1, class ... _Types2 >
+[ [ nodiscard ] ] constexpr bool operator >= ( const tuple < _Types1 ... > & _Left, const tuple < _Types2 ... > & _Right ) {
+    return ! ( _Left < _Right );
+}
+#line 769
+template < class ... _Types1, class ... _Types2 >
+[ [ nodiscard ] ] constexpr bool operator > ( const tuple < _Types1 ... > & _Left, const tuple < _Types2 ... > & _Right ) {
+    return _Right < _Left;
+}
+#line 774
+template < class ... _Types1, class ... _Types2 >
+[ [ nodiscard ] ] constexpr bool operator <= ( const tuple < _Types1 ... > & _Left, const tuple < _Types2 ... > & _Right ) {
+    return ! ( _Right < _Left );
+}
+#line 780 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\tuple"
+template < class ... _Types, enable_if_t < conjunction_v < :: std :: _Is_swappable < _Types > ... >, int > = 0 >
+inline void swap ( tuple < _Types ... > & _Left, tuple < _Types ... > & _Right ) noexcept ( noexcept ( _Left . swap ( _Right ) ) ) {
+    return _Left . swap ( _Right );
+}
+#line 785
+template< class _Ty, class _Tuple> 
+#line 786
+struct _Tuple_element { }; 
+#line 788
+template< class _This, class ..._Rest> 
+#line 789
+struct _Tuple_element< _This, tuple< _This, _Rest...> >  { 
+#line 790
+static_assert((!_Is_any_of_v< _This, _Rest...> ), "duplicate type T in get<T>(tuple)");
+#line 791
+using _Ttype = tuple< _This, _Rest...> ; 
+#line 792
+}; 
+#line 794
+template< class _Ty, class _This, class ..._Rest> 
+#line 795
+struct _Tuple_element< _Ty, tuple< _This, _Rest...> >  { 
+#line 796
+using _Ttype = typename std::_Tuple_element< _Ty, tuple< _Rest...> > ::_Ttype; 
+#line 797
+}; 
+#line 799
+template < size_t _Index, class ... _Types >
+[ [ nodiscard ] ] constexpr tuple_element_t < _Index, tuple < _Types ... > > & get ( tuple < _Types ... > & _Tuple ) noexcept {
+    using _Ttype = typename tuple_element < _Index, tuple < _Types ... >> :: _Ttype;
+    return static_cast < _Ttype & > ( _Tuple ) . _Myfirst . _Val;
+}
+#line 805
+template < size_t _Index, class ... _Types >
+[ [ nodiscard ] ] constexpr const tuple_element_t < _Index, tuple < _Types ... > > & get ( const tuple < _Types ... > & _Tuple ) noexcept {
+    using _Ttype = typename tuple_element < _Index, tuple < _Types ... >> :: _Ttype;
+    return static_cast < const _Ttype & > ( _Tuple ) . _Myfirst . _Val;
+}
+#line 811
+template < size_t _Index, class ... _Types >
+[ [ nodiscard ] ] constexpr tuple_element_t < _Index, tuple < _Types ... > > && get ( tuple < _Types ... > && _Tuple ) noexcept {
+    using _Ty = tuple_element_t < _Index, tuple < _Types ... >>;
+    using _Ttype = typename tuple_element < _Index, tuple < _Types ... >> :: _Ttype;
+    return static_cast < _Ty && > ( static_cast < _Ttype & > ( _Tuple ) . _Myfirst . _Val );
+}
+#line 818
+template < size_t _Index, class ... _Types >
+[ [ nodiscard ] ] constexpr const tuple_element_t < _Index, tuple < _Types ... > > && get ( const tuple < _Types ... > && _Tuple ) noexcept {
+    using _Ty = tuple_element_t < _Index, tuple < _Types ... >>;
+    using _Ttype = typename tuple_element < _Index, tuple < _Types ... >> :: _Ttype;
+    return static_cast < const _Ty && > ( static_cast < const _Ttype & > ( _Tuple ) . _Myfirst . _Val );
+}
+#line 825
+template < size_t _Index, class ... _Types >
+[ [ nodiscard ] ] constexpr auto && _Tuple_get ( tuple < _Types ... > && _Tuple ) noexcept {
+
+    using _Ty = tuple_element_t < _Index, tuple < _Types ... >>;
+    using _Ttype = typename tuple_element < _Index, tuple < _Types ... >> :: _Ttype;
+    return static_cast < _Ty && > ( static_cast < _Ttype & > ( _Tuple ) . _Myfirst . _Val );
+}
+#line 833
+template < class _Ty, class ... _Types >
+[ [ nodiscard ] ] constexpr _Ty & get ( tuple < _Types ... > & _Tuple ) noexcept {
+    using _Ttype = typename _Tuple_element < _Ty, tuple < _Types ... >> :: _Ttype;
+    return static_cast < _Ttype & > ( _Tuple ) . _Myfirst . _Val;
+}
+#line 839
+template < class _Ty, class ... _Types >
+[ [ nodiscard ] ] constexpr const _Ty & get ( const tuple < _Types ... > & _Tuple ) noexcept {
+    using _Ttype = typename _Tuple_element < _Ty, tuple < _Types ... >> :: _Ttype;
+    return static_cast < const _Ttype & > ( _Tuple ) . _Myfirst . _Val;
+}
+#line 845
+template < class _Ty, class ... _Types >
+[ [ nodiscard ] ] constexpr _Ty && get ( tuple < _Types ... > && _Tuple ) noexcept {
+    using _Ttype = typename _Tuple_element < _Ty, tuple < _Types ... >> :: _Ttype;
+    return static_cast < _Ty && > ( static_cast < _Ttype & > ( _Tuple ) . _Myfirst . _Val );
+}
+#line 851
+template < class _Ty, class ... _Types >
+[ [ nodiscard ] ] constexpr const _Ty && get ( const tuple < _Types ... > && _Tuple ) noexcept {
+    using _Ttype = typename _Tuple_element < _Ty, tuple < _Types ... >> :: _Ttype;
+    return static_cast < const _Ty && > ( static_cast < const _Ttype & > ( _Tuple ) . _Myfirst . _Val );
+}
+#line 857
+template < class _This, class ... _Rest >
+template < class _Tag, class _Tpl, size_t ... _Indices, enable_if_t < is_same_v < _Tag, :: std :: _Unpack_tuple_t >, int > >
+constexpr tuple < _This, _Rest ... > :: tuple ( _Tag, _Tpl && _Right, index_sequence < _Indices ... > )
+    : tuple ( _Exact_args_t { }, :: std :: get < _Indices > ( :: std :: forward < _Tpl > ( _Right ) ) ... ) { }
+#line 862
+template < class _This, class ... _Rest >
+template < class _Tag, class _Alloc, class _Tpl, size_t ... _Indices,
+    enable_if_t < is_same_v < _Tag, :: std :: _Alloc_unpack_tuple_t >, int > >
+constexpr tuple < _This, _Rest ... > :: tuple ( _Tag, const _Alloc & _Al, _Tpl && _Right, index_sequence < _Indices ... > )
+    : tuple ( _Alloc_exact_args_t { }, _Al, :: std :: get < _Indices > ( :: std :: forward < _Tpl > ( _Right ) ) ... ) { }
+#line 868
+template < class ... _Types >
+[ [ nodiscard ] ] constexpr tuple < _Unrefwrap_t < _Types > ... > make_tuple ( _Types && ... _Args ) {
+    using _Ttype = tuple < _Unrefwrap_t < _Types > ... >;
+    return _Ttype ( :: std :: forward < _Types > ( _Args ) ... );
+}
+#line 874
+template < class ... _Types >
+[ [ nodiscard ] ] constexpr tuple < _Types & ... > tie ( _Types & ... _Args ) noexcept {
+    using _Ttype = tuple < _Types & ... >;
+    return _Ttype ( _Args ... );
+}
+#line 880
+template < class ... _Types >
+[ [ nodiscard ] ] constexpr tuple < _Types && ... > forward_as_tuple ( _Types && ... _Args ) noexcept {
+    return tuple < _Types && ... > ( :: std :: forward < _Types > ( _Args ) ... );
+}
+#line 885
+template< class _Seq_type1, class _Seq_type2> struct _Cat_sequences; 
+#line 888
+template< size_t ..._Indexes1, size_t ..._Indexes2> 
+#line 889
+struct _Cat_sequences< index_sequence< _Indexes1...> , index_sequence< _Indexes2...> >  { 
+#line 891
+using type = index_sequence< _Indexes1..., _Indexes2...> ; 
+#line 892
+}; 
+#line 894
+template< class _Ty, size_t _Size> class array; 
+#line 897
+template< size_t _Idx, class _Ty, size_t _Size> 
+#line 898
+[[nodiscard]] constexpr _Ty &
+#line 897
+get(array< _Ty, _Size>  & _Arr) noexcept; 
+#line 900
+template< size_t _Idx, class _Ty, size_t _Size> 
+#line 901
+[[nodiscard]] constexpr const _Ty &
+#line 900
+get(const array< _Ty, _Size>  & _Arr) noexcept; 
+#line 903
+template< size_t _Idx, class _Ty, size_t _Size> 
+#line 904
+[[nodiscard]] constexpr _Ty &&
+#line 903
+get(array< _Ty, _Size>  && _Arr) noexcept; 
+#line 906
+template< size_t _Idx, class _Ty, size_t _Size> 
+#line 907
+[[nodiscard]] constexpr const _Ty &&
+#line 906
+get(const array< _Ty, _Size>  && _Arr) noexcept; 
+#line 909
+template< class _Ty, class ..._For_array> 
+#line 910
+struct _View_as_tuple { 
+#line 911
+static_assert((_Always_false< _Ty> ), "Unsupported tuple_cat arguments.");
+#line 912
+}; 
+#line 914
+template< class ..._Types> 
+#line 915
+struct _View_as_tuple< tuple< _Types...> >  { 
+#line 916
+using type = tuple< _Types...> ; 
+#line 917
+}; 
+#line 919
+template< class _Ty1, class _Ty2> 
+#line 920
+struct _View_as_tuple< pair< _Ty1, _Ty2> >  { 
+#line 921
+using type = tuple< _Ty1, _Ty2> ; 
+#line 922
+}; 
+#line 924
+template< class _Ty, class ..._Types> 
+#line 925
+struct _View_as_tuple< array< _Ty, 0> , _Types...>  { 
+#line 926
+using type = tuple< _Types...> ; 
+#line 927
+}; 
+#line 929
+template< class _Ty, size_t _Size, class ..._Types> 
+#line 930
+struct _View_as_tuple< array< _Ty, _Size> , _Types...>  : public std::_View_as_tuple< array< _Ty, _Size - (1)> , _Ty, _Types...>  { 
+#line 932
+}; 
+#line 934
+template< size_t _Nx, class _Ty> 
+#line 935
+struct _Repeat_for : public integral_constant< unsigned __int64, _Nx>  { }; 
+#line 937
+template< class _Ret, class _Kx_arg, class _Ix_arg, size_t _Ix_next, class ..._Tuples> 
+#line 938
+struct _Tuple_cat2 { 
+#line 939
+static_assert((sizeof...(_Tuples) == (0)), "Unsupported tuple_cat arguments.");
+#line 940
+using type = _Ret; 
+#line 941
+using _Kx_arg_seq = _Kx_arg; 
+#line 942
+using _Ix_arg_seq = _Ix_arg; 
+#line 943
+}; 
+#line 945
+template< class ..._Types1, class _Kx_arg, size_t ..._Ix, size_t _Ix_next, class ..._Types2, class ..._Rest> 
+#line 946
+struct _Tuple_cat2< tuple< _Types1...> , _Kx_arg, index_sequence< _Ix...> , _Ix_next, tuple< _Types2...> , _Rest...>  : public std::_Tuple_cat2< tuple< _Types1..., _Types2...> , typename _Cat_sequences< _Kx_arg, index_sequence_for< _Types2...> > ::type, index_sequence< _Ix..., (_Repeat_for< _Ix_next, _Types2> ::value)...> , _Ix_next + (1), _Rest...>  { 
+#line 950
+}; 
+#line 952
+template< class ..._Tuples> 
+#line 953
+struct _Tuple_cat1 : public _Tuple_cat2< tuple< > , integer_sequence< unsigned __int64> , integer_sequence< unsigned __int64> , 0Ui64, typename _View_as_tuple< decay_t< _Tuples> > ::type...>  { 
+#line 956
+}; 
+#line 958
+template < class _Ret, size_t ... _Kx, size_t ... _Ix, class _Ty >
+constexpr _Ret _Tuple_cat ( index_sequence < _Kx ... >, index_sequence < _Ix ... >, _Ty && _Arg ) {
+    return _Ret ( :: std :: get < _Kx > ( :: std :: get < _Ix > ( :: std :: forward < _Ty > ( _Arg ) ) ) ... );
+}
+#line 963
+template < class ... _Tuples >
+[ [ nodiscard ] ] constexpr typename _Tuple_cat1 < _Tuples ... > :: type tuple_cat ( _Tuples && ... _Tpls ) {
+    using _Cat1 = _Tuple_cat1 < _Tuples ... >;
+    return _Tuple_cat < typename _Cat1 :: type > ( typename _Cat1 :: _Kx_arg_seq ( ), typename _Cat1 :: _Ix_arg_seq ( ),
+        :: std :: forward_as_tuple ( :: std :: forward < _Tuples > ( _Tpls ) ... ) );
+}
+#line 996 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\tuple"
+template< class ..._Types, class _Alloc> 
+#line 997
+struct uses_allocator< tuple< _Types...> , _Alloc>  : public true_type { }; 
+#line 1000
+namespace [[deprecated("warning STL4002: The non-Standard std::tr1 namespace and TR1-only machinery are deprecated and will be REMOVED. You can define _" "SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING to acknowledge that you have received this warning.")]] tr1 { 
+#line 1001
+using std::get;
+#line 1002
+using std::ignore;
+#line 1003
+using std::make_tuple;
+#line 1004
+using std::ref;
+#line 1005
+using std::tie;
+#line 1006
+using std::tuple;
+#line 1007
+}
+#line 1010 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\tuple"
+}
+#line 1014
+#pragma warning(pop)
+#pragma pack ( pop )
+#line 1018 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\tuple"
+#pragma external_header(pop)
+#line 25 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\thread"
+#pragma pack ( push, 8 )
+#pragma warning(push, 3)
+#pragma warning(disable : 4180 4412 4455 4494 4514 4574 4582 4583 4587 4588 4619 4623 4625 4626 4643 4648 4702 4793 4820 4988 5026 5027 5045 6294 4984 )
+#line 32
+namespace std { 
+#line 37 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\thread"
+class thread { 
+#line 39
+public: class id; 
+#line 41
+using native_handle_type = void *; 
+#line 43
+thread() noexcept : _Thr{} { } 
+#line 50 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\thread"
+private: template < class _Tuple, size_t ... _Indices >
+    static unsigned int __stdcall _Invoke ( void * _RawVals ) noexcept {
+
+        const unique_ptr < _Tuple > _FnVals ( static_cast < _Tuple * > ( _RawVals ) );
+        _Tuple & _Tup = * _FnVals;
+        :: std :: invoke ( :: std :: move ( :: std :: get < _Indices > ( _Tup ) ) ... );
+        _Cnd_do_broadcast_at_thread_exit ( );
+        return 0;
+    }
+#line 60
+template < class _Tuple, size_t ... _Indices >
+    [ [ nodiscard ] ] static constexpr auto _Get_invoke ( index_sequence < _Indices ... > ) noexcept {
+        return & _Invoke < _Tuple, _Indices ... >;
+    }
+#line 65
+template < class _Fn, class ... _Args >
+    void _Start ( _Fn && _Fx, _Args && ... _Ax ) {
+        using _Tuple = tuple < decay_t < _Fn >, decay_t < _Args > ... >;
+        auto _Decay_copied = :: std :: make_unique < _Tuple > ( :: std :: forward < _Fn > ( _Fx ), :: std :: forward < _Args > ( _Ax ) ... );
+        constexpr auto _Invoker_proc = _Get_invoke < _Tuple > ( make_index_sequence < 1 + sizeof ... ( _Args ) > { } );
+
+#pragma warning(push)
+#pragma warning(disable : 5039)
+
+
+        _Thr . _Hnd =
+            reinterpret_cast < void * > ( :: _beginthreadex ( nullptr, 0, _Invoker_proc, _Decay_copied . get ( ), 0, & _Thr . _Id ) );
+#pragma warning(pop)
+
+        if ( _Thr . _Hnd ) {
+            ( void ) _Decay_copied . release ( );
+        } else {
+            _Thr . _Id = 0;
+            _Throw_Cpp_error ( _RESOURCE_UNAVAILABLE_TRY_AGAIN );
+        }
+    }
+#line 88
+public: template < class _Fn, class ... _Args, enable_if_t < ! is_same_v < _Remove_cvref_t < _Fn >, thread >, int > = 0 >
+    [ [ nodiscard ] ] explicit thread ( _Fn && _Fx, _Args && ... _Ax ) {
+        _Start ( :: std :: forward < _Fn > ( _Fx ), :: std :: forward < _Args > ( _Ax ) ... );
+    }
+#line 93
+~thread() noexcept { 
+#line 94
+if (this->joinable()) { 
+#line 95
+::std::terminate(); 
 #line 96
 }  
 #line 97
 } 
 #line 99
-__forceinline unsigned mul_mod(unsigned a, unsigned b) 
-#line 100
-{ 
+thread(thread &&_Other) noexcept : _Thr(::std::exchange(_Other._Thr, {})) { } 
 #line 101
-if ((a == SPECIAL) && (b == SPECIAL)) { 
+thread &operator=(thread &&_Other) noexcept { 
 #line 102
-return 1; }  
+if (this->joinable()) { 
 #line 103
-return (a * b) % MOD; 
+::std::terminate(); 
 #line 104
-} 
+}  
 #line 106
-__forceinline unsigned div_mod(unsigned a, unsigned b, unsigned *
+(_Thr) = ::std::exchange(_Other._Thr, {}); 
 #line 107
-d_inv) {int volatile ___ = 1;(void)a;(void)b;(void)d_inv;::exit(___);}
-#if 0
+return *this; 
 #line 108
-{ 
-#line 109
-return mul_mod(a, d_inv[b]); 
-#line 110
 } 
-#endif
-#line 112 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__forceinline unsigned add_mod(unsigned a, unsigned b) 
+#line 110
+thread(const thread &) = delete;
+#line 111
+thread &operator=(const thread &) = delete;
 #line 113
-{ 
+void swap(thread &_Other) noexcept { 
 #line 114
-return (a + b) % MOD; 
+::std::swap(_Thr, _Other._Thr); 
 #line 115
 } 
 #line 117
-__forceinline unsigned sub_mod(unsigned a, unsigned b) 
+[[nodiscard]] bool joinable() const noexcept { 
 #line 118
-{ 
+return ((_Thr)._Id) != (0); 
 #line 119
-return ((a - b) + MOD) % MOD; 
-#line 120
 } 
+#line 121
+void join() { 
 #line 122
-__forceinline unsigned pow_mod(unsigned a, unsigned b) 
+if (!this->joinable()) { 
 #line 123
-{ 
+_Throw_Cpp_error(_INVALID_ARGUMENT); 
 #line 124
-unsigned res = (1); 
-#line 125
-while (b > (0)) 
+}  
 #line 126
-{ 
+if (((_Thr)._Id) == _Thrd_id()) { 
 #line 127
-if (b & (1)) { 
+_Throw_Cpp_error(_RESOURCE_DEADLOCK_WOULD_OCCUR); 
 #line 128
-res = mul_mod(res, a); }  
-#line 129
-a = mul_mod(a, a); 
+}  
 #line 130
-b >>= 1; 
+if (_Thrd_join(_Thr, nullptr) != (_Thrd_success)) { 
 #line 131
-}  
+_Throw_Cpp_error(_NO_SUCH_PROCESS); 
 #line 132
-return res; 
-#line 133
-} 
+}  
+#line 134
+(_Thr) = {}; 
 #line 135
-void pre_fnt(unsigned *a, unsigned *b, unsigned st, unsigned *d_N_pos) ;
-#if 0
-#line 136
-{ 
+} 
+#line 137
+void detach() { 
 #line 138
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
+if (!this->joinable()) { 
 #line 139
-(b[d_N_pos[st + id]]) = (a[id]); 
-#line 141
-} 
-#endif
-#line 143 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-void end_fnt(unsigned *b, unsigned n, unsigned *d_inv) ;
-#if 0
+_Throw_Cpp_error(_INVALID_ARGUMENT); 
+#line 140
+}  
+#line 142
+_Check_C_return(_Thrd_detach(_Thr)); 
+#line 143
+(_Thr) = {}; 
 #line 144
-{ 
+} 
 #line 146
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 147
-(b[id << 1]) = div_mod(b[id << 1], n, d_inv); 
+[[nodiscard]] inline id get_id() const noexcept; 
 #line 148
-(b[(id << 1) | (1)]) = div_mod(b[(id << 1) | (1)], n, d_inv); 
+[[nodiscard]] static unsigned hardware_concurrency() noexcept { 
 #line 149
+return _Thrd_hardware_concurrency(); 
+#line 150
 } 
-#endif
-#line 151 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-void fnt_i(unsigned *b, unsigned i, bool inv, unsigned *
 #line 152
-d_root_layer_pow) ;
-#if 0
+[[nodiscard]] native_handle_type native_handle() { 
 #line 153
-{ 
-#line 155
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
+return (_Thr)._Hnd; 
+#line 154
+} 
 #line 157
-unsigned haft_len = 1 << i; 
+private: _Thrd_t _Thr; 
 #line 158
-unsigned bl_st = (id >> i) << (i + (1)), th_id = id & (haft_len - (1)); 
-#line 159
-unsigned pos = bl_st + th_id; 
+}; 
 #line 160
-unsigned u = b[pos]; 
+template < class _Rep, class _Period >
+[ [ nodiscard ] ] auto _To_absolute_time ( const chrono :: duration < _Rep, _Period > & _Rel_time ) noexcept {
+    constexpr auto _Zero = chrono :: duration < _Rep, _Period > :: zero ( );
+    const auto _Now = chrono :: steady_clock :: now ( );
+    decltype ( _Now + _Rel_time ) _Abs_time = _Now;
+    if ( _Rel_time > _Zero ) {
+        constexpr auto _Forever = ( chrono :: steady_clock :: time_point :: max ) ( );
+        if ( _Abs_time < _Forever - _Rel_time ) {
+            _Abs_time += _Rel_time;
+        } else {
+            _Abs_time = _Forever;
+        }
+    }
+    return _Abs_time;
+}
+#line 176
+namespace this_thread { 
+#line 177
+[[nodiscard]] inline thread::id get_id() noexcept; 
+#line 179
+inline void yield() noexcept { 
+#line 180
+_Thrd_yield(); 
+#line 181
+} 
+#line 183
+inline void sleep_until(const xtime *_Abs_time) { 
+#line 184
+_Thrd_sleep(_Abs_time); 
+#line 185
+} 
+#line 187
+template < class _Clock, class _Duration >
+    void sleep_until ( const chrono :: time_point < _Clock, _Duration > & _Abs_time ) {
+
+
+
+        for (;; ) {
+            const auto _Now = _Clock :: now ( );
+            if ( _Abs_time <= _Now ) {
+                return;
+            }
+
+            :: xtime _Tgt;
+            ( void ) _To_xtime_10_day_clamped ( _Tgt, _Abs_time - _Now );
+            _Thrd_sleep ( & _Tgt );
+        }
+    }
+#line 204 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\thread"
+template < class _Rep, class _Period >
+    void sleep_for ( const chrono :: duration < _Rep, _Period > & _Rel_time ) {
+        sleep_until ( _To_absolute_time ( _Rel_time ) );
+    }
+#line 208
+}
+#line 210
+class thread::id { 
+#line 212
+public: id() noexcept : _Id((0)) { } 
+#line 215
+private: id(_Thrd_id_t _Other_id) : _Id(_Other_id) { } 
+#line 217
+_Thrd_id_t _Id; 
+#line 219
+friend id thread::get_id() const noexcept; 
+#line 220
+friend inline id this_thread::get_id() noexcept; 
+#line 221
+friend inline bool operator==(id _Left, id _Right) noexcept; 
+#line 225 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\thread"
+friend inline bool operator<(id _Left, id _Right) noexcept; 
+#line 227 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\thread"
+template < class _Ch, class _Tr >
+    friend basic_ostream < _Ch, _Tr > & operator << ( basic_ostream < _Ch, _Tr > & _Str, thread :: id _Id );
+#line 229
+friend struct hash< id> ; 
+#line 230
+}; 
+#line 232
+[[nodiscard]] inline thread::id thread::get_id() const noexcept { 
+#line 233
+return (_Thr)._Id; 
+#line 234
+} 
+#line 236
+[[nodiscard]] inline thread::id this_thread::get_id() noexcept { 
+#line 237
+return _Thrd_id(); 
+#line 238
+} 
+#line 240
+inline void swap(thread &_Left, thread &_Right) noexcept { 
+#line 241
+_Left.swap(_Right); 
+#line 242
+} 
+#line 244
+[[nodiscard]] inline bool operator==(thread::id _Left, thread::id _Right) noexcept { 
+#line 245
+return (_Left._Id) == (_Right._Id); 
+#line 246
+} 
+#line 253 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\thread"
+[[nodiscard]] inline bool operator!=(thread::id _Left, thread::id _Right) noexcept { 
+#line 254
+return !(_Left == _Right); 
+#line 255
+} 
+#line 257
+[[nodiscard]] inline bool operator<(thread::id _Left, thread::id _Right) noexcept { 
+#line 258
+return (_Left._Id) < (_Right._Id); 
+#line 259
+} 
+#line 261
+[[nodiscard]] inline bool operator<=(thread::id _Left, thread::id _Right) noexcept { 
+#line 262
+return !(_Right < _Left); 
+#line 263
+} 
+#line 265
+[[nodiscard]] inline bool operator>(thread::id _Left, thread::id _Right) noexcept { 
+#line 266
+return (_Right < _Left); 
+#line 267
+} 
+#line 269
+[[nodiscard]] inline bool operator>=(thread::id _Left, thread::id _Right) noexcept { 
+#line 270
+return !(_Left < _Right); 
+#line 271
+} 
+#line 274 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\thread"
+template < class _Ch, class _Tr >
+basic_ostream < _Ch, _Tr > & operator << ( basic_ostream < _Ch, _Tr > & _Str, thread :: id _Id ) {
+    return _Str << _Id . _Id;
+}
+#line 280
+#pragma pack(8)
+template<> 
+#line 280
+struct hash< thread::id>  { 
+#line 281
+typedef thread::id argument_type; 
+#line 282
+typedef size_t result_type; 
+#line 284
+[[nodiscard]] size_t operator()(const thread::id _Keyval) const noexcept { 
+#line 285
+return _Hash_representation(_Keyval._Id); 
+#line 286
+} 
+#line 287
+}; 
+#pragma pack()
+#line 378 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\thread"
+}
+#line 382
+#pragma warning(pop)
+#pragma pack ( pop )
+#line 386 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\thread"
+#pragma external_header(pop)
+#line 23 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\mutex"
+#pragma pack ( push, 8 )
+#pragma warning(push, 3)
+#pragma warning(disable : 4180 4412 4455 4494 4514 4574 4582 4583 4587 4588 4619 4623 4625 4626 4643 4648 4702 4793 4820 4988 5026 5027 5045 6294 4984 )
+#line 30
+namespace std { 
+#line 33
+class condition_variable; 
+#line 34
+class condition_variable_any; 
+#line 36
+class _Mutex_base { 
+#line 38
+public: _Mutex_base(int _Flags = 0) noexcept { 
+#line 39
+_Mtx_init_in_situ(this->_Mymtx(), _Flags | (_Mtx_try)); 
+#line 40
+} 
+#line 42
+~_Mutex_base() noexcept { 
+#line 43
+_Mtx_destroy_in_situ(this->_Mymtx()); 
+#line 44
+} 
+#line 46
+_Mutex_base(const _Mutex_base &) = delete;
+#line 47
+_Mutex_base &operator=(const _Mutex_base &) = delete;
+#line 49
+void lock() { 
+#line 50
+_Check_C_return(_Mtx_lock(this->_Mymtx())); 
+#line 51
+} 
+#line 53
+[[nodiscard]] bool try_lock() { 
+#line 54
+const auto _Res = _Mtx_trylock(this->_Mymtx()); 
+#line 55
+switch (_Res) { 
+#line 56
+case _Thrd_success:  
+#line 57
+return true; 
+#line 58
+case _Thrd_busy:  
+#line 59
+return false; 
+#line 60
+default:  
+#line 61
+_Throw_C_error(_Res); 
+#line 62
+}  
+#line 63
+} 
+#line 65
+void unlock() { 
+#line 66
+_Mtx_unlock(this->_Mymtx()); 
+#line 67
+} 
+#line 69
+using native_handle_type = void *; 
+#line 71
+[[nodiscard]] native_handle_type native_handle() { 
+#line 72
+return _Mtx_getconcrtcs(this->_Mymtx()); 
+#line 73
+} 
+#line 76
+friend class condition_variable; 
+#line 77
+friend class condition_variable_any; 
+#line 79
+private: aligned_storage_t< 80Ui64, 8Ui64>  _Mtx_storage; 
+#line 81
+_Mtx_t _Mymtx() noexcept { 
+#line 82
+return reinterpret_cast< _Mtx_t>(&(_Mtx_storage)); 
+#line 83
+} 
+#line 84
+}; 
+#line 86
+class mutex : public _Mutex_base { 
+#line 88
+public: mutex() noexcept : _Mutex_base() 
+#line 89
+{ } 
+#line 91
+mutex(const mutex &) = delete;
+#line 92
+mutex &operator=(const mutex &) = delete;
+#line 93
+}; 
+#line 95
+class recursive_mutex : public _Mutex_base { 
+#line 97
+public: recursive_mutex() : _Mutex_base(_Mtx_recursive) { } 
+#line 99
+[[nodiscard]] bool try_lock() noexcept { 
+#line 100
+return this->_Mutex_base::try_lock(); 
+#line 101
+} 
+#line 103
+recursive_mutex(const recursive_mutex &) = delete;
+#line 104
+recursive_mutex &operator=(const recursive_mutex &) = delete;
+#line 105
+}; 
+#line 108 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\mutex"
+struct adopt_lock_t { 
+#line 109
+explicit adopt_lock_t() = default;
+#line 110
+}; 
+#line 112
+struct defer_lock_t { 
+#line 113
+explicit defer_lock_t() = default;
+#line 114
+}; 
+#line 116
+struct try_to_lock_t { 
+#line 117
+explicit try_to_lock_t() = default;
+#line 118
+}; 
+#line 120
+constexpr adopt_lock_t adopt_lock{}; 
+#line 121
+constexpr defer_lock_t defer_lock{}; 
+#line 122
+constexpr try_to_lock_t try_to_lock{}; 
+#line 124
+template < class _Mutex >
+class unique_lock {
+public :
+    using mutex_type = _Mutex;
+
+    unique_lock ( ) noexcept : _Pmtx ( nullptr ), _Owns ( false ) { }
+
+    [ [ nodiscard ] ] explicit unique_lock ( _Mutex & _Mtx )
+        : _Pmtx ( :: std :: addressof ( _Mtx ) ), _Owns ( false ) {
+        _Pmtx -> lock ( );
+        _Owns = true;
+    }
+
+    [ [ nodiscard ] ] unique_lock ( _Mutex & _Mtx, adopt_lock_t )
+        : _Pmtx ( :: std :: addressof ( _Mtx ) ), _Owns ( true ) { }
+
+    unique_lock ( _Mutex & _Mtx, defer_lock_t ) noexcept
+        : _Pmtx ( :: std :: addressof ( _Mtx ) ), _Owns ( false ) { }
+
+    [ [ nodiscard ] ] unique_lock ( _Mutex & _Mtx, try_to_lock_t )
+        : _Pmtx ( :: std :: addressof ( _Mtx ) ), _Owns ( _Pmtx -> try_lock ( ) ) { }
+
+    template < class _Rep, class _Period >
+    [ [ nodiscard ] ] unique_lock ( _Mutex & _Mtx, const chrono :: duration < _Rep, _Period > & _Rel_time )
+        : _Pmtx ( :: std :: addressof ( _Mtx ) ), _Owns ( _Pmtx -> try_lock_for ( _Rel_time ) ) { }
+
+    template < class _Clock, class _Duration >
+    [ [ nodiscard ] ] unique_lock ( _Mutex & _Mtx, const chrono :: time_point < _Clock, _Duration > & _Abs_time )
+        : _Pmtx ( :: std :: addressof ( _Mtx ) ), _Owns ( _Pmtx -> try_lock_until ( _Abs_time ) ) {
+
+
+
+
+    }
+
+    [ [ nodiscard ] ] unique_lock ( _Mutex & _Mtx, const xtime * _Abs_time )
+        : _Pmtx ( :: std :: addressof ( _Mtx ) ), _Owns ( false ) {
+        _Owns = _Pmtx -> try_lock_until ( _Abs_time );
+    }
+
+    [ [ nodiscard ] ] unique_lock ( unique_lock && _Other ) noexcept : _Pmtx ( _Other . _Pmtx ), _Owns ( _Other . _Owns ) {
+        _Other . _Pmtx = nullptr;
+        _Other . _Owns = false;
+    }
+
+    unique_lock & operator = ( unique_lock && _Other ) {
+        if ( this != :: std :: addressof ( _Other ) ) {
+            if ( _Owns ) {
+                _Pmtx -> unlock ( );
+            }
+
+            _Pmtx = _Other . _Pmtx;
+            _Owns = _Other . _Owns;
+            _Other . _Pmtx = nullptr;
+            _Other . _Owns = false;
+        }
+        return * this;
+    }
+
+    ~ unique_lock ( ) noexcept {
+        if ( _Owns ) {
+            _Pmtx -> unlock ( );
+        }
+    }
+
+    unique_lock ( const unique_lock & ) = delete;
+    unique_lock & operator = ( const unique_lock & ) = delete;
+
+    void lock ( ) {
+        _Validate ( );
+        _Pmtx -> lock ( );
+        _Owns = true;
+    }
+
+    [ [ nodiscard ] ] bool try_lock ( ) {
+        _Validate ( );
+        _Owns = _Pmtx -> try_lock ( );
+        return _Owns;
+    }
+
+    template < class _Rep, class _Period >
+    [ [ nodiscard ] ] bool try_lock_for ( const chrono :: duration < _Rep, _Period > & _Rel_time ) {
+        _Validate ( );
+        _Owns = _Pmtx -> try_lock_for ( _Rel_time );
+        return _Owns;
+    }
+
+    template < class _Clock, class _Duration >
+    [ [ nodiscard ] ] bool try_lock_until ( const chrono :: time_point < _Clock, _Duration > & _Abs_time ) {
+
+
+
+        _Validate ( );
+        _Owns = _Pmtx -> try_lock_until ( _Abs_time );
+        return _Owns;
+    }
+
+    [ [ nodiscard ] ] bool try_lock_until ( const xtime * _Abs_time ) {
+        _Validate ( );
+        _Owns = _Pmtx -> try_lock_until ( _Abs_time );
+        return _Owns;
+    }
+
+    void unlock ( ) {
+        if ( ! _Pmtx || ! _Owns ) {
+            _Throw_system_error ( errc :: operation_not_permitted );
+        }
+
+        _Pmtx -> unlock ( );
+        _Owns = false;
+    }
+
+    void swap ( unique_lock & _Other ) noexcept {
+        :: std :: swap ( _Pmtx, _Other . _Pmtx );
+        :: std :: swap ( _Owns, _Other . _Owns );
+    }
+
+    _Mutex * release ( ) noexcept {
+        _Mutex * _Res = _Pmtx;
+        _Pmtx = nullptr;
+        _Owns = false;
+        return _Res;
+    }
+
+    [ [ nodiscard ] ] bool owns_lock ( ) const noexcept {
+        return _Owns;
+    }
+
+    explicit operator bool ( ) const noexcept {
+        return _Owns;
+    }
+
+    [ [ nodiscard ] ] _Mutex * mutex ( ) const noexcept {
+        return _Pmtx;
+    }
+
+private :
+    _Mutex * _Pmtx;
+    bool _Owns;
+
+    void _Validate ( ) const {
+        if ( ! _Pmtx ) {
+            _Throw_system_error ( errc :: operation_not_permitted );
+        }
+
+        if ( _Owns ) {
+            _Throw_system_error ( errc :: resource_deadlock_would_occur );
+        }
+    }
+};
+#line 275 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\mutex"
+template < class _Mutex >
+void swap ( unique_lock < _Mutex > & _Left, unique_lock < _Mutex > & _Right ) noexcept {
+    _Left . swap ( _Right );
+}
+#line 280
+template < size_t ... _Indices, class ... _LockN >
+void _Lock_from_locks ( const int _Target, index_sequence < _Indices ... >, _LockN & ... _LkN ) {
+    int _Ignored [ ] = { ( ( static_cast < int > ( _Indices ) == _Target ? ( void ) _LkN . lock ( ) : void ( ) ), 0 ) ... };
+    ( void ) _Ignored;
+}
+#line 286
+template < size_t ... _Indices, class ... _LockN >
+bool _Try_lock_from_locks (
+    const int _Target, index_sequence < _Indices ... >, _LockN & ... _LkN ) {
+    bool _Result { };
+    int _Ignored [ ] = { ( ( static_cast < int > ( _Indices ) == _Target ? ( void ) ( _Result = _LkN . try_lock ( ) ) : void ( ) ), 0 ) ... };
+    ( void ) _Ignored;
+    return _Result;
+}
+#line 295
+template < size_t ... _Indices, class ... _LockN >
+void _Unlock_locks ( const int _First, const int _Last, index_sequence < _Indices ... >, _LockN & ... _LkN ) noexcept
+ {
+
+    int _Ignored [ ] = {
+        ( ( _First <= static_cast < int > ( _Indices ) && static_cast < int > ( _Indices ) < _Last ? ( void ) _LkN . unlock ( ) : void ( ) ),
+            0 ) ... };
+    ( void ) _Ignored;
+}
+#line 305
+template < class ... _LockN >
+int _Try_lock_range ( const int _First, const int _Last, _LockN & ... _LkN ) {
+    using _Indices = index_sequence_for < _LockN ... >;
+    int _Next = _First;
+    try {
+    for (; _Next != _Last; ++ _Next ) {
+        if ( ! _Try_lock_from_locks ( _Next, _Indices { }, _LkN ... ) ) {
+            _Unlock_locks ( _First, _Next, _Indices { }, _LkN ... );
+            return _Next;
+        }
+    }
+    } catch ( ... ) {
+    _Unlock_locks ( _First, _Next, _Indices { }, _LkN ... );
+    throw;
+    }
+
+    return - 1;
+}
+#line 324
+template < class _Lock0, class _Lock1, class _Lock2, class ... _LockN >
+int _Try_lock1 ( _Lock0 & _Lk0, _Lock1 & _Lk1, _Lock2 & _Lk2, _LockN & ... _LkN ) {
+    return _Try_lock_range ( 0, sizeof ... ( _LockN ) + 3, _Lk0, _Lk1, _Lk2, _LkN ... );
+}
+#line 329
+template < class _Lock0, class _Lock1 >
+int _Try_lock1 ( _Lock0 & _Lk0, _Lock1 & _Lk1 ) {
+
+    if ( ! _Lk0 . try_lock ( ) ) {
+        return 0;
+    }
+
+    try {
+    if ( ! _Lk1 . try_lock ( ) ) {
+        _Lk0 . unlock ( );
+        return 1;
+    }
+    } catch ( ... ) {
+    _Lk0 . unlock ( );
+    throw;
+    }
+
+    return - 1;
+}
+#line 349
+template < class _Lock0, class _Lock1, class ... _LockN >
+[ [ nodiscard ] ] int try_lock ( _Lock0 & _Lk0, _Lock1 & _Lk1, _LockN & ... _LkN ) {
+    return _Try_lock1 ( _Lk0, _Lk1, _LkN ... );
+}
+#line 354
+template < class ... _LockN >
+int _Lock_attempt ( const int _Hard_lock, _LockN & ... _LkN ) {
+
+    using _Indices = index_sequence_for < _LockN ... >;
+    _Lock_from_locks ( _Hard_lock, _Indices { }, _LkN ... );
+    int _Failed = - 1;
+    int _Backout_start = _Hard_lock;
+
+    try {
+    _Failed = _Try_lock_range ( 0, _Hard_lock, _LkN ... );
+    if ( _Failed == - 1 ) {
+        _Backout_start = 0;
+        _Failed = _Try_lock_range ( _Hard_lock + 1, sizeof ... ( _LockN ), _LkN ... );
+        if ( _Failed == - 1 ) {
+            return - 1;
+        }
+    }
+    } catch ( ... ) {
+    _Unlock_locks ( _Backout_start, _Hard_lock + 1, _Indices { }, _LkN ... );
+    throw;
+    }
+
+
+    _Unlock_locks ( _Backout_start, _Hard_lock + 1, _Indices { }, _LkN ... );
+    :: std :: this_thread :: yield ( );
+    return _Failed;
+}
+#line 382
+template < class _Lock0, class _Lock1, class _Lock2, class ... _LockN >
+void _Lock_nonmember1 ( _Lock0 & _Lk0, _Lock1 & _Lk1, _Lock2 & _Lk2, _LockN & ... _LkN ) {
+
+    int _Hard_lock = 0;
+    while ( _Hard_lock != - 1 ) {
+        _Hard_lock = _Lock_attempt ( _Hard_lock, _Lk0, _Lk1, _Lk2, _LkN ... );
+    }
+}
+#line 391
+template < class _Lock0, class _Lock1 >
+bool _Lock_attempt_small ( _Lock0 & _Lk0, _Lock1 & _Lk1 ) {
+
+    _Lk0 . lock ( );
+    try {
+    if ( _Lk1 . try_lock ( ) ) {
+        return false;
+    }
+    } catch ( ... ) {
+    _Lk0 . unlock ( );
+    throw;
+    }
+
+    _Lk0 . unlock ( );
+    :: std :: this_thread :: yield ( );
+    return true;
+}
+#line 409
+template < class _Lock0, class _Lock1 >
+void _Lock_nonmember1 ( _Lock0 & _Lk0, _Lock1 & _Lk1 ) {
+
+    while ( _Lock_attempt_small ( _Lk0, _Lk1 ) && _Lock_attempt_small ( _Lk1, _Lk0 ) ) {
+    }
+}
+#line 416
+template < class _Lock0, class _Lock1, class ... _LockN >
+void lock ( _Lock0 & _Lk0, _Lock1 & _Lk1, _LockN & ... _LkN ) {
+    _Lock_nonmember1 ( _Lk0, _Lk1, _LkN ... );
+}
+#line 421
+template < class _Mutex >
+class [ [ nodiscard ] ] lock_guard {
+public :
+    using mutex_type = _Mutex;
+
+    explicit lock_guard ( _Mutex & _Mtx ) : _MyMutex ( _Mtx ) {
+        _MyMutex . lock ( );
+    }
+
+    lock_guard ( _Mutex & _Mtx, adopt_lock_t ) : _MyMutex ( _Mtx ) { }
+
+    ~ lock_guard ( ) noexcept {
+        _MyMutex . unlock ( );
+    }
+
+    lock_guard ( const lock_guard & ) = delete;
+    lock_guard & operator = ( const lock_guard & ) = delete;
+
+private :
+    _Mutex & _MyMutex;
+};
+#line 515 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\mutex"
+extern "C" [[nodiscard]] __declspec(dllimport) int __stdcall __std_init_once_begin_initialize(void ** _LpInitOnce, unsigned long _DwFlags, int * _FPending, void ** _LpContext) noexcept; 
+#line 526
+extern "C" [[nodiscard]] __declspec(dllimport) int __stdcall __std_init_once_complete(void ** _LpInitOnce, unsigned long _DwFlags, void * _LpContext) noexcept; 
+#line 531
+constexpr unsigned long _Init_once_init_failed = 4UL; 
+#line 533
+struct _Init_once_completer { 
+#line 534
+once_flag &_Once; 
+#line 535
+unsigned long _DwFlags; 
+#line 536
+~_Init_once_completer() { 
+#line 537
+if (__std_init_once_complete(&((_Once)._Opaque), _DwFlags, nullptr) == 0) { 
+#line 538
+::abort(); 
+#line 539
+}  
+#line 540
+} 
+#line 541
+}; 
+#line 543
+template < class _Fn, class ... _Args >
+void ( call_once ) ( once_flag & _Once, _Fn && _Fx, _Args && ... _Ax ) noexcept (
+    noexcept ( :: std :: invoke ( :: std :: forward < _Fn > ( _Fx ), :: std :: forward < _Args > ( _Ax ) ... ) ) ) {
+
+
+    int _Pending;
+    if ( __std_init_once_begin_initialize ( & _Once . _Opaque, 0, & _Pending, nullptr ) == 0 ) {
+        :: abort ( );
+    }
+
+    if ( _Pending != 0 ) {
+        _Init_once_completer _Op { _Once, _Init_once_init_failed };
+        :: std :: invoke ( :: std :: forward < _Fn > ( _Fx ), :: std :: forward < _Args > ( _Ax ) ... );
+        _Op . _DwFlags = 0;
+    }
+}
+#line 565
+enum class cv_status { 
+#line 566
+no_timeout, 
+#line 567
+timeout
+#line 568
+}; 
+#line 570
+class condition_variable { 
+#line 572
+public: using native_handle_type = _Cnd_t; 
+#line 574
+condition_variable() { 
+#line 575
+_Cnd_init_in_situ(this->_Mycnd()); 
+#line 576
+} 
+#line 578
+~condition_variable() noexcept { 
+#line 579
+_Cnd_destroy_in_situ(this->_Mycnd()); 
+#line 580
+} 
+#line 582
+condition_variable(const condition_variable &) = delete;
+#line 583
+condition_variable &operator=(const condition_variable &) = delete;
+#line 585
+void notify_one() noexcept { 
+#line 586
+_Cnd_signal(this->_Mycnd()); 
+#line 587
+} 
+#line 589
+void notify_all() noexcept { 
+#line 590
+_Cnd_broadcast(this->_Mycnd()); 
+#line 591
+} 
+#line 593
+void wait(unique_lock< mutex>  &_Lck) { 
+#line 595
+_Cnd_wait(this->_Mycnd(), _Lck.mutex()->_Mymtx()); 
+#line 596
+} 
+#line 598
+template < class _Predicate >
+    void wait ( unique_lock < mutex > & _Lck, _Predicate _Pred ) {
+        while ( ! _Pred ( ) ) {
+            wait ( _Lck );
+        }
+    }
+#line 605
+template < class _Rep, class _Period >
+    cv_status wait_for ( unique_lock < mutex > & _Lck, const chrono :: duration < _Rep, _Period > & _Rel_time ) {
+
+        if ( _Rel_time <= chrono :: duration < _Rep, _Period > :: zero ( ) ) {
+            return cv_status :: timeout;
+        }
+
+
+
+        :: xtime _Tgt;
+        const bool _Clamped = _To_xtime_10_day_clamped ( _Tgt, _Rel_time );
+        const cv_status _Result = wait_until ( _Lck, & _Tgt );
+        if ( _Clamped ) {
+            return cv_status :: no_timeout;
+        }
+
+        return _Result;
+    }
+#line 624
+template < class _Rep, class _Period, class _Predicate >
+    bool wait_for ( unique_lock < mutex > & _Lck, const chrono :: duration < _Rep, _Period > & _Rel_time, _Predicate _Pred ) {
+
+        return _Wait_until1 ( _Lck, _To_absolute_time ( _Rel_time ), _Pred );
+    }
+#line 630
+template < class _Clock, class _Duration >
+    cv_status wait_until ( unique_lock < mutex > & _Lck, const chrono :: time_point < _Clock, _Duration > & _Abs_time ) {
+
+
+
+
+        for (;; ) {
+            const auto _Now = _Clock :: now ( );
+            if ( _Abs_time <= _Now ) {
+                return cv_status :: timeout;
+            }
+
+            :: xtime _Tgt;
+            ( void ) _To_xtime_10_day_clamped ( _Tgt, _Abs_time - _Now );
+            const cv_status _Result = wait_until ( _Lck, & _Tgt );
+            if ( _Result == cv_status :: no_timeout ) {
+                return cv_status :: no_timeout;
+            }
+        }
+    }
+#line 651 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\mutex"
+template < class _Clock, class _Duration, class _Predicate >
+    bool wait_until (
+        unique_lock < mutex > & _Lck, const chrono :: time_point < _Clock, _Duration > & _Abs_time, _Predicate _Pred ) {
+
+
+
+
+        return _Wait_until1 ( _Lck, _Abs_time, _Pred );
+    }
+#line 661 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\mutex"
+cv_status wait_until(unique_lock< mutex>  &_Lck, const xtime *_Abs_time) { 
+#line 663
+if (!(_Mtx_current_owns(_Lck.mutex()->_Mymtx()))) { 
+#line 664
+_Throw_Cpp_error(_OPERATION_NOT_PERMITTED); 
+#line 665
+}  
+#line 668
+const int _Res = _Cnd_timedwait(this->_Mycnd(), _Lck.mutex()->_Mymtx(), _Abs_time); 
+#line 669
+switch (_Res) { 
+#line 670
+case _Thrd_success:  
+#line 671
+return cv_status::no_timeout; 
+#line 672
+case _Thrd_timedout:  
+#line 673
+return cv_status::timeout; 
+#line 674
+default:  
+#line 675
+_Throw_C_error(_Res); 
+#line 676
+}  
+#line 677
+} 
+#line 679
+template < class _Predicate >
+    bool wait_until ( unique_lock < mutex > & _Lck, const xtime * _Abs_time, _Predicate _Pred ) {
+
+        return _Wait_until1 ( _Lck, _Abs_time, _Pred );
+    }
+#line 685
+[[nodiscard]] native_handle_type native_handle() { 
+#line 686
+return this->_Mycnd(); 
+#line 687
+} 
+#line 689
+void _Register(unique_lock< mutex>  &_Lck, int *_Ready) { 
+#line 690
+_Cnd_register_at_thread_exit(this->_Mycnd(), _Lck.release()->_Mymtx(), _Ready); 
+#line 691
+} 
+#line 693
+void _Unregister(mutex &_Mtx) { 
+#line 694
+_Cnd_unregister_at_thread_exit(_Mtx._Mymtx()); 
+#line 695
+} 
+#line 698
+private: aligned_storage_t< 72Ui64, 8Ui64>  _Cnd_storage; 
+#line 700
+_Cnd_t _Mycnd() noexcept { 
+#line 701
+return reinterpret_cast< _Cnd_t>(&(_Cnd_storage)); 
+#line 702
+} 
+#line 704
+template < class _Predicate >
+    bool _Wait_until1 ( unique_lock < mutex > & _Lck, const xtime * _Abs_time, _Predicate & _Pred ) {
+
+        while ( ! _Pred ( ) ) {
+            if ( wait_until ( _Lck, _Abs_time ) == cv_status :: timeout ) {
+                return _Pred ( );
+            }
+        }
+
+        return true;
+    }
+#line 716
+template < class _Clock, class _Duration, class _Predicate >
+    bool _Wait_until1 (
+        unique_lock < mutex > & _Lck, const chrono :: time_point < _Clock, _Duration > & _Abs_time, _Predicate & _Pred ) {
+        while ( ! _Pred ( ) ) {
+            const auto _Now = _Clock :: now ( );
+            if ( _Abs_time <= _Now ) {
+                return false;
+            }
+
+            :: xtime _Tgt;
+            const bool _Clamped = _To_xtime_10_day_clamped ( _Tgt, _Abs_time - _Now );
+            if ( wait_until ( _Lck, & _Tgt ) == cv_status :: timeout && ! _Clamped ) {
+                return _Pred ( );
+            }
+        }
+
+        return true;
+    }
+#line 734
+}; 
+#line 736
+struct _UInt_is_zero { 
+#line 737
+const unsigned &_UInt; 
+#line 739
+[[nodiscard]] bool operator()() const { 
+#line 740
+return (_UInt) == (0); 
+#line 741
+} 
+#line 742
+}; 
+#line 744
+class timed_mutex { 
+#line 746
+public: timed_mutex() noexcept : _My_locked((0)) { } 
+#line 748
+timed_mutex(const timed_mutex &) = delete;
+#line 749
+timed_mutex &operator=(const timed_mutex &) = delete;
+#line 751
+void lock() { 
+#line 752
+unique_lock< mutex>  _Lock(_My_mutex); 
+#line 753
+while ((_My_locked) != (0)) { 
+#line 754
+(_My_cond).wait(_Lock); 
+#line 755
+}  
+#line 757
+(_My_locked) = 4294967295U; 
+#line 758
+} 
+#line 760
+[[nodiscard]] bool try_lock() noexcept { 
+#line 761
+lock_guard< mutex>  _Lock(_My_mutex); 
+#line 762
+if ((_My_locked) != (0)) { 
+#line 763
+return false; 
+#line 764
+} else { 
+#line 765
+(_My_locked) = 4294967295U; 
+#line 766
+return true; 
+#line 767
+}  
+#line 768
+} 
+#line 770
+void unlock() { 
+#line 771
+{ 
+#line 773
+lock_guard< mutex>  _Lock(_My_mutex); 
+#line 774
+(_My_locked) = (0); 
+#line 775
+} 
+#line 776
+(_My_cond).notify_one(); 
+#line 777
+} 
+#line 779
+template < class _Rep, class _Period >
+    [ [ nodiscard ] ] bool try_lock_for ( const chrono :: duration < _Rep, _Period > & _Rel_time ) {
+        return try_lock_until ( _To_absolute_time ( _Rel_time ) );
+    }
+#line 784
+template < class _Time >
+    bool _Try_lock_until ( _Time _Abs_time ) {
+        unique_lock < mutex > _Lock ( _My_mutex );
+        if ( ! _My_cond . wait_until ( _Lock, _Abs_time, _UInt_is_zero { _My_locked } ) ) {
+            return false;
+        }
+
+        _My_locked = 4294967295U;
+        return true;
+    }
+#line 795
+template < class _Clock, class _Duration >
+    [ [ nodiscard ] ] bool try_lock_until ( const chrono :: time_point < _Clock, _Duration > & _Abs_time ) {
+
+
+
+
+        return _Try_lock_until ( _Abs_time );
+    }
+#line 804 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\mutex"
+[[nodiscard]] bool try_lock_until(const xtime *_Abs_time) { 
+#line 805
+return this->_Try_lock_until(_Abs_time); 
+#line 806
+} 
+#line 809
+private: mutex _My_mutex; 
+#line 810
+condition_variable _My_cond; 
+#line 811
+unsigned _My_locked; 
+#line 812
+}; 
+#line 814
+class recursive_timed_mutex { 
+#line 816
+public: recursive_timed_mutex() noexcept : _My_locked((0)) { } 
+#line 818
+recursive_timed_mutex(const recursive_timed_mutex &) = delete;
+#line 819
+recursive_timed_mutex &operator=(const recursive_timed_mutex &) = delete;
+#line 821
+void lock() { 
+#line 822
+const thread::id _Tid = this_thread::get_id(); 
+#line 824
+unique_lock< mutex>  _Lock(_My_mutex); 
+#line 826
+if ((_Tid == (_My_owner))) { 
+#line 827
+if ((_My_locked) < 4294967295U) { 
+#line 828
+++(_My_locked); 
+#line 829
+} else { 
+#line 830
+_Throw_system_error(errc::device_or_resource_busy); 
+#line 831
+}  
+#line 832
+} else { 
+#line 833
+while ((_My_locked) != (0)) { 
+#line 834
+(_My_cond).wait(_Lock); 
+#line 835
+}  
+#line 837
+(_My_locked) = (1); 
+#line 838
+(_My_owner) = _Tid; 
+#line 839
+}  
+#line 840
+} 
+#line 842
+[[nodiscard]] bool try_lock() noexcept { 
+#line 843
+const thread::id _Tid = this_thread::get_id(); 
+#line 845
+lock_guard< mutex>  _Lock(_My_mutex); 
+#line 847
+if ((_Tid == (_My_owner))) { 
+#line 848
+if ((_My_locked) < 4294967295U) { 
+#line 849
+++(_My_locked); 
+#line 850
+} else { 
+#line 851
+return false; 
+#line 852
+}  
+#line 853
+} else { 
+#line 854
+if ((_My_locked) != (0)) { 
+#line 855
+return false; 
+#line 856
+} else { 
+#line 857
+(_My_locked) = (1); 
+#line 858
+(_My_owner) = _Tid; 
+#line 859
+}  
+#line 860
+}  
+#line 861
+return true; 
+#line 862
+} 
+#line 864
+void unlock() { 
+#line 865
+bool _Do_notify = false; 
+#line 867
+{ 
+#line 868
+lock_guard< mutex>  _Lock(_My_mutex); 
+#line 869
+--(_My_locked); 
+#line 870
+if ((_My_locked) == (0)) { 
+#line 871
+_Do_notify = true; 
+#line 872
+(_My_owner) = thread::id(); 
+#line 873
+}  
+#line 874
+} 
+#line 876
+if (_Do_notify) { 
+#line 877
+(_My_cond).notify_one(); 
+#line 878
+}  
+#line 879
+} 
+#line 881
+template < class _Rep, class _Period >
+    [ [ nodiscard ] ] bool try_lock_for ( const chrono :: duration < _Rep, _Period > & _Rel_time ) {
+        return try_lock_until ( _To_absolute_time ( _Rel_time ) );
+    }
+#line 886
+template < class _Time >
+    bool _Try_lock_until ( _Time _Abs_time ) {
+        const thread :: id _Tid = this_thread :: get_id ( );
+
+        unique_lock < mutex > _Lock ( _My_mutex );
+
+        if ( _Tid == _My_owner ) {
+            if ( _My_locked < 4294967295U ) {
+                ++ _My_locked;
+            } else {
+                return false;
+            }
+        } else {
+            if ( ! _My_cond . wait_until ( _Lock, _Abs_time, _UInt_is_zero { _My_locked } ) ) {
+                return false;
+            }
+
+            _My_locked = 1;
+            _My_owner = _Tid;
+        }
+        return true;
+    }
+#line 909
+template < class _Clock, class _Duration >
+    [ [ nodiscard ] ] bool try_lock_until ( const chrono :: time_point < _Clock, _Duration > & _Abs_time ) {
+
+
+
+
+        return _Try_lock_until ( _Abs_time );
+    }
+#line 918 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\mutex"
+[[nodiscard]] bool try_lock_until(const xtime *_Abs_time) { 
+#line 919
+return this->_Try_lock_until(_Abs_time); 
+#line 920
+} 
+#line 923
+private: mutex _My_mutex; 
+#line 924
+condition_variable _My_cond; 
+#line 925
+unsigned _My_locked; 
+#line 926
+thread::id _My_owner; 
+#line 927
+}; 
+#line 929 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\mutex"
+}
+#line 932
+#pragma warning(pop)
+#pragma pack ( pop )
+#line 936 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\mutex"
+#pragma external_header(pop)
+#line 23 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#pragma external_header(push)
+#line 19 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\condition_variable"
+#pragma pack ( push, 8 )
+#pragma warning(push, 3)
+#pragma warning(disable : 4180 4412 4455 4494 4514 4574 4582 4583 4587 4588 4619 4623 4625 4626 4643 4648 4702 4793 4820 4988 5026 5027 5045 6294 4984 )
+#line 30
+namespace std { 
+#line 31
+template < class _Lock >
+struct [ [ nodiscard ] ] _Unlock_guard {
+    explicit _Unlock_guard ( _Lock & _Mtx_ ) : _Mtx ( _Mtx_ ) {
+        _Mtx . unlock ( );
+    }
+
+    ~ _Unlock_guard ( ) noexcept {
+
+
+
+
+        _Mtx . lock ( );
+    }
+
+    _Unlock_guard ( const _Unlock_guard & ) = delete;
+    _Unlock_guard & operator = ( const _Unlock_guard & ) = delete;
+
+private :
+    _Lock & _Mtx;
+};
+#line 52
+class condition_variable_any { 
+#line 54
+public: condition_variable_any() : _Myptr{::std::make_shared< mutex> ()} { 
+#line 55
+_Cnd_init_in_situ(this->_Mycnd()); 
+#line 56
+} 
+#line 58
+~condition_variable_any() noexcept { 
+#line 59
+_Cnd_destroy_in_situ(this->_Mycnd()); 
+#line 60
+} 
+#line 62
+condition_variable_any(const condition_variable_any &) = delete;
+#line 63
+condition_variable_any &operator=(const condition_variable_any &) = delete;
+#line 65
+void notify_one() noexcept { 
+#line 66
+lock_guard< mutex>  _Guard{(*(_Myptr))}; 
+#line 67
+_Cnd_signal(this->_Mycnd()); 
+#line 68
+} 
+#line 70
+void notify_all() noexcept { 
+#line 71
+lock_guard< mutex>  _Guard{(*(_Myptr))}; 
+#line 72
+_Cnd_broadcast(this->_Mycnd()); 
+#line 73
+} 
+#line 75
+template < class _Lock >
+    void wait ( _Lock & _Lck ) noexcept {
+        const shared_ptr < mutex > _Ptr = _Myptr;
+        unique_lock < mutex > _Guard { * _Ptr };
+        _Unlock_guard < _Lock > _Unlock_outer { _Lck };
+        _Cnd_wait ( _Mycnd ( ), _Ptr -> _Mymtx ( ) );
+        _Guard . unlock ( );
+    }
+#line 84
+template < class _Lock, class _Predicate >
+    void wait ( _Lock & _Lck, _Predicate _Pred ) noexcept ( noexcept ( static_cast < bool > ( _Pred ( ) ) ) ) {
+
+        while ( ! static_cast < bool > ( _Pred ( ) ) ) {
+            wait ( _Lck );
+        }
+    }
+#line 92
+template < class _Lock, class _Clock, class _Duration >
+    cv_status wait_until ( _Lock & _Lck, const chrono :: time_point < _Clock, _Duration > & _Abs_time ) {
+
+
+
+
+        return wait_for ( _Lck, _Abs_time - _Clock :: now ( ) );
+    }
+#line 101 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\condition_variable"
+template < class _Lock, class _Clock, class _Duration, class _Predicate >
+    bool wait_until ( _Lock & _Lck, const chrono :: time_point < _Clock, _Duration > & _Abs_time, _Predicate _Pred ) {
+
+
+
+
+        while ( ! _Pred ( ) ) {
+            if ( wait_until ( _Lck, _Abs_time ) == cv_status :: timeout ) {
+                return _Pred ( );
+            }
+        }
+
+        return true;
+    }
+#line 116 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\condition_variable"
+template < class _Lock, class _Rep, class _Period >
+    cv_status wait_for ( _Lock & _Lck, const chrono :: duration < _Rep, _Period > & _Rel_time ) {
+        if ( _Rel_time <= chrono :: duration < _Rep, _Period > :: zero ( ) ) {
+            _Unlock_guard < _Lock > _Unlock_outer { _Lck };
+            ( void ) _Unlock_outer;
+            return cv_status :: timeout;
+        }
+
+
+
+        :: xtime _Tgt;
+        const bool _Clamped = _To_xtime_10_day_clamped ( _Tgt, _Rel_time );
+        const cv_status _Result = _Wait_until ( _Lck, & _Tgt );
+        if ( _Clamped ) {
+            return cv_status :: no_timeout;
+        }
+
+        return _Result;
+    }
+#line 136
+template < class _Lock, class _Rep, class _Period, class _Predicate >
+    bool wait_for ( _Lock & _Lck, const chrono :: duration < _Rep, _Period > & _Rel_time, _Predicate _Pred ) {
+
+        return wait_until ( _Lck, _To_absolute_time ( _Rel_time ), :: std :: move ( _Pred ) );
+    }
+#line 142
+template < class _Lock >
+    cv_status wait_until ( _Lock & _Lck, const xtime * const _Abs_time ) {
+        return _Wait_until ( _Lck, _Abs_time );
+    }
+#line 147
+template < class _Lock, class _Predicate >
+    bool wait_until ( _Lock & _Lck, const xtime * const _Abs_time, _Predicate _Pred ) {
+
+        while ( ! _Pred ( ) ) {
+            if ( _Wait_until ( _Lck, _Abs_time ) == cv_status :: timeout ) {
+                return _Pred ( );
+            }
+        }
+        return true;
+    }
+#line 247 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\condition_variable"
+private: shared_ptr< mutex>  _Myptr; 
+#line 249
+aligned_storage_t< 72Ui64, 8Ui64>  _Cnd_storage; 
+#line 251
+[[nodiscard]] _Cnd_t _Mycnd() noexcept { 
+#line 252
+return reinterpret_cast< _Cnd_t>(&(_Cnd_storage)); 
+#line 253
+} 
+#line 255
+template < class _Lock >
+    cv_status _Wait_until ( _Lock & _Lck, const xtime * const _Abs_time ) {
+        const shared_ptr < mutex > _Ptr = _Myptr;
+        unique_lock < mutex > _Guard { * _Ptr };
+        _Unlock_guard < _Lock > _Unlock_outer { _Lck };
+        const int _Res = _Cnd_timedwait ( _Mycnd ( ), _Ptr -> _Mymtx ( ), _Abs_time );
+        _Guard . unlock ( );
+
+        switch ( _Res ) {
+        case _Thrd_success :
+            return cv_status :: no_timeout;
+        case _Thrd_timedout :
+            return cv_status :: timeout;
+        default :
+            _Throw_C_error ( _Res );
+        }
+    }
+#line 272
+}; 
+#line 274
+inline void notify_all_at_thread_exit(condition_variable &_Cnd, unique_lock< mutex>  _Lck) { 
+#line 276
+_Cnd._Register(_Lck, nullptr); 
+#line 277
+} 
+#line 278
+}
+#line 281
+#pragma warning(pop)
+#pragma pack ( pop )
+#line 285 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\condition_variable"
+#pragma external_header(pop)
+#line 26 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+inline void check(cudaError_t err, const char *const func, const char *const file, const int line) 
+#line 27
+{ 
+#line 28
+if (err != (cudaSuccess)) 
+#line 29
+{ 
+#line 30
+(((((((((std::cerr << ("CUDA Runtime Error at: "))) << file)) << (":"))) << line)) << (std::endl)); 
+#line 31
+(((((((std::cerr << (cudaGetErrorString(err)))) << (" "))) << func)) << (std::endl)); 
+#line 32
+std::exit(1); 
+#line 33
+}  
+#line 34
+} 
+#line 37
+inline void check_last(const char *const file, const int line) 
+#line 38
+{ 
+#line 39
+const cudaError_t err{cudaPeekAtLastError()}; 
+#line 40
+if (err != (cudaSuccess)) 
+#line 41
+{ 
+#line 42
+(((((((((std::cerr << ("CUDA Runtime Error at: "))) << file)) << (":"))) << line)) << (std::endl)); 
+#line 43
+(((std::cerr << (cudaGetErrorString(err)))) << (std::endl)); 
+#line 44
+std::exit(1); 
+#line 45
+}  
+#line 46
+} 
+#line 48
+const unsigned MOD = (65537); 
+#line 49
+const unsigned SPECIAL = (MOD - (1)); 
+#line 50
+const unsigned ROOT = (3); 
+#line 51
+const unsigned ROOT_INV = (21846); 
+#line 52
+const unsigned MAX_LOG = (16); 
+#line 54
+const unsigned LOG_LEN_WARP = (5); 
+#line 55
+const unsigned LEN_WARP = (1 << LOG_LEN_WARP); 
+#line 56
+const unsigned ALGO_N_2_CUTOFF = (16); 
+#line 57
+const unsigned ALGO_NLOGN_CUTOFF = (32); 
+#line 58
+const unsigned ALGO_BLOCK_CUTOFF = (512); 
+#line 60
+const unsigned LOG_DATA = (10); 
+#line 61
+const unsigned LOG_SYMBOL = (LOG_DATA - (1)); 
+#line 62
+const unsigned LOG_SEG = (LOG_SYMBOL - (1)); 
+#line 63
+const unsigned SYMBOL_PER_PACKET = (1 << LOG_SYMBOL); 
+#line 64
+const unsigned NUM_OF_PACKET = (1 << (MAX_LOG - LOG_SYMBOL)); 
+#line 65
+const unsigned NUM_OF_NEED_PACKET = (NUM_OF_PACKET >> 1); 
+#line 66
+const unsigned SEG_PER_PACKET = (1 << LOG_SEG); 
+#line 67
+const unsigned SEG_DIFF = (1 << (MAX_LOG - (1))); 
+#line 68
+const unsigned NUM_OF_NEED_SYMBOL = (1 << (MAX_LOG - (1))); 
+#line 70
+const unsigned LEN_ROOT_LAYER_POW = ((1 << MAX_LOG) - 1); 
+#line 71
+const unsigned LEN_ROOT_LAYER_POW_2 = (LEN_ROOT_LAYER_POW << 1); 
+#line 72
+const unsigned LEN_N_POS = ((1 << (MAX_LOG + (1))) - 1); 
+#line 73
+const unsigned LEN_PACKET_PRODUCT = (NUM_OF_PACKET * (SYMBOL_PER_PACKET << 1)); 
+#line 74
+const unsigned LEN_ONE_PACKET_PRODUCT = (1 << (LOG_SYMBOL + (1))); 
+#line 76
+const unsigned LEN_SMALL = NUM_OF_NEED_SYMBOL; 
+#line 77
+const unsigned LEN_LARGE = (LEN_SMALL << 1); 
+#line 78
+const unsigned SIZE_SMALL = (LEN_SMALL * sizeof(unsigned)); 
+#line 79
+const unsigned SIZE_LARGE = (LEN_LARGE * sizeof(unsigned)); 
+#line 80
+const unsigned SIZE_ONE_PACKET_PRODUCT = (LEN_ONE_PACKET_PRODUCT * sizeof(unsigned)); 
+#line 82
+const unsigned LEN_ENCODE_P = NUM_OF_NEED_SYMBOL; 
+#line 83
+const unsigned LEN_ENCODE_Y = (NUM_OF_NEED_SYMBOL << 1); 
+#line 84
+const unsigned LEN_DECODE_X = NUM_OF_NEED_SYMBOL; 
+#line 85
+const unsigned LEN_DECODE_Y = NUM_OF_NEED_SYMBOL; 
+#line 86
+const unsigned LEN_DECODE_P = NUM_OF_NEED_SYMBOL; 
+#line 87
+const unsigned LEN_BATCH = LEN_WARP; 
+#line 89
+const unsigned LEN_ENCODE_P_BATCH = (LEN_ENCODE_P * LEN_BATCH); 
+#line 90
+const unsigned LEN_ENCODE_Y_BATCH = (LEN_ENCODE_Y * LEN_BATCH); 
+#line 91
+const unsigned LEN_DECODE_X_BATCH = (LEN_DECODE_X * LEN_BATCH); 
+#line 92
+const unsigned LEN_DECODE_Y_BATCH = (LEN_DECODE_Y * LEN_BATCH); 
+#line 93
+const unsigned LEN_DECODE_P_BATCH = (LEN_DECODE_P * LEN_BATCH); 
+#line 94
+const unsigned LEN_SMALL_BATCH = (LEN_SMALL * LEN_BATCH); 
+#line 95
+const unsigned LEN_LARGE_BATCH = (LEN_LARGE * LEN_BATCH); 
+#line 97
+const unsigned MAX_ACTIVE_ENCODE_BATCH = (100); 
+#line 98
+const unsigned MAX_ACTIVE_DECODE_BATCH = (100); 
+#line 100
+const size_t SIZE_ENCODE_P_BATCH = (sizeof(unsigned) * LEN_ENCODE_P_BATCH); 
+#line 101
+const size_t SIZE_ENCODE_Y_BATCH = (sizeof(unsigned) * LEN_ENCODE_Y_BATCH); 
+#line 102
+const size_t SIZE_DECODE_X_BATCH = (sizeof(unsigned) * LEN_DECODE_X_BATCH); 
+#line 103
+const size_t SIZE_DECODE_Y_BATCH = (sizeof(unsigned) * LEN_DECODE_Y_BATCH); 
+#line 104
+const size_t SIZE_DECODE_P_BATCH = (sizeof(unsigned) * LEN_DECODE_P_BATCH); 
+#line 105
+const size_t SIZE_SMALL_BATCH = (sizeof(unsigned) * LEN_SMALL_BATCH); 
+#line 106
+const size_t SIZE_LARGE_BATCH = (sizeof(unsigned) * LEN_LARGE_BATCH); 
+#line 108
+const size_t SIZE_ENCODE_P_BATCH_SLOT = ((sizeof(unsigned) * LEN_ENCODE_P_BATCH) * MAX_ACTIVE_ENCODE_BATCH); 
+#line 109
+const size_t SIZE_ENCODE_Y_BATCH_SLOT = ((sizeof(unsigned) * LEN_ENCODE_Y_BATCH) * MAX_ACTIVE_ENCODE_BATCH); 
+#line 111
+const size_t SIZE_DECODE_X_BATCH_SLOT = ((sizeof(unsigned) * LEN_DECODE_X_BATCH) * MAX_ACTIVE_DECODE_BATCH); 
+#line 112
+const size_t SIZE_DECODE_Y_BATCH_SLOT = ((sizeof(unsigned) * LEN_DECODE_Y_BATCH) * MAX_ACTIVE_DECODE_BATCH); 
+#line 113
+const size_t SIZE_DECODE_P_BATCH_SLOT = ((sizeof(unsigned) * LEN_DECODE_P_BATCH) * MAX_ACTIVE_DECODE_BATCH); 
+#line 114
+const size_t SIZE_DECODE_T1_BATCH_SLOT = ((sizeof(unsigned) * LEN_LARGE_BATCH) * MAX_ACTIVE_DECODE_BATCH); 
+#line 115
+const size_t SIZE_DECODE_T2_BATCH_SLOT = ((sizeof(unsigned) * LEN_LARGE_BATCH) * MAX_ACTIVE_DECODE_BATCH); 
+#line 116
+const size_t SIZE_DECODE_AX_BATCH_SLOT = ((sizeof(unsigned) * LEN_LARGE_BATCH) * MAX_ACTIVE_DECODE_BATCH); 
+#line 117
+const size_t SIZE_DECODE_DAX_BATCH_SLOT = ((sizeof(unsigned) * LEN_SMALL_BATCH) * MAX_ACTIVE_DECODE_BATCH); 
+#line 118
+const size_t SIZE_DECODE_VDAX_BATCH_SLOT = ((sizeof(unsigned) * LEN_LARGE_BATCH) * MAX_ACTIVE_DECODE_BATCH); 
+#line 119
+const size_t SIZE_DECODE_N1_BATCH_SLOT = ((sizeof(unsigned) * LEN_SMALL_BATCH) * MAX_ACTIVE_DECODE_BATCH); 
+#line 120
+const size_t SIZE_DECODE_N2_BATCH_SLOT = ((sizeof(unsigned) * LEN_LARGE_BATCH) * MAX_ACTIVE_DECODE_BATCH); 
+#line 121
+const size_t SIZE_DECODE_N3_BATCH_SLOT = ((sizeof(unsigned) * LEN_SMALL_BATCH) * MAX_ACTIVE_DECODE_BATCH); 
+#line 123
+unsigned **h_encode_p_batch_slot; 
+#line 124
+unsigned **h_encode_y_batch_slot; 
+#line 125
+unsigned **h_decode_x_batch_slot; 
+#line 126
+unsigned **h_decode_y_batch_slot; 
+#line 127
+unsigned **h_decode_p_batch_slot; 
+#line 129
+unsigned *d_encode_p_batch_slot; 
+#line 130
+unsigned *d_encode_y_batch_slot; 
+#line 131
+unsigned *d_decode_x_batch_slot; 
+#line 132
+unsigned *d_decode_y_batch_slot; 
+#line 133
+unsigned *d_decode_p_batch_slot; 
+#line 134
+unsigned *d_decode_t1_batch_slot; 
+#line 135
+unsigned *d_decode_t2_batch_slot; 
+#line 136
+unsigned *d_decode_ax_batch_slot; 
+#line 137
+unsigned *d_decode_dax_batch_slot; 
+#line 138
+unsigned *d_decode_vdax_batch_slot; 
+#line 139
+unsigned *d_decode_n1_batch_slot; 
+#line 140
+unsigned *d_decode_n2_batch_slot; 
+#line 141
+unsigned *d_decode_n3_batch_slot; 
+#line 143
+unsigned *d_N_pos; 
+#line 144
+unsigned *d_root_pow; 
+#line 145
+unsigned *d_root_inv_pow; 
+#line 146
+unsigned *d_inv; 
+#line 147
+unsigned *d_root_layer_pow; 
+#line 148
+unsigned *d_packet_product; 
+#line 150
+struct CB_DATA { 
+#line 151
+unsigned slot_id; 
+#line 152
+unsigned *dst; 
+#line 153
+unsigned *src; 
+#line 154
+size_t size_res; 
+#line 155
+std::queue< unsigned>  &slot; 
+#line 156
+std::mutex &mt; 
+#line 157
+std::condition_variable &cv; 
+#line 158
+}; 
+#line 160
+std::queue< unsigned>  encode_batch_slot, decode_batch_slot; 
 #line 161
-unsigned v = mul_mod(b[pos + haft_len], d_root_layer_pow[(((LEN_ROOT_LAYER_POW * inv) + haft_len) - (1)) + th_id]); 
+std::mutex mt_encode_slot, mt_decode_slot; 
 #line 162
-(b[pos]) = add_mod(u, v); 
-#line 163
-(b[pos + haft_len]) = sub_mod(u, v); 
+std::condition_variable cv_encode_slot, cv_decode_slot; 
 #line 164
+inline unsigned pop_slot(std::queue< unsigned>  &slot, std::mutex &mt, std::condition_variable &cv) { 
+#line 165
+std::unique_lock< std::mutex>  lock(mt); 
+#line 166
+cv.wait(lock, [&]{ return !(slot).empty(); } ); 
+#line 167
+unsigned id = slot.front(); 
+#line 168
+slot.pop(); 
+#line 169
+return id; 
+#line 170
+} 
+#line 172
+inline void push_slot(unsigned id, std::queue< unsigned>  &slot, std::mutex &mt, std::condition_variable &cv) { 
+#line 173
+{ 
+#line 174
+std::lock_guard< std::mutex>  lock(mt); 
+#line 175
+slot.push(id); 
+#line 176
+} 
+#line 177
+cv.notify_one(); 
+#line 178
+} 
+#line 180
+void init_batch_slot() { 
+#line 182
+for (unsigned i = (0); i < MAX_ACTIVE_ENCODE_BATCH; i++) { 
+#line 183
+push_slot(i, encode_batch_slot, mt_encode_slot, cv_encode_slot); }  
+#line 185
+for (unsigned i = (0); i < MAX_ACTIVE_DECODE_BATCH; i++) { 
+#line 186
+push_slot(i, decode_batch_slot, mt_decode_slot, cv_decode_slot); }  
+#line 188
+} 
+#line 190
+void __stdcall h_end_batch_slot(void *data) { 
+#line 192
+CB_DATA *dat = static_cast< CB_DATA *>(data); 
+#line 194
+memcpy(dat->dst, dat->src, dat->size_res); 
+#line 195
+push_slot(dat->slot_id, dat->slot, dat->mt, dat->cv); 
+#line 197
+delete dat; 
+#line 198
+} 
+#line 200
+__forceinline void build_launch_param(unsigned log_n, unsigned &n_th, unsigned &n_bl) { 
+#line 201
+if (log_n <= LOG_LEN_WARP) { 
+#line 202
+n_th = (1 << log_n); 
+#line 203
+n_bl = (1); 
+#line 204
+} else 
+#line 205
+{ 
+#line 206
+unsigned c_l2_sqrt_n = (log_n >> 1) + (log_n & (1)); 
+#line 207
+n_th = (1 << c_l2_sqrt_n); 
+#line 208
+n_bl = (1 << (log_n - c_l2_sqrt_n)); 
+#line 209
+}  
+#line 210
+} 
+#line 212
+__forceinline unsigned mul_mod(unsigned a, unsigned b) 
+#line 213
+{ 
+#line 214
+if ((a == SPECIAL) && (b == SPECIAL)) { 
+#line 215
+return 1; }  
+#line 216
+return (a * b) % MOD; 
+#line 217
+} 
+#line 219
+__forceinline unsigned div_mod(unsigned a, unsigned b, unsigned *
+#line 220
+d_inv) {int volatile ___ = 1;(void)a;(void)b;(void)d_inv;::exit(___);}
+#if 0
+#line 221
+{ 
+#line 222
+return mul_mod(a, d_inv[b]); 
+#line 223
 } 
 #endif
-#line 166 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__forceinline void fnt(unsigned *a, unsigned *b, unsigned log_na, unsigned log_nb, unsigned opt, unsigned *
-#line 167
-d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream) 
-#line 168
-{ 
-#line 179
-unsigned nb = 1 << log_nb, wp = (opt & (2)) >> 1; 
-#line 180
-unsigned n_th, n_bl; 
-#line 182
-build_launch_param(log_na, n_th, n_bl); 
-#line 183
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : pre_fnt(a, b, nb - (1), d_N_pos); 
-#line 185
-build_launch_param(log_nb - (1), n_th, n_bl); 
-#line 186
-for (unsigned i = (0); i < log_nb; i++) { 
-#line 187
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : fnt_i(b, i, wp, d_root_layer_pow); }  
-#line 189
-if (opt & (1)) { 
-#line 190
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : end_fnt(b, nb, d_inv); }  
-#line 191
-} 
-#line 193
-void g_fnt(unsigned *a, unsigned *b, unsigned log_na, unsigned log_nb, unsigned opt, unsigned *
-#line 194
-d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) ;
-#if 0
-#line 195
-{ 
-#line 199
-unsigned id = __device_builtin_variable_threadIdx.x; 
-#line 200
-unsigned na = 1 << log_na, nb = 1 << log_nb, wp = (opt & (2)) >> 1, st = nb - (1); 
-#line 201
-unsigned os1 = nb >> 1, os2 = LEN_ROOT_LAYER_POW * wp; 
-#line 203
-if (id < na) { (b[d_N_pos[st + id]]) = (a[id]); }  
-#line 204
-if (log_na == log_nb) { (b[d_N_pos[(st + id) + os1]]) = (a[id + os1]); }  
-#line 206
-__syncthreads(); 
-#line 208
-for (unsigned i = (0); i < log_nb; i++) { 
-#line 210
-unsigned haft_len = 1 << i; 
-#line 211
-unsigned bl_st = (id >> i) << (i + (1)), th_id = id & (haft_len - (1)); 
-#line 212
-unsigned pos = bl_st + th_id; 
-#line 213
-unsigned u = b[pos]; 
-#line 214
-unsigned v = mul_mod(b[pos + haft_len], d_root_layer_pow[((os2 + haft_len) - (1)) + th_id]); 
-#line 215
-(b[pos]) = add_mod(u, v); 
-#line 216
-(b[pos + haft_len]) = sub_mod(u, v); 
-#line 218
-__syncthreads(); 
-#line 220
-}  
-#line 222
-if (opt & (1)) { 
-#line 223
-(b[id]) = div_mod(b[id], nb, d_inv); 
-#line 224
-(b[id + os1]) = div_mod(b[id + os1], nb, d_inv); 
+#line 225 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__forceinline unsigned add_mod(unsigned a, unsigned b) 
 #line 226
-}  
+{ 
+#line 227
+return (a + b) % MOD; 
 #line 228
 } 
-#endif
-#line 230 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-void d_fnt(unsigned *a, unsigned *b, unsigned log_na, unsigned log_nb, unsigned opt, unsigned *
+#line 230
+__forceinline unsigned sub_mod(unsigned a, unsigned b) 
 #line 231
+{ 
+#line 232
+return ((a - b) + MOD) % MOD; 
+#line 233
+} 
+#line 235
+__forceinline unsigned pow_mod(unsigned a, unsigned b) 
+#line 236
+{ 
+#line 237
+unsigned res = (1); 
+#line 238
+while (b > (0)) 
+#line 239
+{ 
+#line 240
+if (b & (1)) { 
+#line 241
+res = mul_mod(res, a); }  
+#line 242
+a = mul_mod(a, a); 
+#line 243
+b >>= 1; 
+#line 244
+}  
+#line 245
+return res; 
+#line 246
+} 
+#line 248
+void g_pre_fnt(unsigned *a, unsigned *b, unsigned st, unsigned *d_N_pos) ;
+#if 0
+#line 249
+{ 
+#line 251
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
+#line 252
+(b[d_N_pos[st + id]]) = (a[id]); 
+#line 254
+} 
+#endif
+#line 256 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void g_end_fnt(unsigned *b, unsigned n, unsigned *d_inv) ;
+#if 0
+#line 257
+{ 
+#line 259
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
+#line 260
+(b[id << 1]) = div_mod(b[id << 1], n, d_inv); 
+#line 261
+(b[(id << 1) | (1)]) = div_mod(b[(id << 1) | (1)], n, d_inv); 
+#line 262
+} 
+#endif
+#line 264 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void g_fnt_i(unsigned *b, unsigned i, bool inv, unsigned *
+#line 265
+d_root_layer_pow) ;
+#if 0
+#line 266
+{ 
+#line 268
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
+#line 270
+unsigned haft_len = 1 << i; 
+#line 271
+unsigned bl_st = (id >> i) << (i + (1)), th_id = id & (haft_len - (1)); 
+#line 272
+unsigned pos = bl_st + th_id; 
+#line 273
+unsigned u = b[pos]; 
+#line 274
+unsigned v = mul_mod(b[pos + haft_len], d_root_layer_pow[(((LEN_ROOT_LAYER_POW * inv) + haft_len) - (1)) + th_id]); 
+#line 275
+(b[pos]) = add_mod(u, v); 
+#line 276
+(b[pos + haft_len]) = sub_mod(u, v); 
+#line 277
+} 
+#endif
+#line 279 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__forceinline void fnt(unsigned *a, unsigned *b, unsigned log_na, unsigned log_nb, unsigned opt, unsigned *
+#line 280
+d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream) 
+#line 281
+{ 
+#line 292
+unsigned nb = 1 << log_nb, wp = (opt & (2)) >> 1; 
+#line 293
+unsigned n_th, n_bl; 
+#line 295
+build_launch_param(log_na, n_th, n_bl); 
+#line 296
+(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_pre_fnt(a, b, nb - (1), d_N_pos); 
+#line 298
+build_launch_param(log_nb - (1), n_th, n_bl); 
+#line 299
+for (unsigned i = (0); i < log_nb; i++) { 
+#line 300
+(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_fnt_i(b, i, wp, d_root_layer_pow); }  
+#line 302
+if (opt & (1)) { 
+#line 303
+(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_end_fnt(b, nb, d_inv); }  
+#line 304
+} 
+#line 306
+void g_fnt(unsigned *a, unsigned *b, unsigned log_na, unsigned log_nb, unsigned opt, unsigned *
+#line 307
+d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) ;
+#if 0
+#line 308
+{ 
+#line 310
+unsigned id = __device_builtin_variable_threadIdx.x; 
+#line 311
+unsigned na = 1 << log_na, nb = 1 << log_nb, wp = (opt & (2)) >> 1, st = nb - (1); 
+#line 312
+unsigned os1 = nb >> 1, os2 = LEN_ROOT_LAYER_POW * wp; 
+#line 314
+if (id < na) { (b[d_N_pos[st + id]]) = (a[id]); }  
+#line 315
+if (log_na == log_nb) { (b[d_N_pos[(st + id) + os1]]) = (a[id + os1]); }  
+#line 317
+__syncthreads(); 
+#line 319
+for (unsigned i = (0); i < log_nb; i++) { 
+#line 321
+unsigned haft_len = 1 << i; 
+#line 322
+unsigned bl_st = (id >> i) << (i + (1)), th_id = id & (haft_len - (1)); 
+#line 323
+unsigned pos = bl_st + th_id; 
+#line 324
+unsigned u = b[pos]; 
+#line 325
+unsigned v = mul_mod(b[pos + haft_len], d_root_layer_pow[((os2 + haft_len) - (1)) + th_id]); 
+#line 326
+(b[pos]) = add_mod(u, v); 
+#line 327
+(b[pos + haft_len]) = sub_mod(u, v); 
+#line 329
+__syncthreads(); 
+#line 331
+}  
+#line 333
+if (opt & (1)) { 
+#line 334
+(b[id]) = div_mod(b[id], nb, d_inv); 
+#line 335
+(b[id + os1]) = div_mod(b[id + os1], nb, d_inv); 
+#line 337
+}  
+#line 339
+} 
+#endif
+#line 341 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__forceinline void d_sq_fnt(unsigned *a, unsigned *b, unsigned log_na, unsigned log_nb, unsigned opt, unsigned *
+#line 342
 d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) {int volatile ___ = 1;(void)a;(void)b;(void)log_na;(void)log_nb;(void)opt;(void)d_N_pos;(void)d_root_layer_pow;(void)d_inv;::exit(___);}
 #if 0
-#line 232
+#line 343
 { 
-#line 236
+#line 345
 unsigned na = 1 << log_na, nb = 1 << log_nb, wp = (opt & (2)) >> 1, st = nb - (1); 
-#line 237
+#line 346
 unsigned os = LEN_ROOT_LAYER_POW * wp; 
-#line 239
+#line 348
 for (unsigned i = (0); i < na; i++) { 
-#line 240
+#line 349
 (b[d_N_pos[st + i]]) = (a[i]); }  
-#line 242
+#line 351
 for (unsigned i = (0); i < log_nb; i++) { 
-#line 243
+#line 352
 unsigned haft_len = 1 << i, len = haft_len << 1; 
-#line 244
+#line 353
 unsigned wlen = d_root_layer_pow[os + haft_len]; 
-#line 245
+#line 354
 for (unsigned j = (0); j < nb; j += len) { 
-#line 246
+#line 355
 unsigned w = (1); 
-#line 247
+#line 356
 for (unsigned k = (0); k < haft_len; k++) { 
-#line 248
+#line 357
 unsigned u = b[j + k], v = mul_mod(b[(j + k) + haft_len], w); 
-#line 249
+#line 358
 (b[j + k]) = add_mod(u, v); 
-#line 250
+#line 359
 (b[(j + k) + haft_len]) = sub_mod(u, v); 
-#line 251
+#line 360
 w = mul_mod(w, wlen); 
-#line 252
+#line 361
 }  
-#line 253
+#line 362
 }  
-#line 254
+#line 363
 }  
-#line 256
+#line 365
 if (opt & (1)) { 
-#line 257
+#line 366
+unsigned inv_nb = div_mod(1, nb, d_inv); 
+#line 367
 for (unsigned i = (0); i < nb; i++) { 
-#line 258
-(b[i]) = div_mod(b[i], nb, d_inv); }  
-#line 259
+#line 368
+(b[i]) = mul_mod(b[i], inv_nb); }  
+#line 369
 }  
-#line 261
+#line 371
 } 
 #endif
-#line 263 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 373 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 void g_vector_mul_i(unsigned *a, unsigned *b, unsigned *c) ;
 #if 0
-#line 264
-{ 
-#line 266
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 267
-(c[id]) = mul_mod(a[id], b[id]); 
-#line 269
-} 
-#endif
-#line 271 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__forceinline void d_vector_mul_i(unsigned *a, unsigned *b, unsigned *c, unsigned n) {int volatile ___ = 1;(void)a;(void)b;(void)c;(void)n;::exit(___);}
-#if 0
-#line 271
-{ 
-#line 273
-for (unsigned i = (0); i < n; i++) { 
-#line 274
-(c[i]) = mul_mod(a[i], b[i]); }  
-#line 276
-} 
-#endif
-#line 278 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__forceinline void d_poly_mul(unsigned *a, unsigned *b, unsigned *t1, unsigned *t2, unsigned *c, unsigned log_n, unsigned *
-#line 279
-d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) {int volatile ___ = 1;(void)a;(void)b;(void)t1;(void)t2;(void)c;(void)log_n;(void)d_N_pos;(void)d_root_layer_pow;(void)d_inv;::exit(___);}
-#if 0
-#line 280
-{ 
-#line 285
-unsigned na = 1 << log_n, nc = na << 1, size_nc = nc * sizeof(unsigned); 
-#line 287
-if (na <= ALGO_N_2_CUTOFF) 
-#line 288
-{ 
-#line 289
-for (unsigned i = (0); i < na; i++) 
-#line 290
-{ 
-#line 291
-(t1[i]) = (a[i]); 
-#line 292
-(t2[i]) = (b[i]); 
-#line 293
-}  
-#line 294
-memset(c, 0, size_nc); 
-#line 295
-for (unsigned i = (0); i < na; i++) { 
-#line 296
-for (unsigned j = (0); j < na; j++) { 
-#line 297
-(c[i + j]) = add_mod(c[i + j], mul_mod(t1[i], t2[j])); }  }  
-#line 298
-} else 
-#line 300
-{ 
-#line 301
-memset(t1, 0, size_nc); 
-#line 302
-memset(t2, 0, size_nc); 
-#line 304
-if (na <= ALGO_NLOGN_CUTOFF) { 
-#line 306
-d_fnt(a, t1, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv); 
-#line 307
-d_fnt(b, t2, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv); 
-#line 309
-d_vector_mul_i(t1, t2, t1, nc); 
-#line 311
-d_fnt(t1, c, log_n + (1), log_n + (1), 3, d_N_pos, d_root_layer_pow, d_inv); 
-#line 313
-} else 
-#line 314
-{ 
-#line 316
-cudaStream_t stream; 
-#line 317
-cudaStreamCreateWithFlags(&stream, 1); 
-#line 328
-if (na <= ALGO_BLOCK_CUTOFF) { 
-#line 330
-(__cudaPushCallConfiguration(1, na, 0, stream)) ? (void)0 : g_fnt(a, t1, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv); 
-#line 331
-(__cudaPushCallConfiguration(1, na, 0, stream)) ? (void)0 : g_fnt(b, t2, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv); 
-#line 333
-unsigned n_th, n_bl; 
-#line 334
-build_launch_param(log_n + (1), n_th, n_bl); 
-#line 335
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_vector_mul_i(t1, t2, t1); 
-#line 337
-(__cudaPushCallConfiguration(1, na, 0, stream)) ? (void)0 : g_fnt(t1, c, log_n + (1), log_n + (1), 3, d_N_pos, d_root_layer_pow, d_inv); 
-#line 339
-} else 
-#line 340
-{ 
-#line 342
-fnt(a, t1, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 343
-fnt(b, t2, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 345
-unsigned n_th, n_bl; 
-#line 346
-build_launch_param(log_n + (1), n_th, n_bl); 
-#line 347
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_vector_mul_i(t1, t2, t1); 
-#line 349
-fnt(t1, c, log_n + (1), log_n + (1), 3, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 351
-}  
-#line 353
-cudaStreamDestroy(stream); 
-#line 355
-}  
-#line 357
-}  
-#line 358
-} 
-#endif
-#line 360 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-inline void h_poly_mul(unsigned *a, unsigned *b, unsigned *t1, unsigned *t2, unsigned *c, unsigned log_n, unsigned *
-#line 361
-d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream) { 
-#line 365
-unsigned nc = 1 << (log_n + (1)), size_nc = nc * sizeof(unsigned); 
-#line 367
-cudaMemsetAsync(t1, 0, size_nc, stream); 
-#line 368
-cudaMemsetAsync(t2, 0, size_nc, stream); 
-#line 370
-fnt(a, t1, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 371
-fnt(b, t2, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 373
-unsigned n_th, n_bl; 
 #line 374
-build_launch_param(log_n + (1), n_th, n_bl); 
-#line 375
-(__cudaPushCallConfiguration(n_bl, n_th, 0, 0)) ? (void)0 : g_vector_mul_i(t1, t2, t1); 
+{ 
+#line 376
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
 #line 377
-fnt(t1, c, log_n + (1), log_n + (1), 3, d_N_pos, d_root_layer_pow, d_inv, stream); 
+(c[id]) = mul_mod(a[id], b[id]); 
 #line 379
 } 
-#line 381
-void poly_deriv(unsigned *p1, unsigned *p2) ;
+#endif
+#line 381 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__forceinline void d_sq_vector_mul_i(unsigned *a, unsigned *b, unsigned *c, unsigned n) {int volatile ___ = 1;(void)a;(void)b;(void)c;(void)n;::exit(___);}
 #if 0
-#line 382
+#line 381
 { 
+#line 383
+for (unsigned i = (0); i < n; i++) { 
 #line 384
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 385
-(p2[id]) = mul_mod(p1[id + (1)], id + (1)); 
+(c[i]) = mul_mod(a[i], b[i]); }  
 #line 386
 } 
 #endif
 #line 388 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-void build_product_i(unsigned *p, unsigned *t1, unsigned *t2, unsigned i, unsigned *
+__forceinline void d_poly_mul(unsigned *a, unsigned *b, unsigned *t1, unsigned *t2, unsigned *c, unsigned log_n, unsigned *
 #line 389
-d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) ;
+d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) {int volatile ___ = 1;(void)a;(void)b;(void)t1;(void)t2;(void)c;(void)log_n;(void)d_N_pos;(void)d_root_layer_pow;(void)d_inv;::exit(___);}
 #if 0
 #line 390
 { 
-#line 392
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 393
-unsigned st = id << (i + (1)), len = 1 << i; 
-#line 394
-d_poly_mul(p + st, (p + st) + len, t1 + st, t2 + st, p + st, i, d_N_pos, d_root_layer_pow, d_inv); 
 #line 395
-} 
-#endif
-#line 397 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-void build_product(unsigned *p, unsigned *t1, unsigned *t2, unsigned log_n1, unsigned log_n2, cudaStream_t stream) 
+unsigned na = 1 << log_n, nc = na << 1, size_nc = nc * sizeof(unsigned); 
+#line 397
+if (na <= ALGO_N_2_CUTOFF) 
 #line 398
 { 
+#line 399
+for (unsigned i = (0); i < na; i++) 
+#line 400
+{ 
+#line 401
+(t1[i]) = (a[i]); 
 #line 402
-for (unsigned i = log_n1; i < log_n2; i++) 
+(t2[i]) = (b[i]); 
 #line 403
-{ 
+}  
 #line 404
-unsigned n_th, n_bl; 
+memset(c, 0, size_nc); 
 #line 405
-build_launch_param((log_n2 - i) - (1), n_th, n_bl); 
+for (unsigned i = (0); i < na; i++) { 
 #line 406
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : build_product_i(p, t1, t2, i, d_N_pos, d_root_layer_pow, d_inv); 
+for (unsigned j = (0); j < na; j++) { 
 #line 407
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 407); 
+(c[i + j]) = add_mod(c[i + j], mul_mod(t1[i], t2[j])); }  }  
 #line 408
-}  
-#line 409
-} 
+} else 
+#line 410
+{ 
 #line 411
-void build_ax(unsigned *x, unsigned *p, unsigned *t1, unsigned *t2, cudaStream_t stream) 
+memset(t1, 0, size_nc); 
 #line 412
-{ 
+memset(t2, 0, size_nc); 
+#line 414
+if (na <= ALGO_NLOGN_CUTOFF) { 
+#line 416
+d_sq_fnt(a, t1, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv); 
 #line 417
-for (unsigned i = (0); i < NUM_OF_NEED_PACKET; i++) 
-#line 418
-{ 
+d_sq_fnt(b, t2, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv); 
 #line 419
-unsigned st_p1 = i << (LOG_SYMBOL + (1)), st_p2 = (x[i << LOG_SYMBOL]) << 2; 
-#line 420
-check(cudaMemcpyAsync(p + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT, cudaMemcpyDeviceToDevice, stream), "cudaMemcpyAsync(p + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT, cudaMemcpyDeviceToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 420); 
+d_sq_vector_mul_i(t1, t2, t1, nc); 
 #line 421
-}  
-#line 422
-build_product(p, t1, t2, LOG_SYMBOL + (1), MAX_LOG, stream); 
+d_sq_fnt(t1, c, log_n + (1), log_n + (1), 3, d_N_pos, d_root_layer_pow, d_inv); 
 #line 423
-} 
-#line 425
-void build_n1(unsigned *n1, unsigned *vdax, unsigned *x, unsigned *y, unsigned *
+} else 
+#line 424
+{ 
 #line 426
-d_inv) ;
-#if 0
-#line 427
-{ 
-#line 429
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 430
-(n1[id]) = div_mod(y[id], vdax[x[id]], d_inv); 
-#line 432
-} 
-#endif
-#line 434 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-void build_n2(unsigned *n2, unsigned *n1, unsigned *x) ;
-#if 0
-#line 434
-{ 
-#line 439
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 440
-(n2[x[id]]) = (n1[id]); 
-#line 442
-} 
-#endif
-#line 444 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-void build_n3(unsigned *n3, unsigned *p_n3) ;
-#if 0
-#line 444
-{ 
-#line 448
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 449
-(n3[id]) = sub_mod(0, p_n3[id + (1)]); 
-#line 451
-} 
-#endif
-#line 453 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-inline void build_px(unsigned *p, unsigned *ax, unsigned *n3, unsigned *t1, unsigned *t2, unsigned *
-#line 454
-d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream) { 
-#line 458
-h_poly_mul(ax, n3, t1, t2, p, MAX_LOG - (1), d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 459
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 459); 
-#line 461
-} 
-#line 463
-void encode(unsigned *p, unsigned *y) 
-#line 464
-{ 
-#line 466
 cudaStream_t stream; 
+#line 427
+cudaStreamCreateWithFlags(&stream, 1); 
+#line 438
+if (na <= ALGO_BLOCK_CUTOFF) { 
+#line 440
+(__cudaPushCallConfiguration(1, na, 0, stream)) ? (void)0 : g_fnt(a, t1, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv); 
+#line 441
+(__cudaPushCallConfiguration(1, na, 0, stream)) ? (void)0 : g_fnt(b, t2, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv); 
+#line 443
+unsigned n_th, n_bl; 
+#line 444
+build_launch_param(log_n + (1), n_th, n_bl); 
+#line 445
+(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_vector_mul_i(t1, t2, t1); 
+#line 447
+(__cudaPushCallConfiguration(1, na, 0, stream)) ? (void)0 : g_fnt(t1, c, log_n + (1), log_n + (1), 3, d_N_pos, d_root_layer_pow, d_inv); 
+#line 449
+} else 
+#line 450
+{ 
+#line 452
+fnt(a, t1, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
+#line 453
+fnt(b, t2, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
+#line 455
+unsigned n_th, n_bl; 
+#line 456
+build_launch_param(log_n + (1), n_th, n_bl); 
+#line 457
+(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_vector_mul_i(t1, t2, t1); 
+#line 459
+fnt(t1, c, log_n + (1), log_n + (1), 3, d_N_pos, d_root_layer_pow, d_inv, stream); 
+#line 461
+}  
+#line 463
+cudaStreamDestroy(stream); 
+#line 465
+}  
 #line 467
-check(cudaStreamCreate(&stream), "cudaStreamCreate(&stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 467); 
-#line 469
-unsigned *d_p; 
-#line 470
-unsigned *d_y; 
-#line 471
-check(cudaMallocAsync(&d_p, SIZE_SMALL, stream), "cudaMallocAsync(&d_p, SIZE_SMALL, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 471); 
-#line 472
-check(cudaMallocAsync(&d_y, SIZE_LARGE, stream), "cudaMallocAsync(&d_y, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 472); 
-#line 473
-check(cudaMemcpyAsync(d_p, p, SIZE_SMALL, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(d_p, p, SIZE_SMALL, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 473); 
-#line 474
-check(cudaMemsetAsync(d_y, 0, SIZE_LARGE, stream), "cudaMemsetAsync(d_y, 0, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 474); 
-#line 476
-fnt(d_p, d_y, MAX_LOG - (1), MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 477
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 477); 
-#line 479
-check(cudaMemcpyAsync(y, d_y, SIZE_LARGE, cudaMemcpyDeviceToHost, stream), "cudaMemcpyAsync(y, d_y, SIZE_LARGE, cudaMemcpyDeviceToHost, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 479); 
-#line 481
-check(cudaFreeAsync(d_p, stream), "cudaFreeAsync(d_p, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 481); 
-#line 482
-check(cudaFreeAsync(d_y, stream), "cudaFreeAsync(d_y, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 482); 
-#line 484
-check(cudaStreamDestroy(stream), "cudaStreamDestroy(stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 484); 
-#line 486
+}  
+#line 468
 } 
+#endif
+#line 470 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__forceinline void d_sq_poly_mul(unsigned *a, unsigned *b, unsigned *t1, unsigned *t2, unsigned *c, unsigned log_n, unsigned *
+#line 471
+d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) {int volatile ___ = 1;(void)a;(void)b;(void)t1;(void)t2;(void)c;(void)log_n;(void)d_N_pos;(void)d_root_layer_pow;(void)d_inv;::exit(___);}
+#if 0
+#line 471
+{ 
+#line 476
+unsigned na = 1 << log_n, nc = na << 1, size_nc = nc * sizeof(unsigned); 
+#line 477
+if (na <= ALGO_N_2_CUTOFF) 
+#line 478
+{ 
+#line 479
+for (unsigned i = (0); i < na; i++) 
+#line 480
+{ 
+#line 481
+(t1[i]) = (a[i]); 
+#line 482
+(t2[i]) = (b[i]); 
+#line 483
+}  
+#line 484
+memset(c, 0, size_nc); 
+#line 485
+for (unsigned i = (0); i < na; i++) { 
+#line 486
+for (unsigned j = (0); j < na; j++) { 
+#line 487
+(c[i + j]) = add_mod(c[i + j], mul_mod(t1[i], t2[j])); }  }  
 #line 488
-void decode(unsigned *x, unsigned *y, unsigned *p) 
+} else 
 #line 489
 { 
 #line 491
-cudaStream_t stream; 
+memset(t1, 0, size_nc); 
 #line 492
-check(cudaStreamCreate(&stream), "cudaStreamCreate(&stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 492); 
+memset(t2, 0, size_nc); 
 #line 494
-unsigned n_th, n_bl; 
+d_sq_fnt(a, t1, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv); 
 #line 495
-build_launch_param(MAX_LOG - (1), n_th, n_bl); 
+d_sq_fnt(b, t2, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv); 
 #line 497
-unsigned *t1; 
-#line 498
-unsigned *t2; 
+d_sq_vector_mul_i(t1, t2, t1, nc); 
 #line 499
-check(cudaMallocAsync(&t1, SIZE_LARGE, stream), "cudaMallocAsync(&t1, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 499); 
-#line 500
-check(cudaMallocAsync(&t2, SIZE_LARGE, stream), "cudaMallocAsync(&t2, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 500); 
-#line 502
-unsigned *ax; 
+d_sq_fnt(t1, c, log_n + (1), log_n + (1), 3, d_N_pos, d_root_layer_pow, d_inv); 
+#line 501
+}  
 #line 503
-check(cudaMallocAsync(&ax, SIZE_LARGE, stream), "cudaMallocAsync(&ax, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 503); 
-#line 504
-build_ax(x, ax, t1, t2, stream); 
-#line 506
-unsigned *dax; 
-#line 507
-check(cudaMallocAsync(&dax, SIZE_SMALL, stream), "cudaMallocAsync(&dax, SIZE_SMALL, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 507); 
-#line 508
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : poly_deriv(ax, dax); 
-#line 509
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 509); 
-#line 511
-unsigned *vdax; 
-#line 512
-check(cudaMallocAsync(&vdax, SIZE_LARGE, stream), "cudaMallocAsync(&vdax, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 512); 
-#line 513
-check(cudaMemsetAsync(vdax, 0, SIZE_LARGE, stream), "cudaMemsetAsync(vdax, 0, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 513); 
-#line 514
-fnt(dax, vdax, MAX_LOG - (1), MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 515
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 515); 
-#line 517
-unsigned *n1; 
-#line 518
-check(cudaMallocAsync(&n1, SIZE_SMALL, stream), "cudaMallocAsync(&n1, SIZE_SMALL, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 518); 
-#line 519
-check(cudaMemcpyAsync(t1, x, SIZE_SMALL, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(t1, x, SIZE_SMALL, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 519); 
-#line 520
-check(cudaMemcpyAsync(t2, y, SIZE_SMALL, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(t2, y, SIZE_SMALL, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 520); 
-#line 521
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : build_n1(n1, vdax, t1, t2, d_inv); 
-#line 522
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 522); 
-#line 524
-unsigned *n2; 
-#line 525
-unsigned *n3; 
-#line 526
-check(cudaMallocAsync(&n2, SIZE_LARGE, stream), "cudaMallocAsync(&n2, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 526); 
-#line 527
-check(cudaMallocAsync(&n3, SIZE_SMALL, stream), "cudaMallocAsync(&n3, SIZE_SMALL, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 527); 
-#line 529
-check(cudaMemsetAsync(n2, 0, SIZE_LARGE, stream), "cudaMemsetAsync(n2, 0, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 529); 
-#line 530
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : build_n2(n2, n1, t1); 
-#line 531
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 531); 
-#line 533
-fnt(n2, t2, MAX_LOG, MAX_LOG, 2, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 534
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 534); 
-#line 535
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : build_n3(n3, t2); 
-#line 536
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 536); 
-#line 538
-build_px(n2, ax, n3, t1, t2, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 539
-check(cudaMemcpyAsync(p, n2, SIZE_SMALL, cudaMemcpyDeviceToHost, stream), "cudaMemcpyAsync(p, n2, SIZE_SMALL, cudaMemcpyDeviceToHost, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 539); 
-#line 541
-check(cudaFreeAsync(t1, stream), "cudaFreeAsync(t1, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 541); 
-#line 542
-check(cudaFreeAsync(t2, stream), "cudaFreeAsync(t2, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 542); 
-#line 543
-check(cudaFreeAsync(ax, stream), "cudaFreeAsync(ax, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 543); 
-#line 544
-check(cudaFreeAsync(dax, stream), "cudaFreeAsync(dax, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 544); 
-#line 545
-check(cudaFreeAsync(vdax, stream), "cudaFreeAsync(vdax, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 545); 
-#line 546
-check(cudaFreeAsync(n1, stream), "cudaFreeAsync(n1, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 546); 
-#line 547
-check(cudaFreeAsync(n2, stream), "cudaFreeAsync(n2, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 547); 
-#line 548
-check(cudaFreeAsync(n3, stream), "cudaFreeAsync(n3, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 548); 
-#line 550
-check(cudaStreamDestroy(stream), "cudaStreamDestroy(stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 550); 
-#line 552
 } 
+#endif
+#line 505 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+inline void h_poly_mul(unsigned *a, unsigned *b, unsigned *t1, unsigned *t2, unsigned *c, unsigned log_n, unsigned *
+#line 506
+d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream) { 
+#line 510
+unsigned nc = 1 << (log_n + (1)), size_nc = nc * sizeof(unsigned); 
+#line 512
+cudaMemsetAsync(t1, 0, size_nc, stream); 
+#line 513
+cudaMemsetAsync(t2, 0, size_nc, stream); 
+#line 515
+fnt(a, t1, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
+#line 516
+fnt(b, t2, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
+#line 518
+unsigned n_th, n_bl; 
+#line 519
+build_launch_param(log_n + (1), n_th, n_bl); 
+#line 520
+(__cudaPushCallConfiguration(n_bl, n_th, 0, 0)) ? (void)0 : g_vector_mul_i(t1, t2, t1); 
+#line 522
+fnt(t1, c, log_n + (1), log_n + (1), 3, d_N_pos, d_root_layer_pow, d_inv, stream); 
+#line 524
+} 
+#line 526
+void g_poly_deriv(unsigned *ax, unsigned *dax) ;
+#if 0
+#line 527
+{ 
+#line 529
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
+#line 530
+(dax[id]) = mul_mod(ax[id + (1)], id + (1)); 
+#line 531
+} 
+#endif
+#line 533 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__forceinline void d_sq_poly_deriv(unsigned *ax, unsigned *dax, unsigned n) {int volatile ___ = 1;(void)ax;(void)dax;(void)n;::exit(___);}
+#if 0
+#line 533
+{ 
+#line 535
+for (unsigned i = (0); i < n; i++) { 
+#line 536
+(dax[i]) = mul_mod(ax[i + (1)], i + (1)); }  
+#line 538
+} 
+#endif
+#line 540 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void g_build_product_i(unsigned *p, unsigned *t1, unsigned *t2, unsigned i, unsigned *
+#line 541
+d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) ;
+#if 0
+#line 542
+{ 
+#line 544
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
+#line 545
+unsigned st = id << (i + (1)), len = 1 << i; 
+#line 546
+d_poly_mul(p + st, (p + st) + len, t1 + st, t2 + st, p + st, i, d_N_pos, d_root_layer_pow, d_inv); 
+#line 547
+} 
+#endif
+#line 549 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void h_build_product(unsigned *p, unsigned *t1, unsigned *t2, unsigned log_n1, unsigned log_n2, cudaStream_t stream) 
+#line 550
+{ 
 #line 554
-void init() 
+for (unsigned i = log_n1; i < log_n2; i++) 
 #line 555
 { 
+#line 556
+unsigned n_th, n_bl; 
+#line 557
+build_launch_param((log_n2 - i) - (1), n_th, n_bl); 
+#line 558
+(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_build_product_i(p, t1, t2, i, d_N_pos, d_root_layer_pow, d_inv); 
+#line 559
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 559); 
 #line 560
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 560); 
+}  
 #line 561
-check(cudaDeviceReset(), "cudaDeviceReset()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 561); 
-#line 562
-check(cudaDeviceSetLimit(cudaLimitDevRuntimePendingLaunchCount, (1i64 * MAX_RUN_AT_ONCE) * MAX_LAUNCH_COUNT_EACH_RUN), "cudaDeviceSetLimit(cudaLimitDevRuntimePendingLaunchCount, 1LL * MAX_RUN_AT_ONCE * MAX_LAUNCH_COUNT_EACH_RUN)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 562); 
+} 
+#line 563
+void h_build_ax(unsigned *x, unsigned *p, unsigned *t1, unsigned *t2, cudaStream_t stream) 
 #line 564
-unsigned size_N_pos = (LEN_N_POS * sizeof(unsigned)); 
-#line 565
-unsigned *N_pos = (unsigned *)malloc(size_N_pos); 
-#line 566
-check(cudaMalloc(&d_N_pos, size_N_pos), "cudaMalloc(&d_N_pos, size_N_pos)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 566); 
-#line 568
-for (unsigned i = (1); i <= MAX_LOG; i++) 
-#line 569
 { 
+#line 569
+for (unsigned i = (0); i < NUM_OF_NEED_PACKET; i++) 
 #line 570
-unsigned n = 1 << i, st = n - (1); 
+{ 
 #line 571
-for (unsigned j = (0); j < n; j++) { 
+unsigned st_p1 = i << (LOG_SYMBOL + (1)), st_p2 = (x[i << LOG_SYMBOL]) << 2; 
 #line 572
-(N_pos[st + j]) = j; }  
+check(cudaMemcpyAsync(p + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT, cudaMemcpyDeviceToDevice, stream), "cudaMemcpyAsync(p + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT, cudaMemcpyDeviceToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 572); 
 #line 573
 }  
+#line 574
+h_build_product(p, t1, t2, LOG_SYMBOL + (1), MAX_LOG, stream); 
 #line 575
-for (unsigned i = (1); i <= MAX_LOG; i++) 
-#line 576
-{ 
+} 
 #line 577
-unsigned n = 1 << i, st = n - (1); 
+__forceinline void d_sq_build_ax(unsigned *x, unsigned *ax, unsigned *t1, unsigned *t2, unsigned *
 #line 578
-for (unsigned j = (0); j < n; j++) 
-#line 579
+d_packet_product, unsigned *d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) {int volatile ___ = 1;(void)x;(void)ax;(void)t1;(void)t2;(void)d_packet_product;(void)d_N_pos;(void)d_root_layer_pow;(void)d_inv;::exit(___);}
+#if 0
+#line 578
 { 
 #line 580
-unsigned rev_num = (0); 
+for (unsigned i = (0); i < NUM_OF_NEED_PACKET; i++) 
 #line 581
-for (unsigned k = (0); k < i; k++) 
-#line 582
 { 
+#line 582
+unsigned st_p1 = i << (LOG_SYMBOL + (1)), st_p2 = (x[i << LOG_SYMBOL]) << 2; 
 #line 583
-if (j & (1 << k)) { 
+memcpy(ax + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT); 
 #line 584
-rev_num |= (1 << ((i - (1)) - k)); }  
-#line 585
 }  
 #line 586
-if (j < rev_num) { 
+for (unsigned i = (LOG_SYMBOL + (1)); i < MAX_LOG; i++) 
 #line 587
-std::swap(N_pos[st + j], N_pos[st + rev_num]); }  
+{ 
 #line 588
-}  
+unsigned m = 1 << ((MAX_LOG - i) - (1)), len = 1 << i; 
 #line 589
-}  
+for (unsigned j = (0); j < m; j++) { 
+#line 590
+unsigned st = j << (i + (1)); 
 #line 591
-check(cudaMemcpy(d_N_pos, N_pos, size_N_pos, cudaMemcpyHostToDevice), "cudaMemcpy(d_N_pos, N_pos, size_N_pos, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 591); 
+d_sq_poly_mul(ax + st, (ax + st) + len, t1 + st, t2 + st, ax + st, i, d_N_pos, d_root_layer_pow, d_inv); 
 #line 592
-free(N_pos); 
-#line 594
-unsigned size_root = (MOD * sizeof(unsigned)); 
-#line 595
-unsigned *root_pow = (unsigned *)malloc(size_root); 
-#line 596
-unsigned *root_inv_pow = (unsigned *)malloc(size_root); 
-#line 597
-unsigned *inv = (unsigned *)malloc(size_root); 
-#line 598
-check(cudaMalloc(&d_root_pow, size_root), "cudaMalloc(&d_root_pow, size_root)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 598); 
-#line 599
-check(cudaMalloc(&d_root_inv_pow, size_root), "cudaMalloc(&d_root_inv_pow, size_root)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 599); 
-#line 600
-check(cudaMalloc(&d_inv, size_root), "cudaMalloc(&d_inv, size_root)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 600); 
-#line 602
-(((root_pow[0]) = (1)), ((root_inv_pow[0]) = (1))), ((inv[0]) = (0)); 
-#line 603
-for (unsigned i = (1); i < MOD; i++) 
-#line 604
-{ 
-#line 605
-(root_pow[i]) = mul_mod(root_pow[i - (1)], ROOT); 
-#line 606
-(root_inv_pow[i]) = mul_mod(root_inv_pow[i - (1)], ROOT_INV); 
-#line 607
-(inv[i]) = pow_mod(i, MOD - (2)); 
-#line 608
 }  
-#line 610
-check(cudaMemcpy(d_root_pow, root_pow, size_root, cudaMemcpyHostToDevice), "cudaMemcpy(d_root_pow, root_pow, size_root, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 610); 
+#line 593
+}  
+#line 595
+} 
+#endif
+#line 597 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void g_build_n1(unsigned *n1, unsigned *vdax, unsigned *x, unsigned *y, unsigned *
+#line 598
+d_inv) ;
+#if 0
+#line 599
+{ 
+#line 601
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
+#line 602
+(n1[id]) = div_mod(y[id], vdax[x[id]], d_inv); 
+#line 604
+} 
+#endif
+#line 606 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__forceinline void d_sq_build_n1(unsigned *n1, unsigned *vdax, unsigned *x, unsigned *y, unsigned n_n1, unsigned *d_inv) {int volatile ___ = 1;(void)n1;(void)vdax;(void)x;(void)y;(void)n_n1;(void)d_inv;::exit(___);}
+#if 0
+#line 606
+{ 
+#line 608
+for (unsigned i = (0); i < n_n1; i++) { 
+#line 609
+(n1[i]) = div_mod(y[i], vdax[x[i]], d_inv); }  
 #line 611
-check(cudaMemcpy(d_root_inv_pow, root_inv_pow, size_root, cudaMemcpyHostToDevice), "cudaMemcpy(d_root_inv_pow, root_inv_pow, size_root, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 611); 
-#line 612
-check(cudaMemcpy(d_inv, inv, size_root, cudaMemcpyHostToDevice), "cudaMemcpy(d_inv, inv, size_root, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 612); 
-#line 614
-unsigned size_root_layer_pow = (LEN_ROOT_LAYER_POW_2 * sizeof(unsigned)); 
+} 
+#endif
+#line 613 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void g_build_n2(unsigned *n2, unsigned *n1, unsigned *x) ;
+#if 0
+#line 613
+{ 
 #line 615
-unsigned *root_layer_pow = (unsigned *)malloc(size_root_layer_pow); 
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
 #line 616
-check(cudaMalloc(&d_root_layer_pow, size_root_layer_pow), "cudaMalloc(&d_root_layer_pow, size_root_layer_pow)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 616); 
+(n2[x[id]]) = (n1[id]); 
 #line 618
-for (unsigned i = (0); i < (2); i++) 
-#line 619
-{ 
+} 
+#endif
+#line 620 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__forceinline void d_sq_build_n2(unsigned *n2, unsigned *n1, unsigned *x, unsigned n_n1) {int volatile ___ = 1;(void)n2;(void)n1;(void)x;(void)n_n1;::exit(___);}
+#if 0
 #line 620
-unsigned st_i = LEN_ROOT_LAYER_POW * i; 
-#line 621
-for (unsigned j = (0); j < MAX_LOG; j++) 
-#line 622
 { 
+#line 622
+for (unsigned i = (0); i < n_n1; i++) { 
 #line 623
-unsigned haft_len = 1 << j; 
-#line 624
-unsigned st_j = haft_len - (1); 
+(n2[x[i]]) = (n1[i]); }  
 #line 625
-unsigned ang = 1 << ((MAX_LOG - j) - (1)); 
-#line 626
-unsigned wn = (i) ? root_inv_pow[ang] : (root_pow[ang]), w = (1); 
+} 
+#endif
+#line 627 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void g_build_n3(unsigned *n3, unsigned *p_n3) ;
+#if 0
 #line 627
-for (unsigned k = (0); k < haft_len; k++) 
-#line 628
 { 
 #line 629
-(root_layer_pow[(st_i + st_j) + k]) = w; 
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
 #line 630
-w = mul_mod(w, wn); 
-#line 631
-}  
+(n3[id]) = sub_mod(0, p_n3[id + (1)]); 
 #line 632
-}  
-#line 633
-}  
-#line 635
-check(cudaMemcpy(d_root_layer_pow, root_layer_pow, size_root_layer_pow, cudaMemcpyHostToDevice), "cudaMemcpy(d_root_layer_pow, root_layer_pow, size_root_layer_pow, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 635); 
+} 
+#endif
+#line 634 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__forceinline void d_sq_build_n3(unsigned *n3, unsigned *p_n3, unsigned n_n3) {int volatile ___ = 1;(void)n3;(void)p_n3;(void)n_n3;::exit(___);}
+#if 0
+#line 634
+{ 
 #line 636
-free(root_layer_pow); 
-#line 638
-unsigned size_packet_product = (LEN_PACKET_PRODUCT * sizeof(unsigned)); 
+for (unsigned i = (0); i < n_n3; i++) { 
+#line 637
+(n3[i]) = sub_mod(0, p_n3[i + (1)]); }  
 #line 639
-unsigned *packet_product = (unsigned *)malloc(size_packet_product); 
-#line 640
-check(cudaMalloc(&d_packet_product, size_packet_product), "cudaMalloc(&d_packet_product, size_packet_product)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 640); 
+} 
+#endif
+#line 641 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+inline void h_build_px(unsigned *p, unsigned *ax, unsigned *n3, unsigned *t1, unsigned *t2, unsigned *
 #line 642
-for (unsigned i = (0); i < NUM_OF_PACKET; i++) 
-#line 643
-{ 
+d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream) { 
 #line 644
-unsigned st = i << (LOG_SYMBOL + (1)); 
+h_poly_mul(ax, n3, t1, t2, p, MAX_LOG - (1), d_N_pos, d_root_layer_pow, d_inv, stream); 
 #line 645
-for (unsigned j = (0); j < SEG_PER_PACKET; j++) 
-#line 646
-{ 
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 645); 
 #line 647
-unsigned k = (i << LOG_SEG) + j; 
-#line 648
-(packet_product[st + (j << 1)]) = sub_mod(0, root_pow[k]); 
+} 
 #line 649
-(packet_product[st + ((j << 1) | (1))]) = (1); 
+__forceinline void d_sq_build_px(unsigned *p, unsigned *ax, unsigned *n3, unsigned *t1, unsigned *t2, unsigned *t3, unsigned *
 #line 650
-(packet_product[st + ((j + SEG_PER_PACKET) << 1)]) = sub_mod(0, root_pow[k + SEG_DIFF]); 
-#line 651
-(packet_product[st + (((j + SEG_PER_PACKET) << 1) | (1))]) = (1); 
+d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) {int volatile ___ = 1;(void)p;(void)ax;(void)n3;(void)t1;(void)t2;(void)t3;(void)d_N_pos;(void)d_root_layer_pow;(void)d_inv;::exit(___);}
+#if 0
+#line 650
+{ 
 #line 652
-}  
+d_sq_poly_mul(ax, n3, t1, t2, t3, MAX_LOG - (1), d_N_pos, d_root_layer_pow, d_inv); 
 #line 653
-}  
-#line 654
-check(cudaMemcpy(d_packet_product, packet_product, size_packet_product, cudaMemcpyHostToDevice), "cudaMemcpy(d_packet_product, packet_product, size_packet_product, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 654); 
+memcpy(p, t3, SIZE_SMALL); 
 #line 655
-free(packet_product); 
-#line 656
-unsigned *tmp; 
-#line 657
-check(cudaMalloc(&tmp, (LEN_ONE_PACKET_PRODUCT << 1) * sizeof(unsigned)), "cudaMalloc(&tmp, (LEN_ONE_PACKET_PRODUCT << 1) * sizeof(unsigned))", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 657); 
+} 
+#endif
+#line 657 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void h_encode(unsigned *p, unsigned *y) 
 #line 658
-for (unsigned i = (0); i < NUM_OF_PACKET; i++) 
-#line 659
 { 
 #line 660
-unsigned st = i << (LOG_SYMBOL + (1)); 
+cudaStream_t stream; 
 #line 661
-build_product(d_packet_product + st, tmp, tmp + LEN_ONE_PACKET_PRODUCT, 1, LOG_SYMBOL + (1), 0); 
-#line 662
-}  
+check(cudaStreamCreate(&stream), "cudaStreamCreate(&stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 661); 
 #line 663
-check(cudaFree(tmp), "cudaFree(tmp)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 663); 
+unsigned *d_p; 
 #line 664
-free(inv); 
+unsigned *d_y; 
 #line 665
-free(root_pow); 
+check(cudaMallocAsync(&d_p, SIZE_SMALL, stream), "cudaMallocAsync(&d_p, SIZE_SMALL, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 665); 
 #line 666
-free(root_inv_pow); 
+check(cudaMallocAsync(&d_y, SIZE_LARGE, stream), "cudaMallocAsync(&d_y, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 666); 
+#line 667
+check(cudaMemcpyAsync(d_p, p, SIZE_SMALL, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(d_p, p, SIZE_SMALL, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 667); 
 #line 668
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 668); 
-#line 669
-(((std::cout << ("Init process completed!"))) << (std::endl)); 
+check(cudaMemsetAsync(d_y, 0, SIZE_LARGE, stream), "cudaMemsetAsync(d_y, 0, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 668); 
+#line 670
+fnt(d_p, d_y, MAX_LOG - (1), MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
 #line 671
-} 
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 671); 
 #line 673
-void fin() 
-#line 674
-{ 
-#line 677
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 677); 
-#line 679
-check(cudaGetLastError(), "cudaGetLastError()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 679); 
-#line 681
-check(cudaDeviceReset(), "cudaDeviceReset()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 681); 
+check(cudaMemcpyAsync(y, d_y, SIZE_LARGE, cudaMemcpyDeviceToHost, stream), "cudaMemcpyAsync(y, d_y, SIZE_LARGE, cudaMemcpyDeviceToHost, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 673); 
+#line 675
+check(cudaFreeAsync(d_p, stream), "cudaFreeAsync(d_p, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 675); 
+#line 676
+check(cudaFreeAsync(d_y, stream), "cudaFreeAsync(d_y, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 676); 
+#line 678
+check(cudaStreamDestroy(stream), "cudaStreamDestroy(stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 678); 
+#line 680
+} 
 #line 682
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 682); 
-#line 684
-} 
-#line 686
-void test_fnt(); 
-#line 688
-void test_poly_mul(); 
-#line 690
-void test_build_init_product(); 
-#line 692
-void test_encode_decode(); 
-#line 694
-void test_fnt_performance(); 
-#line 696
-void test_encode_decode_performance(); 
-#line 698
-int main() 
-#line 699
+void g_encode_batch(unsigned *ps, unsigned *ys, unsigned *d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) ;
+#if 0
+#line 682
 { 
+#line 684
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
+#line 685
+unsigned offset_p = id * LEN_ENCODE_P; 
+#line 686
+unsigned offset_y = id * LEN_ENCODE_Y; 
+#line 687
+unsigned *p = ps + offset_p; 
+#line 688
+unsigned *y = ys + offset_y; 
+#line 690
+memset(y, 0, SIZE_LARGE); 
+#line 691
+d_sq_fnt(p, y, MAX_LOG - (1), MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv); 
+#line 693
+} 
+#endif
+#line 695 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void h_encode_batch(unsigned *ps, unsigned *ys) { 
+#line 697
+cudaStream_t stream; 
+#line 698
+check(cudaStreamCreate(&stream), "cudaStreamCreate(&stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 698); 
+#line 700
+unsigned slot_id = pop_slot(encode_batch_slot, mt_encode_slot, cv_encode_slot); 
 #line 701
-init(); 
-#line 703
-test_fnt(); 
-#line 705
-test_poly_mul(); 
+unsigned *sl_ps = h_encode_p_batch_slot[slot_id]; 
+#line 702
+unsigned *sl_ys = h_encode_y_batch_slot[slot_id]; 
+#line 704
+memcpy(sl_ps, ps, SIZE_ENCODE_P_BATCH); 
+#line 706
+unsigned *d_ps = d_encode_p_batch_slot + ((1i64 * slot_id) * LEN_ENCODE_P_BATCH); 
 #line 707
-test_build_init_product(); 
-#line 709
-test_encode_decode(); 
+unsigned *d_ys = d_encode_y_batch_slot + ((1i64 * slot_id) * LEN_ENCODE_Y_BATCH); 
+#line 708
+check(cudaMemcpyAsync(d_ps, sl_ps, SIZE_ENCODE_P_BATCH, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(d_ps, sl_ps, SIZE_ENCODE_P_BATCH, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 708); 
+#line 710
+(__cudaPushCallConfiguration(1, LEN_BATCH, 0, stream)) ? (void)0 : g_encode_batch(d_ps, d_ys, d_N_pos, d_root_layer_pow, d_inv); 
 #line 711
-test_fnt_performance(); 
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 711); 
 #line 713
-test_encode_decode_performance(); 
+check(cudaMemcpyAsync(sl_ys, d_ys, SIZE_ENCODE_Y_BATCH, cudaMemcpyDeviceToHost, stream), "cudaMemcpyAsync(sl_ys, d_ys, SIZE_ENCODE_Y_BATCH, cudaMemcpyDeviceToHost, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 713); 
 #line 715
-fin(); 
-#line 717
-return 0; 
+CB_DATA *data = new CB_DATA{slot_id, ys, sl_ys, SIZE_ENCODE_Y_BATCH, encode_batch_slot, mt_encode_slot, cv_encode_slot}; 
+#line 716
+check(cudaLaunchHostFunc(stream, h_end_batch_slot, data), "cudaLaunchHostFunc(stream, h_end_batch_slot, data)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 716); 
 #line 718
+check(cudaStreamDestroy(stream), "cudaStreamDestroy(stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 718); 
+#line 721
 } 
-#line 720
-void test_fnt() { 
+#line 723
+void h_decode(unsigned *x, unsigned *y, unsigned *p) 
 #line 724
-unsigned N_test = (32); 
+{ 
 #line 726
-for (unsigned tt = (0); tt < N_test; tt++) { 
+cudaStream_t stream; 
 #line 727
-unsigned log_nc = (15), log_nv = (16), nc = 1 << log_nc, nv = 1 << log_nv; 
-#line 728
-unsigned size_nc = nc * sizeof(unsigned), size_nv = nv * sizeof(unsigned); 
+check(cudaStreamCreate(&stream), "cudaStreamCreate(&stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 727); 
 #line 729
-std::vector< unsigned>  c1(nc), c2(nc); 
+unsigned n_th, n_bl; 
 #line 730
-unsigned *d_c1, *d_c2, *d_v; 
-#line 731
-cudaMalloc(&d_c1, size_nc); 
+build_launch_param(MAX_LOG - (1), n_th, n_bl); 
 #line 732
-cudaMemset(d_c1, 0, size_nc); 
+unsigned *t1; 
 #line 733
-cudaMalloc(&d_c2, size_nv); 
+unsigned *t2; 
 #line 734
-cudaMemset(d_c2, 0, size_nv); 
+check(cudaMallocAsync(&t1, SIZE_LARGE, stream), "cudaMallocAsync(&t1, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 734); 
 #line 735
-cudaMalloc(&d_v, size_nv); 
-#line 736
-cudaMemset(d_v, 0, size_nv); 
+check(cudaMallocAsync(&t2, SIZE_LARGE, stream), "cudaMallocAsync(&t2, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 735); 
+#line 737
+unsigned *ax; 
 #line 738
-for (unsigned i = (0); i < nc; i++) { 
+check(cudaMallocAsync(&ax, SIZE_LARGE, stream), "cudaMallocAsync(&ax, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 738); 
 #line 739
-c1[i] = ((rand()) % (MOD - (1))); }  
-#line 740
-shuffle(c1.begin(), c1.end(), ((std::mersenne_twister_engine< unsigned, 32Ui64, 624Ui64, 397Ui64, 31Ui64, 2567483615U, 11Ui64, 4294967295U, 7Ui64, 2636928640U, 15Ui64, 4022730752U, 18Ui64, 1812433253U> )(time(0)))); 
+h_build_ax(x, ax, t1, t2, stream); 
 #line 741
-cudaMemcpy(d_c1, c1.data(), size_nc, cudaMemcpyHostToDevice); 
+unsigned *dax; 
+#line 742
+check(cudaMallocAsync(&dax, SIZE_SMALL, stream), "cudaMallocAsync(&dax, SIZE_SMALL, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 742); 
 #line 743
-fnt(d_c1, d_v, log_nc, log_nv, 0, d_N_pos, d_root_layer_pow, d_inv, 0); 
+(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_poly_deriv(ax, dax); 
 #line 744
-fnt(d_v, d_c2, log_nv, log_nv, 3, d_N_pos, d_root_layer_pow, d_inv, 0); 
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 744); 
 #line 746
-cudaMemcpy(c2.data(), d_c2, size_nc, cudaMemcpyDeviceToHost); 
+unsigned *vdax; 
 #line 747
-for (unsigned i = (0); i < nc; i++) { 
+check(cudaMallocAsync(&vdax, SIZE_LARGE, stream), "cudaMallocAsync(&vdax, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 747); 
 #line 748
-(void)0; }  
+check(cudaMemsetAsync(vdax, 0, SIZE_LARGE, stream), "cudaMemsetAsync(vdax, 0, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 748); 
+#line 749
+fnt(dax, vdax, MAX_LOG - (1), MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
 #line 750
-cudaFree(d_c1); 
-#line 751
-cudaFree(d_c2); 
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 750); 
 #line 752
-cudaFree(d_v); 
+unsigned *n1; 
+#line 753
+check(cudaMallocAsync(&n1, SIZE_SMALL, stream), "cudaMallocAsync(&n1, SIZE_SMALL, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 753); 
+#line 754
+check(cudaMemcpyAsync(t1, x, SIZE_SMALL, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(t1, x, SIZE_SMALL, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 754); 
+#line 755
+check(cudaMemcpyAsync(t2, y, SIZE_SMALL, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(t2, y, SIZE_SMALL, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 755); 
 #line 756
-}  
-#line 758
-(((std::cout << ("FNT test passed!"))) << (std::endl)); 
+(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_build_n1(n1, vdax, t1, t2, d_inv); 
+#line 757
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 757); 
+#line 759
+unsigned *n2; 
 #line 760
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 760); 
+unsigned *n3; 
+#line 761
+check(cudaMallocAsync(&n2, SIZE_LARGE, stream), "cudaMallocAsync(&n2, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 761); 
 #line 762
-} 
+check(cudaMallocAsync(&n3, SIZE_SMALL, stream), "cudaMallocAsync(&n3, SIZE_SMALL, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 762); 
 #line 764
-void test_build_init_product() { 
-#line 767
-std::vector< unsigned>  a1 = {(64375), (0), (52012), (0), (2347), (0), (23649), (0), (30899), (0)}, b1(10); 
+check(cudaMemsetAsync(n2, 0, SIZE_LARGE, stream), "cudaMemsetAsync(n2, 0, SIZE_LARGE, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 764); 
+#line 765
+(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_build_n2(n2, n1, t1); 
+#line 766
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 766); 
 #line 768
-cudaMemcpy(b1.data(), d_packet_product, (10) * sizeof(unsigned), cudaMemcpyDeviceToHost); 
+fnt(n2, t2, MAX_LOG, MAX_LOG, 2, d_N_pos, d_root_layer_pow, d_inv, stream); 
+#line 769
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 769); 
 #line 770
-for (unsigned i = (0); i < (10); i++) { 
+(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_build_n3(n3, t2); 
 #line 771
-(void)0; }  
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 771); 
+#line 773
+h_build_px(n2, ax, n3, t1, t2, d_N_pos, d_root_layer_pow, d_inv, stream); 
 #line 774
-std::vector< unsigned>  a2 = {(64375), (0), (31561), (0), (12153), (0), (31103), (0), (20714), (0)}, b2(10); 
-#line 775
-cudaMemcpy(b2.data(), d_packet_product + (1 << (LOG_SYMBOL + (1))), (10) * sizeof(unsigned), cudaMemcpyDeviceToHost); 
+check(cudaMemcpyAsync(p, n2, SIZE_SMALL, cudaMemcpyDeviceToHost, stream), "cudaMemcpyAsync(p, n2, SIZE_SMALL, cudaMemcpyDeviceToHost, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 774); 
+#line 776
+check(cudaFreeAsync(t1, stream), "cudaFreeAsync(t1, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 776); 
 #line 777
-for (unsigned i = (0); i < (10); i++) { 
+check(cudaFreeAsync(t2, stream), "cudaFreeAsync(t2, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 777); 
 #line 778
-(void)0; }  
+check(cudaFreeAsync(ax, stream), "cudaFreeAsync(ax, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 778); 
+#line 779
+check(cudaFreeAsync(dax, stream), "cudaFreeAsync(dax, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 779); 
 #line 780
-(((std::cout << ("Test packet_product passed!"))) << (std::endl)); 
+check(cudaFreeAsync(vdax, stream), "cudaFreeAsync(vdax, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 780); 
+#line 781
+check(cudaFreeAsync(n1, stream), "cudaFreeAsync(n1, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 781); 
 #line 782
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 782); 
-#line 784
+check(cudaFreeAsync(n2, stream), "cudaFreeAsync(n2, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 782); 
+#line 783
+check(cudaFreeAsync(n3, stream), "cudaFreeAsync(n3, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 783); 
+#line 785
+check(cudaStreamDestroy(stream), "cudaStreamDestroy(stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 785); 
+#line 787
 } 
-#line 786
-void test_poly_mul() { 
+#line 789
+void g_decode_batch(unsigned *xs, unsigned *ys, unsigned *ps, unsigned *
 #line 790
-srand(time(0)); 
-#line 792
-unsigned N_test = (32); 
+t1s, unsigned *t2s, unsigned *axs, unsigned *daxs, unsigned *vdaxs, unsigned *n1s, unsigned *n2s, unsigned *n3s, unsigned *
+#line 791
+d_packet_product, unsigned *d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) ;
+#if 0
+#line 791
+{ 
+#line 793
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
 #line 794
-for (unsigned tt = (0); tt < N_test; tt++) { 
+unsigned offset_x = id * LEN_DECODE_X; 
+#line 795
+unsigned offset_y = id * LEN_DECODE_Y; 
 #line 796
-unsigned log_n = (11); 
+unsigned offset_p = id * LEN_DECODE_P; 
 #line 797
-unsigned n = 1 << log_n, size_n = n * sizeof(unsigned); 
+unsigned offset_t1 = id * LEN_LARGE; 
+#line 798
+unsigned offset_t2 = id * LEN_LARGE; 
 #line 799
-std::vector< unsigned>  a(n), b(n), c1(n << 1, 0), c2(n << 1, 0); 
+unsigned offset_ax = id * LEN_LARGE; 
+#line 800
+unsigned offset_dax = id * LEN_SMALL; 
 #line 801
-for (unsigned i = (0); i < n; i++) { 
+unsigned offset_vdax = id * LEN_LARGE; 
 #line 802
-a[i] = ((rand()) % (MOD - (1))); 
+unsigned offset_n1 = id * LEN_SMALL; 
 #line 803
-b[i] = ((rand()) % (MOD - (1))); 
+unsigned offset_n2 = id * LEN_LARGE; 
 #line 804
-}  
+unsigned offset_n3 = id * LEN_SMALL; 
 #line 806
-unsigned *t1, *t2, *d_c; 
+unsigned *x = xs + offset_x; 
 #line 807
-cudaMalloc(&t1, size_n << 1); 
+unsigned *y = ys + offset_y; 
 #line 808
-cudaMalloc(&t2, size_n << 1); 
+unsigned *p = ps + offset_p; 
 #line 809
-cudaMalloc(&d_c, size_n << 1); 
+unsigned *t1 = t1s + offset_t1; 
 #line 810
-cudaMemcpy(d_c, a.data(), size_n, cudaMemcpyHostToDevice); 
+unsigned *t2 = t2s + offset_t2; 
 #line 811
-cudaMemcpy(d_c + n, b.data(), size_n, cudaMemcpyHostToDevice); 
+unsigned *ax = axs + offset_ax; 
 #line 812
-h_poly_mul(d_c, d_c + n, t1, t2, d_c, log_n, d_N_pos, d_root_layer_pow, d_inv, 0); 
+unsigned *dax = daxs + offset_dax; 
+#line 813
+unsigned *vdax = vdaxs + offset_vdax; 
 #line 814
-for (unsigned i = (0); i < n; i++) { 
+unsigned *n1 = n1s + offset_n1; 
 #line 815
-for (unsigned j = (0); j < n; j++) { 
+unsigned *n2 = n2s + offset_n2; 
 #line 816
-c1[i + j] = add_mod(c1[i + j], mul_mod(a[i], b[j])); }  }  
-#line 825
-cudaMemcpy(c2.data(), d_c, size_n << 1, cudaMemcpyDeviceToHost); 
-#line 827
-for (unsigned i = (0); i < (n << 1); i++) { 
+unsigned *n3 = n3s + offset_n3; 
+#line 818
+d_sq_build_ax(x, ax, t1, t2, d_packet_product, d_N_pos, d_root_layer_pow, d_inv); 
+#line 820
+d_sq_poly_deriv(ax, dax, NUM_OF_NEED_SYMBOL); 
+#line 822
+memset(vdax, 0, SIZE_LARGE); 
+#line 824
+d_sq_fnt(dax, vdax, MAX_LOG - (1), MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv); 
+#line 826
+d_sq_build_n1(n1, vdax, x, y, NUM_OF_NEED_SYMBOL, d_inv); 
 #line 828
-(void)0; }  
+memset(n2, 0, SIZE_LARGE); 
+#line 830
+d_sq_build_n2(n2, n1, x, NUM_OF_NEED_SYMBOL); 
 #line 832
-cudaFree(t1); 
-#line 833
-cudaFree(t2); 
+d_sq_fnt(n2, t2, MAX_LOG, MAX_LOG, 2, d_N_pos, d_root_layer_pow, d_inv); 
 #line 834
-cudaFree(d_c); 
+d_sq_build_n3(n3, t2, NUM_OF_NEED_SYMBOL); 
 #line 836
-}  
+d_sq_build_px(p, ax, n3, t1, t2, n2, d_N_pos, d_root_layer_pow, d_inv); 
 #line 838
-(((std::cout << ("Poly mul test passed!"))) << (std::endl)); 
-#line 840
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 840); 
+} 
+#endif
+#line 840 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void h_decode_batch(unsigned *xs, unsigned *ys, unsigned *ps) { 
 #line 842
-} 
-#line 844
-void test_encode_decode() { 
+cudaStream_t stream; 
+#line 843
+check(cudaStreamCreate(&stream), "cudaStreamCreate(&stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 843); 
+#line 845
+unsigned slot_id = pop_slot(decode_batch_slot, mt_decode_slot, cv_decode_slot); 
+#line 846
+unsigned *sl_xs = h_decode_x_batch_slot[slot_id]; 
+#line 847
+unsigned *sl_ys = h_decode_y_batch_slot[slot_id]; 
 #line 848
-srand(time(0)); 
+unsigned *sl_ps = h_decode_p_batch_slot[slot_id]; 
 #line 850
-unsigned N_test = (32); 
-#line 852
-for (unsigned tt = (0); tt < N_test; tt++) { 
+memcpy(sl_xs, xs, SIZE_DECODE_X_BATCH); 
+#line 851
+memcpy(sl_ys, ys, SIZE_DECODE_Y_BATCH); 
 #line 853
-std::vector< unsigned>  a(NUM_OF_NEED_SYMBOL), b(NUM_OF_NEED_SYMBOL << 1), c(NUM_OF_NEED_SYMBOL); 
+unsigned *d_xs = d_decode_x_batch_slot + ((1i64 * slot_id) * LEN_DECODE_X_BATCH); 
+#line 854
+unsigned *d_ys = d_decode_y_batch_slot + ((1i64 * slot_id) * LEN_DECODE_Y_BATCH); 
 #line 855
-for (unsigned i = (0); i < NUM_OF_NEED_SYMBOL; i++) { 
+unsigned *d_ps = d_decode_p_batch_slot + ((1i64 * slot_id) * LEN_DECODE_P_BATCH); 
 #line 856
-a[i] = ((rand()) % (MOD - (1))); }  
+unsigned *d_t1s = d_decode_t1_batch_slot + ((1i64 * slot_id) * LEN_LARGE_BATCH); 
+#line 857
+unsigned *d_t2s = d_decode_t2_batch_slot + ((1i64 * slot_id) * LEN_LARGE_BATCH); 
 #line 858
-encode(a.data(), b.data()); 
+unsigned *d_axs = d_decode_ax_batch_slot + ((1i64 * slot_id) * LEN_LARGE_BATCH); 
+#line 859
+unsigned *d_daxs = d_decode_dax_batch_slot + ((1i64 * slot_id) * LEN_SMALL_BATCH); 
 #line 860
-std::vector< unsigned>  x(NUM_OF_NEED_SYMBOL), y(NUM_OF_NEED_SYMBOL); 
+unsigned *d_vdaxs = d_decode_vdax_batch_slot + ((1i64 * slot_id) * LEN_LARGE_BATCH); 
+#line 861
+unsigned *d_n1s = d_decode_n1_batch_slot + ((1i64 * slot_id) * LEN_SMALL_BATCH); 
 #line 862
-for (unsigned i = (0); i < NUM_OF_NEED_PACKET; i++) { 
+unsigned *d_n2s = d_decode_n2_batch_slot + ((1i64 * slot_id) * LEN_LARGE_BATCH); 
 #line 863
-unsigned stx = i * SYMBOL_PER_PACKET; 
-#line 864
-for (unsigned j = (0); j < SEG_PER_PACKET; j++) { 
+unsigned *d_n3s = d_decode_n3_batch_slot + ((1i64 * slot_id) * LEN_SMALL_BATCH); 
 #line 865
-x[stx + j] = (stx + j); 
+check(cudaMemcpyAsync(d_xs, sl_xs, SIZE_DECODE_X_BATCH, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(d_xs, sl_xs, SIZE_DECODE_X_BATCH, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 865); 
 #line 866
-x[(stx + j) + SEG_PER_PACKET] = ((stx + j) + SEG_DIFF); 
-#line 867
-y[stx + j] = b[stx + j]; 
+check(cudaMemcpyAsync(d_ys, sl_ys, SIZE_DECODE_Y_BATCH, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(d_ys, sl_ys, SIZE_DECODE_Y_BATCH, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 866); 
 #line 868
-y[(stx + j) + SEG_PER_PACKET] = b[(stx + j) + SEG_DIFF]; 
-#line 869
-}  
-#line 870
-}  
-#line 872
-decode(x.data(), y.data(), c.data()); 
+(__cudaPushCallConfiguration(1, LEN_BATCH, 0, stream)) ? (void)0 : g_decode_batch(d_xs, d_ys, d_ps, d_t1s, d_t2s, d_axs, d_daxs, d_vdaxs, d_n1s, d_n2s, d_n3s, d_packet_product, d_N_pos, d_root_layer_pow, d_inv); 
+#line 871
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 871); 
 #line 873
-for (unsigned i = (0); i < NUM_OF_NEED_SYMBOL; i++) { 
-#line 874
-(void)0; }  
+check(cudaMemcpyAsync(sl_ps, d_ps, SIZE_DECODE_P_BATCH, cudaMemcpyDeviceToHost, stream), "cudaMemcpyAsync(sl_ps, d_ps, SIZE_DECODE_P_BATCH, cudaMemcpyDeviceToHost, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 873); 
+#line 875
+CB_DATA *data = new CB_DATA{slot_id, ps, sl_ps, SIZE_DECODE_P_BATCH, decode_batch_slot, mt_decode_slot, cv_decode_slot}; 
 #line 876
-}  
+check(cudaLaunchHostFunc(stream, h_end_batch_slot, data), "cudaLaunchHostFunc(stream, h_end_batch_slot, data)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 876); 
 #line 878
-(((std::cout << ("Encode decode test passed!"))) << (std::endl)); 
+check(cudaStreamDestroy(stream), "cudaStreamDestroy(stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 878); 
 #line 880
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 880); 
+} 
 #line 882
-} 
-#line 884
-void test_fnt_performance() { 
-#line 888
-using namespace std;
+void init() 
+#line 883
+{ 
+#line 886
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 886); 
+#line 887
+check(cudaDeviceReset(), "cudaDeviceReset()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 887); 
+#line 889
+h_encode_p_batch_slot = ((unsigned **)malloc(MAX_ACTIVE_ENCODE_BATCH * sizeof(unsigned *))); 
 #line 890
-const unsigned N_test = MAX_RUN_AT_ONCE; 
+h_encode_y_batch_slot = ((unsigned **)malloc(MAX_ACTIVE_ENCODE_BATCH * sizeof(unsigned *))); 
+#line 891
+h_decode_x_batch_slot = ((unsigned **)malloc(MAX_ACTIVE_DECODE_BATCH * sizeof(unsigned *))); 
 #line 892
-unsigned log_n = (16), n = 1 << log_n; 
+h_decode_y_batch_slot = ((unsigned **)malloc(MAX_ACTIVE_DECODE_BATCH * sizeof(unsigned *))); 
 #line 893
-unsigned size_n = n * sizeof(unsigned); 
-#line 894
-std::vector< std::vector< unsigned> >  a(N_test, ((std::vector< unsigned> )(n))); 
+h_decode_p_batch_slot = ((unsigned **)malloc(MAX_ACTIVE_DECODE_BATCH * sizeof(unsigned *))); 
 #line 895
-cudaStream_t stream[(N_test)]; 
+for (unsigned i = (0); i < MAX_ACTIVE_ENCODE_BATCH; i++) { 
 #line 896
-std::vector< unsigned *>  d_a(N_test), d_b(N_test); 
+check(cudaMallocHost(&(h_encode_p_batch_slot[i]), SIZE_ENCODE_P_BATCH), "cudaMallocHost(&(h_encode_p_batch_slot[i]), SIZE_ENCODE_P_BATCH)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 896); 
+#line 897
+check(cudaMallocHost(&(h_encode_y_batch_slot[i]), SIZE_ENCODE_Y_BATCH), "cudaMallocHost(&(h_encode_y_batch_slot[i]), SIZE_ENCODE_Y_BATCH)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 897); 
 #line 898
-for (unsigned tt = (0); tt < N_test; tt++) { 
-#line 899
-for (unsigned i = (0); i < n; i++) { 
+}  
 #line 900
-(a[tt])[i] = ((rand()) % (MOD - (1))); }  
+for (unsigned i = (0); i < MAX_ACTIVE_ENCODE_BATCH; i++) { 
 #line 901
-check(cudaStreamCreate(&(stream[tt])), "cudaStreamCreate(&stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 901); 
+check(cudaMallocHost(&(h_decode_x_batch_slot[i]), SIZE_DECODE_X_BATCH), "cudaMallocHost(&(h_decode_x_batch_slot[i]), SIZE_DECODE_X_BATCH)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 901); 
 #line 902
-check(cudaMallocAsync(&d_a[tt], size_n, stream[tt]), "cudaMallocAsync(&d_a[tt], size_n, stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 902); 
+check(cudaMallocHost(&(h_decode_y_batch_slot[i]), SIZE_DECODE_Y_BATCH), "cudaMallocHost(&(h_decode_y_batch_slot[i]), SIZE_DECODE_Y_BATCH)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 902); 
 #line 903
-check(cudaMallocAsync(&d_b[tt], size_n, stream[tt]), "cudaMallocAsync(&d_b[tt], size_n, stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 903); 
+check(cudaMallocHost(&(h_decode_p_batch_slot[i]), SIZE_DECODE_P_BATCH), "cudaMallocHost(&(h_decode_p_batch_slot[i]), SIZE_DECODE_P_BATCH)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 903); 
 #line 904
-check(cudaMemcpyAsync(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice, stream[tt]), "cudaMemcpyAsync(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice, stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 904); 
-#line 905
 }  
+#line 906
+check(cudaMalloc(&d_encode_p_batch_slot, SIZE_ENCODE_P_BATCH_SLOT), "cudaMalloc(&d_encode_p_batch_slot, SIZE_ENCODE_P_BATCH_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 906); 
 #line 907
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 907); 
+check(cudaMalloc(&d_encode_y_batch_slot, SIZE_ENCODE_Y_BATCH_SLOT), "cudaMalloc(&d_encode_y_batch_slot, SIZE_ENCODE_Y_BATCH_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 907); 
 #line 909
-(((cout << ("FNT test start"))) << (endl)); 
+check(cudaMalloc(&d_decode_x_batch_slot, SIZE_DECODE_X_BATCH_SLOT), "cudaMalloc(&d_decode_x_batch_slot, SIZE_DECODE_X_BATCH_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 909); 
+#line 910
+check(cudaMalloc(&d_decode_y_batch_slot, SIZE_DECODE_Y_BATCH_SLOT), "cudaMalloc(&d_decode_y_batch_slot, SIZE_DECODE_Y_BATCH_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 910); 
 #line 911
-auto start = chrono::high_resolution_clock::now(); 
+check(cudaMalloc(&d_decode_p_batch_slot, SIZE_DECODE_P_BATCH_SLOT), "cudaMalloc(&d_decode_p_batch_slot, SIZE_DECODE_P_BATCH_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 911); 
+#line 912
+check(cudaMalloc(&d_decode_t1_batch_slot, SIZE_DECODE_T1_BATCH_SLOT), "cudaMalloc(&d_decode_t1_batch_slot, SIZE_DECODE_T1_BATCH_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 912); 
 #line 913
-for (unsigned tt = (0); tt < N_test; tt++) { 
+check(cudaMalloc(&d_decode_t2_batch_slot, SIZE_DECODE_T2_BATCH_SLOT), "cudaMalloc(&d_decode_t2_batch_slot, SIZE_DECODE_T2_BATCH_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 913); 
+#line 914
+check(cudaMalloc(&d_decode_ax_batch_slot, SIZE_DECODE_AX_BATCH_SLOT), "cudaMalloc(&d_decode_ax_batch_slot, SIZE_DECODE_AX_BATCH_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 914); 
+#line 915
+check(cudaMalloc(&d_decode_dax_batch_slot, SIZE_DECODE_DAX_BATCH_SLOT), "cudaMalloc(&d_decode_dax_batch_slot, SIZE_DECODE_DAX_BATCH_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 915); 
+#line 916
+check(cudaMalloc(&d_decode_vdax_batch_slot, SIZE_DECODE_VDAX_BATCH_SLOT), "cudaMalloc(&d_decode_vdax_batch_slot, SIZE_DECODE_VDAX_BATCH_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 916); 
+#line 917
+check(cudaMalloc(&d_decode_n1_batch_slot, SIZE_DECODE_N1_BATCH_SLOT), "cudaMalloc(&d_decode_n1_batch_slot, SIZE_DECODE_N1_BATCH_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 917); 
 #line 918
-fnt(d_a[tt], d_b[tt], log_n, log_n, 0, d_N_pos, d_root_layer_pow, d_inv, stream[tt]); 
+check(cudaMalloc(&d_decode_n2_batch_slot, SIZE_DECODE_N2_BATCH_SLOT), "cudaMalloc(&d_decode_n2_batch_slot, SIZE_DECODE_N2_BATCH_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 918); 
 #line 919
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 919); 
+check(cudaMalloc(&d_decode_n3_batch_slot, SIZE_DECODE_N3_BATCH_SLOT), "cudaMalloc(&d_decode_n3_batch_slot, SIZE_DECODE_N3_BATCH_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 919); 
+#line 921
+init_batch_slot(); 
 #line 923
-}  
+unsigned size_N_pos = (LEN_N_POS * sizeof(unsigned)); 
+#line 924
+unsigned *N_pos = (unsigned *)malloc(size_N_pos); 
 #line 925
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 925); 
-#line 926
-auto stop = chrono::high_resolution_clock::now(); 
+check(cudaMalloc(&d_N_pos, size_N_pos), "cudaMalloc(&d_N_pos, size_N_pos)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 925); 
 #line 927
-auto duration = chrono::duration_cast< std::chrono::duration< __int64, std::ratio< 1i64, 1000i64> > > ((stop - start)).count(); 
+for (unsigned i = (1); i <= MAX_LOG; i++) 
+#line 928
+{ 
 #line 929
-(((((((((((cout << ("FNT "))) << N_test)) << (" chunks in "))) << duration)) << ("ms"))) << (endl)); 
+unsigned n = 1 << i, st = n - (1); 
+#line 930
+for (unsigned j = (0); j < n; j++) { 
 #line 931
-for (unsigned tt = (0); tt < N_test; tt++) { 
+(N_pos[st + j]) = j; }  
 #line 932
-check(cudaFreeAsync(d_a[tt], stream[tt]), "cudaFreeAsync(d_a[tt], stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 932); 
-#line 933
-check(cudaFreeAsync(d_b[tt], stream[tt]), "cudaFreeAsync(d_b[tt], stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 933); 
+}  
 #line 934
-check(cudaStreamDestroy(stream[tt]), "cudaStreamDestroy(stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 934); 
+for (unsigned i = (1); i <= MAX_LOG; i++) 
 #line 935
-}  
+{ 
+#line 936
+unsigned n = 1 << i, st = n - (1); 
 #line 937
-} 
+for (unsigned j = (0); j < n; j++) 
+#line 938
+{ 
 #line 939
-void test_encode_decode_performance() { 
+unsigned rev_num = (0); 
+#line 940
+for (unsigned k = (0); k < i; k++) 
+#line 941
+{ 
+#line 942
+if (j & (1 << k)) { 
 #line 943
-using namespace std;
+rev_num |= (1 << ((i - (1)) - k)); }  
 #line 944
-srand(time(0)); 
+}  
+#line 945
+if (j < rev_num) { 
 #line 946
-const unsigned N_test = MAX_RUN_AT_ONCE; 
+std::swap(N_pos[st + j], N_pos[st + rev_num]); }  
+#line 947
+}  
 #line 948
-const __int64 symbol_bytes = (2); 
-#line 949
-const __int64 size_test_gb = (((symbol_bytes * NUM_OF_NEED_SYMBOL) * N_test) / ((1024 * 1024) * 1024)); 
+}  
+#line 950
+check(cudaMemcpy(d_N_pos, N_pos, size_N_pos, cudaMemcpyHostToDevice), "cudaMemcpy(d_N_pos, N_pos, size_N_pos, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 950); 
 #line 951
-std::vector< std::vector< unsigned> >  a(N_test, ((std::vector< unsigned> )(NUM_OF_NEED_SYMBOL))); 
-#line 952
-std::vector< std::vector< unsigned> >  b(N_test, ((std::vector< unsigned> )(NUM_OF_NEED_SYMBOL << 1))); 
+free(N_pos); 
 #line 953
-std::vector< std::vector< unsigned> >  c(N_test, ((std::vector< unsigned> )(NUM_OF_NEED_SYMBOL))); 
+unsigned size_root = (MOD * sizeof(unsigned)); 
+#line 954
+unsigned *root_pow = (unsigned *)malloc(size_root); 
 #line 955
-for (unsigned tt = (0); tt < N_test; tt++) { 
+unsigned *root_inv_pow = (unsigned *)malloc(size_root); 
 #line 956
-for (unsigned i = (0); i < NUM_OF_NEED_SYMBOL; i++) { 
+unsigned *inv = (unsigned *)malloc(size_root); 
 #line 957
-(a[tt])[i] = ((rand()) % (MOD - (1))); }  }  
+check(cudaMalloc(&d_root_pow, size_root), "cudaMalloc(&d_root_pow, size_root)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 957); 
+#line 958
+check(cudaMalloc(&d_root_inv_pow, size_root), "cudaMalloc(&d_root_inv_pow, size_root)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 958); 
 #line 959
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 959); 
+check(cudaMalloc(&d_inv, size_root), "cudaMalloc(&d_inv, size_root)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 959); 
 #line 961
-(((cout << ("Encode performance test start"))) << (endl)); 
+(((root_pow[0]) = (1)), ((root_inv_pow[0]) = (1))), ((inv[0]) = (0)); 
+#line 962
+for (unsigned i = (1); i < MOD; i++) 
 #line 963
-auto start1 = chrono::high_resolution_clock::now(); 
+{ 
+#line 964
+(root_pow[i]) = mul_mod(root_pow[i - (1)], ROOT); 
 #line 965
-for (unsigned tt = (0); tt < N_test; tt++) { 
+(root_inv_pow[i]) = mul_mod(root_inv_pow[i - (1)], ROOT_INV); 
 #line 966
-encode(a[tt].data(), b[tt].data()); 
+(inv[i]) = pow_mod(i, MOD - (2)); 
 #line 967
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 967); 
-#line 968
 }  
+#line 969
+check(cudaMemcpy(d_root_pow, root_pow, size_root, cudaMemcpyHostToDevice), "cudaMemcpy(d_root_pow, root_pow, size_root, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 969); 
 #line 970
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 970); 
+check(cudaMemcpy(d_root_inv_pow, root_inv_pow, size_root, cudaMemcpyHostToDevice), "cudaMemcpy(d_root_inv_pow, root_inv_pow, size_root, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 970); 
 #line 971
-auto stop1 = chrono::high_resolution_clock::now(); 
-#line 972
-auto duration1 = chrono::duration_cast< std::chrono::duration< __int64, std::ratio< 1i64, 1000i64> > > ((stop1 - start1)).count(); 
+check(cudaMemcpy(d_inv, inv, size_root, cudaMemcpyHostToDevice), "cudaMemcpy(d_inv, inv, size_root, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 971); 
+#line 973
+unsigned size_root_layer_pow = (LEN_ROOT_LAYER_POW_2 * sizeof(unsigned)); 
 #line 974
-(((((((((((cout << ("Encode "))) << N_test)) << (" 64kb chunks in "))) << duration1)) << ("ms"))) << (endl)); 
+unsigned *root_layer_pow = (unsigned *)malloc(size_root_layer_pow); 
 #line 975
-(((((((cout << ("Encode "))) << (((1.0) * size_test_gb) / (((1.0) * duration1) / (1000.0))))) << (" GB/s"))) << (endl)); 
+check(cudaMalloc(&d_root_layer_pow, size_root_layer_pow), "cudaMalloc(&d_root_layer_pow, size_root_layer_pow)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 975); 
 #line 977
-std::vector< std::vector< unsigned> >  x(N_test, ((std::vector< unsigned> )(NUM_OF_NEED_SYMBOL))); 
+for (unsigned i = (0); i < (2); i++) 
 #line 978
-std::vector< std::vector< unsigned> >  y(N_test, ((std::vector< unsigned> )(NUM_OF_NEED_SYMBOL))); 
+{ 
+#line 979
+unsigned st_i = LEN_ROOT_LAYER_POW * i; 
 #line 980
-for (unsigned tt = (0); tt < N_test; tt++) { 
+for (unsigned j = (0); j < MAX_LOG; j++) 
 #line 981
-for (unsigned i = (0); i < NUM_OF_NEED_PACKET; i++) { 
+{ 
 #line 982
-unsigned stx = i * SYMBOL_PER_PACKET; 
+unsigned haft_len = 1 << j; 
 #line 983
-for (unsigned j = (0); j < SEG_PER_PACKET; j++) { 
+unsigned st_j = haft_len - (1); 
 #line 984
-(x[tt])[stx + j] = (stx + j); 
+unsigned ang = 1 << ((MAX_LOG - j) - (1)); 
 #line 985
-(x[tt])[(stx + j) + SEG_PER_PACKET] = ((stx + j) + SEG_DIFF); 
+unsigned wn = (i) ? root_inv_pow[ang] : (root_pow[ang]), w = (1); 
 #line 986
-(y[tt])[stx + j] = (b[tt])[stx + j]; 
+for (unsigned k = (0); k < haft_len; k++) 
 #line 987
-(y[tt])[(stx + j) + SEG_PER_PACKET] = (b[tt])[(stx + j) + SEG_DIFF]; 
+{ 
 #line 988
-}  
+(root_layer_pow[(st_i + st_j) + k]) = w; 
 #line 989
-}  
+w = mul_mod(w, wn); 
 #line 990
 }  
-#line 992
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 992); 
-#line 994
-(((cout << ("Decode performance test start"))) << (endl)); 
-#line 996
-auto start2 = chrono::high_resolution_clock::now(); 
-#line 998
-for (unsigned tt = (0); tt < N_test; tt++) { 
-#line 999
-decode(x[tt].data(), y[tt].data(), c[tt].data()); 
-#line 1000
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1000); 
-#line 1001
+#line 991
 }  
+#line 992
+}  
+#line 994
+check(cudaMemcpy(d_root_layer_pow, root_layer_pow, size_root_layer_pow, cudaMemcpyHostToDevice), "cudaMemcpy(d_root_layer_pow, root_layer_pow, size_root_layer_pow, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 994); 
+#line 995
+free(root_layer_pow); 
+#line 997
+unsigned size_packet_product = (LEN_PACKET_PRODUCT * sizeof(unsigned)); 
+#line 998
+unsigned *packet_product = (unsigned *)malloc(size_packet_product); 
+#line 999
+check(cudaMalloc(&d_packet_product, size_packet_product), "cudaMalloc(&d_packet_product, size_packet_product)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 999); 
+#line 1001
+for (unsigned i = (0); i < NUM_OF_PACKET; i++) 
+#line 1002
+{ 
 #line 1003
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1003); 
+unsigned st = i << (LOG_SYMBOL + (1)); 
 #line 1004
-auto stop2 = chrono::high_resolution_clock::now(); 
+for (unsigned j = (0); j < SEG_PER_PACKET; j++) 
 #line 1005
-auto duration2 = chrono::duration_cast< std::chrono::duration< __int64, std::ratio< 1i64, 1000i64> > > ((stop2 - start2)).count(); 
+{ 
+#line 1006
+unsigned k = (i << LOG_SEG) + j; 
 #line 1007
-(((((((((((cout << ("Decode "))) << N_test)) << (" 64kb chunks in "))) << duration2)) << ("ms"))) << (endl)); 
+(packet_product[st + (j << 1)]) = sub_mod(0, root_pow[k]); 
 #line 1008
-(((((((cout << ("Decode "))) << (((1.0) * size_test_gb) / (((1.0) * duration2) / (1000.0))))) << (" GB/s"))) << (endl)); 
+(packet_product[st + ((j << 1) | (1))]) = (1); 
+#line 1009
+(packet_product[st + ((j + SEG_PER_PACKET) << 1)]) = sub_mod(0, root_pow[k + SEG_DIFF]); 
 #line 1010
+(packet_product[st + (((j + SEG_PER_PACKET) << 1) | (1))]) = (1); 
+#line 1011
+}  
+#line 1012
+}  
+#line 1013
+check(cudaMemcpy(d_packet_product, packet_product, size_packet_product, cudaMemcpyHostToDevice), "cudaMemcpy(d_packet_product, packet_product, size_packet_product, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1013); 
+#line 1014
+free(packet_product); 
+#line 1015
+unsigned *tmp; 
+#line 1016
+check(cudaMalloc(&tmp, (LEN_ONE_PACKET_PRODUCT << 1) * sizeof(unsigned)), "cudaMalloc(&tmp, (LEN_ONE_PACKET_PRODUCT << 1) * sizeof(unsigned))", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1016); 
+#line 1017
+for (unsigned i = (0); i < NUM_OF_PACKET; i++) 
+#line 1018
+{ 
+#line 1019
+unsigned st = i << (LOG_SYMBOL + (1)); 
+#line 1020
+h_build_product(d_packet_product + st, tmp, tmp + LEN_ONE_PACKET_PRODUCT, 1, LOG_SYMBOL + (1), 0); 
+#line 1021
+}  
+#line 1022
+check(cudaFree(tmp), "cudaFree(tmp)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1022); 
+#line 1023
+free(inv); 
+#line 1024
+free(root_pow); 
+#line 1025
+free(root_inv_pow); 
+#line 1027
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1027); 
+#line 1028
+(((std::cout << ("Init process completed!"))) << (std::endl)); 
+#line 1030
+} 
+#line 1032
+void fin() 
+#line 1033
+{ 
+#line 1036
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1036); 
+#line 1038
+for (unsigned i = (0); i < MAX_ACTIVE_ENCODE_BATCH; i++) { 
+#line 1039
+check(cudaFreeHost(h_encode_p_batch_slot[i]), "cudaFreeHost(h_encode_p_batch_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1039); 
+#line 1040
+check(cudaFreeHost(h_encode_y_batch_slot[i]), "cudaFreeHost(h_encode_y_batch_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1040); 
+#line 1041
+}  
+#line 1043
+for (unsigned i = (0); i < MAX_ACTIVE_DECODE_BATCH; i++) { 
+#line 1044
+check(cudaFreeHost(h_decode_x_batch_slot[i]), "cudaFreeHost(h_decode_x_batch_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1044); 
+#line 1045
+check(cudaFreeHost(h_decode_y_batch_slot[i]), "cudaFreeHost(h_decode_y_batch_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1045); 
+#line 1046
+check(cudaFreeHost(h_decode_p_batch_slot[i]), "cudaFreeHost(h_decode_p_batch_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1046); 
+#line 1047
+}  
+#line 1049
+free(h_encode_p_batch_slot); 
+#line 1050
+free(h_encode_y_batch_slot); 
+#line 1051
+free(h_decode_x_batch_slot); 
+#line 1052
+free(h_decode_y_batch_slot); 
+#line 1053
+free(h_decode_p_batch_slot); 
+#line 1055
+check(cudaGetLastError(), "cudaGetLastError()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1055); 
+#line 1057
+check(cudaDeviceReset(), "cudaDeviceReset()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1057); 
+#line 1058
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1058); 
+#line 1060
+} 
+#line 1062
+void test_fnt(); 
+#line 1064
+void test_poly_mul(); 
+#line 1066
+void test_build_init_product(); 
+#line 1068
+void test_encode_decode(); 
+#line 1070
+void test_encode_decode_batch(); 
+#line 1072
+void test_fnt_performance(); 
+#line 1074
+void test_encode_decode_performance(); 
+#line 1076
+int main() 
+#line 1077
+{ 
+#line 1079
+init(); 
+#line 1093
+test_encode_decode_performance(); 
+#line 1095
+fin(); 
+#line 1097
+return 0; 
+#line 1098
+} 
+#line 1100
+void test_fnt() { 
+#line 1104
+unsigned N_test = (32); 
+#line 1106
+for (unsigned tt = (0); tt < N_test; tt++) { 
+#line 1107
+unsigned log_nc = (15), log_nv = (16), nc = 1 << log_nc, nv = 1 << log_nv; 
+#line 1108
+unsigned size_nc = nc * sizeof(unsigned), size_nv = nv * sizeof(unsigned); 
+#line 1109
+std::vector< unsigned>  c1(nc), c2(nc); 
+#line 1110
+unsigned *d_c1, *d_c2, *d_v; 
+#line 1111
+cudaMalloc(&d_c1, size_nc); 
+#line 1112
+cudaMemset(d_c1, 0, size_nc); 
+#line 1113
+cudaMalloc(&d_c2, size_nv); 
+#line 1114
+cudaMemset(d_c2, 0, size_nv); 
+#line 1115
+cudaMalloc(&d_v, size_nv); 
+#line 1116
+cudaMemset(d_v, 0, size_nv); 
+#line 1118
+for (unsigned i = (0); i < nc; i++) { 
+#line 1119
+c1[i] = ((rand()) % (MOD - (1))); }  
+#line 1120
+shuffle(c1.begin(), c1.end(), ((std::mersenne_twister_engine< unsigned, 32Ui64, 624Ui64, 397Ui64, 31Ui64, 2567483615U, 11Ui64, 4294967295U, 7Ui64, 2636928640U, 15Ui64, 4022730752U, 18Ui64, 1812433253U> )(time(0)))); 
+#line 1121
+cudaMemcpy(d_c1, c1.data(), size_nc, cudaMemcpyHostToDevice); 
+#line 1123
+fnt(d_c1, d_v, log_nc, log_nv, 0, d_N_pos, d_root_layer_pow, d_inv, 0); 
+#line 1124
+fnt(d_v, d_c2, log_nv, log_nv, 3, d_N_pos, d_root_layer_pow, d_inv, 0); 
+#line 1126
+cudaMemcpy(c2.data(), d_c2, size_nc, cudaMemcpyDeviceToHost); 
+#line 1127
+for (unsigned i = (0); i < nc; i++) { 
+#line 1128
+(void)0; }  
+#line 1130
+cudaFree(d_c1); 
+#line 1131
+cudaFree(d_c2); 
+#line 1132
+cudaFree(d_v); 
+#line 1136
+}  
+#line 1138
+(((std::cout << ("FNT test passed!"))) << (std::endl)); 
+#line 1140
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1140); 
+#line 1142
+} 
+#line 1144
+void test_build_init_product() { 
+#line 1147
+std::vector< unsigned>  a1 = {(64375), (0), (52012), (0), (2347), (0), (23649), (0), (30899), (0)}, b1(10); 
+#line 1148
+cudaMemcpy(b1.data(), d_packet_product, (10) * sizeof(unsigned), cudaMemcpyDeviceToHost); 
+#line 1150
+for (unsigned i = (0); i < (10); i++) { 
+#line 1151
+(void)0; }  
+#line 1154
+std::vector< unsigned>  a2 = {(64375), (0), (31561), (0), (12153), (0), (31103), (0), (20714), (0)}, b2(10); 
+#line 1155
+cudaMemcpy(b2.data(), d_packet_product + (1 << (LOG_SYMBOL + (1))), (10) * sizeof(unsigned), cudaMemcpyDeviceToHost); 
+#line 1157
+for (unsigned i = (0); i < (10); i++) { 
+#line 1158
+(void)0; }  
+#line 1160
+(((std::cout << ("Test packet_product passed!"))) << (std::endl)); 
+#line 1162
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1162); 
+#line 1164
+} 
+#line 1166
+void test_poly_mul() { 
+#line 1170
+srand(time(0)); 
+#line 1172
+unsigned N_test = (32); 
+#line 1174
+for (unsigned tt = (0); tt < N_test; tt++) { 
+#line 1176
+unsigned log_n = (11); 
+#line 1177
+unsigned n = 1 << log_n, size_n = n * sizeof(unsigned); 
+#line 1179
+std::vector< unsigned>  a(n), b(n), c1(n << 1, 0), c2(n << 1, 0); 
+#line 1181
+for (unsigned i = (0); i < n; i++) { 
+#line 1182
+a[i] = ((rand()) % (MOD - (1))); 
+#line 1183
+b[i] = ((rand()) % (MOD - (1))); 
+#line 1184
+}  
+#line 1186
+unsigned *t1, *t2, *d_c; 
+#line 1187
+cudaMalloc(&t1, size_n << 1); 
+#line 1188
+cudaMalloc(&t2, size_n << 1); 
+#line 1189
+cudaMalloc(&d_c, size_n << 1); 
+#line 1190
+cudaMemcpy(d_c, a.data(), size_n, cudaMemcpyHostToDevice); 
+#line 1191
+cudaMemcpy(d_c + n, b.data(), size_n, cudaMemcpyHostToDevice); 
+#line 1192
+h_poly_mul(d_c, d_c + n, t1, t2, d_c, log_n, d_N_pos, d_root_layer_pow, d_inv, 0); 
+#line 1194
+for (unsigned i = (0); i < n; i++) { 
+#line 1195
+for (unsigned j = (0); j < n; j++) { 
+#line 1196
+c1[i + j] = add_mod(c1[i + j], mul_mod(a[i], b[j])); }  }  
+#line 1205
+cudaMemcpy(c2.data(), d_c, size_n << 1, cudaMemcpyDeviceToHost); 
+#line 1207
+for (unsigned i = (0); i < (n << 1); i++) { 
+#line 1208
+(void)0; }  
+#line 1212
+cudaFree(t1); 
+#line 1213
+cudaFree(t2); 
+#line 1214
+cudaFree(d_c); 
+#line 1216
+}  
+#line 1218
+(((std::cout << ("Poly mul test passed!"))) << (std::endl)); 
+#line 1220
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1220); 
+#line 1222
+} 
+#line 1224
+void test_encode_decode() { 
+#line 1228
+srand(time(0)); 
+#line 1230
+unsigned N_test = (32); 
+#line 1232
+for (unsigned tt = (0); tt < N_test; tt++) { 
+#line 1233
+std::vector< unsigned>  a(NUM_OF_NEED_SYMBOL), b(NUM_OF_NEED_SYMBOL << 1), c(NUM_OF_NEED_SYMBOL); 
+#line 1235
+for (unsigned i = (0); i < NUM_OF_NEED_SYMBOL; i++) { 
+#line 1236
+a[i] = ((rand()) % (MOD - (1))); }  
+#line 1238
+h_encode(a.data(), b.data()); 
+#line 1240
+std::vector< unsigned>  x(NUM_OF_NEED_SYMBOL), y(NUM_OF_NEED_SYMBOL); 
+#line 1242
+for (unsigned i = (0); i < NUM_OF_NEED_PACKET; i++) { 
+#line 1243
+unsigned stx = i * SYMBOL_PER_PACKET; 
+#line 1244
+for (unsigned j = (0); j < SEG_PER_PACKET; j++) { 
+#line 1245
+x[stx + j] = (stx + j); 
+#line 1246
+x[(stx + j) + SEG_PER_PACKET] = ((stx + j) + SEG_DIFF); 
+#line 1247
+y[stx + j] = b[stx + j]; 
+#line 1248
+y[(stx + j) + SEG_PER_PACKET] = b[(stx + j) + SEG_DIFF]; 
+#line 1249
+}  
+#line 1250
+}  
+#line 1252
+h_decode(x.data(), y.data(), c.data()); 
+#line 1253
+for (unsigned i = (0); i < NUM_OF_NEED_SYMBOL; i++) { 
+#line 1254
+(void)0; }  
+#line 1256
+}  
+#line 1258
+(((std::cout << ("Encode decode test passed!"))) << (std::endl)); 
+#line 1260
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1260); 
+#line 1262
+} 
+#line 1264
+void test_encode_decode_batch() { 
+#line 1268
+using namespace std;
+#line 1269
+srand(time(0)); 
+#line 1271
+std::vector< unsigned>  a(LEN_BATCH * NUM_OF_NEED_SYMBOL); 
+#line 1272
+std::vector< unsigned>  b(LEN_BATCH * (NUM_OF_NEED_SYMBOL << 1)); 
+#line 1273
+std::vector< unsigned>  c(LEN_BATCH * NUM_OF_NEED_SYMBOL); 
+#line 1275
+for (unsigned tt = (0); tt < LEN_BATCH; tt++) { 
+#line 1276
+unsigned offset = NUM_OF_NEED_SYMBOL * tt; 
+#line 1277
+for (unsigned i = (0); i < NUM_OF_NEED_SYMBOL; i++) { 
+#line 1278
+a[offset + i] = ((rand()) % (MOD - (1))); }  
+#line 1279
+}  
+#line 1281
+h_encode_batch(a.data(), b.data()); 
+#line 1282
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1282); 
+#line 1284
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1284); 
+#line 1299
+std::vector< unsigned>  x(LEN_BATCH * NUM_OF_NEED_SYMBOL), y(LEN_BATCH * NUM_OF_NEED_SYMBOL); 
+#line 1301
+for (unsigned tt = (0); tt < LEN_BATCH; tt++) { 
+#line 1302
+unsigned os1 = NUM_OF_NEED_SYMBOL * tt; 
+#line 1303
+unsigned os2 = (NUM_OF_NEED_SYMBOL << 1) * tt; 
+#line 1304
+for (unsigned i = (0); i < NUM_OF_NEED_PACKET; i++) { 
+#line 1305
+unsigned stx = i * SYMBOL_PER_PACKET; 
+#line 1306
+for (unsigned j = (0); j < SEG_PER_PACKET; j++) { 
+#line 1307
+x[(os1 + stx) + j] = (stx + j); 
+#line 1308
+x[((os1 + stx) + j) + SEG_PER_PACKET] = ((stx + j) + SEG_DIFF); 
+#line 1309
+y[(os1 + stx) + j] = b[(os2 + stx) + j]; 
+#line 1310
+y[((os1 + stx) + j) + SEG_PER_PACKET] = b[((os2 + stx) + j) + SEG_DIFF]; 
+#line 1311
+}  
+#line 1312
+}  
+#line 1313
+}  
+#line 1315
+h_decode_batch(x.data(), y.data(), c.data()); 
+#line 1316
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1316); 
+#line 1318
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1318); 
+#line 1331
+for (unsigned i = (0); i < a.size(); i++) { 
+#line 1332
+(void)0; }  
+#line 1334
+(((std::cout << ("Encode decode batch test passed!"))) << (std::endl)); 
+#line 1336
+} 
+#line 1338
+void test_fnt_performance() { 
+#line 1342
+using namespace std;
+#line 1344
+const unsigned N_test = (1024); 
+#line 1346
+unsigned log_n = (16), n = 1 << log_n; 
+#line 1347
+unsigned size_n = n * sizeof(unsigned); 
+#line 1348
+std::vector< std::vector< unsigned> >  a(N_test, ((std::vector< unsigned> )(n))); 
+#line 1349
+cudaStream_t stream[(N_test)]; 
+#line 1350
+std::vector< unsigned *>  d_a(N_test), d_b(N_test); 
+#line 1352
+for (unsigned tt = (0); tt < N_test; tt++) { 
+#line 1353
+for (unsigned i = (0); i < n; i++) { 
+#line 1354
+(a[tt])[i] = ((rand()) % (MOD - (1))); }  
+#line 1355
+check(cudaStreamCreate(&(stream[tt])), "cudaStreamCreate(&stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1355); 
+#line 1356
+check(cudaMallocAsync(&d_a[tt], size_n, stream[tt]), "cudaMallocAsync(&d_a[tt], size_n, stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1356); 
+#line 1357
+check(cudaMallocAsync(&d_b[tt], size_n, stream[tt]), "cudaMallocAsync(&d_b[tt], size_n, stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1357); 
+#line 1358
+check(cudaMemcpyAsync(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice, stream[tt]), "cudaMemcpyAsync(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice, stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1358); 
+#line 1359
+}  
+#line 1361
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1361); 
+#line 1363
+(((cout << ("FNT test start"))) << (endl)); 
+#line 1365
+auto start = chrono::high_resolution_clock::now(); 
+#line 1367
+for (unsigned tt = (0); tt < N_test; tt++) { 
+#line 1372
+fnt(d_a[tt], d_b[tt], log_n, log_n, 0, d_N_pos, d_root_layer_pow, d_inv, stream[tt]); 
+#line 1373
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1373); 
+#line 1377
+}  
+#line 1379
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1379); 
+#line 1380
+auto stop = chrono::high_resolution_clock::now(); 
+#line 1381
+auto duration = chrono::duration_cast< std::chrono::duration< __int64, std::ratio< 1i64, 1000i64> > > ((stop - start)).count(); 
+#line 1383
+(((((((((((cout << ("FNT "))) << N_test)) << (" chunks in "))) << duration)) << ("ms"))) << (endl)); 
+#line 1385
+for (unsigned tt = (0); tt < N_test; tt++) { 
+#line 1386
+check(cudaFreeAsync(d_a[tt], stream[tt]), "cudaFreeAsync(d_a[tt], stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1386); 
+#line 1387
+check(cudaFreeAsync(d_b[tt], stream[tt]), "cudaFreeAsync(d_b[tt], stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1387); 
+#line 1388
+check(cudaStreamDestroy(stream[tt]), "cudaStreamDestroy(stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1388); 
+#line 1389
+}  
+#line 1391
+} 
+#line 1393
+void test_encode_decode_performance() { 
+#line 1397
+using namespace std;
+#line 1398
+srand(time(0)); 
+#line 1400
+const unsigned N_test = (8); 
+#line 1402
+const __int64 symbol_bytes = (2); 
+#line 1403
+const __int64 size_test_gb = ((((symbol_bytes * NUM_OF_NEED_SYMBOL) * N_test) * LEN_BATCH) / ((1024 * 1024) * 1024)); 
+#line 1405
+std::vector< std::vector< unsigned> >  a(N_test, ((std::vector< unsigned> )(LEN_BATCH * NUM_OF_NEED_SYMBOL))); 
+#line 1406
+std::vector< std::vector< unsigned> >  b(N_test, ((std::vector< unsigned> )(LEN_BATCH * (NUM_OF_NEED_SYMBOL << 1)))); 
+#line 1407
+std::vector< std::vector< unsigned> >  c(N_test, ((std::vector< unsigned> )(LEN_BATCH * NUM_OF_NEED_SYMBOL))); 
+#line 1409
+for (unsigned tt = (0); tt < N_test; tt++) { 
+#line 1410
+for (unsigned j = (0); j < LEN_BATCH; j++) { 
+#line 1411
+unsigned os = j * NUM_OF_NEED_SYMBOL; 
+#line 1412
+for (unsigned i = (0); i < NUM_OF_NEED_SYMBOL; i++) { 
+#line 1413
+(a[tt])[os + i] = ((rand()) % (MOD - (1))); 
+#line 1414
+}  
+#line 1415
+}  
+#line 1416
+}  
+#line 1418
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1418); 
+#line 1420
+(((cout << ("Encode performance test start"))) << (endl)); 
+#line 1422
+auto start1 = chrono::high_resolution_clock::now(); 
+#line 1424
+for (unsigned tt = (0); tt < N_test; tt++) { 
+#line 1425
+h_encode_batch(a[tt].data(), b[tt].data()); 
+#line 1426
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1426); 
+#line 1427
+}  
+#line 1429
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1429); 
+#line 1430
+auto stop1 = chrono::high_resolution_clock::now(); 
+#line 1431
+auto duration1 = chrono::duration_cast< std::chrono::duration< __int64, std::ratio< 1i64, 1000i64> > > ((stop1 - start1)).count(); 
+#line 1433
+(((((((((((cout << ("Encode "))) << N_test)) << (" batch 32 of 64kb chunks in "))) << duration1)) << ("ms"))) << (endl)); 
+#line 1434
+(((((((cout << ("Encode "))) << (((1.0) * size_test_gb) / (((1.0) * duration1) / (1000.0))))) << (" GB/s"))) << (endl)); 
+#line 1436
+std::vector< std::vector< unsigned> >  x(N_test, ((std::vector< unsigned> )(LEN_BATCH * NUM_OF_NEED_SYMBOL))); 
+#line 1437
+std::vector< std::vector< unsigned> >  y(N_test, ((std::vector< unsigned> )(LEN_BATCH * NUM_OF_NEED_SYMBOL))); 
+#line 1439
+for (unsigned tt = (0); tt < N_test; tt++) { 
+#line 1440
+for (unsigned k = (0); k < LEN_BATCH; k++) { 
+#line 1441
+unsigned os1 = k * NUM_OF_NEED_SYMBOL; 
+#line 1442
+unsigned os2 = k * (NUM_OF_NEED_SYMBOL << 1); 
+#line 1443
+for (unsigned i = (0); i < NUM_OF_NEED_PACKET; i++) { 
+#line 1444
+unsigned stx = i * SYMBOL_PER_PACKET; 
+#line 1445
+for (unsigned j = (0); j < SEG_PER_PACKET; j++) { 
+#line 1446
+(x[tt])[(os1 + stx) + j] = (stx + j); 
+#line 1447
+(x[tt])[((os1 + stx) + j) + SEG_PER_PACKET] = ((stx + j) + SEG_DIFF); 
+#line 1448
+(y[tt])[(os1 + stx) + j] = (b[tt])[(os2 + stx) + j]; 
+#line 1449
+(y[tt])[((os1 + stx) + j) + SEG_PER_PACKET] = (b[tt])[((os2 + stx) + j) + SEG_DIFF]; 
+#line 1450
+}  
+#line 1451
+}  
+#line 1452
+}  
+#line 1453
+}  
+#line 1455
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1455); 
+#line 1457
+(((cout << ("Decode performance test start"))) << (endl)); 
+#line 1459
+auto start2 = chrono::high_resolution_clock::now(); 
+#line 1461
+for (unsigned tt = (0); tt < N_test; tt++) { 
+#line 1462
+h_decode_batch(x[tt].data(), y[tt].data(), c[tt].data()); 
+#line 1463
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1463); 
+#line 1464
+}  
+#line 1466
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1466); 
+#line 1467
+auto stop2 = chrono::high_resolution_clock::now(); 
+#line 1468
+auto duration2 = chrono::duration_cast< std::chrono::duration< __int64, std::ratio< 1i64, 1000i64> > > ((stop2 - start2)).count(); 
+#line 1470
+(((((((((((cout << ("Decode "))) << N_test)) << (" batch 32 of 64kb chunks in "))) << duration2)) << ("ms"))) << (endl)); 
+#line 1471
+(((((((cout << ("Decode "))) << (((1.0) * size_test_gb) / (((1.0) * duration2) / (1000.0))))) << (" GB/s"))) << (endl)); 
+#line 1473
+for (unsigned tt = (0); tt < N_test; tt++) { 
+#line 1474
+for (unsigned i = (0); i < c[tt].size(); i++) { 
+#line 1475
+(void)0; }  
+#line 1476
+}  
+#line 1478
 } 
 #line 1 "kernel.cudafe1.stub.c"
-#define _NV_ANON_NAMESPACE _GLOBAL__N__dcb4e26f_9_kernel_cu_6c617819
+#define _NV_ANON_NAMESPACE _GLOBAL__N__dcb4e26f_9_kernel_cu_9470058a
 #ifdef _NV_ANON_NAMESPACE
 #endif
 #pragma pack()
@@ -71917,24 +77280,28 @@ __declspec(allocate(".nvHRKI")) __declspec(selectany) extern const unsigned char
 extern "C" {
 #pragma data_seg(".nvHRKE")
 __declspec(allocate(".nvHRKE")) __declspec(selectany) extern const unsigned char hostRefKernelArrayExternalLinkage[] = {
-/* _Z10poly_deriv* */
-0x5f,0x5a,0x31,0x30,0x70,0x6f,0x6c,0x79,0x5f,0x64,0x65,0x72,0x69,0x76,0x2a,0x0,
+/* _Z10g_build_n1* */
+0x5f,0x5a,0x31,0x30,0x67,0x5f,0x62,0x75,0x69,0x6c,0x64,0x5f,0x6e,0x31,0x2a,0x0,
+/* _Z10g_build_n2* */
+0x5f,0x5a,0x31,0x30,0x67,0x5f,0x62,0x75,0x69,0x6c,0x64,0x5f,0x6e,0x32,0x2a,0x0,
+/* _Z10g_build_n3* */
+0x5f,0x5a,0x31,0x30,0x67,0x5f,0x62,0x75,0x69,0x6c,0x64,0x5f,0x6e,0x33,0x2a,0x0,
+/* _Z12g_poly_deriv* */
+0x5f,0x5a,0x31,0x32,0x67,0x5f,0x70,0x6f,0x6c,0x79,0x5f,0x64,0x65,0x72,0x69,0x76,0x2a,0x0,
+/* _Z14g_decode_batch* */
+0x5f,0x5a,0x31,0x34,0x67,0x5f,0x64,0x65,0x63,0x6f,0x64,0x65,0x5f,0x62,0x61,0x74,0x63,0x68,0x2a,0x0,
+/* _Z14g_encode_batch* */
+0x5f,0x5a,0x31,0x34,0x67,0x5f,0x65,0x6e,0x63,0x6f,0x64,0x65,0x5f,0x62,0x61,0x74,0x63,0x68,0x2a,0x0,
 /* _Z14g_vector_mul_i* */
 0x5f,0x5a,0x31,0x34,0x67,0x5f,0x76,0x65,0x63,0x74,0x6f,0x72,0x5f,0x6d,0x75,0x6c,0x5f,0x69,0x2a,0x0,
-/* _Z15build_product_i* */
-0x5f,0x5a,0x31,0x35,0x62,0x75,0x69,0x6c,0x64,0x5f,0x70,0x72,0x6f,0x64,0x75,0x63,0x74,0x5f,0x69,0x2a,0x0,
-/* _Z5fnt_i* */
-0x5f,0x5a,0x35,0x66,0x6e,0x74,0x5f,0x69,0x2a,0x0,
-/* _Z7end_fnt* */
-0x5f,0x5a,0x37,0x65,0x6e,0x64,0x5f,0x66,0x6e,0x74,0x2a,0x0,
-/* _Z7pre_fnt* */
-0x5f,0x5a,0x37,0x70,0x72,0x65,0x5f,0x66,0x6e,0x74,0x2a,0x0,
-/* _Z8build_n1* */
-0x5f,0x5a,0x38,0x62,0x75,0x69,0x6c,0x64,0x5f,0x6e,0x31,0x2a,0x0,
-/* _Z8build_n2* */
-0x5f,0x5a,0x38,0x62,0x75,0x69,0x6c,0x64,0x5f,0x6e,0x32,0x2a,0x0,
-/* _Z8build_n3* */
-0x5f,0x5a,0x38,0x62,0x75,0x69,0x6c,0x64,0x5f,0x6e,0x33,0x2a,0x0,
+/* _Z17g_build_product_i* */
+0x5f,0x5a,0x31,0x37,0x67,0x5f,0x62,0x75,0x69,0x6c,0x64,0x5f,0x70,0x72,0x6f,0x64,0x75,0x63,0x74,0x5f,0x69,0x2a,0x0,
+/* _Z7g_fnt_i* */
+0x5f,0x5a,0x37,0x67,0x5f,0x66,0x6e,0x74,0x5f,0x69,0x2a,0x0,
+/* _Z9g_end_fnt* */
+0x5f,0x5a,0x39,0x67,0x5f,0x65,0x6e,0x64,0x5f,0x66,0x6e,0x74,0x2a,0x0,
+/* _Z9g_pre_fnt* */
+0x5f,0x5a,0x39,0x67,0x5f,0x70,0x72,0x65,0x5f,0x66,0x6e,0x74,0x2a,0x0,
 };
 #pragma data_seg()
 }
