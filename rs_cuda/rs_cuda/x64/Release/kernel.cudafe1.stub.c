@@ -1,4 +1,4 @@
-#define __NV_MODULE_ID _dcb4e26f_9_kernel_cu_9470058a
+#define __NV_MODULE_ID _dcb4e26f_9_kernel_cu_f9c6e15d
 #define __NV_CUBIN_HANDLE_STORAGE__ extern
 #if !defined(__CUDA_INCLUDE_COMPILER_INTERNAL_HEADERS__)
 #define __CUDA_INCLUDE_COMPILER_INTERNAL_HEADERS__
@@ -10,6 +10,7 @@ extern void __device_stub__Z9g_end_fntPjjS_(unsigned *, unsigned, unsigned *);
 extern void __device_stub__Z7g_fnt_iPjjbS_(unsigned *, unsigned, bool, unsigned *);
 extern void __device_stub__Z5g_fntPjS_jjjS_S_S_(unsigned *, unsigned *, unsigned, unsigned, unsigned, unsigned *, unsigned *, unsigned *);
 extern void __device_stub__Z14g_vector_mul_iPjS_S_(unsigned *, unsigned *, unsigned *);
+extern void __device_stub__Z6g_fillPjj(unsigned *, unsigned);
 extern void __device_stub__Z12g_poly_derivPjS_(unsigned *, unsigned *);
 extern void __device_stub__Z17g_build_product_iPjS_S_jS_S_S_(unsigned *, unsigned *, unsigned *, unsigned, unsigned *, unsigned *, unsigned *);
 extern void __device_stub__Z10g_build_n1PjS_S_S_S_(unsigned *, unsigned *, unsigned *, unsigned *, unsigned *);
@@ -108,6 +109,19 @@ __cudaLaunch(((char *)((void ( *)(unsigned *, unsigned *, unsigned *))g_vector_m
 }
 void g_vector_mul_i( unsigned *__cuda_0,unsigned *__cuda_1,unsigned *__cuda_2)
 {__device_stub__Z14g_vector_mul_iPjS_S_( __cuda_0,__cuda_1,__cuda_2);
+}
+#line 1 "x64/Release/kernel.cudafe1.stub.c"
+void __device_stub__Z6g_fillPjj(
+unsigned *__par0, 
+unsigned __par1)
+{
+__cudaLaunchPrologue(2);
+__cudaSetupArgSimple(__par0, 0Ui64);
+__cudaSetupArgSimple(__par1, 8Ui64);
+__cudaLaunch(((char *)((void ( *)(unsigned *, unsigned))g_fill)));
+}
+void g_fill( unsigned *__cuda_0,unsigned __cuda_1)
+{__device_stub__Z6g_fillPjj( __cuda_0,__cuda_1);
 }
 #line 1 "x64/Release/kernel.cudafe1.stub.c"
 void __device_stub__Z12g_poly_derivPjS_(
@@ -252,22 +266,23 @@ void g_decode_batch( unsigned *__cuda_0,unsigned *__cuda_1,unsigned *__cuda_2,un
 }
 #line 1 "x64/Release/kernel.cudafe1.stub.c"
 static void __nv_cudaEntityRegisterCallback(
-void **__T45)
+void **__T55)
 {
-__nv_dummy_param_ref(__T45);
-__nv_save_fatbinhandle_for_managed_rt(__T45);
-__cudaRegisterEntry(__T45, ((void ( *)(unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *))g_decode_batch), _Z14g_decode_batchPjS_S_S_S_S_S_S_S_S_S_S_S_S_S_, (-1));
-__cudaRegisterEntry(__T45, ((void ( *)(unsigned *, unsigned *, unsigned *, unsigned *, unsigned *))g_encode_batch), _Z14g_encode_batchPjS_S_S_S_, (-1));
-__cudaRegisterEntry(__T45, ((void ( *)(unsigned *, unsigned *))g_build_n3), _Z10g_build_n3PjS_, (-1));
-__cudaRegisterEntry(__T45, ((void ( *)(unsigned *, unsigned *, unsigned *))g_build_n2), _Z10g_build_n2PjS_S_, (-1));
-__cudaRegisterEntry(__T45, ((void ( *)(unsigned *, unsigned *, unsigned *, unsigned *, unsigned *))g_build_n1), _Z10g_build_n1PjS_S_S_S_, (-1));
-__cudaRegisterEntry(__T45, ((void ( *)(unsigned *, unsigned *, unsigned *, unsigned, unsigned *, unsigned *, unsigned *))g_build_product_i), _Z17g_build_product_iPjS_S_jS_S_S_, (-1));
-__cudaRegisterEntry(__T45, ((void ( *)(unsigned *, unsigned *))g_poly_deriv), _Z12g_poly_derivPjS_, (-1));
-__cudaRegisterEntry(__T45, ((void ( *)(unsigned *, unsigned *, unsigned *))g_vector_mul_i), _Z14g_vector_mul_iPjS_S_, (-1));
-__cudaRegisterEntry(__T45, ((void ( *)(unsigned *, unsigned *, unsigned, unsigned, unsigned, unsigned *, unsigned *, unsigned *))g_fnt), _Z5g_fntPjS_jjjS_S_S_, (-1));
-__cudaRegisterEntry(__T45, ((void ( *)(unsigned *, unsigned, bool, unsigned *))g_fnt_i), _Z7g_fnt_iPjjbS_, (-1));
-__cudaRegisterEntry(__T45, ((void ( *)(unsigned *, unsigned, unsigned *))g_end_fnt), _Z9g_end_fntPjjS_, (-1));
-__cudaRegisterEntry(__T45, ((void ( *)(unsigned *, unsigned *, unsigned, unsigned *))g_pre_fnt), _Z9g_pre_fntPjS_jS_, (-1));
+__nv_dummy_param_ref(__T55);
+__nv_save_fatbinhandle_for_managed_rt(__T55);
+__cudaRegisterEntry(__T55, ((void ( *)(unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned *))g_decode_batch), _Z14g_decode_batchPjS_S_S_S_S_S_S_S_S_S_S_S_S_S_, (-1));
+__cudaRegisterEntry(__T55, ((void ( *)(unsigned *, unsigned *, unsigned *, unsigned *, unsigned *))g_encode_batch), _Z14g_encode_batchPjS_S_S_S_, (-1));
+__cudaRegisterEntry(__T55, ((void ( *)(unsigned *, unsigned *))g_build_n3), _Z10g_build_n3PjS_, (-1));
+__cudaRegisterEntry(__T55, ((void ( *)(unsigned *, unsigned *, unsigned *))g_build_n2), _Z10g_build_n2PjS_S_, (-1));
+__cudaRegisterEntry(__T55, ((void ( *)(unsigned *, unsigned *, unsigned *, unsigned *, unsigned *))g_build_n1), _Z10g_build_n1PjS_S_S_S_, (-1));
+__cudaRegisterEntry(__T55, ((void ( *)(unsigned *, unsigned *, unsigned *, unsigned, unsigned *, unsigned *, unsigned *))g_build_product_i), _Z17g_build_product_iPjS_S_jS_S_S_, (-1));
+__cudaRegisterEntry(__T55, ((void ( *)(unsigned *, unsigned *))g_poly_deriv), _Z12g_poly_derivPjS_, (-1));
+__cudaRegisterEntry(__T55, ((void ( *)(unsigned *, unsigned))g_fill), _Z6g_fillPjj, (-1));
+__cudaRegisterEntry(__T55, ((void ( *)(unsigned *, unsigned *, unsigned *))g_vector_mul_i), _Z14g_vector_mul_iPjS_S_, (-1));
+__cudaRegisterEntry(__T55, ((void ( *)(unsigned *, unsigned *, unsigned, unsigned, unsigned, unsigned *, unsigned *, unsigned *))g_fnt), _Z5g_fntPjS_jjjS_S_S_, (-1));
+__cudaRegisterEntry(__T55, ((void ( *)(unsigned *, unsigned, bool, unsigned *))g_fnt_i), _Z7g_fnt_iPjjbS_, (-1));
+__cudaRegisterEntry(__T55, ((void ( *)(unsigned *, unsigned, unsigned *))g_end_fnt), _Z9g_end_fntPjjS_, (-1));
+__cudaRegisterEntry(__T55, ((void ( *)(unsigned *, unsigned *, unsigned, unsigned *))g_pre_fnt), _Z9g_pre_fntPjS_jS_, (-1));
 }
 static void __sti____cudaRegisterAll(void)
 {

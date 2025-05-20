@@ -3,26 +3,26 @@ extern  /* COMDAT group: _ZTISt20bad_array_new_length */ const struct __si_class
 extern  /* COMDAT group: _ZTISt12system_error */ const struct __si_class_type_info _ZTISt12system_error;
 extern  /* COMDAT group: _ZTISt8bad_cast */ const struct __si_class_type_info _ZTISt8bad_cast;
 extern  /* COMDAT group: _ZTINSt8ios_base7failureE */ const struct __si_class_type_info _ZTINSt8ios_base7failureE;
-#line 123 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned **h_encode_p_batch_slot = 0;
-unsigned **h_encode_y_batch_slot = 0;
-unsigned **h_decode_x_batch_slot = 0;
-unsigned **h_decode_y_batch_slot = 0;
-unsigned **h_decode_p_batch_slot = 0;
+#line 116 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned **h_encode_p_slot = 0;
+unsigned **h_encode_y_slot = 0;
+unsigned **h_decode_x_slot = 0;
+unsigned **h_decode_y_slot = 0;
+unsigned **h_decode_p_slot = 0;
 
-unsigned *d_encode_p_batch_slot = 0;
-unsigned *d_encode_y_batch_slot = 0;
-unsigned *d_decode_x_batch_slot = 0;
-unsigned *d_decode_y_batch_slot = 0;
-unsigned *d_decode_p_batch_slot = 0;
-unsigned *d_decode_t1_batch_slot = 0;
-unsigned *d_decode_t2_batch_slot = 0;
-unsigned *d_decode_ax_batch_slot = 0;
-unsigned *d_decode_dax_batch_slot = 0;
-unsigned *d_decode_vdax_batch_slot = 0;
-unsigned *d_decode_n1_batch_slot = 0;
-unsigned *d_decode_n2_batch_slot = 0;
-unsigned *d_decode_n3_batch_slot = 0;
+unsigned *d_encode_p_slot = 0;
+unsigned *d_encode_y_slot = 0;
+unsigned *d_decode_x_slot = 0;
+unsigned *d_decode_y_slot = 0;
+
+unsigned *d_decode_t1_slot = 0;
+unsigned *d_decode_t2_slot = 0;
+unsigned *d_decode_ax_slot = 0;
+unsigned *d_decode_dax_slot = 0;
+unsigned *d_decode_vdax_slot = 0;
+unsigned *d_decode_n1_slot = 0;
+unsigned *d_decode_n2_slot = 0;
+unsigned *d_decode_n3_slot = 0;
 
 unsigned *d_N_pos = 0;
 unsigned *d_root_pow = 0;
@@ -30,15 +30,15 @@ unsigned *d_root_inv_pow = 0;
 unsigned *d_inv = 0;
 unsigned *d_root_layer_pow = 0;
 unsigned *d_packet_product = 0;
-#line 160 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-struct _ZSt5queueIjSt5dequeIjSaIjEEE encode_batch_slot = {{{{{0}}}}};
-#line 160 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-struct _ZSt5queueIjSt5dequeIjSaIjEEE decode_batch_slot = {{{{{0}}}}};
+#line 153 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+struct _ZSt5queueIjSt5dequeIjSaIjEEE encode_slot = {{{{{0}}}}};
+#line 153 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+struct _ZSt5queueIjSt5dequeIjSaIjEEE decode_slot = {{{{{0}}}}};
 struct _ZSt5mutex mt_encode_slot = {{{0}}};
-#line 161 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 154 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct _ZSt5mutex mt_decode_slot = {{{0}}};
 struct _ZSt18condition_variable cv_encode_slot = {{0}};
-#line 162 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 155 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct _ZSt18condition_variable cv_decode_slot = {{0}};
 extern void *__dso_handle;
 #line 624 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\system_error"
@@ -72,7 +72,7 @@ extern  /* COMDAT group: _ZNSt9_FacetptrISt7num_putIcSt19ostreambuf_iteratorIcSt
 #line 255 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\xlocnum"
  /* COMDAT group: _ZNSt8numpunctIcE2idE */ struct _ZNSt6locale2idE _ZNSt8numpunctIcE2idE = {0};
 #line 1303 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\xmemory"
-static const struct _ZSt15_Fake_allocator __nv_static_30__dcb4e26f_9_kernel_cu_9470058a__ZN39_INTERNAL_dcb4e26f_9_kernel_cu_9470058aSt11_Fake_allocE;
+static const struct _ZSt15_Fake_allocator __nv_static_30__dcb4e26f_9_kernel_cu_f9c6e15d__ZN39_INTERNAL_dcb4e26f_9_kernel_cu_f9c6e15dSt11_Fake_allocE;
 #line 40 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\iostream"
 extern _ZSt7ostream _ZSt4cout;
 extern _ZSt7ostream _ZSt4cerr;
@@ -99,4 +99,4 @@ extern _ZSt7ostream _ZSt4cerr;
 #line 419 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\xlocale"
  /* COMDAT group: _ZNSt9_FacetptrISt7num_putIcSt19ostreambuf_iteratorIcSt11char_traitsIcEEEE6_PsaveE */ const struct _ZNSt6locale5facetE *_ZNSt9_FacetptrISt7num_putIcSt19ostreambuf_iteratorIcSt11char_traitsIcEEEE6_PsaveE = ((const struct _ZNSt6locale5facetE *)0i64);
 #line 1303 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\xmemory"
-static const struct _ZSt15_Fake_allocator __nv_static_30__dcb4e26f_9_kernel_cu_9470058a__ZN39_INTERNAL_dcb4e26f_9_kernel_cu_9470058aSt11_Fake_allocE = {0};
+static const struct _ZSt15_Fake_allocator __nv_static_30__dcb4e26f_9_kernel_cu_f9c6e15d__ZN39_INTERNAL_dcb4e26f_9_kernel_cu_f9c6e15dSt11_Fake_allocE = {0};

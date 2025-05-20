@@ -1,16 +1,13 @@
 ﻿  Compiling CUDA source file kernel.cu...
   
   C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin\nvcc.exe" -gencode=arch=compute_86,code=\"sm_86,compute_86\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\bin\HostX86\x64" -x cu -rdc=true  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\include"    --keep --keep-dir x64\Release -use_fast_math -maxrregcount=0  --machine 64 --compile -cudart static    -DWIN32 -DWIN64 -DNDEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Ox /Fdx64\Release\vc142.pdb /FS   /MT " -o C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\x64\Release\kernel.cu.obj "C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu" 
-C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(105): warning #177-D: variable "SIZE_SMALL_BATCH" was declared but never referenced
-  
-C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(106): warning #177-D: variable "SIZE_LARGE_BATCH" was declared but never referenced
+C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(88): warning #177-D: variable "LEN_BATCH" was declared but never referenced
   
   kernel.cu
-C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(1120): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(1170): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(1228): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(1269): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(1398): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(1155): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(1205): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(1263): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\kernel.cu(1436): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   
   C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin\nvcc.exe" -dlink -o x64\Release\rs_cuda.device-link.obj -Xcompiler "/EHsc /W3 /nologo /Ox /Fdx64\Release\vc142.pdb   /MT " -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin/crt" -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\lib\x64" cudart_static.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib cudart.lib cudadevrt.lib  -gencode=arch=compute_86,code=sm_86  --machine 64 C:\Users\captain3060\Projects\PBL7_DUT_ECC_CUDA\rs_cuda\rs_cuda\x64\Release\kernel.cu.obj 
   cudart_static.lib
