@@ -3,7 +3,7 @@ extern  /* COMDAT group: _ZTISt20bad_array_new_length */ const struct __si_class
 extern  /* COMDAT group: _ZTISt12system_error */ const struct __si_class_type_info _ZTISt12system_error;
 extern  /* COMDAT group: _ZTISt8bad_cast */ const struct __si_class_type_info _ZTISt8bad_cast;
 extern  /* COMDAT group: _ZTINSt8ios_base7failureE */ const struct __si_class_type_info _ZTINSt8ios_base7failureE;
-#line 116 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 129 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned **h_encode_p_slot = 0;
 unsigned **h_encode_y_slot = 0;
 unsigned **h_decode_x_slot = 0;
@@ -30,15 +30,15 @@ unsigned *d_root_inv_pow = 0;
 unsigned *d_inv = 0;
 unsigned *d_root_layer_pow = 0;
 unsigned *d_packet_product = 0;
-#line 153 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 166 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct _ZSt5queueIjSt5dequeIjSaIjEEE encode_slot = {{{{{0}}}}};
-#line 153 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 166 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct _ZSt5queueIjSt5dequeIjSaIjEEE decode_slot = {{{{{0}}}}};
 struct _ZSt5mutex mt_encode_slot = {{{0}}};
-#line 154 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 167 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct _ZSt5mutex mt_decode_slot = {{{0}}};
 struct _ZSt18condition_variable cv_encode_slot = {{0}};
-#line 155 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 168 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct _ZSt18condition_variable cv_decode_slot = {{0}};
 extern void *__dso_handle;
 #line 624 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\system_error"
