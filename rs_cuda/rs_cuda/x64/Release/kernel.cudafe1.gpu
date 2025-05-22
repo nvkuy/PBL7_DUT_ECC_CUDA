@@ -38,9 +38,9 @@ struct lconv;
 struct _Ctypevec;
 #line 58 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\xlocinfo.h"
 struct _Cvtvec;
-#line 156 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 154 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct CB_DATA;
-#line 172 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 170 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct _ZZ8pop_slotRSt5queueIjSt5dequeIjSaIjEEERSt5mutexRSt18condition_variableEUlvE_;
 #line 635 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\__msvc_chrono.hpp"
 struct _ZNSt6chrono12system_clockE;
@@ -735,21 +735,21 @@ int _Isclocale;
 #line 62 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\xlocinfo.h"
 unsigned char _Isleadbyte[32];};
 #pragma pack()
-#line 156 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 154 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct CB_DATA {
-#line 157 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 155 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned slot_id;
-#line 158 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 156 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *dst;
-#line 159 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 157 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *src;
-#line 160 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 158 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 size_t size_res;
-#line 161 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 159 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct _ZSt5queueIjSt5dequeIjSaIjEEE *slot;
-#line 162 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 160 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct _ZSt5mutex *mt;
-#line 163 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 161 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct _ZSt18condition_variable *cv;};
 #line 742 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\xmemory"
 typedef ptrdiff_t _ZNSt13_Simple_typesIjE15difference_typeE;
@@ -763,9 +763,9 @@ typedef _ZNSt16_Vector_iteratorISt11_Vector_valISt13_Simple_typesIjEEE15differen
 typedef _ZNSt21_Iterator_traits_baseISt16_Vector_iteratorISt11_Vector_valISt13_Simple_typesIjEEEvE15difference_typeE _ZSt12_Iter_diff_tISt16_Vector_iteratorISt11_Vector_valISt13_Simple_typesIjEEEE;
 #line 4517 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\algorithm"
 typedef _ZSt12_Iter_diff_tISt16_Vector_iteratorISt11_Vector_valISt13_Simple_typesIjEEEE _ZZSt16_Random_shuffle1ISt16_Vector_iteratorISt11_Vector_valISt13_Simple_typesIjEEESt14_Rng_from_urngIxSt23mersenne_twister_engineIjLy32ELy624ELy397ELy31ELj2567483615ELy11ELj4294967295ELy7ELj2636928640ELy15ELj4022730752ELy18ELj1812433253EEEEvT_SA_RT0_E5_Diff;
-#line 172 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 170 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct _ZZ8pop_slotRSt5queueIjSt5dequeIjSaIjEEERSt5mutexRSt18condition_variableEUlvE_ {
-#line 172 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 170 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 struct _ZSt5queueIjSt5dequeIjSaIjEEE *slot;};
 #line 270 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\__msvc_chrono.hpp"
 typedef struct _ZNSt6chrono8durationIxSt5ratioILx1ELx1000000000EEEE _ZNSt11common_typeIJNSt6chrono8durationIxSt5ratioILx1ELx1000000000EEEES4_EE4typeE;
@@ -2302,8 +2302,6 @@ ___device__(extern  __no_sc__) enum cudaError cudaDeviceSynchronize(void);
 ___device__(extern  __no_sc__) enum cudaError cudaPeekAtLastError(void);
 #line 144 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\cuda_device_runtime_api.h"
 ___device__(extern  __no_sc__) const char *cudaGetErrorString(enum cudaError);
-#line 148 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\cuda_device_runtime_api.h"
-___device__(extern  __no_sc__) enum cudaError cudaStreamCreateWithFlags(struct CUstream_st **, unsigned);
 #line 149 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\cuda_device_runtime_api.h"
 ___device__(extern  __no_sc__) enum cudaError cudaStreamDestroy(struct CUstream_st *);
 #line 159 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\cuda_device_runtime_api.h"
@@ -2312,10 +2310,6 @@ ___device__(extern  __no_sc__) enum cudaError cudaFree(void *);
 ___device__(extern  __no_sc__) enum cudaError cudaMalloc(void **, size_t);
 #line 161 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\cuda_device_runtime_api.h"
 ___device__(extern  __no_sc__) enum cudaError cudaMemcpyAsync(void *, const void *, size_t, enum cudaMemcpyKind, struct CUstream_st *);
-#line 222 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\cuda_device_runtime_api.h"
-___device__(extern  __no_sc__) void *cudaGetParameterBufferV2(void *, struct dim3, struct dim3, unsigned);
-#line 243 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\cuda_device_runtime_api.h"
-___device__(extern  __no_sc__) enum cudaError cudaLaunchDeviceV2(void *, struct CUstream_st *);
 #if !defined(__CUDABE__)
 #line 43 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\vcruntime_string.h"
  __device_builtin__ ___device__(extern  __no_sc__) void *memcpy(void *, const void *, size_t);
@@ -2336,46 +2330,52 @@ ___device__(extern  __no_sc__) void *_ZnwyPv(size_t, void *);
 ___device__(extern  __no_sc__) void free(void *);
 #line 101 "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt\\corecrt_malloc.h"
 ___device__(extern  __no_sc__) void *malloc(size_t);
+#if !defined(__CUDABE__)
+#line 345 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.h"
+ __device_builtin__ ___device__(extern  __no_sc__) unsigned umin(const unsigned, const unsigned);
+#endif
+#if !defined(__CUDABE__)
+#line 421 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.h"
+ __device_builtin__ ___device__(extern  __no_sc__) unsigned umax(const unsigned, const unsigned);
+#endif
+#line 868 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+___device__(static  __no_sc__) unsigned _ZN39_INTERNAL_dcb4e26f_9_kernel_cu_f9c6e15d3minEjj(const unsigned, const unsigned);
+#line 993 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+___device__(static  __no_sc__) unsigned _ZN39_INTERNAL_dcb4e26f_9_kernel_cu_f9c6e15d3maxEjj(const unsigned, const unsigned);
+#line 1003 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+___device__(static  __no_sc__) unsigned _ZN39_INTERNAL_dcb4e26f_9_kernel_cu_f9c6e15d3maxEji(const unsigned, const int);
+#if !defined(__CUDABE__)
+#line 167 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt/device_functions.h"
+ __device_builtin__ ___device__(extern  __no_sc__) void __syncthreads(void);
+#endif
 #line 3309 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt/device_functions.h"
 ___device__(extern  __no_sc__) unsigned __cudaPushCallConfiguration(struct dim3, struct dim3, size_t, struct CUstream_st *);
-#line 206 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-___device__(extern  __no_sc__) __forceinline__ void _Z18build_launch_paramjRjS_(unsigned, unsigned *, unsigned *);
-#line 218 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 208 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 ___device__(extern  __no_sc__) __forceinline__ unsigned _Z7mul_modjj(unsigned, unsigned);
-#line 225 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 215 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 ___device__(extern  __no_sc__) __forceinline__ unsigned _Z7div_modjjPj(unsigned, unsigned, unsigned *);
-#line 231 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 221 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 ___device__(extern  __no_sc__) __forceinline__ unsigned _Z7add_modjj(unsigned, unsigned);
-#line 236 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 226 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 ___device__(extern  __no_sc__) __forceinline__ unsigned _Z7sub_modjj(unsigned, unsigned);
-#line 241 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 231 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 ___device__(extern  __no_sc__) __forceinline__ unsigned _Z7pow_modjj(unsigned, unsigned);
-#line 294 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-___device__(extern  __no_sc__) __forceinline__ void _Z3fntPjS_jjjS_S_S_P11CUstream_st(unsigned *, unsigned *, unsigned, unsigned, unsigned, unsigned *, unsigned *, unsigned *, struct CUstream_st *);
-#line 341 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-___device__(extern  __no_sc__) __forceinline__ void _Z10d_poly_mulPjS_S_S_S_jS_S_S_(unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned, unsigned *, unsigned *, unsigned *);
 #line 679 "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/include\\cuda_runtime.h"
 ___device__(static  __no_sc__) __inline__ enum cudaError _ZN39_INTERNAL_dcb4e26f_9_kernel_cu_f9c6e15d10cudaMallocIjEE9cudaErrorPPT_y(unsigned **, size_t);
-#line 254 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ extern void _Z9g_pre_fntPjS_jS_(unsigned *, unsigned *, unsigned, unsigned *);
-#line 264 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ extern void _Z9g_end_fntPjjS_(unsigned *, unsigned, unsigned *);
-#line 275 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ extern void _Z7g_fnt_iPjjbS_(unsigned *, unsigned, __nv_bool, unsigned *);
-#line 321 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ extern void _Z14g_vector_mul_iPjS_S_(unsigned *, unsigned *, unsigned *);
-#line 332 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ extern void _Z6g_fillPjj(unsigned *, unsigned);
-#line 406 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ extern void _Z12g_poly_derivPjS_(unsigned *, unsigned *);
-#line 415 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ extern void _Z17g_build_product_iPjS_S_jS_S_S_(unsigned *, unsigned *, unsigned *, unsigned, unsigned *, unsigned *, unsigned *);
-#line 458 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ extern void _Z10g_build_n1PjS_S_S_S_(unsigned *, unsigned *, unsigned *, unsigned *, unsigned *);
-#line 469 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ extern void _Z10g_build_n2PjS_S_(unsigned *, unsigned *, unsigned *);
-#line 478 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ extern void _Z10g_build_n3PjS_(unsigned *, unsigned *);
+#line 244 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ extern void _Z3fntPjS_jjjS_S_S_j(unsigned *, unsigned *, unsigned, unsigned, unsigned, unsigned *, unsigned *, unsigned *, unsigned);
+#line 295 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ extern void _Z14g_vector_mul_iPjS_S_jj(unsigned *, unsigned *, unsigned *, unsigned, unsigned);
+#line 306 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ extern void _Z6g_fillPjjjj(unsigned *, unsigned, unsigned, unsigned);
+#line 334 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ extern void _Z12g_poly_derivPjS_j(unsigned *, unsigned *, unsigned);
+#line 372 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ extern void _Z10g_build_n1PjS_S_S_S_j(unsigned *, unsigned *, unsigned *, unsigned *, unsigned *, unsigned);
+#line 383 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ extern void _Z10g_build_n2PjS_S_j(unsigned *, unsigned *, unsigned *, unsigned);
+#line 392 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ extern void _Z10g_build_n3PjS_j(unsigned *, unsigned *, unsigned);
 #line 427 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\vector_types.h"
 ___device__(extern  __no_sc__) void _ZN4dim3C1Ejjj(struct dim3 *const, unsigned, unsigned, unsigned);
 ___device__(extern  __no_sc__) void _ZN4dim3C2Ejjj(struct dim3 *const, unsigned, unsigned, unsigned);
@@ -2475,74 +2475,104 @@ return _Where;
 #endif
 #if !defined(__CUDABE__)
 #endif
-#line 206 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __forceinline__ void _Z18build_launch_paramjRjS_(
-#line 206 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned log_n, 
-#line 206 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *n_th, 
-#line 206 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *n_bl){
-#line 206 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#line 868 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+___device__(static  __no_sc__) __inline__ unsigned _ZN39_INTERNAL_dcb4e26f_9_kernel_cu_f9c6e15d3minEjj(
+#line 868 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+const unsigned a, 
+#line 868 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+const unsigned b){
+#line 869 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
 {
-#line 207 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-if (log_n <= 5U)
-#line 207 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 870 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+return umin(a, b);
+#line 871 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+}}
+#line 993 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+___device__(static  __no_sc__) __inline__ unsigned _ZN39_INTERNAL_dcb4e26f_9_kernel_cu_f9c6e15d3maxEjj(
+#line 993 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+const unsigned a, 
+#line 993 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+const unsigned b){
+#line 994 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
 {
+#line 995 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+return umax(a, b);
+#line 996 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+}}
+#line 1003 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+___device__(static  __no_sc__) __inline__ unsigned _ZN39_INTERNAL_dcb4e26f_9_kernel_cu_f9c6e15d3maxEji(
+#line 1003 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+const unsigned a, 
+#line 1003 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+const int b){
+#line 1004 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+{
+#line 1005 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+return umax(a, ((unsigned)b));
+#line 1006 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\crt\\math_functions.hpp"
+}}
+#if !defined(__CUDABE__)
+#endif
 #line 208 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(*n_th) = ((unsigned)(1 << log_n));
-#line 209 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(*n_bl) = 1U;
-#line 210 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-}
-#line 211 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-else 
-#line 211 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 212 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619543_12_non_const_c_l2_sqrt_n;
-#line 212 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619543_12_non_const_c_l2_sqrt_n = ((log_n >> 1) + (log_n & 1U));
-#line 213 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(*n_th) = ((unsigned)(1 << __cuda_local_var_619543_12_non_const_c_l2_sqrt_n));
-#line 214 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(*n_bl) = ((unsigned)(1 << (log_n - __cuda_local_var_619543_12_non_const_c_l2_sqrt_n)));
-#line 215 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-} 
-#line 216 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-}}
-#line 218 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
  __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __forceinline__ unsigned _Z7mul_modjj(
-#line 218 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 208 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned a, 
-#line 218 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 208 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned b){
-#line 219 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 209 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 220 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 210 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 if ((a == 65536U) && (b == 65536U)) {
-#line 221 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 211 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 return 1U; }
-#line 222 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 212 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 return (a * b) % 65537U;
-#line 223 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 213 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 }}
-#line 225 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 215 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
  __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __forceinline__ unsigned _Z7div_modjjPj(
-#line 225 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 215 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned a, 
-#line 225 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 215 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned b, 
-#line 226 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 216 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *d_inv){
+#line 217 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+{
+#line 218 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+return _Z7mul_modjj(a, (d_inv[b]));
+#line 219 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+}}
+#line 221 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __forceinline__ unsigned _Z7add_modjj(
+#line 221 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned a, 
+#line 221 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned b){
+#line 222 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+{
+#line 223 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+return (a + b) % 65537U;
+#line 224 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+}}
+#line 226 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __forceinline__ unsigned _Z7sub_modjj(
+#line 226 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned a, 
+#line 226 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned b){
 #line 227 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
 #line 228 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-return _Z7mul_modjj(a, (d_inv[b]));
+return ((a - b) + 65537U) % 65537U;
 #line 229 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 }}
 #line 231 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __forceinline__ unsigned _Z7add_modjj(
+ __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __forceinline__ unsigned _Z7pow_modjj(
 #line 231 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned a, 
 #line 231 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
@@ -2550,240 +2580,26 @@ unsigned b){
 #line 232 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
 #line 233 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-return (a + b) % 65537U;
+ unsigned __cuda_local_var_619564_11_non_const_res;
+#line 233 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619564_11_non_const_res = 1U;
 #line 234 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-}}
-#line 236 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __forceinline__ unsigned _Z7sub_modjj(
-#line 236 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned a, 
-#line 236 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned b){
-#line 237 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 238 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-return ((a - b) + 65537U) % 65537U;
-#line 239 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-}}
-#line 241 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __forceinline__ unsigned _Z7pow_modjj(
-#line 241 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned a, 
-#line 241 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned b){
-#line 242 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 243 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619574_11_non_const_res;
-#line 243 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619574_11_non_const_res = 1U;
-#line 244 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 while (b > 0U)
-#line 245 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 235 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 246 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 236 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 if (b & 1U) {
-#line 247 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619574_11_non_const_res = (_Z7mul_modjj(__cuda_local_var_619574_11_non_const_res, a)); }
-#line 248 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 237 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619564_11_non_const_res = (_Z7mul_modjj(__cuda_local_var_619564_11_non_const_res, a)); }
+#line 238 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 a = (_Z7mul_modjj(a, a));
-#line 249 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 239 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 b >>= 1;
-#line 250 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 240 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 }
-#line 251 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-return __cuda_local_var_619574_11_non_const_res;
-#line 252 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-}}
-#line 294 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __forceinline__ void _Z3fntPjS_jjjS_S_S_P11CUstream_st(
-#line 294 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *a, 
-#line 294 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *b, 
-#line 294 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned log_na, 
-#line 294 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned log_nb, 
-#line 294 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned opt, 
-#line 295 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *d_N_pos, 
-#line 295 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *d_root_layer_pow, 
-#line 295 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *d_inv, 
-#line 295 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-struct CUstream_st *stream){
-#line 296 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{  struct dim3 __T0;
- struct dim3 __T1;
- struct dim3 __T2;
- struct dim3 __T3;
- char *__T4;
-#line 307 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619638_11_non_const_nb;
-#line 307 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619638_29_non_const_wp;
-#line 308 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619639_11_non_const_n_bl;
-#line 308 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619639_17_non_const_n_th;
-#line 307 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619638_11_non_const_nb = ((unsigned)(1 << log_nb));
-#line 307 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619638_29_non_const_wp = ((opt & 2U) >> 1);
-#line 310 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-_Z18build_launch_paramjRjS_((log_na - 2U), (&__cuda_local_var_619639_17_non_const_n_th), (&__cuda_local_var_619639_11_non_const_n_bl));
-#line 311 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(((__T2 = ((_ZN4dim3C1Ejjj((&__T0), __cuda_local_var_619639_11_non_const_n_bl, 1U, 1U)) , __T0)) , (void)(__T3 = ((_ZN4dim3C1Ejjj((&__T1), __cuda_local_var_619639_17_non_const_n_th, 1U, 1U)) , __T1))) , (__T4 = ((char *)(cudaGetParameterBufferV2(((void *)_Z9g_pre_fntPjS_jS_), __T2, __T3, ((unsigned)0ULL)))))) ? ((void)(((*((unsigned **)((void *)__T4))) = a) , (void)(((*((unsigned **)((void *)(__T4 + 8ULL)))) = b) , (((*((unsigned *)((void *)(__T4 + 16ULL)))) = (__cuda_local_var_619638_11_non_const_nb - 1U)) , (((*((unsigned **)((void *)(__T4 + 24ULL)))) = d_N_pos) , (cudaLaunchDeviceV2(((void *)__T4), ((struct CUstream_st *)stream)))))))) : ((void)0);
-#line 313 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-_Z18build_launch_paramjRjS_(((log_nb - 1U) - 2U), (&__cuda_local_var_619639_17_non_const_n_th), (&__cuda_local_var_619639_11_non_const_n_bl));
-#line 314 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 314 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned i;
-#line 314 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-i = 0U;
-#line 314 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (i < log_nb); i++) {  struct dim3 __T5;
- struct dim3 __T6;
- struct dim3 __T7;
- struct dim3 __T8;
- char *__T9;
-#line 315 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(((__T7 = ((_ZN4dim3C1Ejjj((&__T5), __cuda_local_var_619639_11_non_const_n_bl, 1U, 1U)) , __T5)) , (void)(__T8 = ((_ZN4dim3C1Ejjj((&__T6), __cuda_local_var_619639_17_non_const_n_th, 1U, 1U)) , __T6))) , (__T9 = ((char *)(cudaGetParameterBufferV2(((void *)_Z7g_fnt_iPjjbS_), __T7, __T8, ((unsigned)0ULL)))))) ? ((void)(((*((unsigned **)((void *)__T9))) = b) , (void)(((*((unsigned *)((void *)(__T9 + 8ULL)))) = i) , (((*((__nv_bool *)((void *)(__T9 + 12ULL)))) = ((__nv_bool)(__cuda_local_var_619638_29_non_const_wp != 0U))) , (((*((unsigned **)((void *)(__T9 + 16ULL)))) = d_root_layer_pow) , (cudaLaunchDeviceV2(((void *)__T9), ((struct CUstream_st *)stream)))))))) : ((void)0); } }
-#line 317 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-if (opt & 1U) {  struct dim3 __T10;
- struct dim3 __T11;
- struct dim3 __T12;
- struct dim3 __T13;
- char *__T14;
-#line 318 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(((__T12 = ((_ZN4dim3C1Ejjj((&__T10), __cuda_local_var_619639_11_non_const_n_bl, 1U, 1U)) , __T10)) , (void)(__T13 = ((_ZN4dim3C1Ejjj((&__T11), __cuda_local_var_619639_17_non_const_n_th, 1U, 1U)) , __T11))) , (__T14 = ((char *)(cudaGetParameterBufferV2(((void *)_Z9g_end_fntPjjS_), __T12, __T13, ((unsigned)0ULL)))))) ? ((void)(((*((unsigned **)((void *)__T14))) = b) , (void)(((*((unsigned *)((void *)(__T14 + 8ULL)))) = __cuda_local_var_619638_11_non_const_nb) , (((*((unsigned **)((void *)(__T14 + 16ULL)))) = d_inv) , (cudaLaunchDeviceV2(((void *)__T14), ((struct CUstream_st *)stream))))))) : ((void)0); } 
-#line 319 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-}}
-#line 341 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __forceinline__ void _Z10d_poly_mulPjS_S_S_S_jS_S_S_(
-#line 341 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *a, 
-#line 341 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *b, 
-#line 341 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *t1, 
-#line 341 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *t2, 
-#line 341 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *c, 
-#line 341 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned log_n, 
-#line 342 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *d_N_pos, 
-#line 342 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *d_root_layer_pow, 
-#line 342 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *d_inv){
-#line 343 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 348 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619679_11_non_const_na;
-#line 348 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619679_28_non_const_nc;
-#line 348 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619679_42_non_const_size_nc;
-#line 348 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619679_11_non_const_na = ((unsigned)(1 << log_n));
-#line 348 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619679_28_non_const_nc = (__cuda_local_var_619679_11_non_const_na << 1);
-#line 348 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619679_42_non_const_size_nc = ((unsigned)(((unsigned long long)__cuda_local_var_619679_28_non_const_nc) * 4ULL));
-#line 350 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-if (__cuda_local_var_619679_11_non_const_na <= 64U)
-#line 351 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 352 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 352 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned i;
-#line 352 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-i = 0U;
-#line 352 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (i < __cuda_local_var_619679_11_non_const_na); i++)
-#line 353 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 354 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(t1[i]) = (a[i]);
-#line 355 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(t2[i]) = (b[i]);
-#line 356 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-} }
-#line 357 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-memset(((void *)c), 0, ((size_t)__cuda_local_var_619679_42_non_const_size_nc));
-#line 358 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 358 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned i;
-#line 358 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-i = 0U;
-#line 358 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (i < __cuda_local_var_619679_11_non_const_na); i++) {
-#line 359 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 359 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned j;
-#line 359 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-j = 0U;
-#line 359 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (j < __cuda_local_var_619679_11_non_const_na); j++) {
-#line 360 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(c[(i + j)]) = (_Z7add_modjj((c[(i + j)]), (_Z7mul_modjj((t1[i]), (t2[j]))))); } } } }
-#line 361 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-}
-#line 363 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-else 
-#line 363 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{  struct dim3 __T15;
- struct dim3 __T16;
- struct dim3 __T17;
- struct dim3 __T18;
- char *__T19;
- struct dim3 __T20;
- struct dim3 __T21;
- struct dim3 __T22;
- struct dim3 __T23;
- char *__T24;
- struct dim3 __T25;
- struct dim3 __T26;
- struct dim3 __T27;
- struct dim3 __T28;
- char *__T29;
-#line 365 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- struct CUstream_st *__cuda_local_var_619696_16_non_const_stream;
-#line 368 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619699_12_non_const_n_bl;
-#line 368 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619699_18_non_const_n_th;
-#line 366 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-cudaStreamCreateWithFlags((&__cuda_local_var_619696_16_non_const_stream), 1U);
-#line 369 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-_Z18build_launch_paramjRjS_(((log_n + 1U) - 3U), (&__cuda_local_var_619699_18_non_const_n_th), (&__cuda_local_var_619699_12_non_const_n_bl));
-#line 370 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(((__T17 = ((_ZN4dim3C1Ejjj((&__T15), __cuda_local_var_619699_12_non_const_n_bl, 1U, 1U)) , __T15)) , (void)(__T18 = ((_ZN4dim3C1Ejjj((&__T16), __cuda_local_var_619699_18_non_const_n_th, 1U, 1U)) , __T16))) , (__T19 = ((char *)(cudaGetParameterBufferV2(((void *)_Z6g_fillPjj), __T17, __T18, ((unsigned)0ULL)))))) ? ((void)(((*((unsigned **)((void *)__T19))) = t1) , (void)(((*((unsigned *)((void *)(__T19 + 8ULL)))) = 0U) , (cudaLaunchDeviceV2(((void *)__T19), ((struct CUstream_st *)__cuda_local_var_619696_16_non_const_stream)))))) : ((void)0);
-#line 371 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(((__T22 = ((_ZN4dim3C1Ejjj((&__T20), __cuda_local_var_619699_12_non_const_n_bl, 1U, 1U)) , __T20)) , (void)(__T23 = ((_ZN4dim3C1Ejjj((&__T21), __cuda_local_var_619699_18_non_const_n_th, 1U, 1U)) , __T21))) , (__T24 = ((char *)(cudaGetParameterBufferV2(((void *)_Z6g_fillPjj), __T22, __T23, ((unsigned)0ULL)))))) ? ((void)(((*((unsigned **)((void *)__T24))) = t2) , (void)(((*((unsigned *)((void *)(__T24 + 8ULL)))) = 0U) , (cudaLaunchDeviceV2(((void *)__T24), ((struct CUstream_st *)__cuda_local_var_619696_16_non_const_stream)))))) : ((void)0);
-#line 373 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-_Z3fntPjS_jjjS_S_S_P11CUstream_st(a, t1, log_n, (log_n + 1U), 0U, d_N_pos, d_root_layer_pow, d_inv, __cuda_local_var_619696_16_non_const_stream);
-#line 374 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-_Z3fntPjS_jjjS_S_S_P11CUstream_st(b, t2, log_n, (log_n + 1U), 0U, d_N_pos, d_root_layer_pow, d_inv, __cuda_local_var_619696_16_non_const_stream);
-#line 376 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(((__T27 = ((_ZN4dim3C1Ejjj((&__T25), __cuda_local_var_619699_12_non_const_n_bl, 1U, 1U)) , __T25)) , (void)(__T28 = ((_ZN4dim3C1Ejjj((&__T26), __cuda_local_var_619699_18_non_const_n_th, 1U, 1U)) , __T26))) , (__T29 = ((char *)(cudaGetParameterBufferV2(((void *)_Z14g_vector_mul_iPjS_S_), __T27, __T28, ((unsigned)0ULL)))))) ? ((void)(((*((unsigned **)((void *)__T29))) = t1) , (void)(((*((unsigned **)((void *)(__T29 + 8ULL)))) = t2) , (((*((unsigned **)((void *)(__T29 + 16ULL)))) = t1) , (cudaLaunchDeviceV2(((void *)__T29), ((struct CUstream_st *)__cuda_local_var_619696_16_non_const_stream))))))) : ((void)0);
-#line 378 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-_Z3fntPjS_jjjS_S_S_P11CUstream_st(t1, c, (log_n + 1U), (log_n + 1U), 3U, d_N_pos, d_root_layer_pow, d_inv, __cuda_local_var_619696_16_non_const_stream);
-#line 380 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-cudaStreamDestroy(__cuda_local_var_619696_16_non_const_stream);
-#line 382 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-} 
-#line 383 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 241 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+return __cuda_local_var_619564_11_non_const_res;
+#line 242 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 }}
 #line 679 "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/include\\cuda_runtime.h"
 ___device__(static  __no_sc__) __inline__ enum cudaError _ZN39_INTERNAL_dcb4e26f_9_kernel_cu_f9c6e15d10cudaMallocIjEE9cudaErrorPPT_y(
@@ -2797,403 +2613,381 @@ size_t size){
 return cudaMalloc(((void **)((void *)devPtr)), size);
 #line 685 "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/include\\cuda_runtime.h"
 }}
-#line 254 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ void _Z9g_pre_fntPjS_jS_(
-#line 254 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 244 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ void _Z3fntPjS_jjjS_S_S_j(
+#line 244 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *a, 
-#line 254 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 244 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *b, 
-#line 254 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned st, 
-#line 254 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *d_N_pos){
-#line 255 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 257 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619588_11_non_const_id;
-#line 258 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619589_11_non_const_id_l;
-#line 258 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619589_38_non_const_id_r;
-#line 257 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619588_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
-#line 258 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619589_11_non_const_id_l = (__cuda_local_var_619588_11_non_const_id * 4U);
-#line 258 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619589_38_non_const_id_r = (__cuda_local_var_619589_11_non_const_id_l + 4U);
-#line 259 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 244 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned log_na, 
+#line 244 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned log_nb, 
+#line 244 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned opt, 
+#line 245 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned *d_N_pos, 
+#line 245 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned *d_root_layer_pow, 
+#line 245 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned *d_inv, 
+#line 245 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned wpt){
+#line 246 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
 #line 259 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned k;
-#line 259 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-k = __cuda_local_var_619589_11_non_const_id_l;
-#line 259 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (k < __cuda_local_var_619589_38_non_const_id_r); k++) {
+ unsigned __cuda_local_var_619590_11_non_const_id;
 #line 260 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(b[(d_N_pos[(st + k)])]) = (a[k]); } } 
+ unsigned __cuda_local_var_619591_11_non_const_na;
+#line 260 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619591_29_non_const_nb;
+#line 260 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619591_47_non_const_wp;
+#line 260 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619591_68_non_const_st;
+#line 261 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619592_11_non_const_id_l;
+#line 261 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619592_28_non_const_id_r;
 #line 262 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-}}
-#line 264 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ void _Z9g_end_fntPjjS_(
-#line 264 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *b, 
-#line 264 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned n, 
-#line 264 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *d_inv){
-#line 265 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619593_11_non_const_os1;
+#line 262 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619593_26_non_const_os2;
+#line 259 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619590_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
+#line 260 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619591_11_non_const_na = ((unsigned)(1 << log_na));
+#line 260 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619591_29_non_const_nb = ((unsigned)(1 << log_nb));
+#line 260 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619591_47_non_const_wp = ((opt & 2U) >> 1);
+#line 260 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619591_68_non_const_st = (__cuda_local_var_619591_29_non_const_nb - 1U);
+#line 261 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619592_11_non_const_id_l = (__cuda_local_var_619590_11_non_const_id * wpt);
+#line 261 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619592_28_non_const_id_r = (_ZN39_INTERNAL_dcb4e26f_9_kernel_cu_f9c6e15d3minEjj((__cuda_local_var_619592_11_non_const_id_l + wpt), (__cuda_local_var_619591_29_non_const_nb >> 1)));
+#line 262 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619593_11_non_const_os1 = (__cuda_local_var_619591_29_non_const_nb >> 1);
+#line 262 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619593_26_non_const_os2 = (65535U * __cuda_local_var_619591_47_non_const_wp);
+#line 263 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 267 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619598_11_non_const_id;
-#line 268 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619599_11_non_const_id_l;
-#line 268 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619599_38_non_const_id_r;
-#line 267 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619598_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
-#line 268 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619599_11_non_const_id_l = (__cuda_local_var_619598_11_non_const_id * 4U);
-#line 268 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619599_38_non_const_id_r = (__cuda_local_var_619599_11_non_const_id_l + 4U);
-#line 269 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 269 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 263 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
  unsigned k;
-#line 269 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-k = __cuda_local_var_619599_11_non_const_id_l;
-#line 269 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (k < __cuda_local_var_619599_38_non_const_id_r); k++)
-#line 269 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 263 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+k = __cuda_local_var_619592_11_non_const_id_l;
+#line 263 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+for (; (k < __cuda_local_var_619592_28_non_const_id_r); k++)
+#line 263 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+{
+#line 264 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+if (k < __cuda_local_var_619591_11_non_const_na) {
+#line 264 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+(b[(d_N_pos[(__cuda_local_var_619591_68_non_const_st + k)])]) = (a[k]); }
+#line 265 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+if (log_na == log_nb) {
+#line 265 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+(b[(d_N_pos[((__cuda_local_var_619591_68_non_const_st + k) + __cuda_local_var_619593_11_non_const_os1)])]) = (a[(k + __cuda_local_var_619593_11_non_const_os1)]); }
+#line 266 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+} }
+#line 268 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__syncthreads();
+#line 270 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
 #line 270 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(b[(k << 1)]) = (_Z7div_modjjPj((b[(k << 1)]), n, d_inv));
-#line 271 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(b[((k << 1) | 1U)]) = (_Z7div_modjjPj((b[((k << 1) | 1U)]), n, d_inv));
+ unsigned i;
+#line 270 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+i = 0U;
+#line 270 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+for (; (i < log_nb); i++)
+#line 270 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+{
 #line 272 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-} } 
+ unsigned __cuda_local_var_619603_12_non_const_haft_len;
+#line 272 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619603_12_non_const_haft_len = ((unsigned)(1 << i));
 #line 273 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-}}
+{
+#line 273 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned k;
+#line 273 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+k = __cuda_local_var_619592_11_non_const_id_l;
+#line 273 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+for (; (k < __cuda_local_var_619592_28_non_const_id_r); k++)
+#line 273 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+{
+#line 274 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619605_13_non_const_bl_st;
+#line 274 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619605_44_non_const_th_id;
 #line 275 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ void _Z7g_fnt_iPjjbS_(
-#line 275 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *b, 
-#line 275 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned i, 
-#line 275 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__nv_bool inv, 
+ unsigned __cuda_local_var_619606_13_non_const_pos;
 #line 276 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *d_root_layer_pow){
+ unsigned __cuda_local_var_619607_13_non_const_u;
 #line 277 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
+ unsigned __cuda_local_var_619608_13_non_const_v;
+#line 274 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619605_13_non_const_bl_st = ((k >> i) << (i + 1U));
+#line 274 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619605_44_non_const_th_id = (k & (__cuda_local_var_619603_12_non_const_haft_len - 1U));
+#line 275 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619606_13_non_const_pos = (__cuda_local_var_619605_13_non_const_bl_st + __cuda_local_var_619605_44_non_const_th_id);
+#line 276 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619607_13_non_const_u = (b[__cuda_local_var_619606_13_non_const_pos]);
+#line 277 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619608_13_non_const_v = (_Z7mul_modjj((b[(__cuda_local_var_619606_13_non_const_pos + __cuda_local_var_619603_12_non_const_haft_len)]), (d_root_layer_pow[(((__cuda_local_var_619593_26_non_const_os2 + __cuda_local_var_619603_12_non_const_haft_len) - 1U) + __cuda_local_var_619605_44_non_const_th_id)])));
+#line 278 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+(b[__cuda_local_var_619606_13_non_const_pos]) = (_Z7add_modjj(__cuda_local_var_619607_13_non_const_u, __cuda_local_var_619608_13_non_const_v));
 #line 279 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619610_11_non_const_id;
+(b[(__cuda_local_var_619606_13_non_const_pos + __cuda_local_var_619603_12_non_const_haft_len)]) = (_Z7sub_modjj(__cuda_local_var_619607_13_non_const_u, __cuda_local_var_619608_13_non_const_v));
 #line 280 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619611_11_non_const_id_l;
-#line 280 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619611_38_non_const_id_r;
+} }
 #line 282 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619613_11_non_const_haft_len;
-#line 279 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619610_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
-#line 280 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619611_11_non_const_id_l = (__cuda_local_var_619610_11_non_const_id * 4U);
-#line 280 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619611_38_non_const_id_r = (__cuda_local_var_619611_11_non_const_id_l + 4U);
-#line 282 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619613_11_non_const_haft_len = ((unsigned)(1 << i));
-#line 283 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__syncthreads();
+#line 284 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+} }
+#line 286 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+if (opt & 1U)
+#line 286 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 283 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 287 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+{
+#line 287 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
  unsigned k;
-#line 283 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-k = __cuda_local_var_619611_11_non_const_id_l;
-#line 283 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (k < __cuda_local_var_619611_38_non_const_id_r); k++)
-#line 283 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 287 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+k = __cuda_local_var_619592_11_non_const_id_l;
+#line 287 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+for (; (k < __cuda_local_var_619592_28_non_const_id_r); k++)
+#line 287 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 284 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619615_12_non_const_bl_st;
-#line 284 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619615_43_non_const_th_id;
-#line 285 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619616_12_non_const_pos;
-#line 286 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619617_12_non_const_u;
-#line 287 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619618_12_non_const_v;
-#line 284 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619615_12_non_const_bl_st = ((k >> i) << (i + 1U));
-#line 284 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619615_43_non_const_th_id = (k & (__cuda_local_var_619613_11_non_const_haft_len - 1U));
-#line 285 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619616_12_non_const_pos = (__cuda_local_var_619615_12_non_const_bl_st + __cuda_local_var_619615_43_non_const_th_id);
-#line 286 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619617_12_non_const_u = (b[__cuda_local_var_619616_12_non_const_pos]);
-#line 287 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619618_12_non_const_v = (_Z7mul_modjj((b[(__cuda_local_var_619616_12_non_const_pos + __cuda_local_var_619613_11_non_const_haft_len)]), (d_root_layer_pow[((((65535U * ((unsigned)inv)) + __cuda_local_var_619613_11_non_const_haft_len) - 1U) + __cuda_local_var_619615_43_non_const_th_id)])));
 #line 288 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(b[__cuda_local_var_619616_12_non_const_pos]) = (_Z7add_modjj(__cuda_local_var_619617_12_non_const_u, __cuda_local_var_619618_12_non_const_v));
+(b[k]) = (_Z7div_modjjPj((b[k]), __cuda_local_var_619591_29_non_const_nb, d_inv));
 #line 289 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-(b[(__cuda_local_var_619616_12_non_const_pos + __cuda_local_var_619613_11_non_const_haft_len)]) = (_Z7sub_modjj(__cuda_local_var_619617_12_non_const_u, __cuda_local_var_619618_12_non_const_v));
+(b[(k + __cuda_local_var_619593_11_non_const_os1)]) = (_Z7div_modjjPj((b[(k + __cuda_local_var_619593_11_non_const_os1)]), __cuda_local_var_619591_29_non_const_nb, d_inv));
 #line 290 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-} } 
+} }
 #line 292 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+} 
+#line 293 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 }}
-#line 321 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ void _Z14g_vector_mul_iPjS_S_(
-#line 321 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 295 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ void _Z14g_vector_mul_iPjS_S_jj(
+#line 295 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *a, 
-#line 321 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 295 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *b, 
-#line 321 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *c){
-#line 322 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 295 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned *c, 
+#line 295 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned n, 
+#line 295 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned wpt){
+#line 296 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 324 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619655_11_non_const_id;
-#line 325 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619656_11_non_const_id_l;
-#line 325 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619656_37_non_const_id_r;
-#line 324 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619655_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
-#line 325 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619656_11_non_const_id_l = (__cuda_local_var_619655_11_non_const_id * 8U);
-#line 325 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619656_37_non_const_id_r = (__cuda_local_var_619656_11_non_const_id_l + 8U);
-#line 326 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 298 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619629_11_non_const_id;
+#line 299 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619630_11_non_const_id_l;
+#line 299 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619630_28_non_const_id_r;
+#line 298 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619629_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
+#line 299 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619630_11_non_const_id_l = (__cuda_local_var_619629_11_non_const_id * wpt);
+#line 299 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619630_28_non_const_id_r = (_ZN39_INTERNAL_dcb4e26f_9_kernel_cu_f9c6e15d3minEjj((__cuda_local_var_619630_11_non_const_id_l + wpt), n));
+#line 300 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 326 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 300 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
  unsigned k;
-#line 326 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-k = __cuda_local_var_619656_11_non_const_id_l;
-#line 326 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (k < __cuda_local_var_619656_37_non_const_id_r); k++) {
-#line 327 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 300 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+k = __cuda_local_var_619630_11_non_const_id_l;
+#line 300 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+for (; (k < __cuda_local_var_619630_28_non_const_id_r); k++) {
+#line 301 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 (c[k]) = (_Z7mul_modjj((a[k]), (b[k]))); } } 
-#line 330 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 304 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 }}
-#line 332 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ void _Z6g_fillPjj(
-#line 332 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 306 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ void _Z6g_fillPjjjj(
+#line 306 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *a, 
-#line 332 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned val){
-#line 332 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 306 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned val, 
+#line 306 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned n, 
+#line 306 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned wpt){
+#line 306 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 334 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619665_11_non_const_id;
-#line 335 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619666_11_non_const_id_l;
-#line 335 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619666_37_non_const_id_r;
-#line 334 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619665_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
-#line 335 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619666_11_non_const_id_l = (__cuda_local_var_619665_11_non_const_id * 8U);
-#line 335 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619666_37_non_const_id_r = (__cuda_local_var_619666_11_non_const_id_l + 8U);
-#line 336 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 308 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619639_11_non_const_id;
+#line 309 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619640_11_non_const_id_l;
+#line 309 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619640_28_non_const_id_r;
+#line 308 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619639_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
+#line 309 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619640_11_non_const_id_l = (__cuda_local_var_619639_11_non_const_id * wpt);
+#line 309 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619640_28_non_const_id_r = (_ZN39_INTERNAL_dcb4e26f_9_kernel_cu_f9c6e15d3minEjj((__cuda_local_var_619640_11_non_const_id_l + wpt), n));
+#line 310 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 336 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 310 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
  unsigned k;
-#line 336 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-k = __cuda_local_var_619666_11_non_const_id_l;
-#line 336 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (k < __cuda_local_var_619666_37_non_const_id_r); k++) {
-#line 337 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 310 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+k = __cuda_local_var_619640_11_non_const_id_l;
+#line 310 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+for (; (k < __cuda_local_var_619640_28_non_const_id_r); k++) {
+#line 311 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 (a[k]) = val; } } 
-#line 339 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 313 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 }}
-#line 406 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ void _Z12g_poly_derivPjS_(
-#line 406 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 334 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ void _Z12g_poly_derivPjS_j(
+#line 334 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *ax, 
-#line 406 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *dax){
-#line 407 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 334 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned *dax, 
+#line 334 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned wpt){
+#line 335 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 409 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619740_11_non_const_id;
-#line 410 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619741_11_non_const_id_l;
-#line 410 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619741_37_non_const_id_r;
-#line 409 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619740_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
-#line 410 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619741_11_non_const_id_l = (__cuda_local_var_619740_11_non_const_id * 4U);
-#line 410 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619741_37_non_const_id_r = (__cuda_local_var_619741_11_non_const_id_l + 4U);
-#line 411 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 337 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619668_11_non_const_id;
+#line 338 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619669_11_non_const_id_l;
+#line 338 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619669_28_non_const_id_r;
+#line 337 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619668_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
+#line 338 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619669_11_non_const_id_l = (__cuda_local_var_619668_11_non_const_id * wpt);
+#line 338 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619669_28_non_const_id_r = (__cuda_local_var_619669_11_non_const_id_l + wpt);
+#line 339 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 411 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 339 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
  unsigned k;
-#line 411 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-k = __cuda_local_var_619741_11_non_const_id_l;
-#line 411 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (k < __cuda_local_var_619741_37_non_const_id_r); k++) {
-#line 412 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 339 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+k = __cuda_local_var_619669_11_non_const_id_l;
+#line 339 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+for (; (k < __cuda_local_var_619669_28_non_const_id_r); k++) {
+#line 340 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 (dax[k]) = (_Z7mul_modjj((ax[(k + 1U)]), (k + 1U))); } } 
-#line 413 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 341 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 }}
-#line 415 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ void _Z17g_build_product_iPjS_S_jS_S_S_(
-#line 415 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *p, 
-#line 415 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *t1, 
-#line 415 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *t2, 
-#line 415 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned i, 
-#line 416 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *d_N_pos, 
-#line 416 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *d_root_layer_pow, 
-#line 416 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *d_inv){
-#line 417 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 419 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619750_11_non_const_id;
-#line 420 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619751_11_non_const_len;
-#line 422 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619753_11_non_const_id_l;
-#line 422 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619753_38_non_const_id_r;
-#line 419 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619750_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
-#line 420 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619751_11_non_const_len = ((unsigned)(1 << i));
-#line 422 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619753_11_non_const_id_l = (__cuda_local_var_619750_11_non_const_id * 1U);
-#line 422 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619753_38_non_const_id_r = (__cuda_local_var_619753_11_non_const_id_l + 1U);
-#line 423 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 423 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned k;
-#line 423 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-k = __cuda_local_var_619753_11_non_const_id_l;
-#line 423 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (k < __cuda_local_var_619753_38_non_const_id_r); k++)
-#line 423 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-{
-#line 424 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619755_12_non_const_st;
-#line 424 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619755_12_non_const_st = (k << (i + 1U));
-#line 425 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-_Z10d_poly_mulPjS_S_S_S_jS_S_S_((p + __cuda_local_var_619755_12_non_const_st), ((p + __cuda_local_var_619755_12_non_const_st) + __cuda_local_var_619751_11_non_const_len), (t1 + __cuda_local_var_619755_12_non_const_st), (t2 + __cuda_local_var_619755_12_non_const_st), (p + __cuda_local_var_619755_12_non_const_st), i, d_N_pos, d_root_layer_pow, d_inv);
-#line 426 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-} } 
-#line 428 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-}}
-#line 458 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ void _Z10g_build_n1PjS_S_S_S_(
-#line 458 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 372 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ void _Z10g_build_n1PjS_S_S_S_j(
+#line 372 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *n1, 
-#line 458 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 372 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *vdax, 
-#line 458 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 372 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *x, 
-#line 458 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 372 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *y, 
-#line 459 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *d_inv){
-#line 460 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 373 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned *d_inv, 
+#line 373 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned wpt){
+#line 374 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 462 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619793_11_non_const_id;
-#line 463 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619794_11_non_const_id_l;
-#line 463 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619794_37_non_const_id_r;
-#line 462 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619793_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
-#line 463 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619794_11_non_const_id_l = (__cuda_local_var_619793_11_non_const_id * 4U);
-#line 463 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619794_37_non_const_id_r = (__cuda_local_var_619794_11_non_const_id_l + 4U);
-#line 464 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 376 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619707_11_non_const_id;
+#line 377 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619708_11_non_const_id_l;
+#line 377 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619708_28_non_const_id_r;
+#line 376 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619707_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
+#line 377 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619708_11_non_const_id_l = (__cuda_local_var_619707_11_non_const_id * wpt);
+#line 377 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619708_28_non_const_id_r = (__cuda_local_var_619708_11_non_const_id_l + wpt);
+#line 378 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 464 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 378 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
  unsigned k;
-#line 464 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-k = __cuda_local_var_619794_11_non_const_id_l;
-#line 464 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (k < __cuda_local_var_619794_37_non_const_id_r); k++) {
-#line 465 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 378 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+k = __cuda_local_var_619708_11_non_const_id_l;
+#line 378 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+for (; (k < __cuda_local_var_619708_28_non_const_id_r); k++) {
+#line 379 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 (n1[k]) = (_Z7div_modjjPj((y[k]), (vdax[(x[k])]), d_inv)); } } 
-#line 467 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 381 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 }}
-#line 469 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ void _Z10g_build_n2PjS_S_(
-#line 469 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 383 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ void _Z10g_build_n2PjS_S_j(
+#line 383 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *n2, 
-#line 469 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 383 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *n1, 
-#line 469 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *x){
-#line 469 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 383 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned *x, 
+#line 383 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned wpt){
+#line 383 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 471 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619802_11_non_const_id;
-#line 472 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619803_11_non_const_id_l;
-#line 472 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619803_37_non_const_id_r;
-#line 471 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619802_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
-#line 472 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619803_11_non_const_id_l = (__cuda_local_var_619802_11_non_const_id * 4U);
-#line 472 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619803_37_non_const_id_r = (__cuda_local_var_619803_11_non_const_id_l + 4U);
-#line 473 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 385 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619716_11_non_const_id;
+#line 386 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619717_11_non_const_id_l;
+#line 386 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619717_28_non_const_id_r;
+#line 385 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619716_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
+#line 386 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619717_11_non_const_id_l = (__cuda_local_var_619716_11_non_const_id * wpt);
+#line 386 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619717_28_non_const_id_r = (__cuda_local_var_619717_11_non_const_id_l + wpt);
+#line 387 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 473 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 387 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
  unsigned k;
-#line 473 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-k = __cuda_local_var_619803_11_non_const_id_l;
-#line 473 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (k < __cuda_local_var_619803_37_non_const_id_r); k++) {
-#line 474 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 387 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+k = __cuda_local_var_619717_11_non_const_id_l;
+#line 387 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+for (; (k < __cuda_local_var_619717_28_non_const_id_r); k++) {
+#line 388 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 (n2[(x[k])]) = (n1[k]); } } 
-#line 476 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 390 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 }}
-#line 478 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__global__ __var_used__ void _Z10g_build_n3PjS_(
-#line 478 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 392 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__global__ __var_used__ void _Z10g_build_n3PjS_j(
+#line 392 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 unsigned *n3, 
-#line 478 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-unsigned *p_n3){
-#line 478 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 392 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned *p_n3, 
+#line 392 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+unsigned wpt){
+#line 392 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 480 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619811_11_non_const_id;
-#line 481 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619812_11_non_const_id_l;
-#line 481 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
- unsigned __cuda_local_var_619812_37_non_const_id_r;
-#line 480 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619811_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
-#line 481 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619812_11_non_const_id_l = (__cuda_local_var_619811_11_non_const_id * 4U);
-#line 481 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__cuda_local_var_619812_37_non_const_id_r = (__cuda_local_var_619812_11_non_const_id_l + 4U);
-#line 482 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 394 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619725_11_non_const_id;
+#line 395 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619726_11_non_const_id_l;
+#line 395 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+ unsigned __cuda_local_var_619726_28_non_const_id_r;
+#line 394 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619725_11_non_const_id = (((blockIdx.x) * (blockDim.x)) + (threadIdx.x));
+#line 395 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619726_11_non_const_id_l = (__cuda_local_var_619725_11_non_const_id * wpt);
+#line 395 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__cuda_local_var_619726_28_non_const_id_r = (__cuda_local_var_619726_11_non_const_id_l + wpt);
+#line 396 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 {
-#line 482 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 396 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
  unsigned k;
-#line 482 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-k = __cuda_local_var_619812_11_non_const_id_l;
-#line 482 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-for (; (k < __cuda_local_var_619812_37_non_const_id_r); k++) {
-#line 483 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 396 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+k = __cuda_local_var_619726_11_non_const_id_l;
+#line 396 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+for (; (k < __cuda_local_var_619726_28_non_const_id_r); k++) {
+#line 397 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 (n3[k]) = (_Z7sub_modjj(0U, (p_n3[(k + 1U)]))); } } 
-#line 485 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 399 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 }}
 #line 427 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\vector_types.h"
  __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __inline__ void _ZN4dim3C1Ejjj( struct dim3 *const this, 
@@ -3213,7 +3007,7 @@ unsigned vz){
 (this->z) = vz; 
 #line 427 "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\include\\vector_types.h"
 }}
- __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __inline__ void _ZN4dim3C2Ejjj( struct dim3 *const this,  unsigned __T30,  unsigned __T31,  unsigned __T32){ {  _ZN4dim3C1Ejjj(this, __T30, __T31, __T32);  }}
+ __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __inline__ void _ZN4dim3C2Ejjj( struct dim3 *const this,  unsigned __T0,  unsigned __T1,  unsigned __T2){ {  _ZN4dim3C1Ejjj(this, __T0, __T1, __T2);  }}
 #line 34 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\initializer_list"
  __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __inline__ void _ZNSt16initializer_listIjEC1EPKjS2_( struct _ZSt16initializer_listIjE *const this, 
 #line 34 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\initializer_list"
@@ -3228,7 +3022,7 @@ const _ZNSt8seed_seq11result_typeE *_Last_arg){
 (this->_Last) = _Last_arg; 
 #line 35 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\initializer_list"
 }}
- __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __inline__ void _ZNSt16initializer_listIjEC2EPKjS2_( struct _ZSt16initializer_listIjE *const this,  const _ZNSt8seed_seq11result_typeE *__T33,  const _ZNSt8seed_seq11result_typeE *__T34){ {  _ZNSt16initializer_listIjEC1EPKjS2_(this, __T33, __T34);  }}
+ __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __inline__ void _ZNSt16initializer_listIjEC2EPKjS2_( struct _ZSt16initializer_listIjE *const this,  const _ZNSt8seed_seq11result_typeE *__T3,  const _ZNSt8seed_seq11result_typeE *__T4){ {  _ZNSt16initializer_listIjEC1EPKjS2_(this, __T3, __T4);  }}
 #line 37 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\initializer_list"
  __attribute__((nv_linkonce_odr)) ___device__( __no_sc__) __inline__ const _ZNSt8seed_seq11result_typeE *_ZNKSt16initializer_listIjE5beginEv( const struct _ZSt16initializer_listIjE *const this){
 #line 37 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\initializer_list"

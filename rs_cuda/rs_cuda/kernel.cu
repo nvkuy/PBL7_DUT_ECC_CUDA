@@ -4,6 +4,8 @@
 #else
 #define CUDA_KERNEL(grid, block, sh_mem, stream)
 #define CUDA_SYNCTHREADS()
+#define min(a, b) a < b ? a : b
+#define max(a, b) a > b ? a : b
 #endif
 
 #include <cuda.h>
@@ -92,24 +94,21 @@ const unsigned SIZE_DECODE_X = LEN_DECODE_X * sizeof(unsigned);
 const unsigned SIZE_DECODE_Y = LEN_DECODE_Y * sizeof(unsigned);
 const unsigned SIZE_DECODE_P = LEN_DECODE_P * sizeof(unsigned);
 
+//const unsigned SM_CNT = 28;
+//const unsigned MAX_WARP = 48 * 4 * SM_CNT;
+
 const unsigned MAX_ACTIVE_ENCODE = 256;
 const unsigned MAX_ACTIVE_DECODE = 256;
 const unsigned MAX_ENCODE_LAUNCH_CNT = 16;
-const unsigned MAX_DECODE_LAUNCH_CNT = 128;
+const unsigned MAX_DECODE_LAUNCH_CNT = 256;
 
-const unsigned LOG_ALGO_LOW_WPT = 3;
-const unsigned LOG_ALGO_MED_WPT = 2;
-const unsigned LOG_ALGO_HIGH_WPT = 2;
-const unsigned LOG_ALGO_EXTR_WPT = 0;
+const unsigned LOG_THREAD_PER_OP = 9;
+const unsigned THREAD_PER_OP = 1 << LOG_THREAD_PER_OP;
+//const unsigned N_BL = 1, N_TH = THREAD_PER_OP;
 
 const unsigned LOG_LEN_WARP = 5;
 const unsigned LEN_WARP = 1 << LOG_LEN_WARP;
 const unsigned ALGO_N_2_CUTOFF = 64;
-
-const unsigned ALGO_LOW_WPT = 1 << LOG_ALGO_LOW_WPT;
-const unsigned ALGO_MED_WPT = 1 << LOG_ALGO_MED_WPT;
-const unsigned ALGO_HIGH_WPT = 1 << LOG_ALGO_HIGH_WPT; 
-const unsigned ALGO_EXTR_WPT = 1 << LOG_ALGO_EXTR_WPT; 
 
 const size_t SIZE_ENCODE_P_SLOT = sizeof(unsigned) * LEN_ENCODE_P * MAX_ACTIVE_ENCODE;
 const size_t SIZE_ENCODE_Y_SLOT = sizeof(unsigned) * LEN_ENCODE_Y * MAX_ACTIVE_ENCODE;
@@ -203,42 +202,30 @@ void CUDART_CB h_end_batch_slot(void* data) {
 	delete dat;
 }
 
-__host__ __device__ __forceinline__ inline void build_launch_param(unsigned log_n, unsigned& n_th, unsigned& n_bl) {
-	if (log_n <= LOG_LEN_WARP) {
-		n_th = 1 << log_n;
-		n_bl = 1;
-	}
-	else {
-		unsigned c_l2_sqrt_n = (log_n >> 1) + (log_n & 1);
-		n_th = 1 << c_l2_sqrt_n;
-		n_bl = 1 << (log_n - c_l2_sqrt_n);
-	}
-}
-
-__host__ __device__ __forceinline__ inline unsigned mul_mod(unsigned a, unsigned b)
+__host__ __device__ __forceinline__ unsigned mul_mod(unsigned a, unsigned b)
 {
 	if (a == SPECIAL && b == SPECIAL)
 		return 1; // overflow
 	return (a * b) % MOD;
 }
 
-__device__ __forceinline__ inline unsigned div_mod(unsigned a, unsigned b,
+__device__ __forceinline__ unsigned div_mod(unsigned a, unsigned b,
 	unsigned* d_inv)
 {
 	return mul_mod(a, d_inv[b]);
 }
 
-__host__ __device__ __forceinline__ inline unsigned add_mod(unsigned a, unsigned b)
+__host__ __device__ __forceinline__ unsigned add_mod(unsigned a, unsigned b)
 {
 	return (a + b) % MOD;
 }
 
-__host__ __device__ __forceinline__ inline unsigned sub_mod(unsigned a, unsigned b)
+__host__ __device__ __forceinline__ unsigned sub_mod(unsigned a, unsigned b)
 {
 	return (a - b + MOD) % MOD;
 }
 
-__host__ __device__ __forceinline__ inline unsigned pow_mod(unsigned a, unsigned b)
+__host__ __device__ __forceinline__ unsigned pow_mod(unsigned a, unsigned b)
 {
 	unsigned res = 1;
 	while (b > 0)
@@ -251,48 +238,8 @@ __host__ __device__ __forceinline__ inline unsigned pow_mod(unsigned a, unsigned
 	return res;
 }
 
-__global__ void g_pre_fnt(unsigned* a, unsigned* b, unsigned st, unsigned* d_N_pos)
-{
-
-	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * ALGO_HIGH_WPT, id_r = id_l + ALGO_HIGH_WPT;
-	for (unsigned k = id_l; k < id_r; k++)
-		b[d_N_pos[st + k]] = a[k];
-
-}
-
-__global__ void g_end_fnt(unsigned* b, unsigned n, unsigned* d_inv)
-{
-
-	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * ALGO_HIGH_WPT, id_r = id_l + ALGO_HIGH_WPT;
-	for (unsigned k = id_l; k < id_r; k++) {
-		b[k << 1] = div_mod(b[k << 1], n, d_inv);
-		b[(k << 1) | 1] = div_mod(b[(k << 1) | 1], n, d_inv);
-	}
-}
-
-__global__ void g_fnt_i(unsigned* b, unsigned i, bool inv,
-	unsigned* d_root_layer_pow)
-{
-
-	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * ALGO_HIGH_WPT, id_r = id_l + ALGO_HIGH_WPT;
-
-	unsigned haft_len = 1 << i;
-	for (unsigned k = id_l; k < id_r; k++) {
-		unsigned bl_st = ((k >> i) << (i + 1)), th_id = (k & (haft_len - 1));
-		unsigned pos = bl_st + th_id;
-		unsigned u = b[pos];
-		unsigned v = mul_mod(b[pos + haft_len], d_root_layer_pow[(LEN_ROOT_LAYER_POW * inv) + haft_len - 1 + th_id]);
-		b[pos] = add_mod(u, v);
-		b[pos + haft_len] = sub_mod(u, v);
-	}
-
-}
-
-__host__ __forceinline__ __device__ inline void fnt(unsigned* a, unsigned* b, unsigned log_na, unsigned log_nb, unsigned opt,
-	unsigned* d_N_pos, unsigned* d_root_layer_pow, unsigned* d_inv, cudaStream_t stream)
+__global__ void fnt(unsigned* a, unsigned* b, unsigned log_na, unsigned log_nb, unsigned opt,
+	unsigned* d_N_pos, unsigned* d_root_layer_pow, unsigned* d_inv, unsigned wpt)
 {
 
 	/*
@@ -304,127 +251,99 @@ __host__ __forceinline__ __device__ inline void fnt(unsigned* a, unsigned* b, un
 	// size_b >= size_a;
 	// need memset *b before use unless size_a == size_b
 
-	unsigned nb = 1 << log_nb, wp = (opt & 2) >> 1;
-	unsigned n_bl, n_th;
+	// have size_b/2 tasks
 
-	build_launch_param(log_na - LOG_ALGO_HIGH_WPT, n_th, n_bl);
-	g_pre_fnt CUDA_KERNEL(n_bl, n_th, NULL, stream)(a, b, nb - 1, d_N_pos);
+	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
+	unsigned na = 1 << log_na, nb = 1 << log_nb, wp = (opt & 2) >> 1, st = nb - 1;
+	unsigned id_l = id * wpt, id_r = min(id_l + wpt, nb >> 1);
+	unsigned os1 = nb >> 1, os2 = LEN_ROOT_LAYER_POW * wp;
+	for (unsigned k = id_l; k < id_r; k++) {
+		if (k < na) b[d_N_pos[st + k]] = a[k];
+		if (log_na == log_nb) b[d_N_pos[st + k + os1]] = a[k + os1];
+	}
 
-	build_launch_param(log_nb - 1 - LOG_ALGO_HIGH_WPT, n_th, n_bl);
-	for (unsigned i = 0; i < log_nb; i++)
-		g_fnt_i CUDA_KERNEL(n_bl, n_th, NULL, stream)(b, i, wp, d_root_layer_pow);
+	CUDA_SYNCTHREADS();
 
-	if (opt & 1)
-		g_end_fnt CUDA_KERNEL(n_bl, n_th, NULL, stream)(b, nb, d_inv);
+	for (unsigned i = 0; i < log_nb; i++) {
+
+		unsigned haft_len = 1 << i;
+		for (unsigned k = id_l; k < id_r; k++) {
+			unsigned bl_st = ((k >> i) << (i + 1)), th_id = (k & (haft_len - 1));
+			unsigned pos = bl_st + th_id;
+			unsigned u = b[pos];
+			unsigned v = mul_mod(b[pos + haft_len], d_root_layer_pow[os2 + haft_len - 1 + th_id]);
+			b[pos] = add_mod(u, v);
+			b[pos + haft_len] = sub_mod(u, v);
+		}
+
+		CUDA_SYNCTHREADS();
+
+	}
+
+	if (opt & 1) {
+		for (unsigned k = id_l; k < id_r; k++) {
+			b[k] = div_mod(b[k], nb, d_inv);
+			b[k + os1] = div_mod(b[k + os1], nb, d_inv);
+		}
+
+	}
 }
 
-__global__ void g_vector_mul_i(unsigned* a, unsigned* b, unsigned* c)
+__global__ void g_vector_mul_i(unsigned* a, unsigned* b, unsigned* c, unsigned n, unsigned wpt)
 {
 
 	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * ALGO_LOW_WPT, id_r = id_l + ALGO_LOW_WPT;
+	unsigned id_l = id * wpt, id_r = min(id_l + wpt, n);
 	for (unsigned k = id_l; k < id_r; k++)
 		c[k] = mul_mod(a[k], b[k]);
 
 
 }
 
-__global__ void g_fill(unsigned* a, unsigned val) {
+__global__ void g_fill(unsigned* a, unsigned val, unsigned n, unsigned wpt) {
 
 	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * ALGO_LOW_WPT, id_r = id_l + ALGO_LOW_WPT;
+	unsigned id_l = id * wpt, id_r = min(id_l + wpt, n);
 	for (unsigned k = id_l; k < id_r; k++)
 		a[k] = val;
 
 }
 
-__forceinline__ __device__ void d_poly_mul(unsigned* a, unsigned* b, unsigned* t1, unsigned* t2, unsigned* c, unsigned log_n,
-	unsigned* d_N_pos, unsigned* d_root_layer_pow, unsigned* d_inv)
-{
+__global__ void g_cpy(unsigned* a, unsigned* b, unsigned n, unsigned wpt) {
 
-	// 2 ^ log_n == size_a && size_a == size_b
-	// *c == *a && *a + na == *b (allow)
+	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
+		unsigned id_l = id * wpt, id_r = min(id_l + wpt, n);
+		for (unsigned k = id_l; k < id_r; k++)
+			b[k] = a[k];
 
-	unsigned na = 1 << log_n, nc = na << 1, size_nc = nc * sizeof(unsigned);
-
-	if (na <= ALGO_N_2_CUTOFF)
-	{
-		for (unsigned i = 0; i < na; i++)
-		{
-			t1[i] = a[i];
-			t2[i] = b[i];
-		}
-		memset(c, 0, size_nc);
-		for (unsigned i = 0; i < na; i++)
-			for (unsigned j = 0; j < na; j++)
-				c[i + j] = add_mod(c[i + j], mul_mod(t1[i], t2[j]));
-	}
-	else
-	{
-
-		cudaStream_t stream;
-		cudaStreamCreateWithFlags(&stream, cudaStreamNonBlocking);
-
-		unsigned n_bl, n_th;
-		build_launch_param(log_n + 1 - LOG_ALGO_LOW_WPT, n_th, n_bl);
-		g_fill CUDA_KERNEL(n_bl, n_th, NULL, stream) (t1, 0);
-		g_fill CUDA_KERNEL(n_bl, n_th, NULL, stream) (t2, 0);
-
-		fnt(a, t1, log_n, log_n + 1, 0, d_N_pos, d_root_layer_pow, d_inv, stream);
-		fnt(b, t2, log_n, log_n + 1, 0, d_N_pos, d_root_layer_pow, d_inv, stream);
-
-		g_vector_mul_i CUDA_KERNEL(n_bl, n_th, NULL, stream)(t1, t2, t1);
-
-		fnt(t1, c, log_n + 1, log_n + 1, 3, d_N_pos, d_root_layer_pow, d_inv, stream);
-
-		cudaStreamDestroy(stream);
-
-	}
 }
 
 inline void h_poly_mul(unsigned* a, unsigned* b, unsigned* t1, unsigned* t2, unsigned* c, unsigned log_n,
 	unsigned* d_N_pos, unsigned* d_root_layer_pow, unsigned* d_inv, cudaStream_t stream) {
 
-	// only use with large poly
 
-	unsigned nc = 1 << (log_n + 1), size_nc = nc * sizeof(unsigned);
+	unsigned na = 1 << log_n, nc = 1 << (log_n + 1), size_nc = nc * sizeof(unsigned);
 
-	unsigned n_bl, n_th;
-	build_launch_param(log_n + 1 - LOG_ALGO_LOW_WPT, n_th, n_bl);
-	g_fill CUDA_KERNEL(n_bl, n_th, NULL, stream) (t1, 0);
-	g_fill CUDA_KERNEL(n_bl, n_th, NULL, stream) (t2, 0);
+	unsigned wpt1 = max(nc >> LOG_THREAD_PER_OP, 1), wpt2 = max(na >> LOG_THREAD_PER_OP, 1);
+	g_fill CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (t1, 0, nc, wpt1);
+	g_fill CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (t2, 0, nc, wpt1);
 
-	fnt(a, t1, log_n, log_n + 1, 0, d_N_pos, d_root_layer_pow, d_inv, stream);
-	fnt(b, t2, log_n, log_n + 1, 0, d_N_pos, d_root_layer_pow, d_inv, stream);
+	fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (a, t1, log_n, log_n + 1, 0, d_N_pos, d_root_layer_pow, d_inv, wpt2);
+	fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (b, t2, log_n, log_n + 1, 0, d_N_pos, d_root_layer_pow, d_inv, wpt2);
 
-	g_vector_mul_i CUDA_KERNEL(n_bl, n_th, NULL, stream)(t1, t2, t1);
+	g_vector_mul_i CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(t1, t2, t1, nc, wpt1);
 
-	fnt(t1, c, log_n + 1, log_n + 1, 3, d_N_pos, d_root_layer_pow, d_inv, stream);
+	fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (t1, c, log_n + 1, log_n + 1, 3, d_N_pos, d_root_layer_pow, d_inv, wpt2);
 
 }
 
-__global__ void g_poly_deriv(unsigned* ax, unsigned* dax)
+__global__ void g_poly_deriv(unsigned* ax, unsigned* dax, unsigned wpt)
 {
 
 	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * ALGO_MED_WPT, id_r = id_l + ALGO_MED_WPT;
+	unsigned id_l = id * wpt, id_r = id_l + wpt;
 	for (unsigned k = id_l; k < id_r; k++)
 		dax[k] = mul_mod(ax[k + 1], k + 1);
-}
-
-__global__ void g_build_product_i(unsigned* p, unsigned* t1, unsigned* t2, unsigned i,
-	unsigned* d_N_pos, unsigned* d_root_layer_pow, unsigned* d_inv)
-{
-
-	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned len = 1 << i;
-
-	unsigned id_l = id * ALGO_EXTR_WPT, id_r = id_l + ALGO_EXTR_WPT;
-	for (unsigned k = id_l; k < id_r; k++) {
-		unsigned st = k << (i + 1);
-		d_poly_mul(p + st, p + st + len, t1 + st, t2 + st, p + st, i, d_N_pos, d_root_layer_pow, d_inv);
-	}
-
 }
 
 inline void h_build_product(unsigned* p, unsigned* t1, unsigned* t2, unsigned log_n1, unsigned log_n2, cudaStream_t stream)
@@ -434,10 +353,11 @@ inline void h_build_product(unsigned* p, unsigned* t1, unsigned* t2, unsigned lo
 
 	for (unsigned i = log_n1; i < log_n2; i++)
 	{
-		unsigned n_th, n_bl;
-		build_launch_param(log_n2 - i - 1 - LOG_ALGO_EXTR_WPT, n_th, n_bl);
-		g_build_product_i CUDA_KERNEL(n_bl, n_th, NULL, stream)(p, t1, t2, i, d_N_pos, d_root_layer_pow, d_inv);
-		CUDA_CHECK_LAST();
+		unsigned m = 1 << (log_n2 - i - 1), len = 1 << i;
+		for (unsigned j = 0; j < m; j++) {
+			unsigned st = j << (i + 1);
+			h_poly_mul(p + st, p + st + len, t1 + st, t2 + st, p + st, i, d_N_pos, d_root_layer_pow, d_inv, stream);
+		}
 	}
 }
 
@@ -450,35 +370,37 @@ inline void h_build_ax(unsigned* x, unsigned* p, unsigned* t1, unsigned* t2, cud
 	for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++)
 	{
 		unsigned st_p1 = i << (LOG_SYMBOL + 1), st_p2 = x[i << LOG_SYMBOL] << 2;
-		CUDA_CHECK(cudaMemcpyAsync(p + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT, cudaMemcpyDeviceToDevice, stream));
+		//CUDA_CHECK(cudaMemcpyAsync(p + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT, cudaMemcpyDeviceToDevice, stream));
+		g_cpy CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (d_packet_product + st_p2, p + st_p1, LEN_ONE_PACKET_PRODUCT, LEN_ONE_PACKET_PRODUCT >> LOG_THREAD_PER_OP);
+		CUDA_CHECK_LAST();
 	}
 	h_build_product(p, t1, t2, LOG_SYMBOL + 1, MAX_LOG, stream);
 }
 
 __global__ void g_build_n1(unsigned* n1, unsigned* vdax, unsigned* x, unsigned* y,
-	unsigned* d_inv)
+	unsigned* d_inv, unsigned wpt)
 {
 
 	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * ALGO_MED_WPT, id_r = id_l + ALGO_MED_WPT;
+	unsigned id_l = id * wpt, id_r = id_l + wpt;
 	for (unsigned k = id_l; k < id_r; k++)
 		n1[k] = div_mod(y[k], vdax[x[k]], d_inv);
 
 }
 
-__global__ void g_build_n2(unsigned* n2, unsigned* n1, unsigned* x) {
+__global__ void g_build_n2(unsigned* n2, unsigned* n1, unsigned* x, unsigned wpt) {
 
 	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * ALGO_MED_WPT, id_r = id_l + ALGO_MED_WPT;
+	unsigned id_l = id * wpt, id_r = id_l + wpt;
 	for (unsigned k = id_l; k < id_r; k++)
 		n2[x[k]] = n1[k];
 
 }
 
-__global__ void g_build_n3(unsigned* n3, unsigned* p_n3) {
+__global__ void g_build_n3(unsigned* n3, unsigned* p_n3, unsigned wpt) {
 
 	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * ALGO_MED_WPT, id_r = id_l + ALGO_MED_WPT;
+	unsigned id_l = id * wpt, id_r = id_l + wpt;
 	for (unsigned k = id_l; k < id_r; k++)
 		n3[k] = sub_mod(0, p_n3[k + 1]);
 
@@ -505,8 +427,7 @@ void h_encode(unsigned* p, unsigned* y)
 	unsigned* d_p = d_encode_p_slot + 1LL * slot_id * LEN_ENCODE_P;
 	unsigned* d_y = d_encode_y_slot + 1LL * slot_id * LEN_ENCODE_Y;
 
-	unsigned n_th, n_bl;
-	build_launch_param(LOG_LEN_ENCODE_Y - LOG_ALGO_LOW_WPT, n_th, n_bl);
+	unsigned wpt1 = LEN_LARGE >> LOG_THREAD_PER_OP, wpt2 = LEN_SMALL >> LOG_THREAD_PER_OP;
 
 	CB_DATA* data = new CB_DATA{ slot_id, y, sl_y, SIZE_ENCODE_Y, encode_slot, mt_encode_slot, cv_encode_slot };
 
@@ -515,9 +436,9 @@ void h_encode(unsigned* p, unsigned* y)
 
 	CUDA_CHECK(cudaMemcpyAsync(d_p, sl_p, SIZE_ENCODE_P, cudaMemcpyHostToDevice, stream));
 	
-	g_fill CUDA_KERNEL(n_bl, n_th, NULL, stream)(d_y, 0);
+	g_fill CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (d_y, 0, LEN_LARGE, wpt1);
 
-	fnt(d_p, d_y, MAX_LOG - 1, MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, stream);
+	fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (d_p, d_y, MAX_LOG - 1, MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, wpt2);
 	CUDA_CHECK_LAST();
 
 	CUDA_CHECK(cudaMemcpyAsync(sl_y, d_y, SIZE_ENCODE_Y, cudaMemcpyDeviceToHost, stream));
@@ -551,9 +472,7 @@ void h_decode(unsigned* x, unsigned* y, unsigned* p)
 	unsigned* d_n2 = d_decode_n2_slot + 1LL * slot_id * LEN_LARGE;
 	unsigned* d_n3 = d_decode_n3_slot + 1LL * slot_id * LEN_SMALL;
 
-	unsigned n_th1, n_bl1, n_th2, n_bl2;
-	build_launch_param(MAX_LOG - LOG_ALGO_MED_WPT - 1, n_th1, n_bl1);
-	build_launch_param(MAX_LOG - LOG_ALGO_LOW_WPT, n_th2, n_bl2);
+	unsigned wpt1 = LEN_LARGE >> LOG_THREAD_PER_OP, wpt2 = LEN_SMALL >> LOG_THREAD_PER_OP;
 
 	CB_DATA* data = new CB_DATA{ slot_id, p, sl_p, SIZE_DECODE_P, decode_slot, mt_decode_slot, cv_decode_slot };
 
@@ -563,26 +482,26 @@ void h_decode(unsigned* x, unsigned* y, unsigned* p)
 	CUDA_CHECK(cudaMemcpyAsync(d_x, sl_x, SIZE_DECODE_X, cudaMemcpyHostToDevice, stream));
 	CUDA_CHECK(cudaMemcpyAsync(d_y, sl_y, SIZE_DECODE_Y, cudaMemcpyHostToDevice, stream));
 
-	g_fill CUDA_KERNEL(n_bl2, n_th2, NULL, stream)(d_vdax, 0);
-	g_fill CUDA_KERNEL(n_bl2, n_th2, NULL, stream)(d_n2, 0);
+	g_fill CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_vdax, 0, LEN_LARGE, wpt1);
+	g_fill CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_n2, 0, LEN_LARGE, wpt1);
 
 	h_build_ax(x, d_ax, d_t1, d_t2, stream);
 
-	g_poly_deriv CUDA_KERNEL(n_bl1, n_th1, NULL, stream)(d_ax, d_dax);
+	g_poly_deriv CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_ax, d_dax, wpt2);
 	CUDA_CHECK_LAST();
 	
-	fnt(d_dax, d_vdax, MAX_LOG - 1, MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, stream);
+	fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_dax, d_vdax, MAX_LOG - 1, MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, wpt2);
 	CUDA_CHECK_LAST();
 	
-	g_build_n1 CUDA_KERNEL(n_bl1, n_th1, NULL, stream)(d_n1, d_vdax, d_x, d_y, d_inv);
+	g_build_n1 CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_n1, d_vdax, d_x, d_y, d_inv, wpt2);
 	CUDA_CHECK_LAST();
 	
-	g_build_n2 CUDA_KERNEL(n_bl1, n_th1, NULL, stream)(d_n2, d_n1, d_x);
+	g_build_n2 CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_n2, d_n1, d_x, wpt2);
 	CUDA_CHECK_LAST();
 	
-	fnt(d_n2, d_t2, MAX_LOG, MAX_LOG, 2, d_N_pos, d_root_layer_pow, d_inv, stream);
+	fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_n2, d_t2, MAX_LOG, MAX_LOG, 2, d_N_pos, d_root_layer_pow, d_inv, wpt2);
 	CUDA_CHECK_LAST();
-	g_build_n3 CUDA_KERNEL(n_bl1, n_th1, NULL, stream)(d_n3, d_t2);
+	g_build_n3 CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_n3, d_t2, wpt2);
 	CUDA_CHECK_LAST();
 	
 	h_build_px(d_n2, d_ax, d_n3, d_t1, d_t2, d_N_pos, d_root_layer_pow, d_inv, stream);
@@ -600,8 +519,19 @@ void init()
 
 	CUDA_CHECK(cudaDeviceSynchronize());
 	CUDA_CHECK(cudaDeviceReset());
-	CUDA_CHECK(cudaDeviceSetLimit(cudaLimitDevRuntimePendingLaunchCount, 
-		std::max(MAX_ACTIVE_DECODE * MAX_DECODE_LAUNCH_CNT, MAX_ACTIVE_ENCODE * MAX_ENCODE_LAUNCH_CNT)));
+	//CUDA_CHECK(cudaDeviceSetLimit(cudaLimitDevRuntimePendingLaunchCount, 
+	//	max(MAX_ACTIVE_DECODE * MAX_DECODE_LAUNCH_CNT, MAX_ACTIVE_ENCODE * MAX_ENCODE_LAUNCH_CNT)));
+
+	//cudaDeviceProp prop;
+    //int device;
+    //cudaGetDevice(&device);
+    //cudaGetDeviceProperties(&prop, device);
+    //std::cout << "Device name: " << prop.name << std::endl;
+	//std::cout << "Allow concurrent Kernels: " << prop.concurrentKernels << std::endl;
+    //std::cout << "Max threads per block: " << prop.maxThreadsPerBlock << std::endl;
+    //std::cout << "Max threads per SM: " << prop.maxThreadsPerMultiProcessor << std::endl;
+    //std::cout << "Number of SMs: " << prop.multiProcessorCount << std::endl;
+    //std::cout << "Max concurrent threads on device: " << prop.maxThreadsPerMultiProcessor * prop.multiProcessorCount << std::endl;
 
 	h_encode_p_slot = (unsigned**)malloc(MAX_ACTIVE_ENCODE * sizeof(unsigned*));
 	h_encode_y_slot = (unsigned**)malloc(MAX_ACTIVE_ENCODE * sizeof(unsigned*));
@@ -795,16 +725,16 @@ int main()
 
 	init();
 
-	//test_fnt();
-	//
-	//test_poly_mul();
-	//
-	//test_build_init_product();
-	//
-	//test_encode_decode();
-	//
+	test_fnt();
+	
+	test_poly_mul();
+	
+	test_build_init_product();
+	
+	test_encode_decode();
+	
 	//test_fnt_performance();
-
+	
 	test_encode_decode_performance();
 
 	fin();
@@ -835,8 +765,10 @@ void test_fnt() {
 		shuffle(c1.begin(), c1.end(), std::default_random_engine(time(NULL)));
 		cudaMemcpy(d_c1, c1.data(), size_nc, cudaMemcpyHostToDevice);
 
-		fnt(d_c1, d_v, log_nc, log_nv, 0, d_N_pos, d_root_layer_pow, d_inv, NULL);
-		fnt(d_v, d_c2, log_nv, log_nv, 3, d_N_pos, d_root_layer_pow, d_inv, NULL);
+
+		unsigned wpt = nv >> (LOG_THREAD_PER_OP + 1);
+		fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, NULL)(d_c1, d_v, log_nc, log_nv, 0, d_N_pos, d_root_layer_pow, d_inv, wpt);
+		fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, NULL)(d_v, d_c2, log_nv, log_nv, 3, d_N_pos, d_root_layer_pow, d_inv, wpt);
 
 		cudaMemcpy(c2.data(), d_c2, size_nc, cudaMemcpyDeviceToHost);
 		for (unsigned i = 0; i < nc; i++)
@@ -1007,13 +939,14 @@ void test_fnt_performance() {
 	cout << "FNT test start" << endl;
 
 	auto start = chrono::high_resolution_clock::now();
+	unsigned wpt = n >> (LOG_THREAD_PER_OP + 1);
 
 	for (unsigned tt = 0; tt < N_test; tt++) {
 		//cudaStreamCreate(&stream[tt]);
 		//cudaMallocAsync(&d_a[tt], size_n, stream[tt]);
 		//cudaMallocAsync(&d_b[tt], size_n, stream[tt]);
 		//cudaMemcpyAsync(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice, stream[tt]);
-		fnt(d_a[tt], d_b[tt], log_n, log_n, 0, d_N_pos, d_root_layer_pow, d_inv, stream[tt]);
+		fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream[tt])(d_a[tt], d_b[tt], log_n, log_n, 0, d_N_pos, d_root_layer_pow, d_inv, wpt);
 		CUDA_CHECK_LAST();
 		//cudaFreeAsync(d_a[tt], stream[tt]);
 		//cudaFreeAsync(d_b[tt], stream[tt]);

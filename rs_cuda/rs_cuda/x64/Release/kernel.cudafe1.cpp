@@ -22186,7 +22186,7 @@ CUresult __stdcall cuGetProcAddress(const char * symbol, void ** pfn, int cudaVe
 CUresult __stdcall cuGetExportTable(const void ** ppExportTable, const CUuuid * pExportTableId); 
 #line 20284 "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/include\\cuda.h"
 }
-#line 14 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 16 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 #pragma external_header(push)
 #line 11 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\iostream"
 #pragma external_header(push)
@@ -58206,7 +58206,7 @@ private: static int _Init_cnt;
 #pragma pack ( pop )
 #line 73 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\iostream"
 #pragma external_header(pop)
-#line 16 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 18 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 #pragma external_header(push)
 #line 17 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\vector"
 #pragma pack ( push, 8 )
@@ -61234,7 +61234,7 @@ inline void _Fill_vbool ( _FwdIt _First, _FwdIt _Last, const _Ty & _Val ) {
 #pragma pack ( pop )
 #line 3152 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\vector"
 #pragma external_header(pop)
-#line 17 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 19 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 #pragma external_header(push)
 #line 9 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\cassert"
 #pragma external_header(push)
@@ -61250,7 +61250,7 @@ __pragma( pack ( push, 8 )) extern "C" {
 #pragma external_header(pop)
 #line 10 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\cassert"
 #pragma external_header(pop)
-#line 18 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 20 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 #pragma external_header(push)
 #line 13 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\algorithm"
 #pragma pack ( push, 8 )
@@ -64078,7 +64078,7 @@ template < class _FwdIt >
 #pragma pack ( pop )
 #line 9949 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\algorithm"
 #pragma external_header(pop)
-#line 19 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 21 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 #pragma external_header(push)
 #line 17 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\random"
 #pragma external_header(push)
@@ -69337,7 +69337,7 @@ __pragma( warning(pop))
 #pragma pack ( pop )
 #line 5136 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\random"
 #pragma external_header(pop)
-#line 20 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 22 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 #pragma external_header(push)
 #line 11 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\chrono"
 #pragma external_header(push)
@@ -70518,7 +70518,7 @@ namespace std {
 #pragma pack ( pop )
 #line 5909 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\chrono"
 #pragma external_header(pop)
-#line 21 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 23 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 #pragma external_header(push)
 #line 12 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\queue"
 #pragma external_header(push)
@@ -72412,7 +72412,7 @@ struct uses_allocator< priority_queue< _Ty, _Container, _Pr> , _Alloc>  : public
 #pragma pack ( pop )
 #line 332 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\queue"
 #pragma external_header(pop)
-#line 22 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 24 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 #pragma external_header(push)
 #line 19 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\mutex"
 #pragma external_header(push)
@@ -74997,7 +74997,7 @@ thread::id _My_owner;
 #pragma pack ( pop )
 #line 936 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\mutex"
 #pragma external_header(pop)
-#line 23 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 25 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 #pragma external_header(push)
 #line 19 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\condition_variable"
 #pragma pack ( push, 8 )
@@ -75186,1563 +75186,1411 @@ _Cnd._Register(_Lck, nullptr);
 #pragma pack ( pop )
 #line 285 "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\VC\\Tools\\MSVC\\14.29.30133\\include\\condition_variable"
 #pragma external_header(pop)
-#line 26 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 28 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 inline void check(cudaError_t err, const char *const func, const char *const file, const int line) 
-#line 27
-{ 
-#line 28
-if (err != (cudaSuccess)) 
 #line 29
 { 
 #line 30
-(((((((((std::cerr << ("CUDA Runtime Error at: "))) << file)) << (":"))) << line)) << (std::endl)); 
-#line 31
-(((((((std::cerr << (cudaGetErrorString(err)))) << (" "))) << func)) << (std::endl)); 
-#line 32
-std::exit(1); 
-#line 33
-}  
-#line 34
-} 
-#line 37
-inline void check_last(const char *const file, const int line) 
-#line 38
-{ 
-#line 39
-const cudaError_t err{cudaPeekAtLastError()}; 
-#line 40
 if (err != (cudaSuccess)) 
-#line 41
+#line 31
 { 
-#line 42
+#line 32
 (((((((((std::cerr << ("CUDA Runtime Error at: "))) << file)) << (":"))) << line)) << (std::endl)); 
-#line 43
-(((std::cerr << (cudaGetErrorString(err)))) << (std::endl)); 
-#line 44
+#line 33
+(((((((std::cerr << (cudaGetErrorString(err)))) << (" "))) << func)) << (std::endl)); 
+#line 34
 std::exit(1); 
-#line 45
+#line 35
 }  
-#line 46
+#line 36
 } 
-#line 48
-const unsigned MOD = (65537); 
-#line 49
-const unsigned SPECIAL = (MOD - (1)); 
-#line 50
-const unsigned ROOT = (3); 
-#line 51
-const unsigned ROOT_INV = (21846); 
-#line 52
-const unsigned MAX_LOG = (16); 
-#line 54
-const unsigned LOG_DATA = (10); 
-#line 55
-const unsigned LOG_SYMBOL = (LOG_DATA - (1)); 
-#line 56
-const unsigned LOG_SEG = (LOG_SYMBOL - (1)); 
-#line 57
-const unsigned SYMBOL_PER_PACKET = (1 << LOG_SYMBOL); 
-#line 58
-const unsigned NUM_OF_PACKET = (1 << (MAX_LOG - LOG_SYMBOL)); 
-#line 59
-const unsigned NUM_OF_NEED_PACKET = (NUM_OF_PACKET >> 1); 
-#line 60
-const unsigned SEG_PER_PACKET = (1 << LOG_SEG); 
-#line 61
-const unsigned SEG_DIFF = (1 << (MAX_LOG - (1))); 
-#line 62
-const unsigned NUM_OF_NEED_SYMBOL = (1 << (MAX_LOG - (1))); 
-#line 64
-const unsigned LEN_ROOT_LAYER_POW = ((1 << MAX_LOG) - 1); 
-#line 65
-const unsigned LEN_ROOT_LAYER_POW_2 = (LEN_ROOT_LAYER_POW << 1); 
-#line 66
-const unsigned LEN_N_POS = ((1 << (MAX_LOG + (1))) - 1); 
-#line 67
-const unsigned LEN_PACKET_PRODUCT = (NUM_OF_PACKET * (SYMBOL_PER_PACKET << 1)); 
-#line 68
-const unsigned LEN_ONE_PACKET_PRODUCT = (1 << (LOG_SYMBOL + (1))); 
-#line 70
-const unsigned LEN_SMALL = NUM_OF_NEED_SYMBOL; 
-#line 71
-const unsigned LEN_LARGE = (LEN_SMALL << 1); 
-#line 73
-const unsigned SIZE_SMALL = (LEN_SMALL * sizeof(unsigned)); 
-#line 74
-const unsigned SIZE_LARGE = (LEN_LARGE * sizeof(unsigned)); 
-#line 75
-const unsigned SIZE_ONE_PACKET_PRODUCT = (LEN_ONE_PACKET_PRODUCT * sizeof(unsigned)); 
-#line 77
-const unsigned LOG_LEN_ENCODE_P = (MAX_LOG - (1)); 
-#line 78
-const unsigned LOG_LEN_ENCODE_Y = MAX_LOG; 
-#line 79
-const unsigned LOG_LEN_DECODE_X = (MAX_LOG - (1)); 
-#line 80
-const unsigned LOG_LEN_DECODE_Y = (MAX_LOG - (1)); 
-#line 81
-const unsigned LOG_LEN_DECODE_P = (MAX_LOG - (1)); 
-#line 83
-const unsigned LEN_ENCODE_P = (1 << LOG_LEN_ENCODE_P); 
-#line 84
-const unsigned LEN_ENCODE_Y = (1 << LOG_LEN_ENCODE_Y); 
-#line 85
-const unsigned LEN_DECODE_X = (1 << LOG_LEN_DECODE_X); 
-#line 86
-const unsigned LEN_DECODE_Y = (1 << LOG_LEN_DECODE_Y); 
-#line 87
-const unsigned LEN_DECODE_P = (1 << LOG_LEN_DECODE_P); 
-#line 89
-const unsigned SIZE_ENCODE_P = (LEN_ENCODE_P * sizeof(unsigned)); 
-#line 90
-const unsigned SIZE_ENCODE_Y = (LEN_ENCODE_Y * sizeof(unsigned)); 
-#line 91
-const unsigned SIZE_DECODE_X = (LEN_DECODE_X * sizeof(unsigned)); 
-#line 92
-const unsigned SIZE_DECODE_Y = (LEN_DECODE_Y * sizeof(unsigned)); 
-#line 93
-const unsigned SIZE_DECODE_P = (LEN_DECODE_P * sizeof(unsigned)); 
-#line 95
-const unsigned MAX_ACTIVE_ENCODE = (256); 
-#line 96
-const unsigned MAX_ACTIVE_DECODE = (256); 
-#line 97
-const unsigned MAX_ENCODE_LAUNCH_CNT = (16); 
-#line 98
-const unsigned MAX_DECODE_LAUNCH_CNT = (128); 
-#line 100
-const unsigned LOG_ALGO_LOW_WPT = (3); 
-#line 101
-const unsigned LOG_ALGO_MED_WPT = (2); 
-#line 102
-const unsigned LOG_ALGO_HIGH_WPT = (2); 
-#line 103
-const unsigned LOG_ALGO_EXTR_WPT = (0); 
-#line 105
-const unsigned LOG_LEN_WARP = (5); 
-#line 106
-const unsigned LEN_WARP = (1 << LOG_LEN_WARP); 
-#line 107
-const unsigned ALGO_N_2_CUTOFF = (64); 
-#line 109
-const unsigned ALGO_LOW_WPT = (1 << LOG_ALGO_LOW_WPT); 
-#line 110
-const unsigned ALGO_MED_WPT = (1 << LOG_ALGO_MED_WPT); 
-#line 111
-const unsigned ALGO_HIGH_WPT = (1 << LOG_ALGO_HIGH_WPT); 
-#line 112
-const unsigned ALGO_EXTR_WPT = (1 << LOG_ALGO_EXTR_WPT); 
-#line 114
-const size_t SIZE_ENCODE_P_SLOT = ((sizeof(unsigned) * LEN_ENCODE_P) * MAX_ACTIVE_ENCODE); 
-#line 115
-const size_t SIZE_ENCODE_Y_SLOT = ((sizeof(unsigned) * LEN_ENCODE_Y) * MAX_ACTIVE_ENCODE); 
-#line 117
-const size_t SIZE_DECODE_X_SLOT = ((sizeof(unsigned) * LEN_DECODE_X) * MAX_ACTIVE_DECODE); 
-#line 118
-const size_t SIZE_DECODE_Y_SLOT = ((sizeof(unsigned) * LEN_DECODE_Y) * MAX_ACTIVE_DECODE); 
-#line 120
-const size_t SIZE_DECODE_T1_SLOT = ((sizeof(unsigned) * LEN_LARGE) * MAX_ACTIVE_DECODE); 
-#line 121
-const size_t SIZE_DECODE_T2_SLOT = ((sizeof(unsigned) * LEN_LARGE) * MAX_ACTIVE_DECODE); 
-#line 122
-const size_t SIZE_DECODE_AX_SLOT = ((sizeof(unsigned) * LEN_LARGE) * MAX_ACTIVE_DECODE); 
-#line 123
-const size_t SIZE_DECODE_DAX_SLOT = ((sizeof(unsigned) * LEN_SMALL) * MAX_ACTIVE_DECODE); 
-#line 124
-const size_t SIZE_DECODE_VDAX_SLOT = ((sizeof(unsigned) * LEN_LARGE) * MAX_ACTIVE_DECODE); 
-#line 125
-const size_t SIZE_DECODE_N1_SLOT = ((sizeof(unsigned) * LEN_SMALL) * MAX_ACTIVE_DECODE); 
-#line 126
-const size_t SIZE_DECODE_N2_SLOT = ((sizeof(unsigned) * LEN_LARGE) * MAX_ACTIVE_DECODE); 
-#line 127
-const size_t SIZE_DECODE_N3_SLOT = ((sizeof(unsigned) * LEN_SMALL) * MAX_ACTIVE_DECODE); 
-#line 129
-unsigned **h_encode_p_slot; 
-#line 130
-unsigned **h_encode_y_slot; 
-#line 131
-unsigned **h_decode_x_slot; 
-#line 132
-unsigned **h_decode_y_slot; 
-#line 133
-unsigned **h_decode_p_slot; 
-#line 135
-unsigned *d_encode_p_slot; 
-#line 136
-unsigned *d_encode_y_slot; 
-#line 137
-unsigned *d_decode_x_slot; 
-#line 138
-unsigned *d_decode_y_slot; 
-#line 140
-unsigned *d_decode_t1_slot; 
-#line 141
-unsigned *d_decode_t2_slot; 
-#line 142
-unsigned *d_decode_ax_slot; 
-#line 143
-unsigned *d_decode_dax_slot; 
-#line 144
-unsigned *d_decode_vdax_slot; 
-#line 145
-unsigned *d_decode_n1_slot; 
-#line 146
-unsigned *d_decode_n2_slot; 
-#line 147
-unsigned *d_decode_n3_slot; 
-#line 149
-unsigned *d_N_pos; 
-#line 150
-unsigned *d_root_pow; 
-#line 151
-unsigned *d_root_inv_pow; 
-#line 152
-unsigned *d_inv; 
-#line 153
-unsigned *d_root_layer_pow; 
-#line 154
-unsigned *d_packet_product; 
-#line 156
-struct CB_DATA { 
-#line 157
-unsigned slot_id; 
-#line 158
-unsigned *dst; 
-#line 159
-unsigned *src; 
-#line 160
-size_t size_res; 
-#line 161
-std::queue< unsigned>  &slot; 
-#line 162
-std::mutex &mt; 
-#line 163
-std::condition_variable &cv; 
-#line 164
-}; 
-#line 166
-std::queue< unsigned>  encode_slot, decode_slot; 
-#line 167
-std::mutex mt_encode_slot, mt_decode_slot; 
-#line 168
-std::condition_variable cv_encode_slot, cv_decode_slot; 
-#line 170
-inline unsigned pop_slot(std::queue< unsigned>  &slot, std::mutex &mt, std::condition_variable &cv) { 
-#line 171
-std::unique_lock< std::mutex>  lock(mt); 
-#line 172
-cv.wait(lock, [&]{ return !(slot).empty(); } ); 
-#line 173
-unsigned id = slot.front(); 
-#line 174
-slot.pop(); 
-#line 175
-return id; 
-#line 176
-} 
-#line 178
-inline void push_slot(unsigned id, std::queue< unsigned>  &slot, std::mutex &mt, std::condition_variable &cv) { 
-#line 179
+#line 39
+inline void check_last(const char *const file, const int line) 
+#line 40
 { 
-#line 180
+#line 41
+const cudaError_t err{cudaPeekAtLastError()}; 
+#line 42
+if (err != (cudaSuccess)) 
+#line 43
+{ 
+#line 44
+(((((((((std::cerr << ("CUDA Runtime Error at: "))) << file)) << (":"))) << line)) << (std::endl)); 
+#line 45
+(((std::cerr << (cudaGetErrorString(err)))) << (std::endl)); 
+#line 46
+std::exit(1); 
+#line 47
+}  
+#line 48
+} 
+#line 50
+const unsigned MOD = (65537); 
+#line 51
+const unsigned SPECIAL = (MOD - (1)); 
+#line 52
+const unsigned ROOT = (3); 
+#line 53
+const unsigned ROOT_INV = (21846); 
+#line 54
+const unsigned MAX_LOG = (16); 
+#line 56
+const unsigned LOG_DATA = (10); 
+#line 57
+const unsigned LOG_SYMBOL = (LOG_DATA - (1)); 
+#line 58
+const unsigned LOG_SEG = (LOG_SYMBOL - (1)); 
+#line 59
+const unsigned SYMBOL_PER_PACKET = (1 << LOG_SYMBOL); 
+#line 60
+const unsigned NUM_OF_PACKET = (1 << (MAX_LOG - LOG_SYMBOL)); 
+#line 61
+const unsigned NUM_OF_NEED_PACKET = (NUM_OF_PACKET >> 1); 
+#line 62
+const unsigned SEG_PER_PACKET = (1 << LOG_SEG); 
+#line 63
+const unsigned SEG_DIFF = (1 << (MAX_LOG - (1))); 
+#line 64
+const unsigned NUM_OF_NEED_SYMBOL = (1 << (MAX_LOG - (1))); 
+#line 66
+const unsigned LEN_ROOT_LAYER_POW = ((1 << MAX_LOG) - 1); 
+#line 67
+const unsigned LEN_ROOT_LAYER_POW_2 = (LEN_ROOT_LAYER_POW << 1); 
+#line 68
+const unsigned LEN_N_POS = ((1 << (MAX_LOG + (1))) - 1); 
+#line 69
+const unsigned LEN_PACKET_PRODUCT = (NUM_OF_PACKET * (SYMBOL_PER_PACKET << 1)); 
+#line 70
+const unsigned LEN_ONE_PACKET_PRODUCT = (1 << (LOG_SYMBOL + (1))); 
+#line 72
+const unsigned LEN_SMALL = NUM_OF_NEED_SYMBOL; 
+#line 73
+const unsigned LEN_LARGE = (LEN_SMALL << 1); 
+#line 75
+const unsigned SIZE_SMALL = (LEN_SMALL * sizeof(unsigned)); 
+#line 76
+const unsigned SIZE_LARGE = (LEN_LARGE * sizeof(unsigned)); 
+#line 77
+const unsigned SIZE_ONE_PACKET_PRODUCT = (LEN_ONE_PACKET_PRODUCT * sizeof(unsigned)); 
+#line 79
+const unsigned LOG_LEN_ENCODE_P = (MAX_LOG - (1)); 
+#line 80
+const unsigned LOG_LEN_ENCODE_Y = MAX_LOG; 
+#line 81
+const unsigned LOG_LEN_DECODE_X = (MAX_LOG - (1)); 
+#line 82
+const unsigned LOG_LEN_DECODE_Y = (MAX_LOG - (1)); 
+#line 83
+const unsigned LOG_LEN_DECODE_P = (MAX_LOG - (1)); 
+#line 85
+const unsigned LEN_ENCODE_P = (1 << LOG_LEN_ENCODE_P); 
+#line 86
+const unsigned LEN_ENCODE_Y = (1 << LOG_LEN_ENCODE_Y); 
+#line 87
+const unsigned LEN_DECODE_X = (1 << LOG_LEN_DECODE_X); 
+#line 88
+const unsigned LEN_DECODE_Y = (1 << LOG_LEN_DECODE_Y); 
+#line 89
+const unsigned LEN_DECODE_P = (1 << LOG_LEN_DECODE_P); 
+#line 91
+const unsigned SIZE_ENCODE_P = (LEN_ENCODE_P * sizeof(unsigned)); 
+#line 92
+const unsigned SIZE_ENCODE_Y = (LEN_ENCODE_Y * sizeof(unsigned)); 
+#line 93
+const unsigned SIZE_DECODE_X = (LEN_DECODE_X * sizeof(unsigned)); 
+#line 94
+const unsigned SIZE_DECODE_Y = (LEN_DECODE_Y * sizeof(unsigned)); 
+#line 95
+const unsigned SIZE_DECODE_P = (LEN_DECODE_P * sizeof(unsigned)); 
+#line 100
+const unsigned MAX_ACTIVE_ENCODE = (1024); 
+#line 101
+const unsigned MAX_ACTIVE_DECODE = (1024); 
+#line 102
+const unsigned MAX_ENCODE_LAUNCH_CNT = (16); 
+#line 103
+const unsigned MAX_DECODE_LAUNCH_CNT = (128); 
+#line 105
+const unsigned LOG_THREAD_PER_OP = (9); 
+#line 106
+const unsigned THREAD_PER_OP = (1 << LOG_THREAD_PER_OP); 
+#line 108
+const unsigned LOG_LEN_WARP = (5); 
+#line 109
+const unsigned LEN_WARP = (1 << LOG_LEN_WARP); 
+#line 110
+const unsigned ALGO_N_2_CUTOFF = (64); 
+#line 112
+const size_t SIZE_ENCODE_P_SLOT = ((sizeof(unsigned) * LEN_ENCODE_P) * MAX_ACTIVE_ENCODE); 
+#line 113
+const size_t SIZE_ENCODE_Y_SLOT = ((sizeof(unsigned) * LEN_ENCODE_Y) * MAX_ACTIVE_ENCODE); 
+#line 115
+const size_t SIZE_DECODE_X_SLOT = ((sizeof(unsigned) * LEN_DECODE_X) * MAX_ACTIVE_DECODE); 
+#line 116
+const size_t SIZE_DECODE_Y_SLOT = ((sizeof(unsigned) * LEN_DECODE_Y) * MAX_ACTIVE_DECODE); 
+#line 118
+const size_t SIZE_DECODE_T1_SLOT = ((sizeof(unsigned) * LEN_LARGE) * MAX_ACTIVE_DECODE); 
+#line 119
+const size_t SIZE_DECODE_T2_SLOT = ((sizeof(unsigned) * LEN_LARGE) * MAX_ACTIVE_DECODE); 
+#line 120
+const size_t SIZE_DECODE_AX_SLOT = ((sizeof(unsigned) * LEN_LARGE) * MAX_ACTIVE_DECODE); 
+#line 121
+const size_t SIZE_DECODE_DAX_SLOT = ((sizeof(unsigned) * LEN_SMALL) * MAX_ACTIVE_DECODE); 
+#line 122
+const size_t SIZE_DECODE_VDAX_SLOT = ((sizeof(unsigned) * LEN_LARGE) * MAX_ACTIVE_DECODE); 
+#line 123
+const size_t SIZE_DECODE_N1_SLOT = ((sizeof(unsigned) * LEN_SMALL) * MAX_ACTIVE_DECODE); 
+#line 124
+const size_t SIZE_DECODE_N2_SLOT = ((sizeof(unsigned) * LEN_LARGE) * MAX_ACTIVE_DECODE); 
+#line 125
+const size_t SIZE_DECODE_N3_SLOT = ((sizeof(unsigned) * LEN_SMALL) * MAX_ACTIVE_DECODE); 
+#line 127
+unsigned **h_encode_p_slot; 
+#line 128
+unsigned **h_encode_y_slot; 
+#line 129
+unsigned **h_decode_x_slot; 
+#line 130
+unsigned **h_decode_y_slot; 
+#line 131
+unsigned **h_decode_p_slot; 
+#line 133
+unsigned *d_encode_p_slot; 
+#line 134
+unsigned *d_encode_y_slot; 
+#line 135
+unsigned *d_decode_x_slot; 
+#line 136
+unsigned *d_decode_y_slot; 
+#line 138
+unsigned *d_decode_t1_slot; 
+#line 139
+unsigned *d_decode_t2_slot; 
+#line 140
+unsigned *d_decode_ax_slot; 
+#line 141
+unsigned *d_decode_dax_slot; 
+#line 142
+unsigned *d_decode_vdax_slot; 
+#line 143
+unsigned *d_decode_n1_slot; 
+#line 144
+unsigned *d_decode_n2_slot; 
+#line 145
+unsigned *d_decode_n3_slot; 
+#line 147
+unsigned *d_N_pos; 
+#line 148
+unsigned *d_root_pow; 
+#line 149
+unsigned *d_root_inv_pow; 
+#line 150
+unsigned *d_inv; 
+#line 151
+unsigned *d_root_layer_pow; 
+#line 152
+unsigned *d_packet_product; 
+#line 154
+struct CB_DATA { 
+#line 155
+unsigned slot_id; 
+#line 156
+unsigned *dst; 
+#line 157
+unsigned *src; 
+#line 158
+size_t size_res; 
+#line 159
+std::queue< unsigned>  &slot; 
+#line 160
+std::mutex &mt; 
+#line 161
+std::condition_variable &cv; 
+#line 162
+}; 
+#line 164
+std::queue< unsigned>  encode_slot, decode_slot; 
+#line 165
+std::mutex mt_encode_slot, mt_decode_slot; 
+#line 166
+std::condition_variable cv_encode_slot, cv_decode_slot; 
+#line 168
+inline unsigned pop_slot(std::queue< unsigned>  &slot, std::mutex &mt, std::condition_variable &cv) { 
+#line 169
+std::unique_lock< std::mutex>  lock(mt); 
+#line 170
+cv.wait(lock, [&]{ return !(slot).empty(); } ); 
+#line 171
+unsigned id = slot.front(); 
+#line 172
+slot.pop(); 
+#line 173
+return id; 
+#line 174
+} 
+#line 176
+inline void push_slot(unsigned id, std::queue< unsigned>  &slot, std::mutex &mt, std::condition_variable &cv) { 
+#line 177
+{ 
+#line 178
 std::lock_guard< std::mutex>  lock(mt); 
-#line 181
+#line 179
 slot.push(id); 
+#line 180
+} 
+#line 181
+cv.notify_one(); 
 #line 182
 } 
-#line 183
-cv.notify_one(); 
 #line 184
-} 
-#line 186
 void init_batch_slot() { 
-#line 188
+#line 186
 for (unsigned i = (0); i < MAX_ACTIVE_ENCODE; i++) { 
-#line 189
+#line 187
 push_slot(i, encode_slot, mt_encode_slot, cv_encode_slot); }  
-#line 191
+#line 189
 for (unsigned i = (0); i < MAX_ACTIVE_DECODE; i++) { 
-#line 192
+#line 190
 push_slot(i, decode_slot, mt_decode_slot, cv_decode_slot); }  
+#line 192
+} 
 #line 194
-} 
-#line 196
 void __stdcall h_end_batch_slot(void *data) { 
-#line 198
+#line 196
 CB_DATA *dat = static_cast< CB_DATA *>(data); 
-#line 200
+#line 198
 memcpy(dat->dst, dat->src, dat->size_res); 
-#line 201
+#line 199
 push_slot(dat->slot_id, dat->slot, dat->mt, dat->cv); 
-#line 203
+#line 201
 delete dat; 
-#line 204
+#line 202
 } 
-#line 206
-__forceinline void build_launch_param(unsigned log_n, unsigned &n_th, unsigned &n_bl) { 
-#line 207
-if (log_n <= LOG_LEN_WARP) { 
 #line 208
-n_th = (1 << log_n); 
-#line 209
-n_bl = (1); 
-#line 210
-} else 
-#line 211
-{ 
-#line 212
-unsigned c_l2_sqrt_n = (log_n >> 1) + (log_n & (1)); 
-#line 213
-n_th = (1 << c_l2_sqrt_n); 
-#line 214
-n_bl = (1 << (log_n - c_l2_sqrt_n)); 
-#line 215
-}  
-#line 216
-} 
-#line 218
 __forceinline unsigned mul_mod(unsigned a, unsigned b) 
-#line 219
+#line 209
 { 
-#line 220
+#line 210
 if ((a == SPECIAL) && (b == SPECIAL)) { 
-#line 221
+#line 211
 return 1; }  
-#line 222
+#line 212
 return (a * b) % MOD; 
-#line 223
+#line 213
 } 
-#line 225
+#line 215
 __forceinline unsigned div_mod(unsigned a, unsigned b, unsigned *
-#line 226
+#line 216
 d_inv) {int volatile ___ = 1;(void)a;(void)b;(void)d_inv;::exit(___);}
 #if 0
+#line 217
+{ 
+#line 218
+return mul_mod(a, d_inv[b]); 
+#line 219
+} 
+#endif
+#line 221 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+__forceinline unsigned add_mod(unsigned a, unsigned b) 
+#line 222
+{ 
+#line 223
+return (a + b) % MOD; 
+#line 224
+} 
+#line 226
+__forceinline unsigned sub_mod(unsigned a, unsigned b) 
 #line 227
 { 
 #line 228
-return mul_mod(a, d_inv[b]); 
+return ((a - b) + MOD) % MOD; 
 #line 229
 } 
-#endif
-#line 231 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__forceinline unsigned add_mod(unsigned a, unsigned b) 
+#line 231
+__forceinline unsigned pow_mod(unsigned a, unsigned b) 
 #line 232
 { 
 #line 233
-return (a + b) % MOD; 
-#line 234
-} 
-#line 236
-__forceinline unsigned sub_mod(unsigned a, unsigned b) 
-#line 237
-{ 
-#line 238
-return ((a - b) + MOD) % MOD; 
-#line 239
-} 
-#line 241
-__forceinline unsigned pow_mod(unsigned a, unsigned b) 
-#line 242
-{ 
-#line 243
 unsigned res = (1); 
-#line 244
+#line 234
 while (b > (0)) 
-#line 245
+#line 235
 { 
-#line 246
+#line 236
 if (b & (1)) { 
-#line 247
+#line 237
 res = mul_mod(res, a); }  
-#line 248
+#line 238
 a = mul_mod(a, a); 
-#line 249
+#line 239
 b >>= 1; 
-#line 250
+#line 240
 }  
-#line 251
+#line 241
 return res; 
-#line 252
+#line 242
 } 
-#line 254
-void g_pre_fnt(unsigned *a, unsigned *b, unsigned st, unsigned *d_N_pos) ;
+#line 244
+void fnt(unsigned *a, unsigned *b, unsigned log_na, unsigned log_nb, unsigned opt, unsigned *
+#line 245
+d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, unsigned wpt) ;
 #if 0
-#line 255
+#line 246
 { 
-#line 257
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 258
-unsigned id_l = id * ALGO_HIGH_WPT, id_r = id_l + ALGO_HIGH_WPT; 
 #line 259
-for (unsigned k = id_l; k < id_r; k++) { 
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
 #line 260
-(b[d_N_pos[st + k]]) = (a[k]); }  
+unsigned na = 1 << log_na, nb = 1 << log_nb, wp = (opt & (2)) >> 1, st = nb - (1); 
+#line 261
+unsigned id_l = id * wpt, id_r = min(id_l + wpt, nb >> 1); 
 #line 262
-} 
-#endif
-#line 264 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-void g_end_fnt(unsigned *b, unsigned n, unsigned *d_inv) ;
-#if 0
+unsigned os1 = nb >> 1, os2 = LEN_ROOT_LAYER_POW * wp; 
+#line 263
+for (unsigned k = id_l; k < id_r; k++) { 
+#line 264
+if (k < na) { (b[d_N_pos[st + k]]) = (a[k]); }  
 #line 265
-{ 
-#line 267
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 268
-unsigned id_l = id * ALGO_HIGH_WPT, id_r = id_l + ALGO_HIGH_WPT; 
-#line 269
-for (unsigned k = id_l; k < id_r; k++) { 
-#line 270
-(b[k << 1]) = div_mod(b[k << 1], n, d_inv); 
-#line 271
-(b[(k << 1) | (1)]) = div_mod(b[(k << 1) | (1)], n, d_inv); 
-#line 272
+if (log_na == log_nb) { (b[d_N_pos[(st + k) + os1]]) = (a[k + os1]); }  
+#line 266
 }  
-#line 273
-} 
-#endif
-#line 275 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-void g_fnt_i(unsigned *b, unsigned i, bool inv, unsigned *
-#line 276
-d_root_layer_pow) ;
-#if 0
-#line 277
-{ 
-#line 279
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 280
-unsigned id_l = id * ALGO_HIGH_WPT, id_r = id_l + ALGO_HIGH_WPT; 
-#line 282
+#line 268
+__syncthreads(); 
+#line 270
+for (unsigned i = (0); i < log_nb; i++) { 
+#line 272
 unsigned haft_len = 1 << i; 
-#line 283
+#line 273
 for (unsigned k = id_l; k < id_r; k++) { 
-#line 284
+#line 274
 unsigned bl_st = (k >> i) << (i + (1)), th_id = k & (haft_len - (1)); 
-#line 285
+#line 275
 unsigned pos = bl_st + th_id; 
-#line 286
+#line 276
 unsigned u = b[pos]; 
-#line 287
-unsigned v = mul_mod(b[pos + haft_len], d_root_layer_pow[(((LEN_ROOT_LAYER_POW * inv) + haft_len) - (1)) + th_id]); 
-#line 288
+#line 277
+unsigned v = mul_mod(b[pos + haft_len], d_root_layer_pow[((os2 + haft_len) - (1)) + th_id]); 
+#line 278
 (b[pos]) = add_mod(u, v); 
-#line 289
+#line 279
 (b[pos + haft_len]) = sub_mod(u, v); 
+#line 280
+}  
+#line 282
+__syncthreads(); 
+#line 284
+}  
+#line 286
+if (opt & (1)) { 
+#line 287
+for (unsigned k = id_l; k < id_r; k++) { 
+#line 288
+(b[k]) = div_mod(b[k], nb, d_inv); 
+#line 289
+(b[k + os1]) = div_mod(b[k + os1], nb, d_inv); 
 #line 290
 }  
 #line 292
+}  
+#line 293
 } 
 #endif
-#line 294 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__forceinline void fnt(unsigned *a, unsigned *b, unsigned log_na, unsigned log_nb, unsigned opt, unsigned *
-#line 295
-d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream) 
+#line 295 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void g_vector_mul_i(unsigned *a, unsigned *b, unsigned *c, unsigned n, unsigned wpt) ;
+#if 0
 #line 296
 { 
-#line 307
-unsigned nb = 1 << log_nb, wp = (opt & (2)) >> 1; 
-#line 308
-unsigned n_bl, n_th; 
-#line 310
-build_launch_param(log_na - LOG_ALGO_HIGH_WPT, n_th, n_bl); 
-#line 311
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_pre_fnt(a, b, nb - (1), d_N_pos); 
-#line 313
-build_launch_param((log_nb - (1)) - LOG_ALGO_HIGH_WPT, n_th, n_bl); 
-#line 314
-for (unsigned i = (0); i < log_nb; i++) { 
-#line 315
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_fnt_i(b, i, wp, d_root_layer_pow); }  
-#line 317
-if (opt & (1)) { 
-#line 318
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_end_fnt(b, nb, d_inv); }  
-#line 319
-} 
-#line 321
-void g_vector_mul_i(unsigned *a, unsigned *b, unsigned *c) ;
-#if 0
-#line 322
-{ 
-#line 324
+#line 298
 unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 325
-unsigned id_l = id * ALGO_LOW_WPT, id_r = id_l + ALGO_LOW_WPT; 
-#line 326
+#line 299
+unsigned id_l = id * wpt, id_r = min(id_l + wpt, n); 
+#line 300
 for (unsigned k = id_l; k < id_r; k++) { 
-#line 327
+#line 301
 (c[k]) = mul_mod(a[k], b[k]); }  
-#line 330
+#line 304
 } 
 #endif
-#line 332 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-void g_fill(unsigned *a, unsigned val) ;
+#line 306 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void g_fill(unsigned *a, unsigned val, unsigned n, unsigned wpt) ;
 #if 0
-#line 332
+#line 306
 { 
-#line 334
+#line 308
 unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 335
-unsigned id_l = id * ALGO_LOW_WPT, id_r = id_l + ALGO_LOW_WPT; 
-#line 336
+#line 309
+unsigned id_l = id * wpt, id_r = min(id_l + wpt, n); 
+#line 310
 for (unsigned k = id_l; k < id_r; k++) { 
-#line 337
+#line 311
 (a[k]) = val; }  
-#line 339
+#line 313
 } 
 #endif
-#line 341 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-__forceinline void d_poly_mul(unsigned *a, unsigned *b, unsigned *t1, unsigned *t2, unsigned *c, unsigned log_n, unsigned *
-#line 342
-d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) {int volatile ___ = 1;(void)a;(void)b;(void)t1;(void)t2;(void)c;(void)log_n;(void)d_N_pos;(void)d_root_layer_pow;(void)d_inv;::exit(___);}
+#line 315 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+inline void h_poly_mul(unsigned *a, unsigned *b, unsigned *t1, unsigned *t2, unsigned *c, unsigned log_n, unsigned *
+#line 316
+d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream) { 
+#line 319
+unsigned na = 1 << log_n, nc = 1 << (log_n + (1)), size_nc = nc * sizeof(unsigned); 
+#line 321
+unsigned wpt1 = max(nc >> LOG_THREAD_PER_OP, 1), wpt2 = max(na >> LOG_THREAD_PER_OP, 1); 
+#line 322
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : g_fill(t1, 0, nc, wpt1); 
+#line 323
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : g_fill(t2, 0, nc, wpt1); 
+#line 325
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : fnt(a, t1, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, wpt2); 
+#line 326
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : fnt(b, t2, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, wpt2); 
+#line 328
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : g_vector_mul_i(t1, t2, t1, nc, wpt1); 
+#line 330
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : fnt(t1, c, log_n + (1), log_n + (1), 3, d_N_pos, d_root_layer_pow, d_inv, wpt2); 
+#line 332
+} 
+#line 334
+void g_poly_deriv(unsigned *ax, unsigned *dax, unsigned wpt) ;
 #if 0
-#line 343
+#line 335
+{ 
+#line 337
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
+#line 338
+unsigned id_l = id * wpt, id_r = id_l + wpt; 
+#line 339
+for (unsigned k = id_l; k < id_r; k++) { 
+#line 340
+(dax[k]) = mul_mod(ax[k + (1)], k + (1)); }  
+#line 341
+} 
+#endif
+#line 343 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+inline void h_build_product(unsigned *p, unsigned *t1, unsigned *t2, unsigned log_n1, unsigned log_n2, cudaStream_t stream) 
+#line 344
 { 
 #line 348
-unsigned na = 1 << log_n, nc = na << 1, size_nc = nc * sizeof(unsigned); 
-#line 350
-if (na <= ALGO_N_2_CUTOFF) 
-#line 351
-{ 
-#line 352
-for (unsigned i = (0); i < na; i++) 
-#line 353
-{ 
-#line 354
-(t1[i]) = (a[i]); 
-#line 355
-(t2[i]) = (b[i]); 
-#line 356
-}  
-#line 357
-memset(c, 0, size_nc); 
-#line 358
-for (unsigned i = (0); i < na; i++) { 
-#line 359
-for (unsigned j = (0); j < na; j++) { 
-#line 360
-(c[i + j]) = add_mod(c[i + j], mul_mod(t1[i], t2[j])); }  }  
-#line 361
-} else 
-#line 363
-{ 
-#line 365
-cudaStream_t stream; 
-#line 366
-cudaStreamCreateWithFlags(&stream, 1); 
-#line 368
-unsigned n_bl, n_th; 
-#line 369
-build_launch_param((log_n + (1)) - LOG_ALGO_LOW_WPT, n_th, n_bl); 
-#line 370
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_fill(t1, 0); 
-#line 371
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_fill(t2, 0); 
-#line 373
-fnt(a, t1, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 374
-fnt(b, t2, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 376
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_vector_mul_i(t1, t2, t1); 
-#line 378
-fnt(t1, c, log_n + (1), log_n + (1), 3, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 380
-cudaStreamDestroy(stream); 
-#line 382
-}  
-#line 383
-} 
-#endif
-#line 385 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-inline void h_poly_mul(unsigned *a, unsigned *b, unsigned *t1, unsigned *t2, unsigned *c, unsigned log_n, unsigned *
-#line 386
-d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream) { 
-#line 390
-unsigned nc = 1 << (log_n + (1)), size_nc = nc * sizeof(unsigned); 
-#line 392
-unsigned n_bl, n_th; 
-#line 393
-build_launch_param((log_n + (1)) - LOG_ALGO_LOW_WPT, n_th, n_bl); 
-#line 394
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_fill(t1, 0); 
-#line 395
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_fill(t2, 0); 
-#line 397
-fnt(a, t1, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 398
-fnt(b, t2, log_n, log_n + (1), 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 400
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_vector_mul_i(t1, t2, t1); 
-#line 402
-fnt(t1, c, log_n + (1), log_n + (1), 3, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 404
-} 
-#line 406
-void g_poly_deriv(unsigned *ax, unsigned *dax) ;
-#if 0
-#line 407
-{ 
-#line 409
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 410
-unsigned id_l = id * ALGO_MED_WPT, id_r = id_l + ALGO_MED_WPT; 
-#line 411
-for (unsigned k = id_l; k < id_r; k++) { 
-#line 412
-(dax[k]) = mul_mod(ax[k + (1)], k + (1)); }  
-#line 413
-} 
-#endif
-#line 415 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-void g_build_product_i(unsigned *p, unsigned *t1, unsigned *t2, unsigned i, unsigned *
-#line 416
-d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv) ;
-#if 0
-#line 417
-{ 
-#line 419
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 420
-unsigned len = 1 << i; 
-#line 422
-unsigned id_l = id * ALGO_EXTR_WPT, id_r = id_l + ALGO_EXTR_WPT; 
-#line 423
-for (unsigned k = id_l; k < id_r; k++) { 
-#line 424
-unsigned st = k << (i + (1)); 
-#line 425
-d_poly_mul(p + st, (p + st) + len, t1 + st, t2 + st, p + st, i, d_N_pos, d_root_layer_pow, d_inv); 
-#line 426
-}  
-#line 428
-} 
-#endif
-#line 430 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-inline void h_build_product(unsigned *p, unsigned *t1, unsigned *t2, unsigned log_n1, unsigned log_n2, cudaStream_t stream) 
-#line 431
-{ 
-#line 435
 for (unsigned i = log_n1; i < log_n2; i++) 
-#line 436
+#line 349
 { 
-#line 437
-unsigned n_th, n_bl; 
-#line 438
-build_launch_param(((log_n2 - i) - (1)) - LOG_ALGO_EXTR_WPT, n_th, n_bl); 
-#line 439
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_build_product_i(p, t1, t2, i, d_N_pos, d_root_layer_pow, d_inv); 
-#line 440
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 440); 
-#line 441
+#line 350
+unsigned m = 1 << ((log_n2 - i) - (1)), len = 1 << i; 
+#line 351
+for (unsigned j = (0); j < m; j++) { 
+#line 352
+unsigned st = j << (i + (1)); 
+#line 353
+h_poly_mul(p + st, (p + st) + len, t1 + st, t2 + st, p + st, i, d_N_pos, d_root_layer_pow, d_inv, stream); 
+#line 354
 }  
+#line 355
+}  
+#line 356
+} 
+#line 358
+inline void h_build_ax(unsigned *x, unsigned *p, unsigned *t1, unsigned *t2, cudaStream_t stream) 
+#line 359
+{ 
+#line 364
+for (unsigned i = (0); i < NUM_OF_NEED_PACKET; i++) 
+#line 365
+{ 
+#line 366
+unsigned st_p1 = i << (LOG_SYMBOL + (1)), st_p2 = (x[i << LOG_SYMBOL]) << 2; 
+#line 367
+check(cudaMemcpyAsync(p + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT, cudaMemcpyDeviceToDevice, stream), "cudaMemcpyAsync(p + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT, cudaMemcpyDeviceToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 367); 
+#line 368
+}  
+#line 369
+h_build_product(p, t1, t2, LOG_SYMBOL + (1), MAX_LOG, stream); 
+#line 370
+} 
+#line 372
+void g_build_n1(unsigned *n1, unsigned *vdax, unsigned *x, unsigned *y, unsigned *
+#line 373
+d_inv, unsigned wpt) ;
+#if 0
+#line 374
+{ 
+#line 376
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
+#line 377
+unsigned id_l = id * wpt, id_r = id_l + wpt; 
+#line 378
+for (unsigned k = id_l; k < id_r; k++) { 
+#line 379
+(n1[k]) = div_mod(y[k], vdax[x[k]], d_inv); }  
+#line 381
+} 
+#endif
+#line 383 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void g_build_n2(unsigned *n2, unsigned *n1, unsigned *x, unsigned wpt) ;
+#if 0
+#line 383
+{ 
+#line 385
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
+#line 386
+unsigned id_l = id * wpt, id_r = id_l + wpt; 
+#line 387
+for (unsigned k = id_l; k < id_r; k++) { 
+#line 388
+(n2[x[k]]) = (n1[k]); }  
+#line 390
+} 
+#endif
+#line 392 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+void g_build_n3(unsigned *n3, unsigned *p_n3, unsigned wpt) ;
+#if 0
+#line 392
+{ 
+#line 394
+unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
+#line 395
+unsigned id_l = id * wpt, id_r = id_l + wpt; 
+#line 396
+for (unsigned k = id_l; k < id_r; k++) { 
+#line 397
+(n3[k]) = sub_mod(0, p_n3[k + (1)]); }  
+#line 399
+} 
+#endif
+#line 401 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+inline void h_build_px(unsigned *p, unsigned *ax, unsigned *n3, unsigned *t1, unsigned *t2, unsigned *
+#line 402
+d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream) { 
+#line 404
+h_poly_mul(ax, n3, t1, t2, p, MAX_LOG - (1), d_N_pos, d_root_layer_pow, d_inv, stream); 
+#line 405
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 405); 
+#line 407
+} 
+#line 409
+void h_encode(unsigned *p, unsigned *y) 
+#line 410
+{ 
+#line 412
+unsigned slot_id = pop_slot(encode_slot, mt_encode_slot, cv_encode_slot); 
+#line 414
+unsigned *sl_p = h_encode_p_slot[slot_id]; 
+#line 415
+unsigned *sl_y = h_encode_y_slot[slot_id]; 
+#line 417
+memcpy(sl_p, p, SIZE_ENCODE_P); 
+#line 419
+unsigned *d_p = d_encode_p_slot + ((1i64 * slot_id) * LEN_ENCODE_P); 
+#line 420
+unsigned *d_y = d_encode_y_slot + ((1i64 * slot_id) * LEN_ENCODE_Y); 
+#line 422
+unsigned wpt1 = (LEN_LARGE >> LOG_THREAD_PER_OP), wpt2 = (LEN_SMALL >> LOG_THREAD_PER_OP); 
+#line 424
+CB_DATA *data = new CB_DATA{slot_id, y, sl_y, (SIZE_ENCODE_Y), encode_slot, mt_encode_slot, cv_encode_slot}; 
+#line 426
+cudaStream_t stream; 
+#line 427
+check(cudaStreamCreate(&stream), "cudaStreamCreate(&stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 427); 
+#line 429
+check(cudaMemcpyAsync(d_p, sl_p, SIZE_ENCODE_P, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(d_p, sl_p, SIZE_ENCODE_P, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 429); 
+#line 431
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : g_fill(d_y, 0, LEN_LARGE, wpt1); 
+#line 433
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : fnt(d_p, d_y, MAX_LOG - (1), MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, wpt2); 
+#line 434
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 434); 
+#line 436
+check(cudaMemcpyAsync(sl_y, d_y, SIZE_ENCODE_Y, cudaMemcpyDeviceToHost, stream), "cudaMemcpyAsync(sl_y, d_y, SIZE_ENCODE_Y, cudaMemcpyDeviceToHost, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 436); 
+#line 438
+check(cudaLaunchHostFunc(stream, h_end_batch_slot, data), "cudaLaunchHostFunc(stream, h_end_batch_slot, data)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 438); 
+#line 440
+check(cudaStreamDestroy(stream), "cudaStreamDestroy(stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 440); 
 #line 442
 } 
 #line 444
-inline void h_build_ax(unsigned *x, unsigned *p, unsigned *t1, unsigned *t2, cudaStream_t stream) 
+void h_decode(unsigned *x, unsigned *y, unsigned *p) 
 #line 445
 { 
-#line 450
-for (unsigned i = (0); i < NUM_OF_NEED_PACKET; i++) 
-#line 451
-{ 
-#line 452
-unsigned st_p1 = i << (LOG_SYMBOL + (1)), st_p2 = (x[i << LOG_SYMBOL]) << 2; 
-#line 453
-check(cudaMemcpyAsync(p + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT, cudaMemcpyDeviceToDevice, stream), "cudaMemcpyAsync(p + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT, cudaMemcpyDeviceToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 453); 
-#line 454
-}  
-#line 455
-h_build_product(p, t1, t2, LOG_SYMBOL + (1), MAX_LOG, stream); 
-#line 456
-} 
-#line 458
-void g_build_n1(unsigned *n1, unsigned *vdax, unsigned *x, unsigned *y, unsigned *
-#line 459
-d_inv) ;
-#if 0
-#line 460
-{ 
-#line 462
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 463
-unsigned id_l = id * ALGO_MED_WPT, id_r = id_l + ALGO_MED_WPT; 
-#line 464
-for (unsigned k = id_l; k < id_r; k++) { 
-#line 465
-(n1[k]) = div_mod(y[k], vdax[x[k]], d_inv); }  
-#line 467
-} 
-#endif
-#line 469 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-void g_build_n2(unsigned *n2, unsigned *n1, unsigned *x) ;
-#if 0
-#line 469
-{ 
-#line 471
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 472
-unsigned id_l = id * ALGO_MED_WPT, id_r = id_l + ALGO_MED_WPT; 
-#line 473
-for (unsigned k = id_l; k < id_r; k++) { 
-#line 474
-(n2[x[k]]) = (n1[k]); }  
-#line 476
-} 
-#endif
-#line 478 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-void g_build_n3(unsigned *n3, unsigned *p_n3) ;
-#if 0
-#line 478
-{ 
-#line 480
-unsigned id = ((__device_builtin_variable_blockIdx.x) * (__device_builtin_variable_blockDim.x)) + (__device_builtin_variable_threadIdx.x); 
-#line 481
-unsigned id_l = id * ALGO_MED_WPT, id_r = id_l + ALGO_MED_WPT; 
-#line 482
-for (unsigned k = id_l; k < id_r; k++) { 
-#line 483
-(n3[k]) = sub_mod(0, p_n3[k + (1)]); }  
-#line 485
-} 
-#endif
-#line 487 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
-inline void h_build_px(unsigned *p, unsigned *ax, unsigned *n3, unsigned *t1, unsigned *t2, unsigned *
-#line 488
-d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream) { 
-#line 490
-h_poly_mul(ax, n3, t1, t2, p, MAX_LOG - (1), d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 491
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 491); 
-#line 493
-} 
-#line 495
-void h_encode(unsigned *p, unsigned *y) 
-#line 496
-{ 
-#line 498
-unsigned slot_id = pop_slot(encode_slot, mt_encode_slot, cv_encode_slot); 
-#line 500
-unsigned *sl_p = h_encode_p_slot[slot_id]; 
-#line 501
-unsigned *sl_y = h_encode_y_slot[slot_id]; 
-#line 503
-memcpy(sl_p, p, SIZE_ENCODE_P); 
-#line 505
-unsigned *d_p = d_encode_p_slot + ((1i64 * slot_id) * LEN_ENCODE_P); 
-#line 506
-unsigned *d_y = d_encode_y_slot + ((1i64 * slot_id) * LEN_ENCODE_Y); 
-#line 508
-unsigned n_th, n_bl; 
-#line 509
-build_launch_param(LOG_LEN_ENCODE_Y - LOG_ALGO_LOW_WPT, n_th, n_bl); 
-#line 511
-CB_DATA *data = new CB_DATA{slot_id, y, sl_y, (SIZE_ENCODE_Y), encode_slot, mt_encode_slot, cv_encode_slot}; 
-#line 513
-cudaStream_t stream; 
-#line 514
-check(cudaStreamCreate(&stream), "cudaStreamCreate(&stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 514); 
-#line 516
-check(cudaMemcpyAsync(d_p, sl_p, SIZE_ENCODE_P, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(d_p, sl_p, SIZE_ENCODE_P, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 516); 
-#line 518
-(__cudaPushCallConfiguration(n_bl, n_th, 0, stream)) ? (void)0 : g_fill(d_y, 0); 
-#line 520
-fnt(d_p, d_y, MAX_LOG - (1), MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 521
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 521); 
-#line 523
-check(cudaMemcpyAsync(sl_y, d_y, SIZE_ENCODE_Y, cudaMemcpyDeviceToHost, stream), "cudaMemcpyAsync(sl_y, d_y, SIZE_ENCODE_Y, cudaMemcpyDeviceToHost, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 523); 
-#line 525
-check(cudaLaunchHostFunc(stream, h_end_batch_slot, data), "cudaLaunchHostFunc(stream, h_end_batch_slot, data)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 525); 
-#line 527
-check(cudaStreamDestroy(stream), "cudaStreamDestroy(stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 527); 
-#line 529
-} 
-#line 531
-void h_decode(unsigned *x, unsigned *y, unsigned *p) 
-#line 532
-{ 
-#line 534
+#line 447
 unsigned slot_id = pop_slot(decode_slot, mt_decode_slot, cv_decode_slot); 
-#line 536
+#line 449
 unsigned *sl_x = h_decode_x_slot[slot_id]; 
-#line 537
+#line 450
 unsigned *sl_y = h_decode_y_slot[slot_id]; 
-#line 538
+#line 451
 unsigned *sl_p = h_decode_p_slot[slot_id]; 
-#line 540
+#line 453
 memcpy(sl_x, x, SIZE_DECODE_X); 
-#line 541
+#line 454
 memcpy(sl_y, y, SIZE_DECODE_Y); 
-#line 543
+#line 456
 unsigned *d_x = d_decode_x_slot + ((1i64 * slot_id) * LEN_DECODE_X); 
-#line 544
+#line 457
 unsigned *d_y = d_decode_y_slot + ((1i64 * slot_id) * LEN_DECODE_Y); 
-#line 545
+#line 458
 unsigned *d_t1 = d_decode_t1_slot + ((1i64 * slot_id) * LEN_LARGE); 
-#line 546
+#line 459
 unsigned *d_t2 = d_decode_t2_slot + ((1i64 * slot_id) * LEN_LARGE); 
-#line 547
+#line 460
 unsigned *d_ax = d_decode_ax_slot + ((1i64 * slot_id) * LEN_LARGE); 
-#line 548
+#line 461
 unsigned *d_dax = d_decode_dax_slot + ((1i64 * slot_id) * LEN_SMALL); 
-#line 549
+#line 462
 unsigned *d_vdax = d_decode_vdax_slot + ((1i64 * slot_id) * LEN_LARGE); 
-#line 550
+#line 463
 unsigned *d_n1 = d_decode_n1_slot + ((1i64 * slot_id) * LEN_SMALL); 
-#line 551
+#line 464
 unsigned *d_n2 = d_decode_n2_slot + ((1i64 * slot_id) * LEN_LARGE); 
-#line 552
+#line 465
 unsigned *d_n3 = d_decode_n3_slot + ((1i64 * slot_id) * LEN_SMALL); 
-#line 554
-unsigned n_th1, n_bl1, n_th2, n_bl2; 
-#line 555
-build_launch_param((MAX_LOG - LOG_ALGO_MED_WPT) - (1), n_th1, n_bl1); 
-#line 556
-build_launch_param(MAX_LOG - LOG_ALGO_LOW_WPT, n_th2, n_bl2); 
-#line 558
+#line 467
+unsigned wpt1 = (LEN_LARGE >> LOG_THREAD_PER_OP), wpt2 = (LEN_SMALL >> LOG_THREAD_PER_OP); 
+#line 469
 CB_DATA *data = new CB_DATA{slot_id, p, sl_p, (SIZE_DECODE_P), decode_slot, mt_decode_slot, cv_decode_slot}; 
-#line 560
+#line 471
 cudaStream_t stream; 
-#line 561
-check(cudaStreamCreate(&stream), "cudaStreamCreate(&stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 561); 
-#line 563
-check(cudaMemcpyAsync(d_x, sl_x, SIZE_DECODE_X, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(d_x, sl_x, SIZE_DECODE_X, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 563); 
-#line 564
-check(cudaMemcpyAsync(d_y, sl_y, SIZE_DECODE_Y, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(d_y, sl_y, SIZE_DECODE_Y, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 564); 
-#line 566
-(__cudaPushCallConfiguration(n_bl2, n_th2, 0, stream)) ? (void)0 : g_fill(d_vdax, 0); 
-#line 567
-(__cudaPushCallConfiguration(n_bl2, n_th2, 0, stream)) ? (void)0 : g_fill(d_n2, 0); 
-#line 569
+#line 472
+check(cudaStreamCreate(&stream), "cudaStreamCreate(&stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 472); 
+#line 474
+check(cudaMemcpyAsync(d_x, sl_x, SIZE_DECODE_X, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(d_x, sl_x, SIZE_DECODE_X, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 474); 
+#line 475
+check(cudaMemcpyAsync(d_y, sl_y, SIZE_DECODE_Y, cudaMemcpyHostToDevice, stream), "cudaMemcpyAsync(d_y, sl_y, SIZE_DECODE_Y, cudaMemcpyHostToDevice, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 475); 
+#line 477
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : g_fill(d_vdax, 0, LEN_LARGE, wpt1); 
+#line 478
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : g_fill(d_n2, 0, LEN_LARGE, wpt1); 
+#line 480
 h_build_ax(x, d_ax, d_t1, d_t2, stream); 
-#line 571
-(__cudaPushCallConfiguration(n_bl1, n_th1, 0, stream)) ? (void)0 : g_poly_deriv(d_ax, d_dax); 
-#line 572
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 572); 
-#line 574
-fnt(d_dax, d_vdax, MAX_LOG - (1), MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 575
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 575); 
-#line 577
-(__cudaPushCallConfiguration(n_bl1, n_th1, 0, stream)) ? (void)0 : g_build_n1(d_n1, d_vdax, d_x, d_y, d_inv); 
-#line 578
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 578); 
-#line 580
-(__cudaPushCallConfiguration(n_bl1, n_th1, 0, stream)) ? (void)0 : g_build_n2(d_n2, d_n1, d_x); 
-#line 581
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 581); 
-#line 583
-fnt(d_n2, d_t2, MAX_LOG, MAX_LOG, 2, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 584
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 584); 
-#line 585
-(__cudaPushCallConfiguration(n_bl1, n_th1, 0, stream)) ? (void)0 : g_build_n3(d_n3, d_t2); 
-#line 586
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 586); 
-#line 588
+#line 482
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : g_poly_deriv(d_ax, d_dax, wpt2); 
+#line 483
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 483); 
+#line 485
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : fnt(d_dax, d_vdax, MAX_LOG - (1), MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, wpt2); 
+#line 486
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 486); 
+#line 488
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : g_build_n1(d_n1, d_vdax, d_x, d_y, d_inv, wpt2); 
+#line 489
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 489); 
+#line 491
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : g_build_n2(d_n2, d_n1, d_x, wpt2); 
+#line 492
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 492); 
+#line 494
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : fnt(d_n2, d_t2, MAX_LOG, MAX_LOG, 2, d_N_pos, d_root_layer_pow, d_inv, wpt2); 
+#line 495
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 495); 
+#line 496
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream)) ? (void)0 : g_build_n3(d_n3, d_t2, wpt2); 
+#line 497
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 497); 
+#line 499
 h_build_px(d_n2, d_ax, d_n3, d_t1, d_t2, d_N_pos, d_root_layer_pow, d_inv, stream); 
-#line 589
-check(cudaMemcpyAsync(sl_p, d_n2, SIZE_SMALL, cudaMemcpyDeviceToHost, stream), "cudaMemcpyAsync(sl_p, d_n2, SIZE_SMALL, cudaMemcpyDeviceToHost, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 589); 
-#line 591
-check(cudaLaunchHostFunc(stream, h_end_batch_slot, data), "cudaLaunchHostFunc(stream, h_end_batch_slot, data)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 591); 
-#line 593
-check(cudaStreamDestroy(stream), "cudaStreamDestroy(stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 593); 
-#line 595
+#line 500
+check(cudaMemcpyAsync(sl_p, d_n2, SIZE_SMALL, cudaMemcpyDeviceToHost, stream), "cudaMemcpyAsync(sl_p, d_n2, SIZE_SMALL, cudaMemcpyDeviceToHost, stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 500); 
+#line 502
+check(cudaLaunchHostFunc(stream, h_end_batch_slot, data), "cudaLaunchHostFunc(stream, h_end_batch_slot, data)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 502); 
+#line 504
+check(cudaStreamDestroy(stream), "cudaStreamDestroy(stream)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 504); 
+#line 506
 } 
-#line 597
+#line 508
 void init() 
-#line 598
+#line 509
 { 
-#line 601
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 601); 
-#line 602
-check(cudaDeviceReset(), "cudaDeviceReset()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 602); 
-#line 603
-check(cudaDeviceSetLimit(cudaLimitDevRuntimePendingLaunchCount, std::max(MAX_ACTIVE_DECODE * MAX_DECODE_LAUNCH_CNT, MAX_ACTIVE_ENCODE * MAX_ENCODE_LAUNCH_CNT)), "cudaDeviceSetLimit(cudaLimitDevRuntimePendingLaunchCount, std::max(MAX_ACTIVE_DECODE * MAX_DECODE_LAUNCH_CNT, MAX_ACTIVE_ENCODE " "* MAX_ENCODE_LAUNCH_CNT))", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 604); 
-#line 606 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
+#line 512
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 512); 
+#line 513
+check(cudaDeviceReset(), "cudaDeviceReset()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 513); 
+#line 514
+check(cudaDeviceSetLimit(cudaLimitDevRuntimePendingLaunchCount, max(MAX_ACTIVE_DECODE * MAX_DECODE_LAUNCH_CNT, MAX_ACTIVE_ENCODE * MAX_ENCODE_LAUNCH_CNT)), "cudaDeviceSetLimit(cudaLimitDevRuntimePendingLaunchCount, max(MAX_ACTIVE_DECODE * MAX_DECODE_LAUNCH_CNT, MAX_ACTIVE_ENCODE * MAX" "_ENCODE_LAUNCH_CNT))", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 515); 
+#line 517 "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu"
 h_encode_p_slot = ((unsigned **)malloc(MAX_ACTIVE_ENCODE * sizeof(unsigned *))); 
-#line 607
+#line 518
 h_encode_y_slot = ((unsigned **)malloc(MAX_ACTIVE_ENCODE * sizeof(unsigned *))); 
-#line 608
+#line 519
 h_decode_x_slot = ((unsigned **)malloc(MAX_ACTIVE_DECODE * sizeof(unsigned *))); 
-#line 609
+#line 520
 h_decode_y_slot = ((unsigned **)malloc(MAX_ACTIVE_DECODE * sizeof(unsigned *))); 
-#line 610
+#line 521
 h_decode_p_slot = ((unsigned **)malloc(MAX_ACTIVE_DECODE * sizeof(unsigned *))); 
-#line 612
+#line 523
 for (unsigned i = (0); i < MAX_ACTIVE_ENCODE; i++) { 
-#line 613
-check(cudaMallocHost(&(h_encode_p_slot[i]), SIZE_ENCODE_P), "cudaMallocHost(&(h_encode_p_slot[i]), SIZE_ENCODE_P)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 613); 
-#line 614
-check(cudaMallocHost(&(h_encode_y_slot[i]), SIZE_ENCODE_Y), "cudaMallocHost(&(h_encode_y_slot[i]), SIZE_ENCODE_Y)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 614); 
-#line 615
+#line 524
+check(cudaMallocHost(&(h_encode_p_slot[i]), SIZE_ENCODE_P), "cudaMallocHost(&(h_encode_p_slot[i]), SIZE_ENCODE_P)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 524); 
+#line 525
+check(cudaMallocHost(&(h_encode_y_slot[i]), SIZE_ENCODE_Y), "cudaMallocHost(&(h_encode_y_slot[i]), SIZE_ENCODE_Y)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 525); 
+#line 526
 }  
-#line 617
+#line 528
 for (unsigned i = (0); i < MAX_ACTIVE_DECODE; i++) { 
-#line 618
-check(cudaMallocHost(&(h_decode_x_slot[i]), SIZE_DECODE_X), "cudaMallocHost(&(h_decode_x_slot[i]), SIZE_DECODE_X)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 618); 
-#line 619
-check(cudaMallocHost(&(h_decode_y_slot[i]), SIZE_DECODE_Y), "cudaMallocHost(&(h_decode_y_slot[i]), SIZE_DECODE_Y)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 619); 
-#line 620
-check(cudaMallocHost(&(h_decode_p_slot[i]), SIZE_DECODE_P), "cudaMallocHost(&(h_decode_p_slot[i]), SIZE_DECODE_P)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 620); 
-#line 621
+#line 529
+check(cudaMallocHost(&(h_decode_x_slot[i]), SIZE_DECODE_X), "cudaMallocHost(&(h_decode_x_slot[i]), SIZE_DECODE_X)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 529); 
+#line 530
+check(cudaMallocHost(&(h_decode_y_slot[i]), SIZE_DECODE_Y), "cudaMallocHost(&(h_decode_y_slot[i]), SIZE_DECODE_Y)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 530); 
+#line 531
+check(cudaMallocHost(&(h_decode_p_slot[i]), SIZE_DECODE_P), "cudaMallocHost(&(h_decode_p_slot[i]), SIZE_DECODE_P)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 531); 
+#line 532
 }  
-#line 623
-check(cudaMalloc(&d_encode_p_slot, SIZE_ENCODE_P_SLOT), "cudaMalloc(&d_encode_p_slot, SIZE_ENCODE_P_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 623); 
-#line 624
-check(cudaMalloc(&d_encode_y_slot, SIZE_ENCODE_Y_SLOT), "cudaMalloc(&d_encode_y_slot, SIZE_ENCODE_Y_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 624); 
-#line 626
-check(cudaMalloc(&d_decode_x_slot, SIZE_DECODE_X_SLOT), "cudaMalloc(&d_decode_x_slot, SIZE_DECODE_X_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 626); 
-#line 627
-check(cudaMalloc(&d_decode_y_slot, SIZE_DECODE_Y_SLOT), "cudaMalloc(&d_decode_y_slot, SIZE_DECODE_Y_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 627); 
-#line 629
-check(cudaMalloc(&d_decode_t1_slot, SIZE_DECODE_T1_SLOT), "cudaMalloc(&d_decode_t1_slot, SIZE_DECODE_T1_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 629); 
-#line 630
-check(cudaMalloc(&d_decode_t2_slot, SIZE_DECODE_T2_SLOT), "cudaMalloc(&d_decode_t2_slot, SIZE_DECODE_T2_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 630); 
-#line 631
-check(cudaMalloc(&d_decode_ax_slot, SIZE_DECODE_AX_SLOT), "cudaMalloc(&d_decode_ax_slot, SIZE_DECODE_AX_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 631); 
-#line 632
-check(cudaMalloc(&d_decode_dax_slot, SIZE_DECODE_DAX_SLOT), "cudaMalloc(&d_decode_dax_slot, SIZE_DECODE_DAX_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 632); 
-#line 633
-check(cudaMalloc(&d_decode_vdax_slot, SIZE_DECODE_VDAX_SLOT), "cudaMalloc(&d_decode_vdax_slot, SIZE_DECODE_VDAX_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 633); 
-#line 634
-check(cudaMalloc(&d_decode_n1_slot, SIZE_DECODE_N1_SLOT), "cudaMalloc(&d_decode_n1_slot, SIZE_DECODE_N1_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 634); 
-#line 635
-check(cudaMalloc(&d_decode_n2_slot, SIZE_DECODE_N2_SLOT), "cudaMalloc(&d_decode_n2_slot, SIZE_DECODE_N2_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 635); 
-#line 636
-check(cudaMalloc(&d_decode_n3_slot, SIZE_DECODE_N3_SLOT), "cudaMalloc(&d_decode_n3_slot, SIZE_DECODE_N3_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 636); 
-#line 638
+#line 534
+check(cudaMalloc(&d_encode_p_slot, SIZE_ENCODE_P_SLOT), "cudaMalloc(&d_encode_p_slot, SIZE_ENCODE_P_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 534); 
+#line 535
+check(cudaMalloc(&d_encode_y_slot, SIZE_ENCODE_Y_SLOT), "cudaMalloc(&d_encode_y_slot, SIZE_ENCODE_Y_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 535); 
+#line 537
+check(cudaMalloc(&d_decode_x_slot, SIZE_DECODE_X_SLOT), "cudaMalloc(&d_decode_x_slot, SIZE_DECODE_X_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 537); 
+#line 538
+check(cudaMalloc(&d_decode_y_slot, SIZE_DECODE_Y_SLOT), "cudaMalloc(&d_decode_y_slot, SIZE_DECODE_Y_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 538); 
+#line 540
+check(cudaMalloc(&d_decode_t1_slot, SIZE_DECODE_T1_SLOT), "cudaMalloc(&d_decode_t1_slot, SIZE_DECODE_T1_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 540); 
+#line 541
+check(cudaMalloc(&d_decode_t2_slot, SIZE_DECODE_T2_SLOT), "cudaMalloc(&d_decode_t2_slot, SIZE_DECODE_T2_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 541); 
+#line 542
+check(cudaMalloc(&d_decode_ax_slot, SIZE_DECODE_AX_SLOT), "cudaMalloc(&d_decode_ax_slot, SIZE_DECODE_AX_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 542); 
+#line 543
+check(cudaMalloc(&d_decode_dax_slot, SIZE_DECODE_DAX_SLOT), "cudaMalloc(&d_decode_dax_slot, SIZE_DECODE_DAX_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 543); 
+#line 544
+check(cudaMalloc(&d_decode_vdax_slot, SIZE_DECODE_VDAX_SLOT), "cudaMalloc(&d_decode_vdax_slot, SIZE_DECODE_VDAX_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 544); 
+#line 545
+check(cudaMalloc(&d_decode_n1_slot, SIZE_DECODE_N1_SLOT), "cudaMalloc(&d_decode_n1_slot, SIZE_DECODE_N1_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 545); 
+#line 546
+check(cudaMalloc(&d_decode_n2_slot, SIZE_DECODE_N2_SLOT), "cudaMalloc(&d_decode_n2_slot, SIZE_DECODE_N2_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 546); 
+#line 547
+check(cudaMalloc(&d_decode_n3_slot, SIZE_DECODE_N3_SLOT), "cudaMalloc(&d_decode_n3_slot, SIZE_DECODE_N3_SLOT)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 547); 
+#line 549
 init_batch_slot(); 
-#line 640
+#line 551
 unsigned size_N_pos = (LEN_N_POS * sizeof(unsigned)); 
-#line 641
+#line 552
 unsigned *N_pos = (unsigned *)malloc(size_N_pos); 
-#line 642
-check(cudaMalloc(&d_N_pos, size_N_pos), "cudaMalloc(&d_N_pos, size_N_pos)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 642); 
-#line 644
+#line 553
+check(cudaMalloc(&d_N_pos, size_N_pos), "cudaMalloc(&d_N_pos, size_N_pos)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 553); 
+#line 555
 for (unsigned i = (1); i <= MAX_LOG; i++) 
-#line 645
+#line 556
 { 
-#line 646
+#line 557
 unsigned n = 1 << i, st = n - (1); 
-#line 647
+#line 558
 for (unsigned j = (0); j < n; j++) { 
-#line 648
+#line 559
 (N_pos[st + j]) = j; }  
+#line 560
+}  
+#line 562
+for (unsigned i = (1); i <= MAX_LOG; i++) 
+#line 563
+{ 
+#line 564
+unsigned n = 1 << i, st = n - (1); 
+#line 565
+for (unsigned j = (0); j < n; j++) 
+#line 566
+{ 
+#line 567
+unsigned rev_num = (0); 
+#line 568
+for (unsigned k = (0); k < i; k++) 
+#line 569
+{ 
+#line 570
+if (j & (1 << k)) { 
+#line 571
+rev_num |= (1 << ((i - (1)) - k)); }  
+#line 572
+}  
+#line 573
+if (j < rev_num) { 
+#line 574
+std::swap(N_pos[st + j], N_pos[st + rev_num]); }  
+#line 575
+}  
+#line 576
+}  
+#line 578
+check(cudaMemcpy(d_N_pos, N_pos, size_N_pos, cudaMemcpyHostToDevice), "cudaMemcpy(d_N_pos, N_pos, size_N_pos, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 578); 
+#line 579
+free(N_pos); 
+#line 581
+unsigned size_root = (MOD * sizeof(unsigned)); 
+#line 582
+unsigned *root_pow = (unsigned *)malloc(size_root); 
+#line 583
+unsigned *root_inv_pow = (unsigned *)malloc(size_root); 
+#line 584
+unsigned *inv = (unsigned *)malloc(size_root); 
+#line 585
+check(cudaMalloc(&d_root_pow, size_root), "cudaMalloc(&d_root_pow, size_root)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 585); 
+#line 586
+check(cudaMalloc(&d_root_inv_pow, size_root), "cudaMalloc(&d_root_inv_pow, size_root)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 586); 
+#line 587
+check(cudaMalloc(&d_inv, size_root), "cudaMalloc(&d_inv, size_root)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 587); 
+#line 589
+(((root_pow[0]) = (1)), ((root_inv_pow[0]) = (1))), ((inv[0]) = (0)); 
+#line 590
+for (unsigned i = (1); i < MOD; i++) 
+#line 591
+{ 
+#line 592
+(root_pow[i]) = mul_mod(root_pow[i - (1)], ROOT); 
+#line 593
+(root_inv_pow[i]) = mul_mod(root_inv_pow[i - (1)], ROOT_INV); 
+#line 594
+(inv[i]) = pow_mod(i, MOD - (2)); 
+#line 595
+}  
+#line 597
+check(cudaMemcpy(d_root_pow, root_pow, size_root, cudaMemcpyHostToDevice), "cudaMemcpy(d_root_pow, root_pow, size_root, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 597); 
+#line 598
+check(cudaMemcpy(d_root_inv_pow, root_inv_pow, size_root, cudaMemcpyHostToDevice), "cudaMemcpy(d_root_inv_pow, root_inv_pow, size_root, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 598); 
+#line 599
+check(cudaMemcpy(d_inv, inv, size_root, cudaMemcpyHostToDevice), "cudaMemcpy(d_inv, inv, size_root, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 599); 
+#line 601
+unsigned size_root_layer_pow = (LEN_ROOT_LAYER_POW_2 * sizeof(unsigned)); 
+#line 602
+unsigned *root_layer_pow = (unsigned *)malloc(size_root_layer_pow); 
+#line 603
+check(cudaMalloc(&d_root_layer_pow, size_root_layer_pow), "cudaMalloc(&d_root_layer_pow, size_root_layer_pow)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 603); 
+#line 605
+for (unsigned i = (0); i < (2); i++) 
+#line 606
+{ 
+#line 607
+unsigned st_i = LEN_ROOT_LAYER_POW * i; 
+#line 608
+for (unsigned j = (0); j < MAX_LOG; j++) 
+#line 609
+{ 
+#line 610
+unsigned haft_len = 1 << j; 
+#line 611
+unsigned st_j = haft_len - (1); 
+#line 612
+unsigned ang = 1 << ((MAX_LOG - j) - (1)); 
+#line 613
+unsigned wn = (i) ? root_inv_pow[ang] : (root_pow[ang]), w = (1); 
+#line 614
+for (unsigned k = (0); k < haft_len; k++) 
+#line 615
+{ 
+#line 616
+(root_layer_pow[(st_i + st_j) + k]) = w; 
+#line 617
+w = mul_mod(w, wn); 
+#line 618
+}  
+#line 619
+}  
+#line 620
+}  
+#line 622
+check(cudaMemcpy(d_root_layer_pow, root_layer_pow, size_root_layer_pow, cudaMemcpyHostToDevice), "cudaMemcpy(d_root_layer_pow, root_layer_pow, size_root_layer_pow, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 622); 
+#line 623
+free(root_layer_pow); 
+#line 625
+unsigned size_packet_product = (LEN_PACKET_PRODUCT * sizeof(unsigned)); 
+#line 626
+unsigned *packet_product = (unsigned *)malloc(size_packet_product); 
+#line 627
+check(cudaMalloc(&d_packet_product, size_packet_product), "cudaMalloc(&d_packet_product, size_packet_product)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 627); 
+#line 629
+for (unsigned i = (0); i < NUM_OF_PACKET; i++) 
+#line 630
+{ 
+#line 631
+unsigned st = i << (LOG_SYMBOL + (1)); 
+#line 632
+for (unsigned j = (0); j < SEG_PER_PACKET; j++) 
+#line 633
+{ 
+#line 634
+unsigned k = (i << LOG_SEG) + j; 
+#line 635
+(packet_product[st + (j << 1)]) = sub_mod(0, root_pow[k]); 
+#line 636
+(packet_product[st + ((j << 1) | (1))]) = (1); 
+#line 637
+(packet_product[st + ((j + SEG_PER_PACKET) << 1)]) = sub_mod(0, root_pow[k + SEG_DIFF]); 
+#line 638
+(packet_product[st + (((j + SEG_PER_PACKET) << 1) | (1))]) = (1); 
+#line 639
+}  
+#line 640
+}  
+#line 641
+check(cudaMemcpy(d_packet_product, packet_product, size_packet_product, cudaMemcpyHostToDevice), "cudaMemcpy(d_packet_product, packet_product, size_packet_product, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 641); 
+#line 642
+free(packet_product); 
+#line 643
+unsigned *tmp; 
+#line 644
+check(cudaMalloc(&tmp, (LEN_ONE_PACKET_PRODUCT << 1) * sizeof(unsigned)), "cudaMalloc(&tmp, (LEN_ONE_PACKET_PRODUCT << 1) * sizeof(unsigned))", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 644); 
+#line 645
+for (unsigned i = (0); i < NUM_OF_PACKET; i++) 
+#line 646
+{ 
+#line 647
+unsigned st = i << (LOG_SYMBOL + (1)); 
+#line 648
+h_build_product(d_packet_product + st, tmp, tmp + LEN_ONE_PACKET_PRODUCT, 1, LOG_SYMBOL + (1), 0); 
 #line 649
 }  
+#line 650
+check(cudaFree(tmp), "cudaFree(tmp)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 650); 
 #line 651
-for (unsigned i = (1); i <= MAX_LOG; i++) 
-#line 652
-{ 
-#line 653
-unsigned n = 1 << i, st = n - (1); 
-#line 654
-for (unsigned j = (0); j < n; j++) 
-#line 655
-{ 
-#line 656
-unsigned rev_num = (0); 
-#line 657
-for (unsigned k = (0); k < i; k++) 
-#line 658
-{ 
-#line 659
-if (j & (1 << k)) { 
-#line 660
-rev_num |= (1 << ((i - (1)) - k)); }  
-#line 661
-}  
-#line 662
-if (j < rev_num) { 
-#line 663
-std::swap(N_pos[st + j], N_pos[st + rev_num]); }  
-#line 664
-}  
-#line 665
-}  
-#line 667
-check(cudaMemcpy(d_N_pos, N_pos, size_N_pos, cudaMemcpyHostToDevice), "cudaMemcpy(d_N_pos, N_pos, size_N_pos, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 667); 
-#line 668
-free(N_pos); 
-#line 670
-unsigned size_root = (MOD * sizeof(unsigned)); 
-#line 671
-unsigned *root_pow = (unsigned *)malloc(size_root); 
-#line 672
-unsigned *root_inv_pow = (unsigned *)malloc(size_root); 
-#line 673
-unsigned *inv = (unsigned *)malloc(size_root); 
-#line 674
-check(cudaMalloc(&d_root_pow, size_root), "cudaMalloc(&d_root_pow, size_root)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 674); 
-#line 675
-check(cudaMalloc(&d_root_inv_pow, size_root), "cudaMalloc(&d_root_inv_pow, size_root)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 675); 
-#line 676
-check(cudaMalloc(&d_inv, size_root), "cudaMalloc(&d_inv, size_root)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 676); 
-#line 678
-(((root_pow[0]) = (1)), ((root_inv_pow[0]) = (1))), ((inv[0]) = (0)); 
-#line 679
-for (unsigned i = (1); i < MOD; i++) 
-#line 680
-{ 
-#line 681
-(root_pow[i]) = mul_mod(root_pow[i - (1)], ROOT); 
-#line 682
-(root_inv_pow[i]) = mul_mod(root_inv_pow[i - (1)], ROOT_INV); 
-#line 683
-(inv[i]) = pow_mod(i, MOD - (2)); 
-#line 684
-}  
-#line 686
-check(cudaMemcpy(d_root_pow, root_pow, size_root, cudaMemcpyHostToDevice), "cudaMemcpy(d_root_pow, root_pow, size_root, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 686); 
-#line 687
-check(cudaMemcpy(d_root_inv_pow, root_inv_pow, size_root, cudaMemcpyHostToDevice), "cudaMemcpy(d_root_inv_pow, root_inv_pow, size_root, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 687); 
-#line 688
-check(cudaMemcpy(d_inv, inv, size_root, cudaMemcpyHostToDevice), "cudaMemcpy(d_inv, inv, size_root, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 688); 
-#line 690
-unsigned size_root_layer_pow = (LEN_ROOT_LAYER_POW_2 * sizeof(unsigned)); 
-#line 691
-unsigned *root_layer_pow = (unsigned *)malloc(size_root_layer_pow); 
-#line 692
-check(cudaMalloc(&d_root_layer_pow, size_root_layer_pow), "cudaMalloc(&d_root_layer_pow, size_root_layer_pow)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 692); 
-#line 694
-for (unsigned i = (0); i < (2); i++) 
-#line 695
-{ 
-#line 696
-unsigned st_i = LEN_ROOT_LAYER_POW * i; 
-#line 697
-for (unsigned j = (0); j < MAX_LOG; j++) 
-#line 698
-{ 
-#line 699
-unsigned haft_len = 1 << j; 
-#line 700
-unsigned st_j = haft_len - (1); 
-#line 701
-unsigned ang = 1 << ((MAX_LOG - j) - (1)); 
-#line 702
-unsigned wn = (i) ? root_inv_pow[ang] : (root_pow[ang]), w = (1); 
-#line 703
-for (unsigned k = (0); k < haft_len; k++) 
-#line 704
-{ 
-#line 705
-(root_layer_pow[(st_i + st_j) + k]) = w; 
-#line 706
-w = mul_mod(w, wn); 
-#line 707
-}  
-#line 708
-}  
-#line 709
-}  
-#line 711
-check(cudaMemcpy(d_root_layer_pow, root_layer_pow, size_root_layer_pow, cudaMemcpyHostToDevice), "cudaMemcpy(d_root_layer_pow, root_layer_pow, size_root_layer_pow, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 711); 
-#line 712
-free(root_layer_pow); 
-#line 714
-unsigned size_packet_product = (LEN_PACKET_PRODUCT * sizeof(unsigned)); 
-#line 715
-unsigned *packet_product = (unsigned *)malloc(size_packet_product); 
-#line 716
-check(cudaMalloc(&d_packet_product, size_packet_product), "cudaMalloc(&d_packet_product, size_packet_product)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 716); 
-#line 718
-for (unsigned i = (0); i < NUM_OF_PACKET; i++) 
-#line 719
-{ 
-#line 720
-unsigned st = i << (LOG_SYMBOL + (1)); 
-#line 721
-for (unsigned j = (0); j < SEG_PER_PACKET; j++) 
-#line 722
-{ 
-#line 723
-unsigned k = (i << LOG_SEG) + j; 
-#line 724
-(packet_product[st + (j << 1)]) = sub_mod(0, root_pow[k]); 
-#line 725
-(packet_product[st + ((j << 1) | (1))]) = (1); 
-#line 726
-(packet_product[st + ((j + SEG_PER_PACKET) << 1)]) = sub_mod(0, root_pow[k + SEG_DIFF]); 
-#line 727
-(packet_product[st + (((j + SEG_PER_PACKET) << 1) | (1))]) = (1); 
-#line 728
-}  
-#line 729
-}  
-#line 730
-check(cudaMemcpy(d_packet_product, packet_product, size_packet_product, cudaMemcpyHostToDevice), "cudaMemcpy(d_packet_product, packet_product, size_packet_product, cudaMemcpyHostToDevice)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 730); 
-#line 731
-free(packet_product); 
-#line 732
-unsigned *tmp; 
-#line 733
-check(cudaMalloc(&tmp, (LEN_ONE_PACKET_PRODUCT << 1) * sizeof(unsigned)), "cudaMalloc(&tmp, (LEN_ONE_PACKET_PRODUCT << 1) * sizeof(unsigned))", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 733); 
-#line 734
-for (unsigned i = (0); i < NUM_OF_PACKET; i++) 
-#line 735
-{ 
-#line 736
-unsigned st = i << (LOG_SYMBOL + (1)); 
-#line 737
-h_build_product(d_packet_product + st, tmp, tmp + LEN_ONE_PACKET_PRODUCT, 1, LOG_SYMBOL + (1), 0); 
-#line 738
-}  
-#line 739
-check(cudaFree(tmp), "cudaFree(tmp)", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 739); 
-#line 740
 free(inv); 
-#line 741
+#line 652
 free(root_pow); 
-#line 742
+#line 653
 free(root_inv_pow); 
-#line 744
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 744); 
-#line 745
+#line 655
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 655); 
+#line 656
 (((std::cout << ("Init process completed!"))) << (std::endl)); 
-#line 747
+#line 658
 } 
-#line 749
+#line 660
 void fin() 
-#line 750
+#line 661
 { 
-#line 753
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 753); 
-#line 755
+#line 664
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 664); 
+#line 666
 for (unsigned i = (0); i < MAX_ACTIVE_ENCODE; i++) { 
-#line 756
-check(cudaFreeHost(h_encode_p_slot[i]), "cudaFreeHost(h_encode_p_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 756); 
-#line 757
-check(cudaFreeHost(h_encode_y_slot[i]), "cudaFreeHost(h_encode_y_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 757); 
-#line 758
+#line 667
+check(cudaFreeHost(h_encode_p_slot[i]), "cudaFreeHost(h_encode_p_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 667); 
+#line 668
+check(cudaFreeHost(h_encode_y_slot[i]), "cudaFreeHost(h_encode_y_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 668); 
+#line 669
 }  
-#line 760
+#line 671
 for (unsigned i = (0); i < MAX_ACTIVE_DECODE; i++) { 
-#line 761
-check(cudaFreeHost(h_decode_x_slot[i]), "cudaFreeHost(h_decode_x_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 761); 
-#line 762
-check(cudaFreeHost(h_decode_y_slot[i]), "cudaFreeHost(h_decode_y_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 762); 
-#line 763
-check(cudaFreeHost(h_decode_p_slot[i]), "cudaFreeHost(h_decode_p_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 763); 
+#line 672
+check(cudaFreeHost(h_decode_x_slot[i]), "cudaFreeHost(h_decode_x_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 672); 
+#line 673
+check(cudaFreeHost(h_decode_y_slot[i]), "cudaFreeHost(h_decode_y_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 673); 
+#line 674
+check(cudaFreeHost(h_decode_p_slot[i]), "cudaFreeHost(h_decode_p_slot[i])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 674); 
+#line 675
+}  
+#line 677
+free(h_encode_p_slot); 
+#line 678
+free(h_encode_y_slot); 
+#line 679
+free(h_decode_x_slot); 
+#line 680
+free(h_decode_y_slot); 
+#line 681
+free(h_decode_p_slot); 
+#line 683
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 683); 
+#line 685
+check(cudaDeviceReset(), "cudaDeviceReset()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 685); 
+#line 686
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 686); 
+#line 688
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 688); 
+#line 690
+} 
+#line 692
+void test_fnt(); 
+#line 694
+void test_poly_mul(); 
+#line 696
+void test_build_init_product(); 
+#line 698
+void test_encode_decode(); 
+#line 700
+void test_fnt_performance(); 
+#line 702
+void test_encode_decode_performance(); 
+#line 704
+int main() 
+#line 705
+{ 
+#line 707
+init(); 
+#line 719
+test_encode_decode_performance(); 
+#line 721
+fin(); 
+#line 723
+return 0; 
+#line 724
+} 
+#line 726
+void test_fnt() { 
+#line 730
+unsigned N_test = (32); 
+#line 732
+for (unsigned tt = (0); tt < N_test; tt++) { 
+#line 733
+unsigned log_nc = (15), log_nv = (16), nc = 1 << log_nc, nv = 1 << log_nv; 
+#line 734
+unsigned size_nc = nc * sizeof(unsigned), size_nv = nv * sizeof(unsigned); 
+#line 735
+std::vector< unsigned>  c1(nc), c2(nc); 
+#line 736
+unsigned *d_c1, *d_c2, *d_v; 
+#line 737
+cudaMalloc(&d_c1, size_nc); 
+#line 738
+cudaMemset(d_c1, 0, size_nc); 
+#line 739
+cudaMalloc(&d_c2, size_nv); 
+#line 740
+cudaMemset(d_c2, 0, size_nv); 
+#line 741
+cudaMalloc(&d_v, size_nv); 
+#line 742
+cudaMemset(d_v, 0, size_nv); 
+#line 744
+for (unsigned i = (0); i < nc; i++) { 
+#line 745
+c1[i] = ((rand()) % (MOD - (1))); }  
+#line 746
+shuffle(c1.begin(), c1.end(), ((std::mersenne_twister_engine< unsigned, 32Ui64, 624Ui64, 397Ui64, 31Ui64, 2567483615U, 11Ui64, 4294967295U, 7Ui64, 2636928640U, 15Ui64, 4022730752U, 18Ui64, 1812433253U> )(time(0)))); 
+#line 747
+cudaMemcpy(d_c1, c1.data(), size_nc, cudaMemcpyHostToDevice); 
+#line 750
+unsigned wpt = nv >> (LOG_THREAD_PER_OP + (1)); 
+#line 751
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, 0)) ? (void)0 : fnt(d_c1, d_v, log_nc, log_nv, 0, d_N_pos, d_root_layer_pow, d_inv, wpt); 
+#line 752
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, 0)) ? (void)0 : fnt(d_v, d_c2, log_nv, log_nv, 3, d_N_pos, d_root_layer_pow, d_inv, wpt); 
+#line 754
+cudaMemcpy(c2.data(), d_c2, size_nc, cudaMemcpyDeviceToHost); 
+#line 755
+for (unsigned i = (0); i < nc; i++) { 
+#line 756
+(void)0; }  
+#line 758
+cudaFree(d_c1); 
+#line 759
+cudaFree(d_c2); 
+#line 760
+cudaFree(d_v); 
 #line 764
 }  
 #line 766
-free(h_encode_p_slot); 
-#line 767
-free(h_encode_y_slot); 
-#line 768
-free(h_decode_x_slot); 
-#line 769
-free(h_decode_y_slot); 
-#line 770
-free(h_decode_p_slot); 
-#line 772
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 772); 
-#line 774
-check(cudaDeviceReset(), "cudaDeviceReset()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 774); 
-#line 775
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 775); 
-#line 777
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 777); 
-#line 779
-} 
-#line 781
-void test_fnt(); 
-#line 783
-void test_poly_mul(); 
-#line 785
-void test_build_init_product(); 
-#line 787
-void test_encode_decode(); 
-#line 789
-void test_fnt_performance(); 
-#line 791
-void test_encode_decode_performance(); 
-#line 793
-int main() 
-#line 794
-{ 
-#line 796
-init(); 
-#line 808
-test_encode_decode_performance(); 
-#line 810
-fin(); 
-#line 812
-return 0; 
-#line 813
-} 
-#line 815
-void test_fnt() { 
-#line 819
-unsigned N_test = (32); 
-#line 821
-for (unsigned tt = (0); tt < N_test; tt++) { 
-#line 822
-unsigned log_nc = (15), log_nv = (16), nc = 1 << log_nc, nv = 1 << log_nv; 
-#line 823
-unsigned size_nc = nc * sizeof(unsigned), size_nv = nv * sizeof(unsigned); 
-#line 824
-std::vector< unsigned>  c1(nc), c2(nc); 
-#line 825
-unsigned *d_c1, *d_c2, *d_v; 
-#line 826
-cudaMalloc(&d_c1, size_nc); 
-#line 827
-cudaMemset(d_c1, 0, size_nc); 
-#line 828
-cudaMalloc(&d_c2, size_nv); 
-#line 829
-cudaMemset(d_c2, 0, size_nv); 
-#line 830
-cudaMalloc(&d_v, size_nv); 
-#line 831
-cudaMemset(d_v, 0, size_nv); 
-#line 833
-for (unsigned i = (0); i < nc; i++) { 
-#line 834
-c1[i] = ((rand()) % (MOD - (1))); }  
-#line 835
-shuffle(c1.begin(), c1.end(), ((std::mersenne_twister_engine< unsigned, 32Ui64, 624Ui64, 397Ui64, 31Ui64, 2567483615U, 11Ui64, 4294967295U, 7Ui64, 2636928640U, 15Ui64, 4022730752U, 18Ui64, 1812433253U> )(time(0)))); 
-#line 836
-cudaMemcpy(d_c1, c1.data(), size_nc, cudaMemcpyHostToDevice); 
-#line 838
-fnt(d_c1, d_v, log_nc, log_nv, 0, d_N_pos, d_root_layer_pow, d_inv, 0); 
-#line 839
-fnt(d_v, d_c2, log_nv, log_nv, 3, d_N_pos, d_root_layer_pow, d_inv, 0); 
-#line 841
-cudaMemcpy(c2.data(), d_c2, size_nc, cudaMemcpyDeviceToHost); 
-#line 842
-for (unsigned i = (0); i < nc; i++) { 
-#line 843
-(void)0; }  
-#line 845
-cudaFree(d_c1); 
-#line 846
-cudaFree(d_c2); 
-#line 847
-cudaFree(d_v); 
-#line 851
-}  
-#line 853
 (((std::cout << ("FNT test passed!"))) << (std::endl)); 
-#line 855
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 855); 
-#line 857
+#line 768
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 768); 
+#line 770
 } 
-#line 859
+#line 772
 void test_build_init_product() { 
-#line 862
+#line 775
 std::vector< unsigned>  a1 = {(64375), (0), (52012), (0), (2347), (0), (23649), (0), (30899), (0)}, b1(10); 
-#line 863
+#line 776
 cudaMemcpy(b1.data(), d_packet_product, (10) * sizeof(unsigned), cudaMemcpyDeviceToHost); 
-#line 865
+#line 778
 for (unsigned i = (0); i < (10); i++) { 
-#line 866
+#line 779
 (void)0; }  
-#line 869
+#line 782
 std::vector< unsigned>  a2 = {(64375), (0), (31561), (0), (12153), (0), (31103), (0), (20714), (0)}, b2(10); 
-#line 870
+#line 783
 cudaMemcpy(b2.data(), d_packet_product + (1 << (LOG_SYMBOL + (1))), (10) * sizeof(unsigned), cudaMemcpyDeviceToHost); 
-#line 872
+#line 785
 for (unsigned i = (0); i < (10); i++) { 
-#line 873
+#line 786
 (void)0; }  
-#line 875
+#line 788
 (((std::cout << ("Test packet_product passed!"))) << (std::endl)); 
-#line 877
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 877); 
-#line 879
+#line 790
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 790); 
+#line 792
 } 
-#line 881
+#line 794
 void test_poly_mul() { 
-#line 885
+#line 798
 srand(time(0)); 
-#line 887
+#line 800
 unsigned N_test = (32); 
-#line 889
+#line 802
 for (unsigned tt = (0); tt < N_test; tt++) { 
-#line 891
+#line 804
 unsigned log_n = (11); 
-#line 892
+#line 805
 unsigned n = 1 << log_n, size_n = n * sizeof(unsigned); 
-#line 894
+#line 807
 std::vector< unsigned>  a(n), b(n), c1(n << 1, 0), c2(n << 1, 0); 
-#line 896
+#line 809
 for (unsigned i = (0); i < n; i++) { 
-#line 897
+#line 810
 a[i] = ((rand()) % (MOD - (1))); 
-#line 898
+#line 811
 b[i] = ((rand()) % (MOD - (1))); 
-#line 899
+#line 812
 }  
-#line 901
+#line 814
 unsigned *t1, *t2, *d_c; 
-#line 902
+#line 815
 cudaMalloc(&t1, size_n << 1); 
-#line 903
+#line 816
 cudaMalloc(&t2, size_n << 1); 
-#line 904
+#line 817
 cudaMalloc(&d_c, size_n << 1); 
-#line 905
+#line 818
 cudaMemcpy(d_c, a.data(), size_n, cudaMemcpyHostToDevice); 
-#line 906
+#line 819
 cudaMemcpy(d_c + n, b.data(), size_n, cudaMemcpyHostToDevice); 
-#line 907
+#line 820
 h_poly_mul(d_c, d_c + n, t1, t2, d_c, log_n, d_N_pos, d_root_layer_pow, d_inv, 0); 
-#line 909
+#line 822
 for (unsigned i = (0); i < n; i++) { 
-#line 910
+#line 823
 for (unsigned j = (0); j < n; j++) { 
-#line 911
+#line 824
 c1[i + j] = add_mod(c1[i + j], mul_mod(a[i], b[j])); }  }  
-#line 920
+#line 833
 cudaMemcpy(c2.data(), d_c, size_n << 1, cudaMemcpyDeviceToHost); 
-#line 922
+#line 835
 for (unsigned i = (0); i < (n << 1); i++) { 
-#line 923
+#line 836
 (void)0; }  
-#line 927
+#line 840
 cudaFree(t1); 
-#line 928
+#line 841
 cudaFree(t2); 
-#line 929
+#line 842
 cudaFree(d_c); 
-#line 931
+#line 844
 }  
-#line 933
+#line 846
 (((std::cout << ("Poly mul test passed!"))) << (std::endl)); 
-#line 935
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 935); 
-#line 937
+#line 848
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 848); 
+#line 850
 } 
-#line 939
+#line 852
 void test_encode_decode() { 
-#line 943
+#line 856
 srand(time(0)); 
-#line 945
+#line 858
 unsigned N_test = (32); 
-#line 947
+#line 860
 for (unsigned tt = (0); tt < N_test; tt++) { 
-#line 948
+#line 861
 std::vector< unsigned>  a(NUM_OF_NEED_SYMBOL), b(NUM_OF_NEED_SYMBOL << 1), c(NUM_OF_NEED_SYMBOL); 
-#line 950
+#line 863
 for (unsigned i = (0); i < NUM_OF_NEED_SYMBOL; i++) { 
-#line 951
+#line 864
 a[i] = ((rand()) % (MOD - (1))); }  
-#line 953
+#line 866
 h_encode(a.data(), b.data()); 
-#line 954
+#line 867
 cudaDeviceSynchronize(); 
-#line 956
+#line 869
 std::vector< unsigned>  x(NUM_OF_NEED_SYMBOL), y(NUM_OF_NEED_SYMBOL); 
-#line 958
+#line 871
 for (unsigned i = (0); i < NUM_OF_NEED_PACKET; i++) { 
-#line 959
+#line 872
 unsigned stx = i * SYMBOL_PER_PACKET; 
-#line 960
+#line 873
 for (unsigned j = (0); j < SEG_PER_PACKET; j++) { 
-#line 961
+#line 874
 x[stx + j] = (stx + j); 
-#line 962
+#line 875
 x[(stx + j) + SEG_PER_PACKET] = ((stx + j) + SEG_DIFF); 
-#line 963
+#line 876
 y[stx + j] = b[stx + j]; 
-#line 964
+#line 877
 y[(stx + j) + SEG_PER_PACKET] = b[(stx + j) + SEG_DIFF]; 
-#line 965
+#line 878
 }  
-#line 966
+#line 879
 }  
-#line 968
+#line 881
 h_decode(x.data(), y.data(), c.data()); 
-#line 969
+#line 882
 cudaDeviceSynchronize(); 
-#line 971
+#line 884
 for (unsigned i = (0); i < NUM_OF_NEED_SYMBOL; i++) { 
-#line 972
+#line 885
 (void)0; }  
-#line 974
+#line 887
 }  
-#line 976
+#line 889
 (((std::cout << ("Encode decode test passed!"))) << (std::endl)); 
-#line 978
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 978); 
-#line 980
+#line 891
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 891); 
+#line 893
 } 
-#line 982
+#line 895
 void test_fnt_performance() { 
-#line 986
+#line 899
 using namespace std;
-#line 988
+#line 901
 const unsigned N_test = ((1024 * 1024) / 64); 
-#line 990
+#line 903
 unsigned log_n = (16), n = 1 << log_n; 
-#line 991
+#line 904
 unsigned size_n = n * sizeof(unsigned); 
-#line 992
+#line 905
 std::vector< std::vector< unsigned> >  a(N_test, ((std::vector< unsigned> )(n))); 
-#line 993
+#line 906
 cudaStream_t stream[(N_test)]; 
-#line 994
+#line 907
 std::vector< unsigned *>  d_a(N_test), d_b(N_test); 
-#line 996
+#line 909
 for (unsigned tt = (0); tt < N_test; tt++) { 
-#line 997
+#line 910
 for (unsigned i = (0); i < n; i++) { 
-#line 998
+#line 911
 (a[tt])[i] = ((rand()) % (MOD - (1))); }  
-#line 999
-check(cudaStreamCreate(&(stream[tt])), "cudaStreamCreate(&stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 999); 
-#line 1000
-check(cudaMallocAsync(&d_a[tt], size_n, stream[tt]), "cudaMallocAsync(&d_a[tt], size_n, stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1000); 
-#line 1001
-check(cudaMallocAsync(&d_b[tt], size_n, stream[tt]), "cudaMallocAsync(&d_b[tt], size_n, stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1001); 
-#line 1002
-check(cudaMemcpyAsync(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice, stream[tt]), "cudaMemcpyAsync(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice, stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1002); 
-#line 1003
+#line 912
+check(cudaStreamCreate(&(stream[tt])), "cudaStreamCreate(&stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 912); 
+#line 913
+check(cudaMallocAsync(&d_a[tt], size_n, stream[tt]), "cudaMallocAsync(&d_a[tt], size_n, stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 913); 
+#line 914
+check(cudaMallocAsync(&d_b[tt], size_n, stream[tt]), "cudaMallocAsync(&d_b[tt], size_n, stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 914); 
+#line 915
+check(cudaMemcpyAsync(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice, stream[tt]), "cudaMemcpyAsync(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice, stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 915); 
+#line 916
 }  
-#line 1005
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1005); 
-#line 1007
+#line 918
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 918); 
+#line 920
 (((cout << ("FNT test start"))) << (endl)); 
-#line 1009
+#line 922
 auto start = chrono::high_resolution_clock::now(); 
-#line 1011
+#line 923
+unsigned wpt = n >> (LOG_THREAD_PER_OP + (1)); 
+#line 925
 for (unsigned tt = (0); tt < N_test; tt++) { 
-#line 1016
-fnt(d_a[tt], d_b[tt], log_n, log_n, 0, d_N_pos, d_root_layer_pow, d_inv, stream[tt]); 
-#line 1017
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1017); 
-#line 1021
+#line 930
+(__cudaPushCallConfiguration(1, THREAD_PER_OP, 0, stream[tt])) ? (void)0 : fnt(d_a[tt], d_b[tt], log_n, log_n, 0, d_N_pos, d_root_layer_pow, d_inv, wpt); 
+#line 931
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 931); 
+#line 935
 }  
-#line 1023
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1023); 
-#line 1024
+#line 937
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 937); 
+#line 938
 auto stop = chrono::high_resolution_clock::now(); 
-#line 1025
+#line 939
 auto duration = chrono::duration_cast< std::chrono::duration< __int64, std::ratio< 1i64, 1000i64> > > ((stop - start)).count(); 
-#line 1027
+#line 941
 (((((((((((cout << ("FNT "))) << N_test)) << (" chunks in "))) << duration)) << ("ms"))) << (endl)); 
-#line 1029
+#line 943
 for (unsigned tt = (0); tt < N_test; tt++) { 
-#line 1030
-check(cudaFreeAsync(d_a[tt], stream[tt]), "cudaFreeAsync(d_a[tt], stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1030); 
-#line 1031
-check(cudaFreeAsync(d_b[tt], stream[tt]), "cudaFreeAsync(d_b[tt], stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1031); 
-#line 1032
-check(cudaStreamDestroy(stream[tt]), "cudaStreamDestroy(stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1032); 
-#line 1033
+#line 944
+check(cudaFreeAsync(d_a[tt], stream[tt]), "cudaFreeAsync(d_a[tt], stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 944); 
+#line 945
+check(cudaFreeAsync(d_b[tt], stream[tt]), "cudaFreeAsync(d_b[tt], stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 945); 
+#line 946
+check(cudaStreamDestroy(stream[tt]), "cudaStreamDestroy(stream[tt])", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 946); 
+#line 947
 }  
-#line 1035
+#line 949
 } 
-#line 1037
+#line 951
 void test_encode_decode_performance() { 
-#line 1041
+#line 955
 using namespace std;
-#line 1042
+#line 956
 srand(time(0)); 
-#line 1044
+#line 958
 const unsigned N_test = ((128 * 1024) / 64); 
-#line 1046
+#line 960
 const __int64 symbol_bytes = (2); 
-#line 1047
+#line 961
 const double size_test_gb = (((((1.0) * symbol_bytes) * NUM_OF_NEED_SYMBOL) * N_test) / ((1024 * 1024) * 1024)); 
-#line 1049
+#line 963
 std::vector< std::vector< unsigned> >  a(N_test, ((std::vector< unsigned> )(NUM_OF_NEED_SYMBOL))); 
-#line 1050
+#line 964
 std::vector< std::vector< unsigned> >  b(N_test, ((std::vector< unsigned> )(NUM_OF_NEED_SYMBOL << 1))); 
-#line 1051
+#line 965
 std::vector< std::vector< unsigned> >  c(N_test, ((std::vector< unsigned> )(NUM_OF_NEED_SYMBOL))); 
-#line 1053
+#line 967
 for (unsigned tt = (0); tt < N_test; tt++) { 
-#line 1054
+#line 968
 for (unsigned i = (0); i < NUM_OF_NEED_SYMBOL; i++) { 
-#line 1055
+#line 969
 (a[tt])[i] = ((rand()) % (MOD - (1))); }  }  
-#line 1057
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1057); 
-#line 1059
+#line 971
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 971); 
+#line 973
 (((cout << ("Encode performance test start"))) << (endl)); 
-#line 1061
+#line 975
 auto start1 = chrono::high_resolution_clock::now(); 
-#line 1063
+#line 977
 for (unsigned tt = (0); tt < N_test; tt++) { 
-#line 1064
+#line 978
 h_encode(a[tt].data(), b[tt].data()); 
-#line 1065
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1065); 
-#line 1066
+#line 979
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 979); 
+#line 980
 }  
-#line 1068
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1068); 
-#line 1069
+#line 982
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 982); 
+#line 983
 auto stop1 = chrono::high_resolution_clock::now(); 
-#line 1070
+#line 984
 auto duration1 = chrono::duration_cast< std::chrono::duration< __int64, std::ratio< 1i64, 1000i64> > > ((stop1 - start1)).count(); 
-#line 1072
+#line 986
 (((((((((((cout << ("Encode "))) << N_test)) << (" 64kb chunks in "))) << duration1)) << ("ms"))) << (endl)); 
-#line 1073
+#line 987
 (((((((cout << ("Encode "))) << (((1.0) * size_test_gb) / (((1.0) * duration1) / (1000.0))))) << (" GB/s"))) << (endl)); 
-#line 1075
+#line 989
 std::vector< std::vector< unsigned> >  x(N_test, ((std::vector< unsigned> )(NUM_OF_NEED_SYMBOL))); 
-#line 1076
+#line 990
 std::vector< std::vector< unsigned> >  y(N_test, ((std::vector< unsigned> )(NUM_OF_NEED_SYMBOL))); 
-#line 1078
+#line 992
 for (unsigned tt = (0); tt < N_test; tt++) { 
-#line 1079
+#line 993
 for (unsigned i = (0); i < NUM_OF_NEED_PACKET; i++) { 
-#line 1080
+#line 994
 unsigned stx = i * SYMBOL_PER_PACKET; 
-#line 1081
+#line 995
 for (unsigned j = (0); j < SEG_PER_PACKET; j++) { 
-#line 1082
+#line 996
 (x[tt])[stx + j] = (stx + j); 
-#line 1083
+#line 997
 (x[tt])[(stx + j) + SEG_PER_PACKET] = ((stx + j) + SEG_DIFF); 
-#line 1084
+#line 998
 (y[tt])[stx + j] = (b[tt])[stx + j]; 
-#line 1085
+#line 999
 (y[tt])[(stx + j) + SEG_PER_PACKET] = (b[tt])[(stx + j) + SEG_DIFF]; 
-#line 1086
+#line 1000
 }  
-#line 1087
+#line 1001
 }  
-#line 1088
+#line 1002
 }  
-#line 1090
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1090); 
-#line 1092
+#line 1004
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1004); 
+#line 1006
 (((cout << ("Decode performance test start"))) << (endl)); 
-#line 1094
+#line 1008
 auto start2 = chrono::high_resolution_clock::now(); 
-#line 1096
+#line 1010
 for (unsigned tt = (0); tt < N_test; tt++) { 
-#line 1097
+#line 1011
 h_decode(x[tt].data(), y[tt].data(), c[tt].data()); 
-#line 1098
-check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1098); 
-#line 1099
+#line 1012
+check_last("C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1012); 
+#line 1013
 }  
-#line 1101
-check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1101); 
-#line 1102
+#line 1015
+check(cudaDeviceSynchronize(), "cudaDeviceSynchronize()", "C:\\Users\\captain3060\\Projects\\PBL7_DUT_ECC_CUDA\\rs_cuda\\rs_cuda\\kernel.cu", 1015); 
+#line 1016
 auto stop2 = chrono::high_resolution_clock::now(); 
-#line 1103
+#line 1017
 auto duration2 = chrono::duration_cast< std::chrono::duration< __int64, std::ratio< 1i64, 1000i64> > > ((stop2 - start2)).count(); 
-#line 1105
+#line 1019
 (((((((((((cout << ("Decode "))) << N_test)) << (" 64kb chunks in "))) << duration2)) << ("ms"))) << (endl)); 
-#line 1106
+#line 1020
 (((((((cout << ("Decode "))) << (((1.0) * size_test_gb) / (((1.0) * duration2) / (1000.0))))) << (" GB/s"))) << (endl)); 
-#line 1108
+#line 1022
 for (unsigned tt = (0); tt < N_test; tt++) { 
-#line 1109
+#line 1023
 for (unsigned i = (0); i < c[tt].size(); i++) { 
-#line 1110
+#line 1024
 (void)0; }  
-#line 1111
+#line 1025
 }  
-#line 1113
+#line 1027
 } 
 #line 1 "kernel.cudafe1.stub.c"
 #define _NV_ANON_NAMESPACE _GLOBAL__N__dcb4e26f_9_kernel_cu_f9c6e15d
@@ -76772,16 +76620,10 @@ __declspec(allocate(".nvHRKE")) __declspec(selectany) extern const unsigned char
 0x5f,0x5a,0x31,0x32,0x67,0x5f,0x70,0x6f,0x6c,0x79,0x5f,0x64,0x65,0x72,0x69,0x76,0x2a,0x0,
 /* _Z14g_vector_mul_i* */
 0x5f,0x5a,0x31,0x34,0x67,0x5f,0x76,0x65,0x63,0x74,0x6f,0x72,0x5f,0x6d,0x75,0x6c,0x5f,0x69,0x2a,0x0,
-/* _Z17g_build_product_i* */
-0x5f,0x5a,0x31,0x37,0x67,0x5f,0x62,0x75,0x69,0x6c,0x64,0x5f,0x70,0x72,0x6f,0x64,0x75,0x63,0x74,0x5f,0x69,0x2a,0x0,
+/* _Z3fnt* */
+0x5f,0x5a,0x33,0x66,0x6e,0x74,0x2a,0x0,
 /* _Z6g_fill* */
 0x5f,0x5a,0x36,0x67,0x5f,0x66,0x69,0x6c,0x6c,0x2a,0x0,
-/* _Z7g_fnt_i* */
-0x5f,0x5a,0x37,0x67,0x5f,0x66,0x6e,0x74,0x5f,0x69,0x2a,0x0,
-/* _Z9g_end_fnt* */
-0x5f,0x5a,0x39,0x67,0x5f,0x65,0x6e,0x64,0x5f,0x66,0x6e,0x74,0x2a,0x0,
-/* _Z9g_pre_fnt* */
-0x5f,0x5a,0x39,0x67,0x5f,0x70,0x72,0x65,0x5f,0x66,0x6e,0x74,0x2a,0x0,
 };
 #pragma data_seg()
 }
