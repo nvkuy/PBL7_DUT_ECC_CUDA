@@ -25,7 +25,7 @@
 #include <condition_variable>
 
 #define CUDA_CHECK(val) check((val), #val, __FILE__, __LINE__)
-inline void check(cudaError_t err, const char* const func, const char* const file, const int line)
+inline void check(cudaError_t err, const char *const func, const char *const file, const int line)
 {
 	if (err != cudaSuccess)
 	{
@@ -36,9 +36,9 @@ inline void check(cudaError_t err, const char* const func, const char* const fil
 }
 
 #define CUDA_CHECK_LAST() check_last(__FILE__, __LINE__)
-inline void check_last(const char* const file, const int line)
+inline void check_last(const char *const file, const int line)
 {
-	cudaError_t const err{ cudaPeekAtLastError() };
+	cudaError_t const err{cudaPeekAtLastError()};
 	if (err != cudaSuccess)
 	{
 		std::cerr << "CUDA Runtime Error at: " << file << ":" << line << std::endl;
@@ -94,17 +94,20 @@ const unsigned SIZE_DECODE_X = LEN_DECODE_X * sizeof(unsigned);
 const unsigned SIZE_DECODE_Y = LEN_DECODE_Y * sizeof(unsigned);
 const unsigned SIZE_DECODE_P = LEN_DECODE_P * sizeof(unsigned);
 
-//const unsigned SM_CNT = 28;
-//const unsigned MAX_WARP = 48 * 4 * SM_CNT;
+// const unsigned SM_CNT = 28;
+// const unsigned MAX_WARP = 48 * 4 * SM_CNT;
 
-const unsigned MAX_ACTIVE_ENCODE = 256;
-const unsigned MAX_ACTIVE_DECODE = 256;
-const unsigned MAX_ENCODE_LAUNCH_CNT = 16;
+const unsigned MAX_ACTIVE_ENCODE = 1024;
+const unsigned MAX_ACTIVE_DECODE = 512;
+const unsigned MAX_ENCODE_LAUNCH_CNT = 32;
 const unsigned MAX_DECODE_LAUNCH_CNT = 256;
 
-const unsigned LOG_THREAD_PER_OP = 9;
+const unsigned LOG_THREAD_PER_OP = 10;
 const unsigned THREAD_PER_OP = 1 << LOG_THREAD_PER_OP;
-//const unsigned N_BL = 1, N_TH = THREAD_PER_OP;
+const unsigned N_TH = 256, N_BL = THREAD_PER_OP / N_TH;
+
+const unsigned LOG_THREAD_PER_EXTR_OP = 5;
+const unsigned THREAD_PER_EXTR_OP = 1 << LOG_THREAD_PER_EXTR_OP;
 
 const unsigned LOG_LEN_WARP = 5;
 const unsigned LEN_WARP = 1 << LOG_LEN_WARP;
@@ -115,7 +118,7 @@ const size_t SIZE_ENCODE_Y_SLOT = sizeof(unsigned) * LEN_ENCODE_Y * MAX_ACTIVE_E
 
 const size_t SIZE_DECODE_X_SLOT = sizeof(unsigned) * LEN_DECODE_X * MAX_ACTIVE_DECODE;
 const size_t SIZE_DECODE_Y_SLOT = sizeof(unsigned) * LEN_DECODE_Y * MAX_ACTIVE_DECODE;
-//const size_t SIZE_DECODE_P_SLOT = sizeof(unsigned) * LEN_DECODE_P * MAX_ACTIVE_DECODE;
+// const size_t SIZE_DECODE_P_SLOT = sizeof(unsigned) * LEN_DECODE_P * MAX_ACTIVE_DECODE;
 const size_t SIZE_DECODE_T1_SLOT = sizeof(unsigned) * LEN_LARGE * MAX_ACTIVE_DECODE;
 const size_t SIZE_DECODE_T2_SLOT = sizeof(unsigned) * LEN_LARGE * MAX_ACTIVE_DECODE;
 const size_t SIZE_DECODE_AX_SLOT = sizeof(unsigned) * LEN_LARGE * MAX_ACTIVE_DECODE;
@@ -125,56 +128,60 @@ const size_t SIZE_DECODE_N1_SLOT = sizeof(unsigned) * LEN_SMALL * MAX_ACTIVE_DEC
 const size_t SIZE_DECODE_N2_SLOT = sizeof(unsigned) * LEN_LARGE * MAX_ACTIVE_DECODE;
 const size_t SIZE_DECODE_N3_SLOT = sizeof(unsigned) * LEN_SMALL * MAX_ACTIVE_DECODE;
 
-unsigned** h_encode_p_slot;
-unsigned** h_encode_y_slot;
-unsigned** h_decode_x_slot;
-unsigned** h_decode_y_slot;
-unsigned** h_decode_p_slot;
+unsigned **h_encode_p_slot;
+unsigned **h_encode_y_slot;
+unsigned **h_decode_x_slot;
+unsigned **h_decode_y_slot;
+unsigned **h_decode_p_slot;
 
-unsigned* d_encode_p_slot;
-unsigned* d_encode_y_slot;
-unsigned* d_decode_x_slot;
-unsigned* d_decode_y_slot;
-//unsigned* d_decode_p_slot;
-unsigned* d_decode_t1_slot;
-unsigned* d_decode_t2_slot;
-unsigned* d_decode_ax_slot;
-unsigned* d_decode_dax_slot;
-unsigned* d_decode_vdax_slot;
-unsigned* d_decode_n1_slot;
-unsigned* d_decode_n2_slot;
-unsigned* d_decode_n3_slot;
+unsigned *d_encode_p_slot;
+unsigned *d_encode_y_slot;
+unsigned *d_decode_x_slot;
+unsigned *d_decode_y_slot;
+// unsigned* d_decode_p_slot;
+unsigned *d_decode_t1_slot;
+unsigned *d_decode_t2_slot;
+unsigned *d_decode_ax_slot;
+unsigned *d_decode_dax_slot;
+unsigned *d_decode_vdax_slot;
+unsigned *d_decode_n1_slot;
+unsigned *d_decode_n2_slot;
+unsigned *d_decode_n3_slot;
 
-unsigned* d_N_pos;
-unsigned* d_root_pow;
-unsigned* d_root_inv_pow;
-unsigned* d_inv;
-unsigned* d_root_layer_pow;
-unsigned* d_packet_product;
+unsigned *d_N_pos;
+unsigned *d_root_pow;
+unsigned *d_root_inv_pow;
+unsigned *d_inv;
+unsigned *d_root_layer_pow;
+unsigned *d_packet_product;
 
-struct CB_DATA {
+struct CB_DATA
+{
 	unsigned slot_id;
-	unsigned* dst;
-	unsigned* src;
+	unsigned *dst;
+	unsigned *src;
 	size_t size_res;
-	std::queue<unsigned>& slot; 
-	std::mutex& mt; 
-	std::condition_variable& cv;
+	std::queue<unsigned> &slot;
+	std::mutex &mt;
+	std::condition_variable &cv;
 };
 
 std::queue<unsigned> encode_slot, decode_slot;
 std::mutex mt_encode_slot, mt_decode_slot;
 std::condition_variable cv_encode_slot, cv_decode_slot;
 
-inline unsigned pop_slot(std::queue<unsigned> &slot, std::mutex &mt, std::condition_variable &cv) {
+inline unsigned pop_slot(std::queue<unsigned> &slot, std::mutex &mt, std::condition_variable &cv)
+{
 	std::unique_lock<std::mutex> lock(mt);
-	cv.wait(lock, [&] { return !slot.empty(); });
+	cv.wait(lock, [&]
+			{ return !slot.empty(); });
 	unsigned id = slot.front();
 	slot.pop();
 	return id;
 }
 
-inline void push_slot(unsigned id, std::queue<unsigned>& slot, std::mutex& mt, std::condition_variable& cv) {
+inline void push_slot(unsigned id, std::queue<unsigned> &slot, std::mutex &mt, std::condition_variable &cv)
+{
 	{
 		std::lock_guard<std::mutex> lock(mt);
 		slot.push(id);
@@ -182,19 +189,20 @@ inline void push_slot(unsigned id, std::queue<unsigned>& slot, std::mutex& mt, s
 	cv.notify_one();
 }
 
-void init_batch_slot() {
+void init_slot()
+{
 
 	for (unsigned i = 0; i < MAX_ACTIVE_ENCODE; i++)
 		push_slot(i, encode_slot, mt_encode_slot, cv_encode_slot);
 
 	for (unsigned i = 0; i < MAX_ACTIVE_DECODE; i++)
 		push_slot(i, decode_slot, mt_decode_slot, cv_decode_slot);
-
 }
 
-void CUDART_CB h_end_batch_slot(void* data) {
+void CUDART_CB h_end_slot(void *data)
+{
 
-	CB_DATA* dat = static_cast<CB_DATA*>(data);
+	CB_DATA *dat = static_cast<CB_DATA *>(data);
 
 	memcpy(dat->dst, dat->src, dat->size_res);
 	push_slot(dat->slot_id, dat->slot, dat->mt, dat->cv);
@@ -209,8 +217,7 @@ __host__ __device__ __forceinline__ unsigned mul_mod(unsigned a, unsigned b)
 	return (a * b) % MOD;
 }
 
-__device__ __forceinline__ unsigned div_mod(unsigned a, unsigned b,
-	unsigned* d_inv)
+__device__ __forceinline__ unsigned div_mod(unsigned a, unsigned b, unsigned *d_inv)
 {
 	return mul_mod(a, d_inv[b]);
 }
@@ -238,8 +245,44 @@ __host__ __device__ __forceinline__ unsigned pow_mod(unsigned a, unsigned b)
 	return res;
 }
 
-__global__ void fnt(unsigned* a, unsigned* b, unsigned log_na, unsigned log_nb, unsigned opt,
-	unsigned* d_N_pos, unsigned* d_root_layer_pow, unsigned* d_inv, unsigned wpt)
+__global__ void g_pre_fnt(unsigned *a, unsigned *b, unsigned st_d_N_pos, unsigned na, unsigned *d_N_pos)
+{
+
+	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
+	for (unsigned k = id; k < na; k += THREAD_PER_OP)
+		b[d_N_pos[st_d_N_pos + k]] = a[k];
+}
+
+__global__ void g_end_fnt(unsigned *b, unsigned nbd2, unsigned *d_inv)
+{
+
+	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
+	unsigned inv_nb = div_mod(1, nbd2 << 1, d_inv);
+
+	for (unsigned k = id; k < nbd2; k += THREAD_PER_OP)
+	{
+		b[k] = mul_mod(b[k], inv_nb);
+		b[k + nbd2] = mul_mod(b[k + nbd2], inv_nb);
+	}
+}
+
+__global__ void g_fnt_i(unsigned *b, unsigned i, bool inv, unsigned nbd2, unsigned *d_root_layer_pow)
+{
+
+	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
+	unsigned haft_len = 1 << i, wlen_os = LEN_ROOT_LAYER_POW * inv + haft_len - 1;
+	for (unsigned k = id; k < nbd2; k += THREAD_PER_OP)
+	{
+		unsigned bl_st = ((k >> i) << (i + 1)), th_id = (k & (haft_len - 1));
+		unsigned pos = bl_st + th_id;
+		unsigned u = b[pos];
+		unsigned v = mul_mod(b[pos + haft_len], d_root_layer_pow[wlen_os + th_id]);
+		b[pos] = add_mod(u, v);
+		b[pos + haft_len] = sub_mod(u, v);
+	}
+}
+
+__host__ __forceinline__ __device__ void fnt(unsigned *a, unsigned *b, unsigned log_na, unsigned log_nb, unsigned opt, unsigned *d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream)
 {
 
 	/*
@@ -251,230 +294,247 @@ __global__ void fnt(unsigned* a, unsigned* b, unsigned log_na, unsigned log_nb, 
 	// size_b >= size_a;
 	// need memset *b before use unless size_a == size_b
 
-	// have size_b/2 tasks
+	unsigned nb = 1 << log_nb, wp = (opt & 2) >> 1;
+	unsigned na = 1 << log_na, nbd2 = nb >> 1;
 
-	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned na = 1 << log_na, nb = 1 << log_nb, wp = (opt & 2) >> 1, st = nb - 1;
-	unsigned id_l = id * wpt, id_r = min(id_l + wpt, nb >> 1);
-	unsigned os1 = nb >> 1, os2 = LEN_ROOT_LAYER_POW * wp;
-	for (unsigned k = id_l; k < id_r; k++) {
-		if (k < na) b[d_N_pos[st + k]] = a[k];
-		if (log_na == log_nb) b[d_N_pos[st + k + os1]] = a[k + os1];
-	}
+	g_pre_fnt CUDA_KERNEL(N_BL, N_TH, 0, stream)(a, b, nb - 1, na, d_N_pos);
 
-	CUDA_SYNCTHREADS();
+	for (unsigned i = 0; i < log_nb; i++)
+		g_fnt_i CUDA_KERNEL(N_BL, N_TH, 0, stream)(b, i, wp, nbd2, d_root_layer_pow);
 
-	for (unsigned i = 0; i < log_nb; i++) {
-
-		unsigned haft_len = 1 << i;
-		for (unsigned k = id_l; k < id_r; k++) {
-			unsigned bl_st = ((k >> i) << (i + 1)), th_id = (k & (haft_len - 1));
-			unsigned pos = bl_st + th_id;
-			unsigned u = b[pos];
-			unsigned v = mul_mod(b[pos + haft_len], d_root_layer_pow[os2 + haft_len - 1 + th_id]);
-			b[pos] = add_mod(u, v);
-			b[pos + haft_len] = sub_mod(u, v);
-		}
-
-		CUDA_SYNCTHREADS();
-
-	}
-
-	if (opt & 1) {
-		for (unsigned k = id_l; k < id_r; k++) {
-			b[k] = div_mod(b[k], nb, d_inv);
-			b[k + os1] = div_mod(b[k + os1], nb, d_inv);
-		}
-
-	}
+	if (opt & 1)
+		g_end_fnt CUDA_KERNEL(N_BL, N_TH, 0, stream)(b, nbd2, d_inv);
 }
 
-__global__ void g_vector_mul_i(unsigned* a, unsigned* b, unsigned* c, unsigned n, unsigned wpt)
+__global__ void g_vector_mul_i(unsigned *a, unsigned *b, unsigned *c, unsigned n)
 {
 
 	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * wpt, id_r = min(id_l + wpt, n);
-	for (unsigned k = id_l; k < id_r; k++)
+	for (unsigned k = id; k < n; k += THREAD_PER_OP)
 		c[k] = mul_mod(a[k], b[k]);
-
-
 }
 
-__global__ void g_fill(unsigned* a, unsigned val, unsigned n, unsigned wpt) {
-
-	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * wpt, id_r = min(id_l + wpt, n);
-	for (unsigned k = id_l; k < id_r; k++)
-		a[k] = val;
-
-}
-
-__global__ void g_cpy(unsigned* a, unsigned* b, unsigned n, unsigned wpt) {
-
-	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-		unsigned id_l = id * wpt, id_r = min(id_l + wpt, n);
-		for (unsigned k = id_l; k < id_r; k++)
-			b[k] = a[k];
-
-}
-
-inline void h_poly_mul(unsigned* a, unsigned* b, unsigned* t1, unsigned* t2, unsigned* c, unsigned log_n,
-	unsigned* d_N_pos, unsigned* d_root_layer_pow, unsigned* d_inv, cudaStream_t stream) {
-
-
-	unsigned na = 1 << log_n, nc = 1 << (log_n + 1), size_nc = nc * sizeof(unsigned);
-
-	unsigned wpt1 = max(nc >> LOG_THREAD_PER_OP, 1), wpt2 = max(na >> LOG_THREAD_PER_OP, 1);
-	g_fill CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (t1, 0, nc, wpt1);
-	g_fill CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (t2, 0, nc, wpt1);
-
-	fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (a, t1, log_n, log_n + 1, 0, d_N_pos, d_root_layer_pow, d_inv, wpt2);
-	fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (b, t2, log_n, log_n + 1, 0, d_N_pos, d_root_layer_pow, d_inv, wpt2);
-
-	g_vector_mul_i CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(t1, t2, t1, nc, wpt1);
-
-	fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (t1, c, log_n + 1, log_n + 1, 3, d_N_pos, d_root_layer_pow, d_inv, wpt2);
-
-}
-
-__global__ void g_poly_deriv(unsigned* ax, unsigned* dax, unsigned wpt)
+__global__ void g_fill(unsigned *a, unsigned val, unsigned na)
 {
 
 	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * wpt, id_r = id_l + wpt;
-	for (unsigned k = id_l; k < id_r; k++)
+	for (unsigned k = id; k < na; k += THREAD_PER_OP)
+		a[k] = val;
+}
+
+//__global__ void g_cpy(unsigned *a, unsigned *b, unsigned n)
+//{
+//
+//	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
+//	for (unsigned k = id; k < n; k += THREAD_PER_OP)
+//		b[k] = a[k];
+//}
+
+__forceinline__ __device__ void d_poly_mul(unsigned *a, unsigned *b, unsigned *t1, unsigned *t2, unsigned *c, unsigned log_n, unsigned *d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv)
+{
+
+	// 2 ^ log_n == size_a && size_a == size_b
+	// *c == *a && *a + na == *b (allow)
+
+	unsigned na = 1 << log_n, nc = na << 1, size_nc = nc * sizeof(unsigned);
+
+	if (na > ALGO_N_2_CUTOFF)
+	{
+
+		g_fill CUDA_KERNEL(N_BL, N_TH, 0, cudaStreamPerThread)(t1, 0, nc);
+		g_fill CUDA_KERNEL(N_BL, N_TH, 0, cudaStreamPerThread)(t2, 0, nc);
+
+		fnt(a, t1, log_n, log_n + 1, 0, d_N_pos, d_root_layer_pow, d_inv, cudaStreamPerThread);
+		fnt(b, t2, log_n, log_n + 1, 0, d_N_pos, d_root_layer_pow, d_inv, cudaStreamPerThread);
+
+		g_vector_mul_i CUDA_KERNEL(N_BL, N_TH, 0, cudaStreamPerThread)(t1, t2, t1, nc);
+
+		fnt(t1, c, log_n + 1, log_n + 1, 3, d_N_pos, d_root_layer_pow, d_inv, cudaStreamPerThread);
+
+	}
+	else
+	{
+
+		for (unsigned i = 0; i < na; i++)
+		{
+			t1[i] = a[i];
+			t2[i] = b[i];
+		}
+		memset(c, 0, size_nc);
+		for (unsigned i = 0; i < na; i++)
+			for (unsigned j = 0; j < na; j++)
+				c[i + j] = add_mod(c[i + j], mul_mod(t1[i], t2[j]));
+	}
+}
+
+inline void h_poly_mul(unsigned *a, unsigned *b, unsigned *t1, unsigned *t2, unsigned *c, unsigned log_n, unsigned *d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream)
+{
+
+	unsigned nc = 1 << (log_n + 1);
+
+	g_fill CUDA_KERNEL(N_BL, N_TH, 0, stream)(t1, 0, nc);
+	CUDA_CHECK_LAST();
+	g_fill CUDA_KERNEL(N_BL, N_TH, 0, stream)(t2, 0, nc);
+	CUDA_CHECK_LAST();
+
+	fnt(a, t1, log_n, log_n + 1, 0, d_N_pos, d_root_layer_pow, d_inv, stream);
+	CUDA_CHECK_LAST();
+	fnt(b, t2, log_n, log_n + 1, 0, d_N_pos, d_root_layer_pow, d_inv, stream);
+	CUDA_CHECK_LAST();
+
+	g_vector_mul_i CUDA_KERNEL(N_BL, N_TH, 0, stream)(t1, t2, t1, nc);
+	CUDA_CHECK_LAST();
+
+	fnt(t1, c, log_n + 1, log_n + 1, 3, d_N_pos, d_root_layer_pow, d_inv, stream);
+	CUDA_CHECK_LAST();
+}
+
+__global__ void g_poly_deriv(unsigned *ax, unsigned *dax)
+{
+
+	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
+	for (unsigned k = id; k < NUM_OF_NEED_SYMBOL; k += THREAD_PER_OP)
 		dax[k] = mul_mod(ax[k + 1], k + 1);
 }
 
-inline void h_build_product(unsigned* p, unsigned* t1, unsigned* t2, unsigned log_n1, unsigned log_n2, cudaStream_t stream)
+__global__ void g_build_product_i(unsigned *p, unsigned *t1, unsigned *t2, unsigned i, unsigned n_g, unsigned *d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv)
+{
+
+	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
+	unsigned len = 1 << i;
+
+	for (unsigned k = id; k < n_g; k += THREAD_PER_EXTR_OP)
+	{
+		unsigned st = k << (i + 1);
+		d_poly_mul(p + st, p + st + len, t1 + st, t2 + st, p + st, i, d_N_pos, d_root_layer_pow, d_inv);
+	}
+}
+
+inline void h_build_product(unsigned *p, unsigned *t1, unsigned *t2, unsigned log_n1, unsigned log_n2, cudaStream_t stream)
 {
 
 	// p, t1, t2 in device
 
 	for (unsigned i = log_n1; i < log_n2; i++)
 	{
-		unsigned m = 1 << (log_n2 - i - 1), len = 1 << i;
-		for (unsigned j = 0; j < m; j++) {
-			unsigned st = j << (i + 1);
-			h_poly_mul(p + st, p + st + len, t1 + st, t2 + st, p + st, i, d_N_pos, d_root_layer_pow, d_inv, stream);
-		}
-	}
-}
-
-inline void h_build_ax(unsigned* x, unsigned* p, unsigned* t1, unsigned* t2, cudaStream_t stream)
-{
-
-	// p, t1, t2 in device
-	// x in host
-
-	for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++)
-	{
-		unsigned st_p1 = i << (LOG_SYMBOL + 1), st_p2 = x[i << LOG_SYMBOL] << 2;
-		//CUDA_CHECK(cudaMemcpyAsync(p + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT, cudaMemcpyDeviceToDevice, stream));
-		g_cpy CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (d_packet_product + st_p2, p + st_p1, LEN_ONE_PACKET_PRODUCT, LEN_ONE_PACKET_PRODUCT >> LOG_THREAD_PER_OP);
+		unsigned n_g = 1 << (log_n2 - i - 1);
+		g_build_product_i CUDA_KERNEL(1, THREAD_PER_EXTR_OP, 0, stream)(p, t1, t2, i, n_g, d_N_pos, d_root_layer_pow, d_inv);
 		CUDA_CHECK_LAST();
 	}
-	h_build_product(p, t1, t2, LOG_SYMBOL + 1, MAX_LOG, stream);
 }
 
-__global__ void g_build_n1(unsigned* n1, unsigned* vdax, unsigned* x, unsigned* y,
-	unsigned* d_inv, unsigned wpt)
+__global__ void g_pre_build_ax(unsigned *ax, unsigned *x, unsigned *d_packet_product)
 {
 
 	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * wpt, id_r = id_l + wpt;
-	for (unsigned k = id_l; k < id_r; k++)
+	unsigned st_p1 = id << (LOG_SYMBOL + 1), st_p2 = x[id << LOG_SYMBOL] << 2;
+	memcpy(ax + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT);
+}
+
+inline void h_build_ax(unsigned *x, unsigned *ax, unsigned *t1, unsigned *t2, cudaStream_t stream)
+{
+
+	// for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++)
+	// {
+	// 	unsigned st_p1 = i << (LOG_SYMBOL + 1), st_p2 = x[i << LOG_SYMBOL] << 2;
+	// 	CUDA_CHECK(cudaMemcpyAsync(ax + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT, cudaMemcpyDeviceToDevice, stream));
+	// 	//g_cpy CUDA_KERNEL(N_BL, N_TH, 0, stream)(d_packet_product + st_p2, ax + st_p1, LEN_ONE_PACKET_PRODUCT);
+	// 	//CUDA_CHECK_LAST();
+	// }
+	g_pre_build_ax CUDA_KERNEL(1, NUM_OF_NEED_PACKET, 0, stream) (ax, x, d_packet_product);
+	CUDA_CHECK_LAST();
+	
+	h_build_product(ax, t1, t2, LOG_SYMBOL + 1, MAX_LOG, stream);
+}
+
+__global__ void g_build_n1(unsigned *n1, unsigned *vdax, unsigned *x, unsigned *y, unsigned *d_inv)
+{
+
+	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
+	for (unsigned k = id; k < NUM_OF_NEED_SYMBOL; k += THREAD_PER_OP)
 		n1[k] = div_mod(y[k], vdax[x[k]], d_inv);
-
 }
 
-__global__ void g_build_n2(unsigned* n2, unsigned* n1, unsigned* x, unsigned wpt) {
+__global__ void g_build_n2(unsigned *n2, unsigned *n1, unsigned *x)
+{
 
 	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * wpt, id_r = id_l + wpt;
-	for (unsigned k = id_l; k < id_r; k++)
+	for (unsigned k = id; k < NUM_OF_NEED_SYMBOL; k += THREAD_PER_OP)
 		n2[x[k]] = n1[k];
-
 }
 
-__global__ void g_build_n3(unsigned* n3, unsigned* p_n3, unsigned wpt) {
+__global__ void g_build_n3(unsigned *n3, unsigned *p_n3)
+{
 
 	unsigned id = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned id_l = id * wpt, id_r = id_l + wpt;
-	for (unsigned k = id_l; k < id_r; k++)
+	for (unsigned k = id; k < NUM_OF_NEED_SYMBOL; k += THREAD_PER_OP)
 		n3[k] = sub_mod(0, p_n3[k + 1]);
-
 }
 
-inline void h_build_px(unsigned* p, unsigned* ax, unsigned* n3, unsigned* t1, unsigned* t2,
-	unsigned* d_N_pos, unsigned* d_root_layer_pow, unsigned* d_inv, cudaStream_t stream) {
+inline void h_build_px(unsigned *p, unsigned *ax, unsigned *n3, unsigned *t1, unsigned *t2, unsigned *d_N_pos, unsigned *d_root_layer_pow, unsigned *d_inv, cudaStream_t stream)
+{
 
 	h_poly_mul(ax, n3, t1, t2, p, MAX_LOG - 1, d_N_pos, d_root_layer_pow, d_inv, stream);
 	CUDA_CHECK_LAST();
-
 }
 
-void h_encode(unsigned* p, unsigned* y)
+inline void h_encode(unsigned *p, unsigned *y)
 {
 
 	unsigned slot_id = pop_slot(encode_slot, mt_encode_slot, cv_encode_slot);
 
-	unsigned* sl_p = h_encode_p_slot[slot_id];
-	unsigned* sl_y = h_encode_y_slot[slot_id];
+	unsigned *sl_p = h_encode_p_slot[slot_id];
+	unsigned *sl_y = h_encode_y_slot[slot_id];
 
 	memcpy(sl_p, p, SIZE_ENCODE_P);
 
-	unsigned* d_p = d_encode_p_slot + 1LL * slot_id * LEN_ENCODE_P;
-	unsigned* d_y = d_encode_y_slot + 1LL * slot_id * LEN_ENCODE_Y;
+	unsigned *d_p = d_encode_p_slot + 1LL * slot_id * LEN_ENCODE_P;
+	unsigned *d_y = d_encode_y_slot + 1LL * slot_id * LEN_ENCODE_Y;
 
-	unsigned wpt1 = LEN_LARGE >> LOG_THREAD_PER_OP, wpt2 = LEN_SMALL >> LOG_THREAD_PER_OP;
-
-	CB_DATA* data = new CB_DATA{ slot_id, y, sl_y, SIZE_ENCODE_Y, encode_slot, mt_encode_slot, cv_encode_slot };
+	CB_DATA *data = new CB_DATA{slot_id, y, sl_y, SIZE_ENCODE_Y, encode_slot, mt_encode_slot, cv_encode_slot};
 
 	cudaStream_t stream;
 	CUDA_CHECK(cudaStreamCreate(&stream));
 
 	CUDA_CHECK(cudaMemcpyAsync(d_p, sl_p, SIZE_ENCODE_P, cudaMemcpyHostToDevice, stream));
-	
-	g_fill CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (d_y, 0, LEN_LARGE, wpt1);
 
-	fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream) (d_p, d_y, MAX_LOG - 1, MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, wpt2);
+	g_fill CUDA_KERNEL(N_BL, N_TH, 0, stream)(d_y, 0, LEN_LARGE);
+	CUDA_CHECK_LAST();
+
+	fnt(d_p, d_y, MAX_LOG - 1, MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, stream);
 	CUDA_CHECK_LAST();
 
 	CUDA_CHECK(cudaMemcpyAsync(sl_y, d_y, SIZE_ENCODE_Y, cudaMemcpyDeviceToHost, stream));
-	
-	CUDA_CHECK(cudaLaunchHostFunc(stream, h_end_batch_slot, data));
+
+	CUDA_CHECK(cudaLaunchHostFunc(stream, h_end_slot, data));
 
 	CUDA_CHECK(cudaStreamDestroy(stream));
-
 }
 
-void h_decode(unsigned* x, unsigned* y, unsigned* p)
+inline void h_decode(unsigned *x, unsigned *y, unsigned *p)
 {
 
 	unsigned slot_id = pop_slot(decode_slot, mt_decode_slot, cv_decode_slot);
 
-	unsigned* sl_x = h_decode_x_slot[slot_id];
-	unsigned* sl_y = h_decode_y_slot[slot_id];
-	unsigned* sl_p = h_decode_p_slot[slot_id];
+	unsigned *sl_x = h_decode_x_slot[slot_id];
+	unsigned *sl_y = h_decode_y_slot[slot_id];
+	unsigned *sl_p = h_decode_p_slot[slot_id];
 
 	memcpy(sl_x, x, SIZE_DECODE_X);
 	memcpy(sl_y, y, SIZE_DECODE_Y);
 
-	unsigned* d_x = d_decode_x_slot + 1LL * slot_id * LEN_DECODE_X;
-	unsigned* d_y = d_decode_y_slot + 1LL * slot_id * LEN_DECODE_Y;
-	unsigned* d_t1 = d_decode_t1_slot + 1LL * slot_id * LEN_LARGE;
-	unsigned* d_t2 = d_decode_t2_slot + 1LL * slot_id * LEN_LARGE;
-	unsigned* d_ax = d_decode_ax_slot + 1LL * slot_id * LEN_LARGE;
-	unsigned* d_dax = d_decode_dax_slot + 1LL * slot_id * LEN_SMALL;
-	unsigned* d_vdax = d_decode_vdax_slot + 1LL * slot_id * LEN_LARGE;
-	unsigned* d_n1 = d_decode_n1_slot + 1LL * slot_id * LEN_SMALL;
-	unsigned* d_n2 = d_decode_n2_slot + 1LL * slot_id * LEN_LARGE;
-	unsigned* d_n3 = d_decode_n3_slot + 1LL * slot_id * LEN_SMALL;
+	unsigned *d_x = d_decode_x_slot + 1LL * slot_id * LEN_DECODE_X;
+	unsigned *d_y = d_decode_y_slot + 1LL * slot_id * LEN_DECODE_Y;
+	unsigned *d_t1 = d_decode_t1_slot + 1LL * slot_id * LEN_LARGE;
+	unsigned *d_t2 = d_decode_t2_slot + 1LL * slot_id * LEN_LARGE;
+	unsigned *d_ax = d_decode_ax_slot + 1LL * slot_id * LEN_LARGE;
+	unsigned *d_dax = d_decode_dax_slot + 1LL * slot_id * LEN_SMALL;
+	unsigned *d_vdax = d_decode_vdax_slot + 1LL * slot_id * LEN_LARGE;
+	unsigned *d_n1 = d_decode_n1_slot + 1LL * slot_id * LEN_SMALL;
+	unsigned *d_n2 = d_decode_n2_slot + 1LL * slot_id * LEN_LARGE;
+	unsigned *d_n3 = d_decode_n3_slot + 1LL * slot_id * LEN_SMALL;
 
-	unsigned wpt1 = LEN_LARGE >> LOG_THREAD_PER_OP, wpt2 = LEN_SMALL >> LOG_THREAD_PER_OP;
-
-	CB_DATA* data = new CB_DATA{ slot_id, p, sl_p, SIZE_DECODE_P, decode_slot, mt_decode_slot, cv_decode_slot };
+	CB_DATA *data = new CB_DATA{slot_id, p, sl_p, SIZE_DECODE_P, decode_slot, mt_decode_slot, cv_decode_slot};
 
 	cudaStream_t stream;
 	CUDA_CHECK(cudaStreamCreate(&stream));
@@ -482,35 +542,36 @@ void h_decode(unsigned* x, unsigned* y, unsigned* p)
 	CUDA_CHECK(cudaMemcpyAsync(d_x, sl_x, SIZE_DECODE_X, cudaMemcpyHostToDevice, stream));
 	CUDA_CHECK(cudaMemcpyAsync(d_y, sl_y, SIZE_DECODE_Y, cudaMemcpyHostToDevice, stream));
 
-	g_fill CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_vdax, 0, LEN_LARGE, wpt1);
-	g_fill CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_n2, 0, LEN_LARGE, wpt1);
+	g_fill CUDA_KERNEL(N_BL, N_TH, 0, stream)(d_vdax, 0, LEN_LARGE);
+	CUDA_CHECK_LAST();
+	g_fill CUDA_KERNEL(N_BL, N_TH, 0, stream)(d_n2, 0, LEN_LARGE);
+	CUDA_CHECK_LAST();
 
-	h_build_ax(x, d_ax, d_t1, d_t2, stream);
+	h_build_ax(d_x, d_ax, d_t1, d_t2, stream);
 
-	g_poly_deriv CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_ax, d_dax, wpt2);
+	g_poly_deriv CUDA_KERNEL(N_BL, N_TH, 0, stream)(d_ax, d_dax);
 	CUDA_CHECK_LAST();
-	
-	fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_dax, d_vdax, MAX_LOG - 1, MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, wpt2);
+
+	fnt(d_dax, d_vdax, MAX_LOG - 1, MAX_LOG, 0, d_N_pos, d_root_layer_pow, d_inv, stream);
 	CUDA_CHECK_LAST();
-	
-	g_build_n1 CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_n1, d_vdax, d_x, d_y, d_inv, wpt2);
+
+	g_build_n1 CUDA_KERNEL(N_BL, N_TH, 0, stream)(d_n1, d_vdax, d_x, d_y, d_inv);
 	CUDA_CHECK_LAST();
-	
-	g_build_n2 CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_n2, d_n1, d_x, wpt2);
+
+	g_build_n2 CUDA_KERNEL(N_BL, N_TH, 0, stream)(d_n2, d_n1, d_x);
 	CUDA_CHECK_LAST();
-	
-	fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_n2, d_t2, MAX_LOG, MAX_LOG, 2, d_N_pos, d_root_layer_pow, d_inv, wpt2);
+
+	fnt(d_n2, d_t2, MAX_LOG, MAX_LOG, 2, d_N_pos, d_root_layer_pow, d_inv, stream);
 	CUDA_CHECK_LAST();
-	g_build_n3 CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream)(d_n3, d_t2, wpt2);
+	g_build_n3 CUDA_KERNEL(N_BL, N_TH, 0, stream)(d_n3, d_t2);
 	CUDA_CHECK_LAST();
-	
+
 	h_build_px(d_n2, d_ax, d_n3, d_t1, d_t2, d_N_pos, d_root_layer_pow, d_inv, stream);
 	CUDA_CHECK(cudaMemcpyAsync(sl_p, d_n2, SIZE_SMALL, cudaMemcpyDeviceToHost, stream));
 
-	CUDA_CHECK(cudaLaunchHostFunc(stream, h_end_batch_slot, data));
+	CUDA_CHECK(cudaLaunchHostFunc(stream, h_end_slot, data));
 
 	CUDA_CHECK(cudaStreamDestroy(stream));
-
 }
 
 void init()
@@ -519,32 +580,34 @@ void init()
 
 	CUDA_CHECK(cudaDeviceSynchronize());
 	CUDA_CHECK(cudaDeviceReset());
-	//CUDA_CHECK(cudaDeviceSetLimit(cudaLimitDevRuntimePendingLaunchCount, 
-	//	max(MAX_ACTIVE_DECODE * MAX_DECODE_LAUNCH_CNT, MAX_ACTIVE_ENCODE * MAX_ENCODE_LAUNCH_CNT)));
+	CUDA_CHECK(cudaDeviceSynchronize());
+	// CUDA_CHECK(cudaDeviceSetLimit(cudaLimitDevRuntimePendingLaunchCount, max(MAX_ACTIVE_DECODE * MAX_DECODE_LAUNCH_CNT, MAX_ACTIVE_ENCODE * MAX_ENCODE_LAUNCH_CNT)));
 
-	//cudaDeviceProp prop;
-    //int device;
-    //cudaGetDevice(&device);
-    //cudaGetDeviceProperties(&prop, device);
-    //std::cout << "Device name: " << prop.name << std::endl;
-	//std::cout << "Allow concurrent Kernels: " << prop.concurrentKernels << std::endl;
-    //std::cout << "Max threads per block: " << prop.maxThreadsPerBlock << std::endl;
-    //std::cout << "Max threads per SM: " << prop.maxThreadsPerMultiProcessor << std::endl;
-    //std::cout << "Number of SMs: " << prop.multiProcessorCount << std::endl;
-    //std::cout << "Max concurrent threads on device: " << prop.maxThreadsPerMultiProcessor * prop.multiProcessorCount << std::endl;
+	// cudaDeviceProp prop;
+	// int device;
+	// cudaGetDevice(&device);
+	// cudaGetDeviceProperties(&prop, device);
+	// std::cout << "Device name: " << prop.name << std::endl;
+	// std::cout << "Allow concurrent Kernels: " << prop.concurrentKernels << std::endl;
+	// std::cout << "Max threads per block: " << prop.maxThreadsPerBlock << std::endl;
+	// std::cout << "Max threads per SM: " << prop.maxThreadsPerMultiProcessor << std::endl;
+	// std::cout << "Number of SMs: " << prop.multiProcessorCount << std::endl;
+	// std::cout << "Max concurrent threads on device: " << prop.maxThreadsPerMultiProcessor * prop.multiProcessorCount << std::endl;
 
-	h_encode_p_slot = (unsigned**)malloc(MAX_ACTIVE_ENCODE * sizeof(unsigned*));
-	h_encode_y_slot = (unsigned**)malloc(MAX_ACTIVE_ENCODE * sizeof(unsigned*));
-	h_decode_x_slot = (unsigned**)malloc(MAX_ACTIVE_DECODE * sizeof(unsigned*));
-	h_decode_y_slot = (unsigned**)malloc(MAX_ACTIVE_DECODE * sizeof(unsigned*));
-	h_decode_p_slot = (unsigned**)malloc(MAX_ACTIVE_DECODE * sizeof(unsigned*));
+	h_encode_p_slot = (unsigned **)malloc(MAX_ACTIVE_ENCODE * sizeof(unsigned *));
+	h_encode_y_slot = (unsigned **)malloc(MAX_ACTIVE_ENCODE * sizeof(unsigned *));
+	h_decode_x_slot = (unsigned **)malloc(MAX_ACTIVE_DECODE * sizeof(unsigned *));
+	h_decode_y_slot = (unsigned **)malloc(MAX_ACTIVE_DECODE * sizeof(unsigned *));
+	h_decode_p_slot = (unsigned **)malloc(MAX_ACTIVE_DECODE * sizeof(unsigned *));
 
-	for (unsigned i = 0; i < MAX_ACTIVE_ENCODE; i++) {
+	for (unsigned i = 0; i < MAX_ACTIVE_ENCODE; i++)
+	{
 		CUDA_CHECK(cudaMallocHost(&(h_encode_p_slot[i]), SIZE_ENCODE_P));
 		CUDA_CHECK(cudaMallocHost(&(h_encode_y_slot[i]), SIZE_ENCODE_Y));
 	}
 
-	for (unsigned i = 0; i < MAX_ACTIVE_DECODE; i++) {
+	for (unsigned i = 0; i < MAX_ACTIVE_DECODE; i++)
+	{
 		CUDA_CHECK(cudaMallocHost(&(h_decode_x_slot[i]), SIZE_DECODE_X));
 		CUDA_CHECK(cudaMallocHost(&(h_decode_y_slot[i]), SIZE_DECODE_Y));
 		CUDA_CHECK(cudaMallocHost(&(h_decode_p_slot[i]), SIZE_DECODE_P));
@@ -555,7 +618,7 @@ void init()
 
 	CUDA_CHECK(cudaMalloc(&d_decode_x_slot, SIZE_DECODE_X_SLOT));
 	CUDA_CHECK(cudaMalloc(&d_decode_y_slot, SIZE_DECODE_Y_SLOT));
-	//CUDA_CHECK(cudaMalloc(&d_decode_p_slot, SIZE_DECODE_P_SLOT));
+	// CUDA_CHECK(cudaMalloc(&d_decode_p_slot, SIZE_DECODE_P_SLOT));
 	CUDA_CHECK(cudaMalloc(&d_decode_t1_slot, SIZE_DECODE_T1_SLOT));
 	CUDA_CHECK(cudaMalloc(&d_decode_t2_slot, SIZE_DECODE_T2_SLOT));
 	CUDA_CHECK(cudaMalloc(&d_decode_ax_slot, SIZE_DECODE_AX_SLOT));
@@ -565,10 +628,10 @@ void init()
 	CUDA_CHECK(cudaMalloc(&d_decode_n2_slot, SIZE_DECODE_N2_SLOT));
 	CUDA_CHECK(cudaMalloc(&d_decode_n3_slot, SIZE_DECODE_N3_SLOT));
 
-	init_batch_slot();
+	init_slot();
 
 	unsigned size_N_pos = LEN_N_POS * sizeof(unsigned);
-	unsigned* N_pos = (unsigned*)malloc(size_N_pos);
+	unsigned *N_pos = (unsigned *)malloc(size_N_pos);
 	CUDA_CHECK(cudaMalloc(&d_N_pos, size_N_pos));
 
 	for (unsigned i = 1; i <= MAX_LOG; i++)
@@ -598,9 +661,9 @@ void init()
 	free(N_pos);
 
 	unsigned size_root = MOD * sizeof(unsigned);
-	unsigned* root_pow = (unsigned*)malloc(size_root);
-	unsigned* root_inv_pow = (unsigned*)malloc(size_root);
-	unsigned* inv = (unsigned*)malloc(size_root);
+	unsigned *root_pow = (unsigned *)malloc(size_root);
+	unsigned *root_inv_pow = (unsigned *)malloc(size_root);
+	unsigned *inv = (unsigned *)malloc(size_root);
 	CUDA_CHECK(cudaMalloc(&d_root_pow, size_root));
 	CUDA_CHECK(cudaMalloc(&d_root_inv_pow, size_root));
 	CUDA_CHECK(cudaMalloc(&d_inv, size_root));
@@ -618,7 +681,7 @@ void init()
 	CUDA_CHECK(cudaMemcpy(d_inv, inv, size_root, cudaMemcpyHostToDevice));
 
 	unsigned size_root_layer_pow = LEN_ROOT_LAYER_POW_2 * sizeof(unsigned);
-	unsigned* root_layer_pow = (unsigned*)malloc(size_root_layer_pow);
+	unsigned *root_layer_pow = (unsigned *)malloc(size_root_layer_pow);
 	CUDA_CHECK(cudaMalloc(&d_root_layer_pow, size_root_layer_pow));
 
 	for (unsigned i = 0; i < 2; i++)
@@ -642,7 +705,7 @@ void init()
 	free(root_layer_pow);
 
 	unsigned size_packet_product = LEN_PACKET_PRODUCT * sizeof(unsigned);
-	unsigned* packet_product = (unsigned*)malloc(size_packet_product);
+	unsigned *packet_product = (unsigned *)malloc(size_packet_product);
 	CUDA_CHECK(cudaMalloc(&d_packet_product, size_packet_product));
 
 	for (unsigned i = 0; i < NUM_OF_PACKET; i++)
@@ -659,7 +722,7 @@ void init()
 	}
 	CUDA_CHECK(cudaMemcpy(d_packet_product, packet_product, size_packet_product, cudaMemcpyHostToDevice));
 	free(packet_product);
-	unsigned* tmp;
+	unsigned *tmp;
 	CUDA_CHECK(cudaMalloc(&tmp, (LEN_ONE_PACKET_PRODUCT << 1) * sizeof(unsigned)));
 	for (unsigned i = 0; i < NUM_OF_PACKET; i++)
 	{
@@ -673,7 +736,6 @@ void init()
 
 	CUDA_CHECK(cudaDeviceSynchronize());
 	std::cout << "Init process completed!" << std::endl;
-
 }
 
 void fin()
@@ -682,12 +744,14 @@ void fin()
 
 	CUDA_CHECK(cudaDeviceSynchronize());
 
-	for (unsigned i = 0; i < MAX_ACTIVE_ENCODE; i++) {
+	for (unsigned i = 0; i < MAX_ACTIVE_ENCODE; i++)
+	{
 		CUDA_CHECK(cudaFreeHost(h_encode_p_slot[i]));
 		CUDA_CHECK(cudaFreeHost(h_encode_y_slot[i]));
 	}
 
-	for (unsigned i = 0; i < MAX_ACTIVE_DECODE; i++) {
+	for (unsigned i = 0; i < MAX_ACTIVE_DECODE; i++)
+	{
 		CUDA_CHECK(cudaFreeHost(h_decode_x_slot[i]));
 		CUDA_CHECK(cudaFreeHost(h_decode_y_slot[i]));
 		CUDA_CHECK(cudaFreeHost(h_decode_p_slot[i]));
@@ -705,7 +769,6 @@ void fin()
 	CUDA_CHECK(cudaDeviceSynchronize());
 
 	CUDA_CHECK_LAST();
-
 }
 
 void test_fnt();
@@ -725,16 +788,16 @@ int main()
 
 	init();
 
-	test_fnt();
+	// test_fnt();
 	
-	test_poly_mul();
+	// test_poly_mul();
 	
-	test_build_init_product();
+	// test_build_init_product();
 	
-	test_encode_decode();
+	// test_encode_decode();
 	
-	//test_fnt_performance();
-	
+	// test_fnt_performance();
+
 	test_encode_decode_performance();
 
 	fin();
@@ -742,17 +805,19 @@ int main()
 	return 0;
 }
 
-void test_fnt() {
+void test_fnt()
+{
 
 	// test correctness of fnt()
 
 	unsigned N_test = 32;
 
-	for (unsigned tt = 0; tt < N_test; tt++) {
+	for (unsigned tt = 0; tt < N_test; tt++)
+	{
 		unsigned log_nc = 15, log_nv = 16, nc = 1 << log_nc, nv = 1 << log_nv;
 		unsigned size_nc = nc * sizeof(unsigned), size_nv = nv * sizeof(unsigned);
 		std::vector<unsigned> c1(nc), c2(nc);
-		unsigned* d_c1, * d_c2, * d_v;
+		unsigned *d_c1, *d_c2, *d_v;
 		cudaMalloc(&d_c1, size_nc);
 		cudaMemset(d_c1, 0, size_nc);
 		cudaMalloc(&d_c2, size_nv);
@@ -765,10 +830,8 @@ void test_fnt() {
 		shuffle(c1.begin(), c1.end(), std::default_random_engine(time(NULL)));
 		cudaMemcpy(d_c1, c1.data(), size_nc, cudaMemcpyHostToDevice);
 
-
-		unsigned wpt = nv >> (LOG_THREAD_PER_OP + 1);
-		fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, NULL)(d_c1, d_v, log_nc, log_nv, 0, d_N_pos, d_root_layer_pow, d_inv, wpt);
-		fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, NULL)(d_v, d_c2, log_nv, log_nv, 3, d_N_pos, d_root_layer_pow, d_inv, wpt);
+		fnt(d_c1, d_v, log_nc, log_nv, 0, d_N_pos, d_root_layer_pow, d_inv, NULL);
+		fnt(d_v, d_c2, log_nv, log_nv, 3, d_N_pos, d_root_layer_pow, d_inv, NULL);
 
 		cudaMemcpy(c2.data(), d_c2, size_nc, cudaMemcpyDeviceToHost);
 		for (unsigned i = 0; i < nc; i++)
@@ -778,27 +841,26 @@ void test_fnt() {
 		cudaFree(d_c2);
 		cudaFree(d_v);
 
-		//std::cout << "FNT test " << tt << " passed!" << std::endl;
-
+		// std::cout << "FNT test " << tt << " passed!" << std::endl;
 	}
 
 	std::cout << "FNT test passed!" << std::endl;
 
 	CUDA_CHECK_LAST();
-
 }
 
-void test_build_init_product() {
+void test_build_init_product()
+{
 
 	// first 10 element..
-	std::vector<unsigned> a1 = { 64375, 0, 52012, 0, 2347, 0, 23649, 0, 30899, 0 }, b1(10);
+	std::vector<unsigned> a1 = {64375, 0, 52012, 0, 2347, 0, 23649, 0, 30899, 0}, b1(10);
 	cudaMemcpy(b1.data(), d_packet_product, 10 * sizeof(unsigned), cudaMemcpyDeviceToHost);
 
 	for (unsigned i = 0; i < 10; i++)
 		assert(a1[i] == b1[i]);
 
 	// first 10 element of next packet..
-	std::vector<unsigned> a2 = { 64375, 0, 31561, 0, 12153, 0, 31103, 0, 20714, 0 }, b2(10);
+	std::vector<unsigned> a2 = {64375, 0, 31561, 0, 12153, 0, 31103, 0, 20714, 0}, b2(10);
 	cudaMemcpy(b2.data(), d_packet_product + (1 << (LOG_SYMBOL + 1)), 10 * sizeof(unsigned), cudaMemcpyDeviceToHost);
 
 	for (unsigned i = 0; i < 10; i++)
@@ -807,10 +869,10 @@ void test_build_init_product() {
 	std::cout << "Test packet_product passed!" << std::endl;
 
 	CUDA_CHECK_LAST();
-
 }
 
-void test_poly_mul() {
+void test_poly_mul()
+{
 
 	// test correctness of poly_mul()
 
@@ -818,19 +880,21 @@ void test_poly_mul() {
 
 	unsigned N_test = 32;
 
-	for (unsigned tt = 0; tt < N_test; tt++) {
+	for (unsigned tt = 0; tt < N_test; tt++)
+	{
 
 		unsigned log_n = 11;
 		unsigned n = 1 << log_n, size_n = n * sizeof(unsigned);
 
 		std::vector<unsigned> a(n), b(n), c1(n << 1, 0), c2(n << 1, 0);
 
-		for (unsigned i = 0; i < n; i++) {
+		for (unsigned i = 0; i < n; i++)
+		{
 			a[i] = rand() % (MOD - 1); // 2 bytes
 			b[i] = rand() % (MOD - 1); // 2 bytes
 		}
 
-		unsigned* t1, * t2, * d_c;
+		unsigned *t1, *t2, *d_c;
 		cudaMalloc(&t1, size_n << 1);
 		cudaMalloc(&t2, size_n << 1);
 		cudaMalloc(&d_c, size_n << 1);
@@ -854,21 +918,20 @@ void test_poly_mul() {
 		for (unsigned i = 0; i < (n << 1); i++)
 			assert(c1[i] == c2[i]);
 
-		//std::cout << "Poly mul test " << tt << " passed!" << std::endl;
+		// std::cout << "Poly mul test " << tt << " passed!" << std::endl;
 
 		cudaFree(t1);
 		cudaFree(t2);
 		cudaFree(d_c);
-
 	}
 
 	std::cout << "Poly mul test passed!" << std::endl;
 
 	CUDA_CHECK_LAST();
-
 }
 
-void test_encode_decode() {
+void test_encode_decode()
+{
 
 	// test correctness of encode() and decode()
 
@@ -876,7 +939,8 @@ void test_encode_decode() {
 
 	unsigned N_test = 32;
 
-	for (unsigned tt = 0; tt < N_test; tt++) {
+	for (unsigned tt = 0; tt < N_test; tt++)
+	{
 		std::vector<unsigned> a(NUM_OF_NEED_SYMBOL), b(NUM_OF_NEED_SYMBOL << 1), c(NUM_OF_NEED_SYMBOL);
 
 		for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
@@ -887,9 +951,11 @@ void test_encode_decode() {
 
 		std::vector<unsigned> x(NUM_OF_NEED_SYMBOL), y(NUM_OF_NEED_SYMBOL);
 
-		for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++) {
+		for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++)
+		{
 			unsigned stx = i * SYMBOL_PER_PACKET;
-			for (unsigned j = 0; j < SEG_PER_PACKET; j++) {
+			for (unsigned j = 0; j < SEG_PER_PACKET; j++)
+			{
 				x[stx + j] = stx + j;
 				x[stx + j + SEG_PER_PACKET] = stx + j + SEG_DIFF;
 				y[stx + j] = b[stx + j];
@@ -902,36 +968,37 @@ void test_encode_decode() {
 
 		for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
 			assert(a[i] == c[i]);
-		//std::cout << "Encode decode test " << tt << " passed!" << std::endl;
+		// std::cout << "Encode decode test " << tt << " passed!" << std::endl;
 	}
 
 	std::cout << "Encode decode test passed!" << std::endl;
 
 	CUDA_CHECK_LAST();
-
 }
 
-void test_fnt_performance() {
+void test_fnt_performance()
+{
 
 	// fnt() performance with memory already prepare in device
 
 	using namespace std;
 
-	const unsigned N_test = 1024 * 1024 / 64;
-	//const unsigned N_test = 1; // use when need profile one..
+	const unsigned N_test = 128 * 1024 / 64;
+	// const unsigned N_test = 1; // use when need profile one..
 	unsigned log_n = 16, n = 1 << log_n;
 	unsigned size_n = n * sizeof(unsigned);
 	vector<vector<unsigned>> a(N_test, vector<unsigned>(n));
 	cudaStream_t stream[N_test];
-	vector<unsigned*> d_a(N_test), d_b(N_test);
+	vector<unsigned *> d_a(N_test), d_b(N_test);
 
-	for (unsigned tt = 0; tt < N_test; tt++) {
+	for (unsigned tt = 0; tt < N_test; tt++)
+	{
 		for (unsigned i = 0; i < n; i++)
 			a[tt][i] = rand() % (MOD - 1);
 		CUDA_CHECK(cudaStreamCreate(&stream[tt]));
-		CUDA_CHECK(cudaMallocAsync(&d_a[tt], size_n, stream[tt]));
-		CUDA_CHECK(cudaMallocAsync(&d_b[tt], size_n, stream[tt]));
-		CUDA_CHECK(cudaMemcpyAsync(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice, stream[tt]));
+		CUDA_CHECK(cudaMalloc(&d_a[tt], size_n));
+		CUDA_CHECK(cudaMalloc(&d_b[tt], size_n));
+		CUDA_CHECK(cudaMemcpy(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice));
 	}
 
 	CUDA_CHECK(cudaDeviceSynchronize());
@@ -939,18 +1006,18 @@ void test_fnt_performance() {
 	cout << "FNT test start" << endl;
 
 	auto start = chrono::high_resolution_clock::now();
-	unsigned wpt = n >> (LOG_THREAD_PER_OP + 1);
 
-	for (unsigned tt = 0; tt < N_test; tt++) {
-		//cudaStreamCreate(&stream[tt]);
-		//cudaMallocAsync(&d_a[tt], size_n, stream[tt]);
-		//cudaMallocAsync(&d_b[tt], size_n, stream[tt]);
-		//cudaMemcpyAsync(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice, stream[tt]);
-		fnt CUDA_KERNEL(1, THREAD_PER_OP, NULL, stream[tt])(d_a[tt], d_b[tt], log_n, log_n, 0, d_N_pos, d_root_layer_pow, d_inv, wpt);
+	for (unsigned tt = 0; tt < N_test; tt++)
+	{
+		// cudaStreamCreate(&stream[tt]);
+		// cudaMallocAsync(&d_a[tt], size_n, stream[tt]);
+		// cudaMallocAsync(&d_b[tt], size_n, stream[tt]);
+		// cudaMemcpyAsync(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice, stream[tt]);
+		fnt(d_a[tt], d_b[tt], log_n, log_n, 0, d_N_pos, d_root_layer_pow, d_inv, stream[tt]);
 		CUDA_CHECK_LAST();
-		//cudaFreeAsync(d_a[tt], stream[tt]);
-		//cudaFreeAsync(d_b[tt], stream[tt]);
-		//cudaStreamDestroy(stream[tt]);
+		// cudaFreeAsync(d_a[tt], stream[tt]);
+		// cudaFreeAsync(d_b[tt], stream[tt]);
+		// cudaStreamDestroy(stream[tt]);
 	}
 
 	CUDA_CHECK(cudaDeviceSynchronize());
@@ -959,15 +1026,16 @@ void test_fnt_performance() {
 
 	cout << "FNT " << N_test << " chunks in " << duration << "ms" << endl;
 
-	for (unsigned tt = 0; tt < N_test; tt++) {
-		CUDA_CHECK(cudaFreeAsync(d_a[tt], stream[tt]));
-		CUDA_CHECK(cudaFreeAsync(d_b[tt], stream[tt]));
+	for (unsigned tt = 0; tt < N_test; tt++)
+	{
+		CUDA_CHECK(cudaFree(d_a[tt]));
+		CUDA_CHECK(cudaFree(d_b[tt]));
 		CUDA_CHECK(cudaStreamDestroy(stream[tt]));
 	}
-
 }
 
-void test_encode_decode_performance() {
+void test_encode_decode_performance()
+{
 
 	// test encode(), decode() performance full flow (without prepare memory in device)
 
@@ -975,13 +1043,15 @@ void test_encode_decode_performance() {
 	srand(time(NULL));
 
 	const unsigned N_test = 128 * 1024 / 64;
-	//const unsigned N_test = 1; // use when need profile one..
+	// const unsigned N_test = 1; // use when need profile one..
 	const long long symbol_bytes = 2;
 	const double size_test_gb = 1.0 * symbol_bytes * NUM_OF_NEED_SYMBOL * N_test / (1024 * 1024 * 1024);
 
 	vector<vector<unsigned>> a(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL));
 	vector<vector<unsigned>> b(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL << 1));
 	vector<vector<unsigned>> c(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL));
+	vector<vector<unsigned>> x(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL));
+	vector<vector<unsigned>> y(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL));
 
 	for (unsigned tt = 0; tt < N_test; tt++)
 		for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
@@ -993,7 +1063,8 @@ void test_encode_decode_performance() {
 
 	auto start1 = chrono::high_resolution_clock::now();
 
-	for (unsigned tt = 0; tt < N_test; tt++) {
+	for (unsigned tt = 0; tt < N_test; tt++)
+	{
 		h_encode(a[tt].data(), b[tt].data());
 		CUDA_CHECK_LAST();
 	}
@@ -1005,13 +1076,13 @@ void test_encode_decode_performance() {
 	cout << "Encode " << N_test << " 64kb chunks in " << duration1 << "ms" << endl;
 	cout << "Encode " << (1.0 * size_test_gb) / (1.0 * duration1 / 1000.0) << " GB/s" << endl;
 
-	vector<vector<unsigned>> x(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL));
-	vector<vector<unsigned>> y(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL));
-
-	for (unsigned tt = 0; tt < N_test; tt++) {
-		for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++) {
+	for (unsigned tt = 0; tt < N_test; tt++)
+	{
+		for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++)
+		{
 			unsigned stx = i * SYMBOL_PER_PACKET;
-			for (unsigned j = 0; j < SEG_PER_PACKET; j++) {
+			for (unsigned j = 0; j < SEG_PER_PACKET; j++)
+			{
 				x[tt][stx + j] = stx + j;
 				x[tt][stx + j + SEG_PER_PACKET] = stx + j + SEG_DIFF;
 				y[tt][stx + j] = b[tt][stx + j];
@@ -1026,7 +1097,8 @@ void test_encode_decode_performance() {
 
 	auto start2 = chrono::high_resolution_clock::now();
 
-	for (unsigned tt = 0; tt < N_test; tt++) {
+	for (unsigned tt = 0; tt < N_test; tt++)
+	{
 		h_decode(x[tt].data(), y[tt].data(), c[tt].data());
 		CUDA_CHECK_LAST();
 	}
@@ -1038,9 +1110,16 @@ void test_encode_decode_performance() {
 	cout << "Decode " << N_test << " 64kb chunks in " << duration2 << "ms" << endl;
 	cout << "Decode " << (1.0 * size_test_gb) / (1.0 * duration2 / 1000.0) << " GB/s" << endl;
 
-	for (unsigned tt = 0; tt < N_test; tt++) {
+	for (unsigned tt = 0; tt < N_test; tt++)
+	{
 		for (unsigned i = 0; i < c[tt].size(); i++)
 			assert(a[tt][i] == c[tt][i]);
+		// for (unsigned i = 0; i < c[tt].size(); i++) {
+		// 	if (a[tt][i] != c[tt][i]) {
+		// 		cout << tt << endl;
+		// 		break;
+		// 	}
+		// }
 	}
 
 }
