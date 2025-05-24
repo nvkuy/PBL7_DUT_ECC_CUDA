@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug CUDA",
+            "type": "cuda-gdb",
+            "request": "launch",
+            "program": "${fileDirname}/out/${fileBasenameNoExtension}_debug",
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "/usr/local/cuda-12.8/lib64${LD_LIBRARY_PATH:+:}"
+                }
+            ],
+            "debuggerPath": "/usr/local/cuda-12.8/bin/cuda-gdb",
+            "preLaunchTask": "Build CUDA Debug"
+        }
+    ]
+}
