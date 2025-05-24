@@ -1,0 +1,58 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build CUDA Debug",
+            "type": "shell",
+            "command": "/usr/local/cuda-12.8/bin/nvcc",
+            "args": [
+                "-g",
+                "-G",
+                "-arch=compute_86",
+                "-code=sm_86",
+                "-w",
+                "-Xcompiler",
+                "-rdynamic",
+                "-rdc=true",
+                "-lcudadevrt",
+                "-lcudart",
+                "-o",
+                "${fileDirname}/out/${fileBasenameNoExtension}_debug",
+                "${file}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": ["$nvcc"],
+            "detail": "Compile CUDA file for debugging."
+        },
+        {
+            "label": "Build CUDA Release",
+            "type": "shell",
+            "command": "/usr/local/cuda-12.8/bin/nvcc",
+            "args": [
+                "-O3",
+                "-arch=compute_86",
+                "-code=sm_86",
+                "--maxrregcount=32",
+                //"--maxrregcount=64",
+                //"-DNDEBUG",
+                "-Xcompiler",
+                "-fPIC",
+                "--use_fast_math",
+                //"-dlto",
+                "-w",
+                "-rdc=true",
+                "-lcudadevrt",
+                "-lcudart",
+                "-o",
+                "${fileDirname}/out/${fileBasenameNoExtension}_release",
+                "${file}"
+            ],
+            "group": "build",
+            "problemMatcher": ["$nvcc"],
+            "detail": "Compile CUDA file for release with optimizations."
+        }
+    ]
+}
