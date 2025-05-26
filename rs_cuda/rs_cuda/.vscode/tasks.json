@@ -24,7 +24,9 @@
                 "kind": "build",
                 "isDefault": false
             },
-            "problemMatcher": ["$nvcc"],
+            "problemMatcher": [
+                "$nvcc"
+            ],
             "detail": "Compile CUDA file for debugging."
         },
         {
@@ -37,10 +39,10 @@
                 "-code=sm_86",
                 "--maxrregcount=32",
                 //"--maxrregcount=64",
-                //"-DNDEBUG",
+                // "-DNDEBUG",
                 "-Xcompiler",
                 "-fPIC",
-                "--use_fast_math",
+                // "--use_fast_math",
                 //"-dlto",
                 "-w",
                 "-rdc=true",
@@ -51,7 +53,9 @@
                 "${file}"
             ],
             "group": "build",
-            "problemMatcher": ["$nvcc"],
+            "problemMatcher": [
+                "$nvcc"
+            ],
             "detail": "Compile CUDA file for release with optimizations."
         }
     ]

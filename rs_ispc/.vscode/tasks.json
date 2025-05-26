@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Debug",
+            "type": "shell",
+            "command": "/usr/local/bin/ispc kernel.ispc -o kernel.o -h kernel.h -g -O0 --target=avx2-i32x8 && g++ main.cpp kernel.o tasksys.cpp -o bin/debug/ispc_app -g -std=c++20 -DISPC_USE_TBB_TASK_GROUP -ltbb -pthread -I/opt/intel/oneapi/tbb/2022.1/include -L/opt/intel/oneapi/tbb/2022.1/lib/intel64/gcc4.8 -Wl,-rpath,/opt/intel/oneapi/tbb/2022.1/lib/intel64/gcc4.8",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Build Release",
+            "type": "shell",
+            "command": "/usr/local/bin/ispc kernel.ispc -o kernel.o -h kernel.h -O3 --target=avx2-i32x8 && g++ main.cpp kernel.o tasksys.cpp -o bin/release/ispc_app -O3 -std=c++20 -DISPC_USE_TBB_TASK_GROUP -ltbb -pthread -I/opt/intel/oneapi/tbb/2022.1/include -L/opt/intel/oneapi/tbb/2022.1/lib/intel64/gcc4.8 -Wl,-rpath,/opt/intel/oneapi/tbb/2022.1/lib/intel64/gcc4.8",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        }
+    ]
+}

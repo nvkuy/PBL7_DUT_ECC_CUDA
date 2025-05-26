@@ -107,9 +107,10 @@ const unsigned MAX_ACTIVE_DECODE = 512;
 
 // const unsigned LOG_THREAD_PER_OP = 10;
 // const unsigned THREAD_PER_OP = 1 << 10;
-const unsigned LOG_THREAD_PER_BLOCK = 8;
 const unsigned MAX_NUM_BLOCK_PER_OP = 32;
-const unsigned THREAD_PER_BLOCK = 1 << 8;
+
+const unsigned LOG_THREAD_PER_BLOCK = 8;
+const unsigned THREAD_PER_BLOCK = 1 << LOG_THREAD_PER_BLOCK;
 // const unsigned N_TH = 256, N_BL = THREAD_PER_OP / N_TH;
 
 const unsigned LOG_THREAD_PER_EXTR_OP = 5;
@@ -216,15 +217,41 @@ void CUDART_CB h_end_slot(void *data)
 	delete dat;
 }
 
-__host__ __device__ __forceinline__ unsigned num_block(unsigned n) {
+__host__ __device__ __forceinline__ unsigned num_block(unsigned n) 
+{
 	return min(max(n >> LOG_THREAD_PER_BLOCK, 1), MAX_NUM_BLOCK_PER_OP);
+}
+
+__host__ __device__ __forceinline__ unsigned add_small_mod(unsigned a, unsigned b) 
+{
+	unsigned res = a + b;
+    if (res >= MOD) res -= MOD;
+    return res;
+}
+
+__host__ __device__ __forceinline__ unsigned sub_small_mod(unsigned a, unsigned b)
+{
+    unsigned res = a + MOD - b;
+    if (res >= MOD) res -= MOD;
+    return res;
+}
+
+__host__ __device__ __forceinline__ unsigned fast_mod(unsigned x) {
+
+	// if (x < MOD) return x;
+	// unsigned res = MOD + (x & 0xFFFFU) - (x >> 16);
+	// if (res >= MOD) res -= MOD;
+	// return res;
+	return sub_small_mod((x & 0xFFFFU), (x >> 16));
+
 }
 
 __host__ __device__ __forceinline__ unsigned mul_mod(unsigned a, unsigned b)
 {
-	if (a == SPECIAL && b == SPECIAL)
-		return 1; // overflow
-	return (a * b) % MOD;
+	//if (a == SPECIAL && b == SPECIAL)
+	//	return 1; // overflow
+	//return (a * b) % MOD;
+	return (a == SPECIAL && b == SPECIAL) ? 1 : fast_mod(a * b);
 }
 
 __device__ __forceinline__ unsigned div_mod(unsigned a, unsigned b, unsigned *d_inv)
@@ -234,12 +261,12 @@ __device__ __forceinline__ unsigned div_mod(unsigned a, unsigned b, unsigned *d_
 
 __host__ __device__ __forceinline__ unsigned add_mod(unsigned a, unsigned b)
 {
-	return (a + b) % MOD;
+	return fast_mod(a + b);
 }
 
 __host__ __device__ __forceinline__ unsigned sub_mod(unsigned a, unsigned b)
 {
-	return (a - b + MOD) % MOD;
+	return fast_mod(a - b + MOD);
 }
 
 __host__ __device__ __forceinline__ unsigned pow_mod(unsigned a, unsigned b)
@@ -290,8 +317,8 @@ __global__ void g_fnt_i(unsigned *b, unsigned i, bool inv, unsigned nbd2, unsign
 		unsigned pos = bl_st + th_id;
 		unsigned u = b[pos];
 		unsigned v = mul_mod(b[pos + haft_len], d_root_layer_pow[wlen_os + th_id]);
-		b[pos] = add_mod(u, v);
-		b[pos + haft_len] = sub_mod(u, v);
+		b[pos] = add_small_mod(u, v);
+		b[pos + haft_len] = sub_small_mod(u, v);
 	}
 }
 
