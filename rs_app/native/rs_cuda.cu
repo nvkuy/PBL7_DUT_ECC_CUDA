@@ -1,4 +1,4 @@
-﻿#ifdef __CUDACC__
+#ifdef __CUDACC__
 #define CUDA_KERNEL(grid, block, sh_mem, stream) <<< grid, block, sh_mem, stream >>>
 #define CUDA_SYNCTHREADS() __syncthreads()
 #else
@@ -11,6 +11,7 @@
 #pragma GCC optimize("O3,unroll-loops")
 #pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 
+#include "rs_java_RS_Native.h"
 #include <cuda.h>
 #include <cuda_runtime.h>
 #include <device_launch_parameters.h>
@@ -26,6 +27,13 @@
 #include <queue>
 #include <mutex>
 #include <condition_variable>
+
+#define JNI_CHECK_LAST(env) \
+    if ((env)->ExceptionCheck()) { \
+        std::cerr << "!! JNI EXCEPTION PENDING at " << __FILE__ << ":" << __LINE__ << std::endl; \
+        (env)->ExceptionDescribe(); \
+        return; \
+    }
 
 #define CUDA_CHECK(val) check((val), #val, __FILE__, __LINE__)
 inline void check(cudaError_t err, const char *const func, const char *const file, const int line)
@@ -100,8 +108,6 @@ const unsigned SIZE_DECODE_P = LEN_DECODE_P * sizeof(unsigned);
 // const unsigned SM_CNT = 28;
 // const unsigned MAX_WARP = 48 * 4 * SM_CNT;
 
-const unsigned MAX_ACTIVE_ENCODE = 1024;
-const unsigned MAX_ACTIVE_DECODE = 512;
 // const unsigned MAX_ENCODE_LAUNCH_CNT = 32;
 // const unsigned MAX_DECODE_LAUNCH_CNT = 256;
 
@@ -120,26 +126,11 @@ const unsigned LOG_LEN_WARP = 5;
 const unsigned LEN_WARP = 1 << LOG_LEN_WARP;
 const unsigned ALGO_N_2_CUTOFF = 64;
 
-const size_t SIZE_ENCODE_P_SLOT = sizeof(unsigned) * LEN_ENCODE_P * MAX_ACTIVE_ENCODE;
-const size_t SIZE_ENCODE_Y_SLOT = sizeof(unsigned) * LEN_ENCODE_Y * MAX_ACTIVE_ENCODE;
-
-const size_t SIZE_DECODE_X_SLOT = sizeof(unsigned) * LEN_DECODE_X * MAX_ACTIVE_DECODE;
-const size_t SIZE_DECODE_Y_SLOT = sizeof(unsigned) * LEN_DECODE_Y * MAX_ACTIVE_DECODE;
-// const size_t SIZE_DECODE_P_SLOT = sizeof(unsigned) * LEN_DECODE_P * MAX_ACTIVE_DECODE;
-const size_t SIZE_DECODE_T1_SLOT = sizeof(unsigned) * LEN_LARGE * MAX_ACTIVE_DECODE;
-const size_t SIZE_DECODE_T2_SLOT = sizeof(unsigned) * LEN_LARGE * MAX_ACTIVE_DECODE;
-const size_t SIZE_DECODE_AX_SLOT = sizeof(unsigned) * LEN_LARGE * MAX_ACTIVE_DECODE;
-const size_t SIZE_DECODE_DAX_SLOT = sizeof(unsigned) * LEN_SMALL * MAX_ACTIVE_DECODE;
-const size_t SIZE_DECODE_VDAX_SLOT = sizeof(unsigned) * LEN_LARGE * MAX_ACTIVE_DECODE;
-const size_t SIZE_DECODE_N1_SLOT = sizeof(unsigned) * LEN_SMALL * MAX_ACTIVE_DECODE;
-const size_t SIZE_DECODE_N2_SLOT = sizeof(unsigned) * LEN_LARGE * MAX_ACTIVE_DECODE;
-const size_t SIZE_DECODE_N3_SLOT = sizeof(unsigned) * LEN_SMALL * MAX_ACTIVE_DECODE;
-
-unsigned **h_encode_p_slot;
-unsigned **h_encode_y_slot;
-unsigned **h_decode_x_slot;
-unsigned **h_decode_y_slot;
-unsigned **h_decode_p_slot;
+int **h_encode_p_slot;
+int **h_encode_y_slot;
+int **h_decode_x_slot;
+int **h_decode_y_slot;
+int **h_decode_p_slot;
 
 unsigned *d_encode_p_slot;
 unsigned *d_encode_y_slot;
@@ -162,67 +153,82 @@ unsigned *d_inv;
 unsigned *d_root_layer_pow;
 unsigned *d_packet_product;
 
+static JavaVM* g_jvm = nullptr;
+jobject rs_obj;
+jmethodID rs_after_encode, rs_after_decode;
+
+JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved) {
+	g_jvm = vm;
+	JNIEnv* env;
+    vm->GetEnv((void**)&env, JNI_VERSION_24);
+
+	jclass rsClass = env->FindClass("rs_java/RS_Native");
+
+	rs_after_encode = env->GetMethodID(rsClass, "encodeProcessAfter", "(I[I)V");
+	rs_after_decode = env->GetMethodID(rsClass, "decodeProcessAfter", "(I[I)V");
+
+	env->DeleteLocalRef(rsClass);
+
+	return JNI_VERSION_24;
+}
+
 struct CB_DATA
 {
-	unsigned slot_id;
-	unsigned *dst;
-	unsigned *src;
-	size_t size_res;
-	std::queue<unsigned> &slot;
-	std::mutex &mt;
-	std::condition_variable &cv;
+	jint slot_id;
 };
 
-std::queue<unsigned> encode_slot, decode_slot;
-std::mutex mt_encode_slot, mt_decode_slot;
-std::condition_variable cv_encode_slot, cv_decode_slot;
-
-inline unsigned pop_slot(std::queue<unsigned> &slot, std::mutex &mt, std::condition_variable &cv)
-{
-	std::unique_lock<std::mutex> lock(mt);
-	cv.wait(lock, [&]
-			{ return !slot.empty(); });
-	unsigned id = slot.front();
-	slot.pop();
-	return id;
-}
-
-inline void push_slot(unsigned id, std::queue<unsigned> &slot, std::mutex &mt, std::condition_variable &cv)
-{
-	{
-		std::lock_guard<std::mutex> lock(mt);
-		slot.push(id);
-	}
-	cv.notify_one();
-}
-
-void init_slot()
-{
-
-	for (unsigned i = 0; i < MAX_ACTIVE_ENCODE; i++)
-		push_slot(i, encode_slot, mt_encode_slot, cv_encode_slot);
-
-	for (unsigned i = 0; i < MAX_ACTIVE_DECODE; i++)
-		push_slot(i, decode_slot, mt_decode_slot, cv_decode_slot);
-}
-
-void CUDART_CB h_end_slot(void *data)
+void CUDART_CB h_end_slot_encode(void *data)
 {
 
 	CB_DATA *dat = static_cast<CB_DATA *>(data);
 
-	memcpy(dat->dst, dat->src, dat->size_res);
-	push_slot(dat->slot_id, dat->slot, dat->mt, dat->cv);
+	JNIEnv* env = nullptr;
+	g_jvm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_24);
+	g_jvm->AttachCurrentThread((void**)&env, nullptr);
 
+	jintArray res = env->NewIntArray(LEN_LARGE);
+	JNI_CHECK_LAST(env);
+	env->SetIntArrayRegion(res, 0, LEN_LARGE, h_encode_y_slot[dat->slot_id]);
+	JNI_CHECK_LAST(env);
+	
+	env->CallVoidMethod(rs_obj, rs_after_encode, dat->slot_id, res);
+	JNI_CHECK_LAST(env);
+
+	env->DeleteLocalRef(res);
+	JNI_CHECK_LAST(env);
+	g_jvm->DetachCurrentThread();
 	delete dat;
 }
 
-__host__ __device__ __forceinline__ unsigned num_block(unsigned n) 
+void CUDART_CB h_end_slot_decode(void *data)
+{
+
+	CB_DATA *dat = static_cast<CB_DATA *>(data);
+
+	JNIEnv* env = nullptr;
+	g_jvm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_24);
+	g_jvm->AttachCurrentThread((void**)&env, nullptr);
+
+	jintArray res = env->NewIntArray(LEN_SMALL);
+	JNI_CHECK_LAST(env);
+	env->SetIntArrayRegion(res, 0, LEN_SMALL, h_decode_p_slot[dat->slot_id]);
+	JNI_CHECK_LAST(env);
+
+	env->CallVoidMethod(rs_obj, rs_after_decode, dat->slot_id, res);
+	JNI_CHECK_LAST(env);
+
+	env->DeleteLocalRef(res);
+	JNI_CHECK_LAST(env);
+	g_jvm->DetachCurrentThread();
+	delete dat;
+}
+
+__host__ __device__ __forceinline__ unsigned num_block(unsigned n)
 {
 	return min(max(n >> LOG_THREAD_PER_BLOCK, 1), MAX_NUM_BLOCK_PER_OP);
 }
 
-__host__ __device__ __forceinline__ unsigned add_small_mod(unsigned a, unsigned b) 
+__host__ __device__ __forceinline__ unsigned add_small_mod(unsigned a, unsigned b)
 {
 	unsigned res = a + b;
     if (res >= MOD) res -= MOD;
@@ -483,7 +489,7 @@ inline void h_build_product(unsigned *p, unsigned *t1, unsigned *t2, unsigned lo
 // 	memcpy(ax + st_p1, d_packet_product + st_p2, SIZE_ONE_PACKET_PRODUCT);
 // }
 
-inline void h_build_ax(unsigned *x, unsigned *ax, unsigned *t1, unsigned *t2, cudaStream_t stream)
+inline void h_build_ax(int *x, unsigned *ax, unsigned *t1, unsigned *t2, cudaStream_t stream)
 {
 
 	for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++)
@@ -534,18 +540,16 @@ inline void h_build_px(unsigned *p, unsigned *ax, unsigned *n3, unsigned *t1, un
 	CUDA_CHECK_LAST();
 }
 
-inline void h_encode(unsigned *p, unsigned *y)
+inline void h_encode(CB_DATA *data, int *p)
 {
 
-	unsigned slot_id = pop_slot(encode_slot, mt_encode_slot, cv_encode_slot);
+	unsigned slot_id = data->slot_id;
 
-	unsigned *sl_p = h_encode_p_slot[slot_id];
-	unsigned *sl_y = h_encode_y_slot[slot_id];
+	int *sl_p = h_encode_p_slot[slot_id];
+	int *sl_y = h_encode_y_slot[slot_id];
 
 	unsigned *d_p = d_encode_p_slot + 1LL * slot_id * LEN_ENCODE_P;
 	unsigned *d_y = d_encode_y_slot + 1LL * slot_id * LEN_ENCODE_Y;
-
-	CB_DATA *data = new CB_DATA{slot_id, y, sl_y, SIZE_ENCODE_Y, encode_slot, mt_encode_slot, cv_encode_slot};
 
 	unsigned n_bl = num_block(LEN_LARGE);
 
@@ -564,19 +568,34 @@ inline void h_encode(unsigned *p, unsigned *y)
 
 	CUDA_CHECK(cudaMemcpyAsync(sl_y, d_y, SIZE_ENCODE_Y, cudaMemcpyDeviceToHost, stream));
 
-	CUDA_CHECK(cudaLaunchHostFunc(stream, h_end_slot, data));
+	CUDA_CHECK(cudaLaunchHostFunc(stream, h_end_slot_encode, data));
 
 	CUDA_CHECK(cudaStreamDestroy(stream));
 }
 
-inline void h_decode(unsigned *x, unsigned *y, unsigned *p)
+JNIEXPORT void JNICALL Java_rs_1java_RS_1Native_encode(
+	JNIEnv *env, jobject j_obj, jint slot_id, jintArray j_p) 
 {
 
-	unsigned slot_id = pop_slot(decode_slot, mt_decode_slot, cv_decode_slot);
+	jint *p = env->GetIntArrayElements(j_p, nullptr);
+	JNI_CHECK_LAST(env);
 
-	unsigned *sl_x = h_decode_x_slot[slot_id];
-	unsigned *sl_y = h_decode_y_slot[slot_id];
-	unsigned *sl_p = h_decode_p_slot[slot_id];
+	CB_DATA *data = new CB_DATA{slot_id};
+	h_encode(data, p);
+
+	env->ReleaseIntArrayElements(j_p, p, JNI_ABORT);
+	JNI_CHECK_LAST(env);
+
+}
+
+inline void h_decode(CB_DATA *data, int *x, int *y)
+{
+
+	unsigned slot_id = data->slot_id;
+
+	int *sl_x = h_decode_x_slot[slot_id];
+	int *sl_y = h_decode_y_slot[slot_id];
+	int *sl_p = h_decode_p_slot[slot_id];
 
 	unsigned *d_x = d_decode_x_slot + 1LL * slot_id * LEN_DECODE_X;
 	unsigned *d_y = d_decode_y_slot + 1LL * slot_id * LEN_DECODE_Y;
@@ -588,8 +607,6 @@ inline void h_decode(unsigned *x, unsigned *y, unsigned *p)
 	unsigned *d_n1 = d_decode_n1_slot + 1LL * slot_id * LEN_SMALL;
 	unsigned *d_n2 = d_decode_n2_slot + 1LL * slot_id * LEN_LARGE;
 	unsigned *d_n3 = d_decode_n3_slot + 1LL * slot_id * LEN_SMALL;
-
-	CB_DATA *data = new CB_DATA{slot_id, p, sl_p, SIZE_DECODE_P, decode_slot, mt_decode_slot, cv_decode_slot};
 
 	unsigned n_bl_large = num_block(LEN_LARGE);
 	unsigned n_bl_small = num_block(LEN_SMALL);
@@ -632,19 +649,38 @@ inline void h_decode(unsigned *x, unsigned *y, unsigned *p)
 	h_build_px(d_n2, d_ax, d_n3, d_t1, d_t2, d_N_pos, d_root_layer_pow, d_inv, stream);
 	CUDA_CHECK(cudaMemcpyAsync(sl_p, d_n2, SIZE_SMALL, cudaMemcpyDeviceToHost, stream));
 
-	CUDA_CHECK(cudaLaunchHostFunc(stream, h_end_slot, data));
+	CUDA_CHECK(cudaLaunchHostFunc(stream, h_end_slot_decode, data));
 
 	CUDA_CHECK(cudaStreamDestroy(stream));
 }
 
-void init()
+JNIEXPORT void JNICALL Java_rs_1java_RS_1Native_decode(
+	JNIEnv *env, jobject j_obj, jint slot_id, jintArray j_x, jintArray j_y)
+{
+
+	jint *x = env->GetIntArrayElements(j_x, nullptr);
+	JNI_CHECK_LAST(env);
+	jint *y = env->GetIntArrayElements(j_y, nullptr);
+	JNI_CHECK_LAST(env);
+
+	CB_DATA *data = new CB_DATA{slot_id};
+	h_decode(data, x, y);
+
+	env->ReleaseIntArrayElements(j_x, x, JNI_ABORT);
+	JNI_CHECK_LAST(env);
+	env->ReleaseIntArrayElements(j_y, y, JNI_ABORT);
+	JNI_CHECK_LAST(env);
+
+}
+
+void init(unsigned max_active_encode, unsigned max_active_decode)
 {
 	// offline process
 
 	CUDA_CHECK(cudaDeviceSynchronize());
 	CUDA_CHECK(cudaDeviceReset());
 	CUDA_CHECK(cudaDeviceSynchronize());
-	// CUDA_CHECK(cudaDeviceSetLimit(cudaLimitDevRuntimePendingLaunchCount, max(MAX_ACTIVE_DECODE * MAX_DECODE_LAUNCH_CNT, MAX_ACTIVE_ENCODE * MAX_ENCODE_LAUNCH_CNT)));
+	// CUDA_CHECK(cudaDeviceSetLimit(cudaLimitDevRuntimePendingLaunchCount, max(max_active_decode * MAX_DECODE_LAUNCH_CNT, max_active_encode * MAX_ENCODE_LAUNCH_CNT)));
 
 	// cudaDeviceProp prop;
 	// int device;
@@ -657,41 +693,52 @@ void init()
 	// std::cout << "Number of SMs: " << prop.multiProcessorCount << std::endl;
 	// std::cout << "Max concurrent threads on device: " << prop.maxThreadsPerMultiProcessor * prop.multiProcessorCount << std::endl;
 
-	h_encode_p_slot = (unsigned **)malloc(MAX_ACTIVE_ENCODE * sizeof(unsigned *));
-	h_encode_y_slot = (unsigned **)malloc(MAX_ACTIVE_ENCODE * sizeof(unsigned *));
-	h_decode_x_slot = (unsigned **)malloc(MAX_ACTIVE_DECODE * sizeof(unsigned *));
-	h_decode_y_slot = (unsigned **)malloc(MAX_ACTIVE_DECODE * sizeof(unsigned *));
-	h_decode_p_slot = (unsigned **)malloc(MAX_ACTIVE_DECODE * sizeof(unsigned *));
+	size_t size_encode_p_slot = sizeof(unsigned) * LEN_ENCODE_P * max_active_encode;
+	size_t size_encode_y_slot = sizeof(unsigned) * LEN_ENCODE_Y * max_active_encode;
+	size_t size_decode_x_slot = sizeof(unsigned) * LEN_DECODE_X * max_active_decode;
+	size_t size_decode_y_slot = sizeof(unsigned) * LEN_DECODE_Y * max_active_decode;
+	size_t size_decode_t1_slot = sizeof(unsigned) * LEN_LARGE * max_active_decode;
+	size_t size_decode_t2_slot = sizeof(unsigned) * LEN_LARGE * max_active_decode;
+	size_t size_decode_ax_slot = sizeof(unsigned) * LEN_LARGE * max_active_decode;
+	size_t size_decode_dax_slot = sizeof(unsigned) * LEN_SMALL * max_active_decode;
+	size_t size_decode_vdax_slot = sizeof(unsigned) * LEN_LARGE * max_active_decode;
+	size_t size_decode_n1_slot = sizeof(unsigned) * LEN_SMALL * max_active_decode;
+	size_t size_decode_n2_slot = sizeof(unsigned) * LEN_LARGE * max_active_decode;
+	size_t size_decode_n3_slot = sizeof(unsigned) * LEN_SMALL * max_active_decode;
 
-	for (unsigned i = 0; i < MAX_ACTIVE_ENCODE; i++)
+	h_encode_p_slot = (int **)malloc(max_active_encode * sizeof(unsigned *));
+	h_encode_y_slot = (int **)malloc(max_active_encode * sizeof(unsigned *));
+	h_decode_x_slot = (int **)malloc(max_active_decode * sizeof(unsigned *));
+	h_decode_y_slot = (int **)malloc(max_active_decode * sizeof(unsigned *));
+	h_decode_p_slot = (int **)malloc(max_active_decode * sizeof(unsigned *));
+
+	for (unsigned i = 0; i < max_active_encode; i++)
 	{
 		CUDA_CHECK(cudaMallocHost(&(h_encode_p_slot[i]), SIZE_ENCODE_P));
 		CUDA_CHECK(cudaMallocHost(&(h_encode_y_slot[i]), SIZE_ENCODE_Y));
 	}
 
-	for (unsigned i = 0; i < MAX_ACTIVE_DECODE; i++)
+	for (unsigned i = 0; i < max_active_decode; i++)
 	{
 		CUDA_CHECK(cudaMallocHost(&(h_decode_x_slot[i]), SIZE_DECODE_X));
 		CUDA_CHECK(cudaMallocHost(&(h_decode_y_slot[i]), SIZE_DECODE_Y));
 		CUDA_CHECK(cudaMallocHost(&(h_decode_p_slot[i]), SIZE_DECODE_P));
 	}
 
-	CUDA_CHECK(cudaMalloc(&d_encode_p_slot, SIZE_ENCODE_P_SLOT));
-	CUDA_CHECK(cudaMalloc(&d_encode_y_slot, SIZE_ENCODE_Y_SLOT));
+	CUDA_CHECK(cudaMalloc(&d_encode_p_slot, size_encode_p_slot));
+	CUDA_CHECK(cudaMalloc(&d_encode_y_slot, size_encode_y_slot));
 
-	CUDA_CHECK(cudaMalloc(&d_decode_x_slot, SIZE_DECODE_X_SLOT));
-	CUDA_CHECK(cudaMalloc(&d_decode_y_slot, SIZE_DECODE_Y_SLOT));
+	CUDA_CHECK(cudaMalloc(&d_decode_x_slot, size_decode_x_slot));
+	CUDA_CHECK(cudaMalloc(&d_decode_y_slot, size_decode_y_slot));
 	// CUDA_CHECK(cudaMalloc(&d_decode_p_slot, SIZE_DECODE_P_SLOT));
-	CUDA_CHECK(cudaMalloc(&d_decode_t1_slot, SIZE_DECODE_T1_SLOT));
-	CUDA_CHECK(cudaMalloc(&d_decode_t2_slot, SIZE_DECODE_T2_SLOT));
-	CUDA_CHECK(cudaMalloc(&d_decode_ax_slot, SIZE_DECODE_AX_SLOT));
-	CUDA_CHECK(cudaMalloc(&d_decode_dax_slot, SIZE_DECODE_DAX_SLOT));
-	CUDA_CHECK(cudaMalloc(&d_decode_vdax_slot, SIZE_DECODE_VDAX_SLOT));
-	CUDA_CHECK(cudaMalloc(&d_decode_n1_slot, SIZE_DECODE_N1_SLOT));
-	CUDA_CHECK(cudaMalloc(&d_decode_n2_slot, SIZE_DECODE_N2_SLOT));
-	CUDA_CHECK(cudaMalloc(&d_decode_n3_slot, SIZE_DECODE_N3_SLOT));
-
-	init_slot();
+	CUDA_CHECK(cudaMalloc(&d_decode_t1_slot, size_decode_t1_slot));
+	CUDA_CHECK(cudaMalloc(&d_decode_t2_slot, size_decode_t2_slot));
+	CUDA_CHECK(cudaMalloc(&d_decode_ax_slot, size_decode_ax_slot));
+	CUDA_CHECK(cudaMalloc(&d_decode_dax_slot, size_decode_dax_slot));
+	CUDA_CHECK(cudaMalloc(&d_decode_vdax_slot, size_decode_vdax_slot));
+	CUDA_CHECK(cudaMalloc(&d_decode_n1_slot, size_decode_n1_slot));
+	CUDA_CHECK(cudaMalloc(&d_decode_n2_slot, size_decode_n2_slot));
+	CUDA_CHECK(cudaMalloc(&d_decode_n3_slot, size_decode_n3_slot));
 
 	unsigned size_N_pos = LEN_N_POS * sizeof(unsigned);
 	unsigned *N_pos = (unsigned *)malloc(size_N_pos);
@@ -801,19 +848,28 @@ void init()
 	std::cout << "Init process completed!" << std::endl;
 }
 
-void fin()
+JNIEXPORT void JNICALL Java_rs_1java_RS_1Native_init(
+	JNIEnv *env, jobject j_obj, jint max_active_encode, jint max_active_decode) 
+{
+	rs_obj = env->NewGlobalRef(j_obj);
+	JNI_CHECK_LAST(env);
+
+	init(max_active_encode, max_active_decode);
+}
+
+void fin(unsigned max_active_encode, unsigned max_active_decode)
 {
 	// clear cuda memory
 
 	CUDA_CHECK(cudaDeviceSynchronize());
 
-	for (unsigned i = 0; i < MAX_ACTIVE_ENCODE; i++)
+	for (unsigned i = 0; i < max_active_encode; i++)
 	{
 		CUDA_CHECK(cudaFreeHost(h_encode_p_slot[i]));
 		CUDA_CHECK(cudaFreeHost(h_encode_y_slot[i]));
 	}
 
-	for (unsigned i = 0; i < MAX_ACTIVE_DECODE; i++)
+	for (unsigned i = 0; i < max_active_decode; i++)
 	{
 		CUDA_CHECK(cudaFreeHost(h_decode_x_slot[i]));
 		CUDA_CHECK(cudaFreeHost(h_decode_y_slot[i]));
@@ -834,351 +890,11 @@ void fin()
 	CUDA_CHECK_LAST();
 }
 
-void test_fnt();
-
-void test_poly_mul();
-
-void test_build_init_product();
-
-void test_encode_decode();
-
-void test_fnt_performance();
-
-void test_encode_decode_performance();
-
-int main()
+JNIEXPORT void JNICALL Java_rs_1java_RS_1Native_fin(
+	JNIEnv *env, jobject j_obj, jint max_active_encode, jint max_active_decode)
 {
-
-	init();
-
-	// test_fnt();
+	fin(max_active_encode, max_active_decode);
 	
-	// test_poly_mul();
-	
-	// test_build_init_product();
-	
-	// test_encode_decode();
-	
-	// test_fnt_performance();
-
-	test_encode_decode_performance();
-
-	fin();
-
-	return 0;
-}
-
-void test_fnt()
-{
-
-	// test correctness of fnt()
-
-	unsigned N_test = 32;
-
-	for (unsigned tt = 0; tt < N_test; tt++)
-	{
-		unsigned log_nc = 15, log_nv = 16, nc = 1 << log_nc, nv = 1 << log_nv;
-		unsigned size_nc = nc * sizeof(unsigned), size_nv = nv * sizeof(unsigned);
-		std::vector<unsigned> c1(nc), c2(nc);
-		unsigned *d_c1, *d_c2, *d_v;
-		cudaMalloc(&d_c1, size_nc);
-		cudaMemset(d_c1, 0, size_nc);
-		cudaMalloc(&d_c2, size_nv);
-		cudaMemset(d_c2, 0, size_nv);
-		cudaMalloc(&d_v, size_nv);
-		cudaMemset(d_v, 0, size_nv);
-
-		for (unsigned i = 0; i < nc; i++)
-			c1[i] = rand() % (MOD - 1);
-		shuffle(c1.begin(), c1.end(), std::default_random_engine(time(NULL)));
-		cudaMemcpy(d_c1, c1.data(), size_nc, cudaMemcpyHostToDevice);
-
-		fnt(d_c1, d_v, log_nc, log_nv, 0, d_N_pos, d_root_layer_pow, d_inv, NULL);
-		fnt(d_v, d_c2, log_nv, log_nv, 3, d_N_pos, d_root_layer_pow, d_inv, NULL);
-
-		cudaMemcpy(c2.data(), d_c2, size_nc, cudaMemcpyDeviceToHost);
-		for (unsigned i = 0; i < nc; i++)
-			assert(c1[i] == c2[i]);
-
-		cudaFree(d_c1);
-		cudaFree(d_c2);
-		cudaFree(d_v);
-
-		// std::cout << "FNT test " << tt << " passed!" << std::endl;
-	}
-
-	std::cout << "FNT test passed!" << std::endl;
-
-	CUDA_CHECK_LAST();
-}
-
-void test_build_init_product()
-{
-
-	// first 10 element..
-	std::vector<unsigned> a1 = {64375, 0, 52012, 0, 2347, 0, 23649, 0, 30899, 0}, b1(10);
-	cudaMemcpy(b1.data(), d_packet_product, 10 * sizeof(unsigned), cudaMemcpyDeviceToHost);
-
-	for (unsigned i = 0; i < 10; i++)
-		assert(a1[i] == b1[i]);
-
-	// first 10 element of next packet..
-	std::vector<unsigned> a2 = {64375, 0, 31561, 0, 12153, 0, 31103, 0, 20714, 0}, b2(10);
-	cudaMemcpy(b2.data(), d_packet_product + (1 << (LOG_SYMBOL + 1)), 10 * sizeof(unsigned), cudaMemcpyDeviceToHost);
-
-	for (unsigned i = 0; i < 10; i++)
-		assert(a2[i] == b2[i]);
-
-	std::cout << "Test packet_product passed!" << std::endl;
-
-	CUDA_CHECK_LAST();
-}
-
-void test_poly_mul()
-{
-
-	// test correctness of poly_mul()
-
-	srand(time(NULL));
-
-	unsigned N_test = 32;
-
-	for (unsigned tt = 0; tt < N_test; tt++)
-	{
-
-		unsigned log_n = 11;
-		unsigned n = 1 << log_n, size_n = n * sizeof(unsigned);
-
-		std::vector<unsigned> a(n), b(n), c1(n << 1, 0), c2(n << 1, 0);
-
-		for (unsigned i = 0; i < n; i++)
-		{
-			a[i] = rand() % (MOD - 1); // 2 bytes
-			b[i] = rand() % (MOD - 1); // 2 bytes
-		}
-
-		unsigned *t1, *t2, *d_c;
-		cudaMalloc(&t1, size_n << 1);
-		cudaMalloc(&t2, size_n << 1);
-		cudaMalloc(&d_c, size_n << 1);
-		cudaMemcpy(d_c, a.data(), size_n, cudaMemcpyHostToDevice);
-		cudaMemcpy(d_c + n, b.data(), size_n, cudaMemcpyHostToDevice);
-		h_poly_mul(d_c, d_c + n, t1, t2, d_c, log_n, d_N_pos, d_root_layer_pow, d_inv, NULL);
-
-		for (unsigned i = 0; i < n; i++)
-			for (unsigned j = 0; j < n; j++)
-				c1[i + j] = add_mod(c1[i + j], mul_mod(a[i], b[j]));
-
-		/*unsigned* d_a, * d_b;
-		cudaMalloc(&d_a, size_n);
-		cudaMalloc(&d_b, size_n);
-		cudaMemcpy(d_a, a.data(), size_n, cudaMemcpyHostToDevice);
-		cudaMemcpy(d_b, b.data(), size_n, cudaMemcpyHostToDevice);
-		poly_mul_wrapper CUDA_KERNEL(1, 1, NULL, NULL)(d_a, d_b, t1, t2, d_c, log_n, d_N_pos, d_root_layer_pow, d_inv);*/
-
-		cudaMemcpy(c2.data(), d_c, size_n << 1, cudaMemcpyDeviceToHost);
-
-		for (unsigned i = 0; i < (n << 1); i++)
-			assert(c1[i] == c2[i]);
-
-		// std::cout << "Poly mul test " << tt << " passed!" << std::endl;
-
-		cudaFree(t1);
-		cudaFree(t2);
-		cudaFree(d_c);
-	}
-
-	std::cout << "Poly mul test passed!" << std::endl;
-
-	CUDA_CHECK_LAST();
-}
-
-void test_encode_decode()
-{
-
-	// test correctness of encode() and decode()
-
-	srand(time(NULL));
-
-	unsigned N_test = 32;
-
-	for (unsigned tt = 0; tt < N_test; tt++)
-	{
-		std::vector<unsigned> a(NUM_OF_NEED_SYMBOL), b(NUM_OF_NEED_SYMBOL << 1), c(NUM_OF_NEED_SYMBOL);
-
-		for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
-			a[i] = rand() % (MOD - 1); // 2 bytes
-
-		h_encode(a.data(), b.data());
-		cudaDeviceSynchronize();
-
-		std::vector<unsigned> x(NUM_OF_NEED_SYMBOL), y(NUM_OF_NEED_SYMBOL);
-
-		for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++)
-		{
-			unsigned stx = i * SYMBOL_PER_PACKET;
-			for (unsigned j = 0; j < SEG_PER_PACKET; j++)
-			{
-				x[stx + j] = stx + j;
-				x[stx + j + SEG_PER_PACKET] = stx + j + SEG_DIFF;
-				y[stx + j] = b[stx + j];
-				y[stx + j + SEG_PER_PACKET] = b[stx + j + SEG_DIFF];
-			}
-		}
-
-		h_decode(x.data(), y.data(), c.data());
-		cudaDeviceSynchronize();
-
-		for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
-			assert(a[i] == c[i]);
-		// std::cout << "Encode decode test " << tt << " passed!" << std::endl;
-	}
-
-	std::cout << "Encode decode test passed!" << std::endl;
-
-	CUDA_CHECK_LAST();
-}
-
-void test_fnt_performance()
-{
-
-	// fnt() performance with memory already prepare in device
-
-	using namespace std;
-
-	const unsigned N_test = 512 * 1024 / 64;
-	// const unsigned N_test = 1; // use when need profile one..
-	unsigned log_n = 16, n = 1 << log_n;
-	unsigned size_n = n * sizeof(unsigned);
-	vector<vector<unsigned>> a(N_test, vector<unsigned>(n));
-	cudaStream_t stream[N_test];
-	vector<unsigned *> d_a(N_test), d_b(N_test);
-
-	for (unsigned tt = 0; tt < N_test; tt++)
-	{
-		for (unsigned i = 0; i < n; i++)
-			a[tt][i] = rand() % (MOD - 1);
-		CUDA_CHECK(cudaStreamCreate(&stream[tt]));
-		CUDA_CHECK(cudaMalloc(&d_a[tt], size_n));
-		CUDA_CHECK(cudaMalloc(&d_b[tt], size_n));
-		CUDA_CHECK(cudaMemcpy(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice));
-	}
-
-	CUDA_CHECK(cudaDeviceSynchronize());
-
-	cout << "FNT test start" << endl;
-
-	auto start = chrono::high_resolution_clock::now();
-
-	for (unsigned tt = 0; tt < N_test; tt++)
-	{
-		// cudaStreamCreate(&stream[tt]);
-		// cudaMallocAsync(&d_a[tt], size_n, stream[tt]);
-		// cudaMallocAsync(&d_b[tt], size_n, stream[tt]);
-		// cudaMemcpyAsync(d_a[tt], a[tt].data(), size_n, cudaMemcpyHostToDevice, stream[tt]);
-		fnt(d_a[tt], d_b[tt], log_n, log_n, 0, d_N_pos, d_root_layer_pow, d_inv, stream[tt]);
-		CUDA_CHECK_LAST();
-		// cudaFreeAsync(d_a[tt], stream[tt]);
-		// cudaFreeAsync(d_b[tt], stream[tt]);
-		// cudaStreamDestroy(stream[tt]);
-	}
-
-	CUDA_CHECK(cudaDeviceSynchronize());
-	auto stop = chrono::high_resolution_clock::now();
-	auto duration = chrono::duration_cast<chrono::milliseconds>(stop - start).count();
-
-	cout << "FNT " << N_test << " chunks in " << duration << "ms" << endl;
-
-	for (unsigned tt = 0; tt < N_test; tt++)
-	{
-		CUDA_CHECK(cudaFree(d_a[tt]));
-		CUDA_CHECK(cudaFree(d_b[tt]));
-		CUDA_CHECK(cudaStreamDestroy(stream[tt]));
-	}
-}
-
-void test_encode_decode_performance()
-{
-
-	// test encode(), decode() performance full flow (without prepare memory in device)
-
-	using namespace std;
-	srand(time(NULL));
-
-	const unsigned N_test = 128 * 1024 / 64;
-	// const unsigned N_test = 1; // use when need profile one..
-	const long long symbol_bytes = 2;
-	const double size_test_gb = 1.0 * symbol_bytes * NUM_OF_NEED_SYMBOL * N_test / (1024 * 1024 * 1024);
-
-	vector<vector<unsigned>> a(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL));
-	vector<vector<unsigned>> b(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL << 1));
-	vector<vector<unsigned>> c(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL));
-	vector<vector<unsigned>> x(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL));
-	vector<vector<unsigned>> y(N_test, vector<unsigned>(NUM_OF_NEED_SYMBOL));
-
-	for (unsigned tt = 0; tt < N_test; tt++)
-		for (unsigned i = 0; i < NUM_OF_NEED_SYMBOL; i++)
-			a[tt][i] = rand() % (MOD - 1); // 2 bytes
-
-	CUDA_CHECK(cudaDeviceSynchronize());
-
-	cout << "Encode performance test start" << endl;
-
-	auto start1 = chrono::high_resolution_clock::now();
-
-	for (unsigned tt = 0; tt < N_test; tt++)
-	{
-		h_encode(a[tt].data(), b[tt].data());
-		CUDA_CHECK_LAST();
-	}
-
-	CUDA_CHECK(cudaDeviceSynchronize());
-	auto stop1 = chrono::high_resolution_clock::now();
-	auto duration1 = chrono::duration_cast<chrono::milliseconds>(stop1 - start1).count();
-
-	cout << "Encode " << N_test << " 64kb chunks in " << duration1 << "ms" << endl;
-	cout << "Encode " << (1.0 * size_test_gb) / (1.0 * duration1 / 1000.0) << " GB/s" << endl;
-
-	for (unsigned tt = 0; tt < N_test; tt++)
-	{
-		for (unsigned i = 0; i < NUM_OF_NEED_PACKET; i++)
-		{
-			unsigned stx = i * SYMBOL_PER_PACKET;
-			// unsigned st = i * SYMBOL_PER_PACKET;
-			unsigned st = i * SEG_PER_PACKET;
-			for (unsigned j = 0; j < SEG_PER_PACKET; j++)
-			{
-				x[tt][stx + j] = st + j;
-				x[tt][stx + j + SEG_PER_PACKET] = st + j + SEG_DIFF;
-				y[tt][stx + j] = b[tt][st + j];
-				y[tt][stx + j + SEG_PER_PACKET] = b[tt][st + j + SEG_DIFF];
-			}
-		}
-	}
-
-	CUDA_CHECK(cudaDeviceSynchronize());
-
-	cout << "Decode performance test start" << endl;
-
-	auto start2 = chrono::high_resolution_clock::now();
-
-	for (unsigned tt = 0; tt < N_test; tt++)
-	{
-		h_decode(x[tt].data(), y[tt].data(), c[tt].data());
-		CUDA_CHECK_LAST();
-	}
-
-	CUDA_CHECK(cudaDeviceSynchronize());
-	auto stop2 = chrono::high_resolution_clock::now();
-	auto duration2 = chrono::duration_cast<chrono::milliseconds>(stop2 - start2).count();
-
-	cout << "Decode " << N_test << " 64kb chunks in " << duration2 << "ms" << endl;
-	cout << "Decode " << (1.0 * size_test_gb) / (1.0 * duration2 / 1000.0) << " GB/s" << endl;
-
-	for (unsigned tt = 0; tt < N_test; tt++)
-	{
-		for (unsigned i = 0; i < c[tt].size(); i++)
-			assert(a[tt][i] == c[tt][i]);
-	}
-
+	env->DeleteGlobalRef(rs_obj);
+	JNI_CHECK_LAST(env);
 }
